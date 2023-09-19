@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-    <html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
     <head>
         <meta charset="utf-8" />
@@ -138,14 +138,14 @@
         <section class="section">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 col-lg-7">
+                    <div class="col-lg-8 col-lg-7" th:object="${blog}" >
                         <img src="images/blog/single.jpg" class="img-fluid rounded shadow" alt="">
 
                         <!-- <ul class="list-unstyled mt-4">
                             <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i> Calvin Carlo</li>
                             <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i> 1st January, 2021</li>
                         </ul> -->
-
+                        <h1 th:text="${title}"></h1>
                         <p class="text-muted mt-4">This is required when, for example, the final text is not yet available. Dummy text is also known as 'fill text'. It is said that song composers of the past used dummy texts as lyrics when writing melodies in order to have a 'ready-made' text to sing with the melody. Dummy texts have been in use by typesetters since the 16th century.</p>
                         <p class="text-muted">Due to its widespread use as filler text for layouts, non-readability is of great importance: human perception is tuned to recognize certain patterns and repetitions in texts.</p>
                         <p class="text-muted mb-0">For this reason, dummy text usually consists of a more or less random series of words or syllables.</p>

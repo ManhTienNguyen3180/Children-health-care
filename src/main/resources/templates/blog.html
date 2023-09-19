@@ -96,7 +96,7 @@
                     <!-- Navigation Menu-->   
                     <ul class="navigation-menu nav-left nav-light">
                         <li class="has-submenu parent-menu-item">
-                            <a href="home.html">Home</a>
+                            <a href="home">Home</a>
                             
                         </li>
 
@@ -106,12 +106,12 @@
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="">Services</a>
+                            <a href="service">Services</a>
                             
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="">Blog</a>
+                            <a href="blog">Blog</a>
                             
                         </li>
                         
@@ -162,15 +162,15 @@
         <section class="section">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2">
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2 " th:each="blog : ${result}">
                         <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                             <img src="images/blog/01.jpg" class="img-fluid" alt="">
-                            <div class="card-body p-4">
+                            <div class="card-body p-4" >
                                 <ul class="list-unstyled mb-2">
-                                    <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
+                                    <li class="list-inline-item text-muted small me-3" ><i class="uil uil-calendar-alt text-dark h6 me-1"></i>20th November, 2020</li>
                                     <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
                                 </ul>
-                                <a href="blog-detail.html" class="text-dark title h5">Easily connect to doctor and make a treatment</a>
+                                <a href="blog-detail.html" class="text-dark title h5" th:text="${blog.title}"></a>
                                 <div class="post-meta d-flex justify-content-between mt-3">
                                     <ul class="list-unstyled mb-0">
                                         <li class="list-inline-item me-2 mb-0"><a href="#" class="text-muted like"><i class="mdi mdi-heart-outline me-1"></i>33</a></li>
