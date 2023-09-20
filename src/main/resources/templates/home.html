@@ -49,7 +49,7 @@
             <div class="container">
                 <!-- Logo container-->
                 <div>
-                    <a class="logo" href="home.html">
+                    <a class="logo" href="home">
                         <span class="logo-light-mode">
                             <img src="images/logo-dark.png" class="l-dark" height="24" alt="">
                             <img src="images/logo-light.png" class="l-light" height="24" alt="">
@@ -77,15 +77,19 @@
 
                 <!-- Start Dropdown -->
                 <ul class="dropdowns list-inline mb-0">
-                    <li class="list-inline-item mb-0">
+                    <!-- <li class="list-inline-item mb-0">
                         <a href="" >
                             <div class="btn btn-primary">Book Appointment</div>
                         </a>
+                    </li> -->
+                    <li class="list-inline-item mb-0">
+                        <a href="login" >
+                            <div class="btn btn-primary">Login/Sign up</div>
+                        </a>
                     </li>
-
                     
 
-                    <li class="list-inline-item mb-0 ms-1">
+                    <!-- <li class="list-inline-item mb-0 ms-1">
                         <div class="dropdown dropdown-primary">
                             <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button>
                             <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
@@ -102,7 +106,8 @@
                                 <a class="dropdown-item text-dark" href="login.html"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                             </div>
                         </div>
-                    </li>
+                        <a href="" >Login/Sign up</a>
+                    </li> -->
                 </ul>
                 <!-- Start Dropdown -->
         
@@ -115,7 +120,7 @@
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="">Doctors</a>
+                            <a href="doctor">Doctors</a>
                             
                         </li>
 
@@ -268,12 +273,102 @@
                             <div class="card-body p-0 mt-3">
                                 <a th:href="@{/service-detail/{id}(id=${service.service_id})}" class="title text-dark h5" th:text="${service.service_name}"></a>
                                 <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="departments.html" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
+                                <a href="departments.html" class="link">Read More </a>
                             </div>
                         </div>
                     </div><!--end col-->
 
                     
+                    <div class="col-xl-3 col-md-4 col-12 mt-5">
+                        <div class="card features feature-primary bg-transparent border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-psychotherapy-fill h3 mb-0"></i>
+                            </div>
+                            <div class="card-body p-0 mt-3">
+                                <a href="departments.html" class="title text-dark h5">Psychotherapy</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="departments.html" class="link">Read More </a>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+
+                    <div class="col-xl-3 col-md-4 col-12 mt-5">
+                        <div class="card features feature-primary bg-transparent border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-stethoscope-fill h3 mb-0"></i>
+                            </div>
+                            <div class="card-body p-0 mt-3">
+                                <a href="departments.html" class="title text-dark h5">Primary Care</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="departments.html" class="link">Read More </a>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+
+                    <div class="col-xl-3 col-md-4 col-12 mt-5">
+                        <div class="card features feature-primary bg-transparent border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-capsule-fill h3 mb-0"></i>
+                            </div>
+                            <div class="card-body p-0 mt-3">
+                                <a href="departments.html" class="title text-dark h5">Dental Care</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="departments.html" class="link">Read More </a>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                    
+                    <div class="col-xl-3 col-md-4 col-12 mt-5">
+                        <div class="card features feature-primary bg-transparent border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-microscope-fill h3 mb-0"></i>
+                            </div>
+                            <div class="card-body p-0 mt-3">
+                                <a href="departments.html" class="title text-dark h5">Orthopedic</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="departments.html" class="link">Read More </a>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+
+                    <div class="col-xl-3 col-md-4 col-12 mt-5">
+                        <div class="card features feature-primary bg-transparent border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-pulse-fill h3 mb-0"></i>
+                            </div>
+                            <div class="card-body p-0 mt-3">
+                                <a href="departments.html" class="title text-dark h5">Cardiology</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="departments.html" class="link">Read More </a>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+
+                    <div class="col-xl-3 col-md-4 col-12 mt-5">
+                        <div class="card features feature-primary bg-transparent border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-empathize-fill h3 mb-0"></i>
+                            </div>
+                            <div class="card-body p-0 mt-3">
+                                <a href="departments.html" class="title text-dark h5">Gynecology</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="departments.html" class="link">Read More </a>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+
+                    <div class="col-xl-3 col-md-4 col-12 mt-5">
+                        <div class="card features feature-primary bg-transparent border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-mind-map h3 mb-0"></i>
+                            </div>
+                            <div class="card-body p-0 mt-3">
+                                <a href="departments.html" class="title text-dark h5">Neurology</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="departments.html" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
+                            </div>
+                        </div>
+                    </div><!--end col-->
                 </div><!--end row-->
             </div><!--end container-->
             
@@ -636,74 +731,11 @@
 
         <!-- Back to top -->
         <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
-        <!-- Back to top -->
-
-        <!-- Offcanvas Start -->
-        <div class="offcanvas bg-white offcanvas-top" tabindex="-1" id="offcanvasTop">
-            <div class="offcanvas-body d-flex align-items-center align-items-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="text-center">
-                                <h4>Search now.....</h4>
-                                <div class="subcribe-form mt-4">
-                                    <form>
-                                        <div class="mb-0">
-                                            <input type="text" id="help" name="name" class="border bg-white rounded-pill" required="" placeholder="Search">
-                                            <button type="submit" class="btn btn-pills btn-primary">Search</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div><!--end col-->
-                    </div><!--end row-->
-                </div><!--end container-->
-            </div>
-        </div>
-        <!-- Offcanvas End -->
-
-        <!-- Offcanvas Start -->
-        <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-            <div class="offcanvas-header p-4 border-bottom">
-                <h5 id="offcanvasRightLabel" class="mb-0">
-                    <img src="images/logo-dark.png" height="24" class="light-version" alt="">
-                    <img src="images/logo-light.png" height="24" class="dark-version" alt="">
-                </h5>
-                <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
-            </div>
-            <div class="offcanvas-body p-4 px-md-5">
-                <div class="row">
-                    <div class="col-12">
-                        <!-- Style switcher -->
-                        <div id="style-switcher">
-                            <div>
-                                <ul class="text-center list-unstyled mb-0">
-                                    <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="../assets/images/layouts/landing-light-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="../assets/images/layouts/landing-dark-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
-                                    <li class="d-grid"><a href="../admin/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- end Style switcher -->
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div>
-
-            
-        </div>
-        <!-- Offcanvas End -->
-
-        <!-- MOdal Start -->
         
-        <!-- MOdal End -->
         
         <!-- javascript -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <!-- <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script> -->
         <!-- SLIDER -->
         <script src="js/tiny-slider.js"></script>
         <script src="js/tiny-slider-init.js"></script>
