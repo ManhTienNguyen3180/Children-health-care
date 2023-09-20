@@ -256,19 +256,20 @@
                 </div><!--end row-->
 
                 <div class="row">
-                    <div class="col-xl-3 col-md-4 col-12 mt-5">
+                    <div class="col-xl-3 col-md-4 col-12 mt-5" th:each="service : ${service}">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
                                 <i class="ri-eye-fill h3 mb-0"></i>
                             </div>
                             <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Eye Care</a>
+                                <a th:href="@{/service-detail/{id}(id=${service.service_id})}" class="title text-dark h5" th:text="${service.service_name}"></a>
                                 <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
                                 <a href="departments.html" class="link">Read More </a>
                             </div>
                         </div>
                     </div><!--end col-->
 
+                    
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
                             <div class="icon text-center rounded-md">
@@ -481,7 +482,7 @@
                 </div><!--end row-->
 
                 <div class="row align-items-center">
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
+                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2" th:each="doctor : ${doctor}">
                         <div class="card team border-0 rounded shadow overflow-hidden">
                             <div class="team-img position-relative">
                                 <img src="images/doctors/01.jpg" class="img-fluid" alt="">
@@ -493,65 +494,17 @@
                                 </ul>
                             </div>
                             <div class="card-body content text-center">
-                                <a href="doctor-team-one.html" class="title text-dark h5 d-block mb-0">Calvin Carlo</a>
+                                <a th:href="@{/doctor-detail/{id}(id=${doctor.doctor_id})}" class="title text-dark h5 d-block mb-0" th:text="${doctor.doctor_name}" ></a>
                                 <small class="text-muted speciality">Eye Care</small>
                             </div>
                         </div>
                     </div><!--end col-->
                     
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/02.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="card-body content text-center">
-                                <a href="doctor-team-one.html" class="title text-dark h5 d-block mb-0">Cristino Murphy</a>
-                                <small class="text-muted speciality">Gynecology</small>
-                            </div>
-                        </div>
-                    </div><!--end col-->
                     
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/03.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="card-body content text-center">
-                                <a href="doctor-team-one.html" class="title text-dark h5 d-block mb-0">Alia Reddy</a>
-                                <small class="text-muted speciality">Psychotherapy</small>
-                            </div>
-                        </div>
-                    </div><!--end col-->
                     
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/04.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="card-body content text-center">
-                                <a href="doctor-team-one.html" class="title text-dark h5 d-block mb-0">Toni Kovar</a>
-                                <small class="text-muted speciality">Orthopedic</small>
-                            </div>
-                        </div>
-                    </div><!--end col-->
+                    
+                    
+                    
                 </div><!--end row-->
             </div><!--end container-->
 
