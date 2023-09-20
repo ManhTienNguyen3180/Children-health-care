@@ -1,32 +1,29 @@
 package com.example.project.service;
 
-<<<<<<< src/main/java/com/example/project/service/UserService.java
-
-
-=======
+import java.util.List;
 import java.util.Optional;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.project.Repository.UserRepo;
+import com.example.project.Repository.UserRepository;
 import com.example.project.entity.user;
 
 @Service
 public class UserService {
     
     @Autowired
-    private UserRepo userRepository;
+    private UserRepository userRepository;
+    
 
     public Optional<user> findByEmail(String email){
-        return userRepository.findByEmail(email);
+        return userRepository.findUserByEmail(email);
     }
     public Optional<user> findByResetToken(String resetToken){
         return userRepository.findByResetToken(resetToken);
     }
     public void save(user user){
-        repo.save(user);
+        userRepository.save(user);
     }
     public List<user> getUsers() {
 
@@ -71,4 +68,3 @@ public class UserService {
     userRepository.deleteById(userid);
   }
 }
->>>>>>> src/main/java/com/example/project/service/UserService.java

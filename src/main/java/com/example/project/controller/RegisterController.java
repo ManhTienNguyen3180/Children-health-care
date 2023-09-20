@@ -38,35 +38,33 @@ public class RegisterController {
       @RequestParam("phonenum") String phonenum,
       @RequestParam("email") String email,
       @RequestParam("password") String password,
-      Model model
-     ) {
-      user s =userService.findUserByUserN(username);
-      if( s ==null){
-        s=userService.findUserByEmail(email);
-        if( s ==null){
-           user u = new user(username,
-        password,
-        fullname,
-        gender,
-        Integer.parseInt(phonenum),
-        email,
-        password,
-        1,
-        1,
-        LocalDate.now(),
-        "user");
-         userService.addNewUser(u);
-       
-        }else{
+      Model model) {
+    user s = userService.findUserByUserN(username);
+    if (s == null) {
+      s = userService.findUserByEmail(email);
+      if (s == null) {
+        user u = new user(gender, username,
+            password,
+            fullname,
+            gender,
+            Integer.parseInt(phonenum),
+            email,
+            password,
+            1,
+            1,
+            password, LocalDate.now(),
+            "user");
+        userService.addNewUser(u);
+
+      } else {
         model.addAttribute("mEmail", "email already used");
         return "signup";
       }
-       
-        
-      }else{
-        model.addAttribute("mUsername", "username already used");
-        return "signup";
-      }
+
+    } else {
+      model.addAttribute("mUsername", "username already used");
+      return "signup";
+    }
 
     return "redirect:/login";
   }
