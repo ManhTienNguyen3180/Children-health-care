@@ -1,30 +1,34 @@
 package com.example.project.service;
 
-import java.time.LocalDate;
-import java.util.List;
+<<<<<<< src/main/java/com/example/project/service/UserService.java
+
+
+=======
 import java.util.Optional;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.project.Repository.UserRepository;
+import com.example.project.Repository.UserRepo;
 import com.example.project.entity.user;
 
-/**
- * UserService
- */
 @Service
-// define coponent of user cotroller
 public class UserService {
+    
+    @Autowired
+    private UserRepo userRepository;
 
-  private final UserRepository userRepository;
-
-  @Autowired // connect with userRepository
-  public UserService(UserRepository userRepository) {
-    this.userRepository = userRepository;
-  }
-
-  public List<user> getUsers() {
+    public Optional<user> findByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+    public Optional<user> findByResetToken(String resetToken){
+        return userRepository.findByResetToken(resetToken);
+    }
+    public void save(user user){
+        repo.save(user);
+    }
+    public List<user> getUsers() {
 
     return userRepository.findAll();
   }
@@ -67,3 +71,4 @@ public class UserService {
     userRepository.deleteById(userid);
   }
 }
+>>>>>>> src/main/java/com/example/project/service/UserService.java

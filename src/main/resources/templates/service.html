@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <html lang="en">
 
     <head>
         <meta charset="utf-8" />
@@ -26,26 +26,22 @@
     </head>
 
     <body>
-        <!-- Loader -->
-        <div id="preloader">
-            <div id="status">
-                <div class="spinner">
-                    <div class="double-bounce1"></div>
-                    <div class="double-bounce2"></div>
-                </div>
-            </div>
-        </div>
-        <!-- Loader -->
+        
         
         <!-- Navbar STart -->
         <header id="topnav" class="defaultscroll sticky">
             <div class="container">
                 <!-- Logo container-->
-                <a class="logo" href="home">
-                    <img src="images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                    <img src="images/logo-light.png" height="24" class="logo-dark-mode" alt="">
-                </a>                
-                <!-- Logo End -->
+                <div>
+                    <a class="logo" href="index.html">
+                        <span class="logo-light-mode">
+                            <img src="images/logo-dark.png" class="l-dark" height="24" alt="">
+                            <img src="images/logo-light.png" class="l-light" height="24" alt="">
+                        </span>
+                        <img src="images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                    </a>
+                </div>
+                <!-- End Logo container-->
                 
                 <!-- Start Mobile Toggle -->
                 <div class="menu-extras">
@@ -66,21 +62,25 @@
                 <!-- Start Dropdown -->
                 <ul class="dropdowns list-inline mb-0">
                     <li class="list-inline-item mb-0">
-                        <a href="" >
-                            <div class="btn btn-primary">Book Appointment</div>
+                        <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                            <div class="btn btn-icon btn-pills btn-primary"><i data-feather="settings" class="fea icon-sm"></i></div>
                         </a>
                     </li>
 
-                    
-                    
-                    <li class="list-inline-item mb-0 ms-1" >
+                    <li class="list-inline-item mb-0 ms-1">
+                        <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                            <i class="uil uil-search"></i>
+                        </a>
+                    </li>
+
+                    <li class="list-inline-item mb-0 ms-1">
                         <div class="dropdown dropdown-primary">
                             <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button>
                             <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
                                 <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html">
-                                    <img src="images/doctors/02.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                    <img src="images/doctors/01.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                     <div class="flex-1 ms-2">
-                                        <span class="d-block mb-1" ></span>
+                                        <span class="d-block mb-1">Calvin Carlo</span>
                                         <small class="text-muted">Orthopedic</small>
                                     </div>
                                 </a>
@@ -103,17 +103,17 @@
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="doctor">Doctors</a>
+                            <a href="">Doctors</a>
                             
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="">Services</a>
+                            <a href="service">Services</a>
                             
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="">Blog</a>
+                            <a href="blog">Blog</a>
                             
                         </li>
                         
@@ -131,19 +131,19 @@
         <!-- Navbar End -->
 
         <!-- Start Hero -->
-        <section class="bg-half-150 bg-light d-table w-100">
+        <section class="bg-half-170 d-table w-100" style="background: url('images/bg/department.jpg') center center;">
+            <div class="bg-overlay bg-overlay-dark"></div>
             <div class="container">
                 <div class="row mt-5 justify-content-center">
                     <div class="col-12">
                         <div class="section-title text-center">
-                            <h3 class="sub-title mb-4">Doctors team</h3>
-                            <p class="para-desc mx-auto text-muted">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
+                            <h3 class="sub-title mb-4 text-white title-dark">Departments</h3>
+                            <p class="para-desc mx-auto text-white-50">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
                         
                             <nav aria-label="breadcrumb" class="d-inline-block mt-3">
-                                <ul class="breadcrumb bg-transparent mb-0">
+                                <ul class="breadcrumb bg-light rounded mb-0 py-1 px-2">
                                     <li class="breadcrumb-item"><a href="index.html">Doctris</a></li>
-                                    <li class="breadcrumb-item"><a href="#">Doctors</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Team one</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Departments</li>
                                 </ul>
                             </nav>
                         </div>
@@ -151,152 +151,158 @@
                 </div><!--end row-->
             </div><!--end container-->
         </section><!--end section-->
+        <div class="position-relative">
+            <div class="shape overflow-hidden text-white">
+                <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+                </svg>
+            </div>
+        </div>
         <!-- End Hero -->
 
         <!-- Start -->
         <section class="section">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-3 col-lg-3 col-md-6">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/01.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                        <div class="card features feature-primary border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-eye-fill h3 mb-0"></i>
                             </div>
-                            <div class="card-body content text-center" th:each="doctor : ${result}">
-                                <a href="#" class="title text-dark h5 d-block mb-0" th:text="${doctor.doctor_name}"></a>
-                                <small class="text-muted speciality">Eye Care</small>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/02.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="card-body content text-center">
-                                <a href="#" class="title text-dark h5 d-block mb-0">Cristino Murphy</a>
-                                <small class="text-muted speciality">Gynecology</small>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 mt-lg-0 pt-2 pt-lg-0">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/03.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="card-body content text-center">
-                                <a href="#" class="title text-dark h5 d-block mb-0">Alia Reddy</a>
-                                <small class="text-muted speciality">Psychotherapy</small>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 mt-lg-0 pt-2 pt-lg-0">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/04.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="card-body content text-center">
-                                <a href="#" class="title text-dark h5 d-block mb-0">Toni Kovar</a>
-                                <small class="text-muted speciality">Orthopedic</small>
+                            <div class="card-body p-0 mt-3">
+                                <a href="#" class="title text-dark h5">Eye Care</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
                             </div>
                         </div>
                     </div><!--end col-->
 
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/05.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-5 mt-sm-0">
+                        <div class="card features feature-primary border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-psychotherapy-fill h3 mb-0"></i>
                             </div>
-                            <div class="card-body content text-center">
-                                <a href="#" class="title text-dark h5 d-block mb-0">Jessica McFarlane</a>
-                                <small class="text-muted speciality">Dentist</small>
+                            <div class="card-body p-0 mt-3">
+                                <a href="#" class="title text-dark h5">Psychotherapy</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-5 mt-lg-0">
+                        <div class="card features feature-primary border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-stethoscope-fill h3 mb-0"></i>
+                            </div>
+                            <div class="card-body p-0 mt-3">
+                                <a href="#" class="title text-dark h5">Primary Care</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-5 mt-xl-0">
+                        <div class="card features feature-primary border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-capsule-fill h3 mb-0"></i>
+                            </div>
+                            <div class="card-body p-0 mt-3">
+                                <a href="#" class="title text-dark h5">Dental Care</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
                             </div>
                         </div>
                     </div><!--end col-->
                     
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/06.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4 pt-2">
+                        <div class="card features feature-primary border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-microscope-fill h3 mb-0"></i>
                             </div>
-                            <div class="card-body content text-center">
-                                <a href="#" class="title text-dark h5 d-block mb-0">Elsie Sherman</a>
-                                <small class="text-muted speciality">Gastrologist</small>
+                            <div class="card-body p-0 mt-3">
+                                <a href="#" class="title text-dark h5">Orthopedic</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
                             </div>
                         </div>
                     </div><!--end col-->
-                    
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/07.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
+
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4 pt-2">
+                        <div class="card features feature-primary border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-pulse-fill h3 mb-0"></i>
                             </div>
-                            <div class="card-body content text-center">
-                                <a href="#" class="title text-dark h5 d-block mb-0">Bertha Magers</a>
-                                <small class="text-muted speciality">Urologist</small>
+                            <div class="card-body p-0 mt-3">
+                                <a href="#" class="title text-dark h5">Cardiology</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
                             </div>
                         </div>
                     </div><!--end col-->
-                    
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/08.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
+
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4 pt-2">
+                        <div class="card features feature-primary border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-empathize-fill h3 mb-0"></i>
                             </div>
-                            <div class="card-body content text-center">
-                                <a href="#" class="title text-dark h5 d-block mb-0">Louis Batey</a>
-                                <small class="text-muted speciality">Neurologist</small>
+                            <div class="card-body p-0 mt-3">
+                                <a href="#" class="title text-dark h5">Gynecology</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4 pt-2">
+                        <div class="card features feature-primary border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-mind-map h3 mb-0"></i>
+                            </div>
+                            <div class="card-body p-0 mt-3">
+                                <a href="#" class="title text-dark h5">Neurology</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4 pt-2">
+                        <div class="card features feature-primary border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-mental-health-line h3 mb-0"></i>
+                            </div>
+                            <div class="card-body p-0 mt-3">
+                                <a href="#" class="title text-dark h5">Dermatologists</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4 pt-2">
+                        <div class="card features feature-primary border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-apple-line h3 mb-0"></i>
+                            </div>
+                            <div class="card-body p-0 mt-3">
+                                <a href="#" class="title text-dark h5">Nutritionists</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4 pt-2">
+                        <div class="card features feature-primary border-0">
+                            <div class="icon text-center rounded-md">
+                                <i class="ri-infrared-thermometer-line h3 mb-0"></i>
+                            </div>
+                            <div class="card-body p-0 mt-3">
+                                <a href="#" class="title text-dark h5">Physical Therapists</a>
+                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
+                                <a href="#" class="link">Read More <i class="ri-arrow-right-line align-middle"></i></a>
                             </div>
                         </div>
                     </div><!--end col-->
@@ -311,7 +317,7 @@
                 <div class="row">
                     <div class="col-xl-5 col-lg-4 mb-0 mb-md-4 pb-0 pb-md-2">
                         <a href="#" class="logo-footer">
-                            <img src="images/logo-light.png" height="22" alt="">
+                            <img src="../assets/images/logo-light.png" height="22" alt="">
                         </a>
                         <p class="mt-4 me-xl-5">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
                     </div><!--end col-->
@@ -321,25 +327,25 @@
                             <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
                                 <h5 class="text-light title-dark footer-head">Company</h5>
                                 <ul class="list-unstyled footer-list mt-4">
-                                    <li><a href="aboutus.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> About us</a></li>
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Services</a></li>
-                                    <li><a href="doctor-team-two.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Team</a></li>
-                                    <li><a href="blog-detail.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Project</a></li>
-                                    <li><a href="blogs.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Blog</a></li>
-                                    <li><a href="login.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Login</a></li>
+                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> About us</a></li>
+                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Services</a></li>
+                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Team</a></li>
+                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Project</a></li>
+                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Blog</a></li>
+                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Login</a></li>
                                 </ul>
                             </div><!--end col-->
                             
                             <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
                                 <h5 class="text-light title-dark footer-head">Departments</h5>
                                 <ul class="list-unstyled footer-list mt-4">
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Eye Care</a></li>
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Psychotherapy</a></li>
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Dental Care</a></li>
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Orthopedic</a></li>
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Cardiology</a></li>
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Gynecology</a></li>
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Neurology</a></li>
+                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Eye Care</a></li>
+                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Psychotherapy</a></li>
+                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Dental Care</a></li>
+                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Orthopedic</a></li>
+                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Cardiology</a></li>
+                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Gynecology</a></li>
+                                    <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Neurology</a></li>
                                 </ul>
                             </div><!--end col-->
                             
@@ -429,8 +435,8 @@
         <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header p-4 border-bottom">
                 <h5 id="offcanvasRightLabel" class="mb-0">
-                    <img src="images/logo-dark.png" height="24" class="light-version" alt="">
-                    <img src="images/logo-light.png" height="24" class="dark-version" alt="">
+                    <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="">
+                    <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="">
                 </h5>
                 <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
             </div>
@@ -471,11 +477,11 @@
         <!-- Offcanvas End -->
         
         <!-- javascript -->
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="../assets/js/bootstrap.bundle.min.js"></script>
         <!-- Icons -->
-        <script src="js/feather.min.js"></script>
+        <script src="../assets/js/feather.min.js"></script>
         <!-- Main Js -->
-        <script src="js/app.js"></script>
+        <script src="../assets/js/app.js"></script>
         
     </body>
 
