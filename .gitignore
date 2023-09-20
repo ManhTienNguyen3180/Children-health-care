@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+src/main/java/com/example/Configuration/viewConfig.java
+src/main/java/com/example/project/controller/userTest.http
+src/main/resources/application.properties
+src/main/resources/application.properties
+src/main/resources/application.properties
