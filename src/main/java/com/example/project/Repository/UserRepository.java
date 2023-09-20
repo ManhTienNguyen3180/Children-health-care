@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.project.entity.user;
-import java.util.List;
 
 //Create a JPA repository
 //reponsible of data access and provides CRUD
