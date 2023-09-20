@@ -17,6 +17,7 @@ import com.example.project.service.EmailService;
 import com.example.project.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class PasswordController {
@@ -130,4 +131,30 @@ public class PasswordController {
 	public ModelAndView displayForgotPasswordPage() {
 		return new ModelAndView("forgot-password");
     }
+
+	@RequestMapping(value = "/changeUserPass", method = RequestMethod.POST)
+	public String changeUserPass(@RequestParam("oldPass") String password, @RequestParam("newPass") String newPassword, @RequestParam("reNewPass") String confirmPassword, RedirectAttributes redir,HttpSession session) {
+		user user = (user) session.getAttribute("user");
+		if (!newPassword.equals(confirmPassword)) {
+			redir.addFlashAttribute("errorMessage", "Your new password and confirm password are not match.");
+			return "redirect:/user-profile";
+		}
+		if (!password.equals(user.getPassword())) {
+			redir.addFlashAttribute("successMessage", "Your old password is not correct.");
+			return "redirect:/user-profile";
+		}if(password.equalsIgnoreCase(user.getPassword())&&newPassword.equalsIgnoreCase(confirmPassword)) {
+			user.setPassword(newPassword);
+			userService.save(user);
+			return "redirect:/user-profile";
+		}
+
+		
+		else {
+			redir.addFlashAttribute("errorMessage", "Your password is not correct.");
+			return "redirect:/user-profile";
+		}
+	}
+		
+	
+	
 }
