@@ -35,7 +35,17 @@ public class BlogServiceImpl implements BlogService {
     //Delete blog
     @Override
     public void delete(int id) {
-        repo.deleteById(id);;
+        repo.deleteById(id);
+    }
+
+    @Override
+    public List<blog> getBlogByCategoryId(int category_id) {
+        return repo.findByCategory_blog_id(category_id);
+    }
+
+    @Override
+    public List<blog> getBlogsNew() {
+        return repo.getBlogNew();
     }
 
     

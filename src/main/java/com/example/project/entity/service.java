@@ -1,11 +1,10 @@
 package com.example.project.entity;
 
 import java.sql.Date;
-import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import java.util.List;
 @Entity
 public class service {
 //     service_id int AI PK 
@@ -30,8 +29,8 @@ public class service {
     private String create_by;
 
     
-    @OneToMany(mappedBy = "service")
-    private List<reservation> reservation;
+    // @OneToMany(mappedBy = "service")
+    // private List<reservation> reservation;
 
 
     public service() {
@@ -49,9 +48,8 @@ public class service {
         this.status = status;
         this.create_at = create_at;
         this.create_by = create_by;
-        this.reservation = reservation;
+        
     }
-
 
     public int getService_id() {
         return service_id;
@@ -143,14 +141,7 @@ public class service {
     }
 
 
-    public List<reservation> getReservation() {
-        return reservation;
-    }
-
-
-    public void setReservation(List<reservation> reservation) {
-        this.reservation = reservation;
-    }
+    
     
     
 

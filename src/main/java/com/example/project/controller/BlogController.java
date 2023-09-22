@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.project.entity.blog;
 import com.example.project.service.BlogService;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -32,24 +31,19 @@ public class BlogController {
         return "blog";
     }
 
-    // @RequestMapping("/blog-detail/{blog_id}")  
-    // public String getBlogById(@RequestParam(value="blog_id") String bid, Model model) {
-    //     int id=Integer.parseInt(bid);
-    //     model.addAttribute("blog", BlogService.findBlogById(id)) ;
-    //     return "blog-detail";
-    // }
+    
     
     @GetMapping("/blog-detail/{id}")
     public String viewBlogDetail(@PathVariable int id, Model model) {
-        
+        Optional<blog> b =BlogService.findBlogById(id);
+        int cate_id=b.get().getCategory_blog_id();
+        List<blog> list = BlogService.getBlogByCategoryId(cate_id);
+        model.addAttribute("listBlog", list);
         model.addAttribute("blog", BlogService.findBlogById(id).orElse(null));
         return "blog-detail";
     }
     
-    // @GetMapping("/blog-detail")
-    // public String blogDetail(){
-    //     return "blog-detail";
-    // }
+    
 
 
 
@@ -62,11 +56,7 @@ public class BlogController {
         return "bloglistmanager";
     }
 
-    @RequestMapping("/blog-detail/{blog_id}")
-    public String getBlogById(@RequestParam(value = "blog_id") int id, Model model) {
-        model.addAttribute("blog", BlogService.findBlogById(id));
-        return "blog-detail";
-    }
+    
 
     // Add Blog
     @GetMapping("/bloglistmanager/add")

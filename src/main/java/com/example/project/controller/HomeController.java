@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import jakarta.servlet.http.HttpSession;
+
+import com.example.project.service.BlogService;
 import com.example.project.service.DoctorService;
 import com.example.project.service.ServiceService;
 
@@ -17,7 +19,9 @@ public class HomeController {
     private DoctorService DoctorService;
     @Autowired 
     private ServiceService ServiceService;
-    
+    @Autowired 
+    private BlogService BlogService;
+
     @GetMapping("/")
     public String home1(){
         return "home";
@@ -31,6 +35,7 @@ public class HomeController {
     public String home(Model model){
         model.addAttribute("doctor", DoctorService.fetchDoctorList());
         model.addAttribute("service", ServiceService.fechServicesList());
+        model.addAttribute("blogNew", BlogService.getBlogsNew());
         return "home";
     }
     

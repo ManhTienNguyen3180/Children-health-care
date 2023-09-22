@@ -19,4 +19,10 @@ public interface BlogService {
 
     //Detele blog
     void delete(int id);
+
+    //get list blog by cate_id
+    List<blog> getBlogByCategoryId(int category_id);
+
+    //get list blog by status
+    List<blog> getBlogsNew();
 }

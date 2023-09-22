@@ -20,6 +20,7 @@ public class DoctorController {
         return "doctor";
     }
 
+    
     @GetMapping("/doctor-detail/{id}")
     public String viewDoctorDetail(@PathVariable int id, Model model) {
         
@@ -27,8 +28,5 @@ public class DoctorController {
         return "doctor-detail";
     }
 
-    // @GetMapping("/doctor-detail")
-    // public String doctorDetail(){
-    //     return "doctor-detail";
-    // }
+    
 }

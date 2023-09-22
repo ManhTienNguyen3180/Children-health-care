@@ -1,7 +1,5 @@
 package com.example.project.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +17,12 @@ public class ReservationService {
     }
 
 
-    public reservation findServiceByService_Name1(String servicename) {
-        Optional<reservation> useOptional = repository.findByService_ServiceName(servicename);
-        if (useOptional.isPresent()) {
-            reservation p = useOptional.get();
-            return p;
-        }
-        return null;
-    }
+    // public reservation findServiceByService_Name1(String servicename) {
+    //     Optional<reservation> useOptional = repository.findByService_ServiceName(servicename);
+    //     if (useOptional.isPresent()) {
+    //         reservation p = useOptional.get();
+    //         return p;
+    //     }
+    //     return null;
+    // }
 }

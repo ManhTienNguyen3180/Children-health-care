@@ -3,13 +3,8 @@ package com.example.project.entity;
 import java.sql.Date;
 import java.sql.Time;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class reservation {
@@ -33,9 +28,7 @@ public class reservation {
     private Date create_at;
     private String create_by;
     
-    @ManyToOne
-    @JoinColumn(name = "service_id") 
-    private service service;
+    
 
     public reservation() {
     }
@@ -61,7 +54,7 @@ public class reservation {
         this.status = status;
         this.create_at = create_at;
         this.create_by = create_by;
-        this.service = service;
+        
     }
 
     public int getReservation_id() {
@@ -200,13 +193,7 @@ public class reservation {
         this.create_by = create_by;
     }
 
-    public service getService() {
-        return service;
-    }
-
-    public void setService(service service) {
-        this.service = service;
-    }
+    
 
     
 
