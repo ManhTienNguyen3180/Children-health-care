@@ -26,16 +26,7 @@
     </head>
 
     <body>
-        <!-- Loader -->
-        <div id="preloader">
-            <div id="status">
-                <div class="spinner">
-                    <div class="double-bounce1"></div>
-                    <div class="double-bounce2"></div>
-                </div>
-            </div>
-        </div>
-        <!-- Loader -->
+        
         
         <!-- Navbar STart -->
         <header id="topnav" class="defaultscroll sticky">
@@ -96,7 +87,7 @@
         
                 <div id="navigation">
                     <!-- Navigation Menu-->   
-                    <ul class="navigation-menu nav-left nav-light">
+                    <ul class="navigation-menu nav-left ">
                         <li class="has-submenu parent-menu-item">
                             <a href="home">Home</a>
                             
@@ -157,7 +148,7 @@
         <section class="section">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-3 col-lg-3 col-md-6">
+                    <div class="col-xl-3 col-lg-3 col-md-6" th:each="doctor : ${result}" >
                         <div class="card team border-0 rounded shadow overflow-hidden">
                             <div class="team-img position-relative">
                                 <img src="images/doctors/01.jpg" class="img-fluid" alt="">
@@ -168,8 +159,8 @@
                                     <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
                                 </ul>
                             </div>
-                            <div class="card-body content text-center" th:each="doctor : ${result}">
-                                <a href="#" class="title text-dark h5 d-block mb-0" th:text="${doctor.doctor_name}"></a>
+                            <div class="card-body content text-center ">
+                                <a th:href="@{/doctor-detail/{id}(id=${doctor.doctor_id})}" class="title text-dark h5 d-block mb-0" th:text="${doctor.doctor_name}"></a>
                                 <small class="text-muted speciality">Eye Care</small>
                             </div>
                         </div>

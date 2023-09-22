@@ -22,8 +22,8 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Optional<blog> findBlogById(int id) {
-        
         return (Optional<blog>) repo.findById(id);
+        
     }
 
     //Save Blog

@@ -49,7 +49,7 @@ public class RegisterController {
             password,
             1,
             1,
-            password, LocalDate.now(),
+            username, LocalDate.now(),
             "user");
         userService.addNewUser(u);
 

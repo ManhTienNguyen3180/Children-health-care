@@ -1,6 +1,7 @@
 package com.example.project.entity;
 
 import java.sql.Date;
+<<<<<<< HEAD
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -13,6 +14,24 @@ import jakarta.persistence.OneToMany;
 public class service {
     @Id
     @Column(name = "service_id")
+=======
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+@Entity
+public class service {
+//     service_id int AI PK 
+// service_name varchar(250) 
+// price int 
+// description longtext 
+// img varchar(250) 
+// category_id int 
+// status tinyint 
+// create_at date 
+// create_by varchar(100)
+
+    @Id
+>>>>>>> f5e8fa03a98a4befeb1220d8d6c2cccd1185c09f
     private int service_id;
     private String service_name;
     private int price;
@@ -21,6 +40,7 @@ public class service {
     private int category_id;
     private int status;
     private Date create_at;
+<<<<<<< HEAD
     private String create_by;
 
     
@@ -28,6 +48,14 @@ public class service {
     public service() {
     }
     
+=======
+    
+    private String create_by;
+    
+    public service() {
+    }
+
+>>>>>>> f5e8fa03a98a4befeb1220d8d6c2cccd1185c09f
     public service(int service_id, String service_name, int price, String description, String img, int category_id,
             int status, Date create_at, String create_by) {
         this.service_id = service_id;
@@ -40,6 +68,7 @@ public class service {
         this.create_at = create_at;
         this.create_by = create_by;
     }
+<<<<<<< HEAD
     public int getService_id() {
         return service_id;
     }
@@ -91,9 +120,86 @@ public class service {
     public String getCreate_by() {
         return create_by;
     }
+=======
+
+    public int getService_id() {
+        return service_id;
+    }
+
+    public void setService_id(int service_id) {
+        this.service_id = service_id;
+    }
+
+    public String getService_name() {
+        return service_name;
+    }
+
+    public void setService_name(String service_name) {
+        this.service_name = service_name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public int getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Date getCreate_at() {
+        return create_at;
+    }
+
+    public void setCreate_at(Date create_at) {
+        this.create_at = create_at;
+    }
+
+    public String getCreate_by() {
+        return create_by;
+    }
+
+>>>>>>> f5e8fa03a98a4befeb1220d8d6c2cccd1185c09f
     public void setCreate_by(String create_by) {
         this.create_by = create_by;
     }
 
     
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> f5e8fa03a98a4befeb1220d8d6c2cccd1185c09f
 }

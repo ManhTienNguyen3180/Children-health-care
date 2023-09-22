@@ -29,7 +29,7 @@ public class ReservationController {
 
     @GetMapping("bookingappointment")
     public String getData(Model model){
-        model.addAttribute("listService", ServiceService.fetchServiceList());  
+        model.addAttribute("listService", ServiceService.fechServicesList());  
         model.addAttribute("listDoctor", DoctorService.fetchDoctorList());  
         
         return "bookingappointment";
