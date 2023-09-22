@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.project.service.ServiceService;
 
-import com.example.project.service.ServiceService;
-
 @Controller
 public class ServiceController {   
 

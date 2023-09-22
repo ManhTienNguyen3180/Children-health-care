@@ -1,9 +1,5 @@
 package com.example.project.controller;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f5e8fa03a98a4befeb1220d8d6c2cccd1185c09f
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

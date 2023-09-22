@@ -3,8 +3,10 @@ package com.example.project.entity;
 import java.sql.Date;
 import java.sql.Time;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -15,9 +17,7 @@ public class reservation {
     private int reservation_id;
     private int patient_id;
     private int patient_name;
-    @JoinColumn(name = "service_id")
-    @Column(name = "service_id")
-    private int service_id;
+    
     private String service_name;
     private String doctor_name;
     private String email;
@@ -33,19 +33,20 @@ public class reservation {
     private Date create_at;
     private String create_by;
     
-    @ManyToOne    
-    private service Service;
+    @ManyToOne
+    @JoinColumn(name = "service_id") 
+    private service service;
 
     public reservation() {
     }
 
-    public reservation(int reservation_id, int patient_id, int patient_name, int service_id, String service_name,
-            String doctor_name, String email, String phone, Date date, Time time, String description, int price,
-            int num_person, int total_cost, Date actual_date, int status, Date create_at, String create_by) {
+    public reservation(int reservation_id, int patient_id, int patient_name, String service_name, String doctor_name,
+            String email, String phone, Date date, Time time, String description, int price, int num_person,
+            int total_cost, Date actual_date, int status, Date create_at, String create_by,
+            com.example.project.entity.service service) {
         this.reservation_id = reservation_id;
         this.patient_id = patient_id;
         this.patient_name = patient_name;
-        this.service_id = service_id;
         this.service_name = service_name;
         this.doctor_name = doctor_name;
         this.email = email;
@@ -60,6 +61,7 @@ public class reservation {
         this.status = status;
         this.create_at = create_at;
         this.create_by = create_by;
+        this.service = service;
     }
 
     public int getReservation_id() {
@@ -86,14 +88,6 @@ public class reservation {
         this.patient_name = patient_name;
     }
 
-    public int getService_id() {
-        return service_id;
-    }
-
-    public void setService_id(int service_id) {
-        this.service_id = service_id;
-    }
-
     public String getService_name() {
         return service_name;
     }
@@ -110,12 +104,36 @@ public class reservation {
         this.doctor_name = doctor_name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
     }
 
     public String getDescription() {
@@ -182,37 +200,17 @@ public class reservation {
         this.create_by = create_by;
     }
 
-
-
-    public String getEmail() {
-        return email;
+    public service getService() {
+        return service;
     }
 
-
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setService(service service) {
+        this.service = service;
     }
 
+    
 
-
-    public String getPhone() {
-        return phone;
-    }
-
-
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
-    }
+    
 
     
     

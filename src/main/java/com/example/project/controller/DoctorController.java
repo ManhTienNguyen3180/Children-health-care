@@ -20,9 +20,6 @@ public class DoctorController {
         return "doctor";
     }
 
-<<<<<<< HEAD
-    
-=======
     @GetMapping("/doctor-detail/{id}")
     public String viewDoctorDetail(@PathVariable int id, Model model) {
         
@@ -34,5 +31,4 @@ public class DoctorController {
     // public String doctorDetail(){
     //     return "doctor-detail";
     // }
->>>>>>> f5e8fa03a98a4befeb1220d8d6c2cccd1185c09f
 }
