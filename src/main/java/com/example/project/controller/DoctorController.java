@@ -17,4 +17,6 @@ public class DoctorController {
         model.addAttribute("result", DoctorService.fetchDoctorList());
         return "doctor";
     }
+
+    
 }
