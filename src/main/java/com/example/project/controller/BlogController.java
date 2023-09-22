@@ -1,5 +1,6 @@
 package com.example.project.controller;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
@@ -61,7 +62,7 @@ public class BlogController {
 
     // Save Blog
     @RequestMapping(value = "/bloglistmanager/save", method = RequestMethod.POST)
-    public String saveStudent(@ModelAttribute("student") blog blog) {
+    public String saveStudent(@ModelAttribute("blog") blog blog) {
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         blog.setDate(date);
         BlogService.save(blog);
@@ -75,5 +76,8 @@ public class BlogController {
         return "redirect:/bloglistmanager";
     }
 
-
+    //Save image
+    public void saveImage(File file){
+        
+    }
 }

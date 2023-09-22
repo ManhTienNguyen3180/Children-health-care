@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -12,18 +11,21 @@
     <meta name="website" content="https://shreethemes.in" />
     <meta name="Version" content="v1.2.0" />
     <!-- favicon -->
-    <link th:href="@{images/favicon.ico.png}" rel="shortcut icon" href="images/favicon.ico.png">
+    <link th:href="@{/images/favicon.ico.png}" rel="shortcut icon" href="images/favicon.ico.png">
     <!-- Bootstrap -->
-    <link th:href="@{/css/bootstrap.min.css}"  rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
     <!-- Icons -->
-    <link th:href="@{/css/materialdesignicons.min.css}" href="css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/materialdesignicons.min.css}" href="css/materialdesignicons.min.css" rel="stylesheet"
+        type="text/css" />
     <link th:href="@{/css/remixicon.css}" href="css/remixicon.css" rel="stylesheet" type="text/css" />
-    <link th:href="@{/css/https://unicons.iconscout.com/release/v3.0.6/css/line.css}" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
+    <link th:href="@{/css/https://unicons.iconscout.com/release/v3.0.6/css/line.css}"
+        href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
     <!-- SLIDER -->
-    <link th:rel="stylesheet" th:href="@{/css/tiny-slider.css}" href="css/tiny-slider.css"/>
+    <link th:rel="stylesheet" th:href="@{/css/tiny-slider.css}" href="css/tiny-slider.css" />
     <!-- Css -->
     <link th:href="@{/css/style.min.css}" href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
 
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
 </head>
 
 <body>
@@ -32,16 +34,16 @@
     <!-- Loader -->
 
     <!-- Navbar STart -->
-    <header id="topnav" class="defaultscroll sticky">
+    <header id="topnav" class=" sticky">
         <div class="container">
             <!-- Logo container-->
             <div>
                 <a class="logo" href="home">
                     <span class="logo-light-mode">
-                        <img src="images/logo-dark.png" class="l-dark" height="24" alt="">
-                        <img src="images/logo-light.png" class="l-light" height="24" alt="">
+                        <img th:src="@{/images/logo-dark.png}" class="l-dark" height="24" alt="">
+                        <img th:src="@{/images/logo-light.png}" class="l-light" height="24" alt="">
                     </span>
-                    <img src="images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                    <img th:src="@{/images/logo-light.png}" height="24" class="logo-dark-mode" alt="">
                 </a>
             </div>
             <!-- End Logo container-->
@@ -76,26 +78,27 @@
                     <div class="dropdown dropdown-primary">
                         <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle"
+                                th:src="@{/images/doctors/01.jpg}" class="avatar avatar-ex-small rounded-circle"
                                 alt=""></button>
                         <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                             style="min-width: 200px;">
-                            <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html">
-                                <img src="images/doctors/02.jpg"
+                            <a class="dropdown-item d-flex align-items-center text-dark"
+                                th:href="@{/doctor-profile.html}">
+                                <img th:src="@{/images/doctors/02.jpg}"
                                     class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                 <div class="flex-1 ms-2">
                                     <span class="d-block mb-1">Calvin Carlo</span>
                                     <small class="text-muted">Orthopedic</small>
                                 </div>
                             </a>
-                            <a class="dropdown-item text-dark" href="doctor-dashboard.html"><span
+                            <a class="dropdown-item text-dark" th:src="@{/doctor-dashboard.html}"><span
                                     class="mb-0 d-inline-block me-1"><i
                                         class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
-                            <a class="dropdown-item text-dark" href="doctor-profile-setting.html"><span
+                            <a class="dropdown-item text-dark" th:src="@{/doctor-profile-setting.html}"><span
                                     class="mb-0 d-inline-block me-1"><i
                                         class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
                             <div class="dropdown-divider border-top"></div>
-                            <a class="dropdown-item text-dark" href="login.html"><span
+                            <a class="dropdown-item text-dark" th:src="@{/login.html}"><span
                                     class="mb-0 d-inline-block me-1"><i
                                         class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                         </div>
@@ -149,7 +152,7 @@
 
                 <div alight="left">
                     <tr>
-                        <label class="form-label">Blog CategoryID</label>
+                        <label class="form-label">CategoryID</label>
                         <td>
                             <input type="hidden" th:field="*{blog_id}" />
                             <input type="text" th:field="*{category_blog_id}" class="form-control"
@@ -160,30 +163,27 @@
                 <br>
                 <div alight="left">
                     <tr>
-                        <label class="form-label">Blog Title</label>
+                        <label class="form-label">Title</label>
                         <td>
-                            <input type="text" th:field="*{title}" class="form-control"
-                                placeholder="Title" />
+                            <input type="text" th:field="*{title}" class="form-control" placeholder="Title" />
                         </td>
                     </tr>
                 </div>
                 <br>
-                <div alight="left">
-                    <tr>
-                        <label class="form-label">Blog Description</label>
-                        <td>
-                            <input type="text" th:field="*{description}" class="form-control"
-                                placeholder="Description" />
-                        </td>
-                    </tr>
+                <div>
+                    <label class="form-label">Description</label>
+                    <textarea id="editor" name="description" th:field="*{description}" class="form-control"></textarea>
+
                 </div>
+
+                <br>
+
                 <br>
                 <div alight="left">
                     <tr>
                         <label class="form-label">Status</label>
                         <td>
-                            <input type="text" th:field="*{status}" class="form-control"
-                                placeholder="Status" />
+                            <input type="text" th:field="*{status}" class="form-control" placeholder="Status" />
                         </td>
                     </tr>
                 </div>
@@ -192,8 +192,7 @@
                     <tr>
                         <label class="form-label">Author</label>
                         <td>
-                            <input type="text" th:field="*{author}" class="form-control"
-                                placeholder="Author" />
+                            <input type="text" th:field="*{author}" class="form-control" placeholder="Author" />
                         </td>
                     </tr>
                 </div>
@@ -202,8 +201,7 @@
                     <tr>
                         <label class="form-label">Image</label>
                         <td>
-                            <input type="text" th:field="*{image}" class="form-control"
-                                placeholder="Image" />
+                            <input type="file" th:field="*{image}" class="form-control" placeholder="Image" />
                         </td>
                     </tr>
                 </div>
@@ -223,7 +221,7 @@
             <div class="row">
                 <div class="col-xl-5 col-lg-4 mb-0 mb-md-4 pb-0 pb-md-2">
                     <a href="#" class="logo-footer">
-                        <img src="images/logo-light.png" height="22" alt="">
+                        <img th:src="@{/images/logo-light.png}" height="22" alt="">
                     </a>
                     <p class="mt-4 me-xl-5">Great doctor if you need your family member to get effective immediate
                         assistance, emergency treatment or a simple consultation.</p>
@@ -362,94 +360,20 @@
     </div>
     <!-- Offcanvas End -->
 
-    <!-- Offcanvas Start -->
-    <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight"
-        aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header p-4 border-bottom">
-            <h5 id="offcanvasRightLabel" class="mb-0">
-                <img src="images/logo-dark.png" height="24" class="light-version" alt="">
-                <img src="images/logo-light.png" height="24" class="dark-version" alt="">
-            </h5>
-            <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas"
-                aria-label="Close"><i class="uil uil-times fs-4"></i></button>
-        </div>
-        <div class="offcanvas-body p-4 px-md-5">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Style switcher -->
-                    <div id="style-switcher">
-                        <div>
-                            <ul class="text-center list-unstyled mb-0">
-                                <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light"
-                                        onclick="setTheme('style-rtl')"><img
-                                            src="../assets/images/layouts/landing-light-rtl.png"
-                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
-                                            class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light"
-                                        onclick="setTheme('style')"><img
-                                            src="../assets/images/layouts/landing-light.png"
-                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
-                                            class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark"
-                                        onclick="setTheme('style-dark-rtl')"><img
-                                            src="../assets/images/layouts/landing-dark-rtl.png"
-                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
-                                            class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark"
-                                        onclick="setTheme('style-dark')"><img
-                                            src="../assets/images/layouts/landing-dark.png"
-                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
-                                            class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4"
-                                        onclick="setTheme('style-dark')"><img
-                                            src="../assets/images/layouts/landing-dark.png"
-                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
-                                            class="text-muted mt-2 d-block">Dark Version</span></a></li>
-                                <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4"
-                                        onclick="setTheme('style')"><img
-                                            src="../assets/images/layouts/landing-light.png"
-                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
-                                            class="text-muted mt-2 d-block">Light Version</span></a></li>
-                                <li class="d-grid"><a href="../admin/index.html" target="_blank" class="mt-4"><img
-                                            src="../assets/images/layouts/light-dash.png"
-                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
-                                            class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- end Style switcher -->
-                </div><!--end col-->
-            </div><!--end row-->
-        </div>
 
-        <div class="offcanvas-footer p-4 border-top text-center">
-            <ul class="list-unstyled social-icon mb-0">
-                <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris-template" target="_blank"
-                        class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
-                <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank"
-                        class="rounded"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
-                <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank"
-                        class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
-                <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank"
-                        class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
-                <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank"
-                        class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
-                <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i
-                            class="uil uil-envelope align-middle" title="email"></i></a></li>
-                <li class="list-inline-item mb-0"><a href="../../../index.html" target="_blank" class="rounded"><i
-                            class="uil uil-globe align-middle" title="website"></i></a></li>
-            </ul><!--end icon-->
-        </div>
-    </div>
-    <!-- Offcanvas End -->
-
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
     <!-- javascript -->
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <!-- Icons -->
-    <script src="js/feather.min.js"></script>
+    <script th:src="@{/js/feather.min.js}"></script>
     <!-- Main Js -->
-    <script src="js/app.js"></script>
-
+    <script th:src="@{/js/app.js}"></script>
 </body>
 
 </html>
