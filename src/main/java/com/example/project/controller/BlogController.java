@@ -64,7 +64,11 @@ public class BlogController {
 
     @RequestMapping("/blog-detail/{blog_id}")
     public String getBlogById(@RequestParam(value = "blog_id") int id, Model model) {
-        model.addAttribute("blog", BlogService.findBlogById(id));
+        Optional<blog> b =BlogService.findBlogById(id);
+        int cate_id=b.get().getCategory_blog_id();
+        model.addAttribute("blog", b);
+        List<blog> list = BlogService.getBlogByCategoryId(cate_id);
+        model.addAttribute("listBlog", list);
         return "blog-detail";
     }
 

@@ -126,10 +126,10 @@
                         </li>
                         
                         
-                        <li class="has-submenu parent-parent-menu-item">
+                        <!-- <li class="has-submenu parent-parent-menu-item">
                             <a href="">About</a>
                             
-                        </li>
+                        </li> -->
                         
                         
                     </ul><!--end navigation menu-->
@@ -232,17 +232,44 @@
 
                     <div class="col-lg-7 col-md-6 mt-4 pt-2 mt-sm-0 pt-sm-0">
                         <div class="section-title ms-lg-5">
-                            <span class="badge badge-pill badge-soft-primary">About Doctris</span>
-                            <h4 class="title mt-3 mb-4">Good Services And Better <br> Health By Our Specialists</h4>
+                            <span class="badge badge-pill badge-soft-primary">Blogs Doctris</span>
+                            <h4 class="title mt-3 mb-4">BLOGS AND NEWS </h4>
                             <p class="para-desc text-muted">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
                             <p class="para-desc text-muted">The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century. Lorem Ipsum is composed in a pseudo-Latin language which more or less corresponds to 'proper' Latin. It contains a series of real Latin words.</p>
                             <div class="mt-4">
-                                <a href="aboutus.html" class="btn btn-soft-primary">Read More</a>
+                                <a href="/blog" class="btn btn-soft-primary">Read More</a>
                             </div>
                         </div>
                     </div><!--end col-->
                 </div><!--end row-->
             </div><!--end container-->
+
+            <section class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2 " th:each="blog : ${blogNew}">
+                            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
+                                <img src="images/blog/01.jpg" class="img-fluid" alt="">
+                                <div class="card-body p-4" >
+                                    <ul class="list-unstyled mb-2">
+                                        <li class="list-inline-item text-muted small me-3" th:text="${blog.Date}"></li>
+                                        <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
+                                    </ul>
+                                    <a th:href="@{/blog-detail/{id}(id=${blog.blog_id})}" class="text-dark title h5" th:text="${blog.title}"></a>
+                                    <div class="post-meta d-flex justify-content-between mt-3">
+                                      
+                                        <a th:href="@{/blog-detail/{id}(id=${blog.blog_id})}" class="link">Read More </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+    
+                        
+                    </div><!--end row-->
+    
+                    
+                </div><!--end container-->
+            </section><!--end section-->
 
             <div class="container mt-100 mt-60">
                 <div class="row justify-content-center">
@@ -258,101 +285,25 @@
                 <div class="row">
                     <div class="col-xl-3 col-md-4 col-12 mt-5" th:each="service : ${service}">
                         <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
+                            <!-- <div class="icon text-center rounded-md">
                                 <i class="ri-eye-fill h3 mb-0"></i>
-                            </div>
+                            </div> -->
                             <div class="card-body p-0 mt-3">
                                 <a th:href="@{/service-detail/{id}(id=${service.service_id})}" class="title text-dark h5" th:text="${service.service_name}"></a>
                                 <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="departments.html" class="link">Read More </a>
+                                <a th:href="@{/service-detail/{id}(id=${service.service_id})}" class="link">Read More </a>
                             </div>
                         </div>
                     </div><!--end col-->
 
                     
-                    <div class="col-xl-3 col-md-4 col-12 mt-5">
-                        <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-psychotherapy-fill h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Psychotherapy</a>
-                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="departments.html" class="link">Read More </a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
+                   
 
                     <div class="col-xl-3 col-md-4 col-12 mt-5">
                         <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-stethoscope-fill h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Primary Care</a>
-                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="departments.html" class="link">Read More </a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-xl-3 col-md-4 col-12 mt-5">
-                        <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-capsule-fill h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Dental Care</a>
-                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="departments.html" class="link">Read More </a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    
-                    <div class="col-xl-3 col-md-4 col-12 mt-5">
-                        <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-microscope-fill h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Orthopedic</a>
-                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="departments.html" class="link">Read More </a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-xl-3 col-md-4 col-12 mt-5">
-                        <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-pulse-fill h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Cardiology</a>
-                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="departments.html" class="link">Read More </a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-xl-3 col-md-4 col-12 mt-5">
-                        <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
-                                <i class="ri-empathize-fill h3 mb-0"></i>
-                            </div>
-                            <div class="card-body p-0 mt-3">
-                                <a href="departments.html" class="title text-dark h5">Gynecology</a>
-                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="departments.html" class="link">Read More </a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-xl-3 col-md-4 col-12 mt-5">
-                        <div class="card features feature-primary bg-transparent border-0">
-                            <div class="icon text-center rounded-md">
+                            <!-- <div class="icon text-center rounded-md">
                                 <i class="ri-mind-map h3 mb-0"></i>
-                            </div>
+                            </div> -->
                             <div class="card-body p-0 mt-3">
                                 <a href="departments.html" class="title text-dark h5">Neurology</a>
                                 <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
@@ -486,12 +437,12 @@
                         <div class="card team border-0 rounded shadow overflow-hidden">
                             <div class="team-img position-relative">
                                 <img src="images/doctors/01.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
+                                <!-- <ul class="list-unstyled team-social mb-0">
                                     <li><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
                                     <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
                                     <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
                                     <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
+                                </ul> -->
                             </div>
                             <div class="card-body content text-center">
                                 <a th:href="@{/doctor-detail/{id}(id=${doctor.doctor_id})}" class="title text-dark h5 d-block mb-0" th:text="${doctor.doctor_name}" ></a>
