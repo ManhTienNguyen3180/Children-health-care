@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <html lang="en"  >
 
     <head>
         <meta charset="utf-8" />
@@ -13,17 +13,17 @@
         <meta name="website" content="https://shreethemes.in" />
         <meta name="Version" content="v1.2.0" />
         <!-- favicon -->
-        <link rel="shortcut icon" href="images/favicon.ico.png">
+        <link th:href="@{images/favicon.ico.png}" rel="shortcut icon" href="images/favicon.ico.png">
         <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link th:href="@{/css/bootstrap.min.css}"  rel="stylesheet" type="text/css" />
         <!-- Icons -->
-        <link href="css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
-        <link href="css/remixicon.css" rel="stylesheet" type="text/css" />
-        <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
+        <link th:href="@{/css/materialdesignicons.min.css}" href="css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+        <link th:href="@{/css/remixicon.css}" href="css/remixicon.css" rel="stylesheet" type="text/css" />
+        <link th:href="@{/css/https://unicons.iconscout.com/release/v3.0.6/css/line.css}" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- SLIDER -->
-        <link rel="stylesheet" href="css/tiny-slider.css"/>
+        <link rel="stylesheet" th:href="@{/css/tiny-slider.css}" href="css/tiny-slider.css"/>
         <!-- Css -->
-        <link href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <link th:href="@{/css/style.min.css}" href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
 
     </head>
 
@@ -138,14 +138,14 @@
         <section class="section">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 col-lg-7" th:object="${blog}" >
+                    <div class="col-lg-8 col-lg-7" >
                         <img src="images/blog/single.jpg" class="img-fluid rounded shadow" alt="">
 
                         <!-- <ul class="list-unstyled mt-4">
                             <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i> Calvin Carlo</li>
                             <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i> 1st January, 2021</li>
                         </ul> -->
-                        <h1 th:text="${title}"></h1>
+                        <h1 th:text="${blog.title}"></h1>
                         <p class="text-muted mt-4">This is required when, for example, the final text is not yet available. Dummy text is also known as 'fill text'. It is said that song composers of the past used dummy texts as lyrics when writing melodies in order to have a 'ready-made' text to sing with the melody. Dummy texts have been in use by typesetters since the 16th century.</p>
                         <p class="text-muted">Due to its widespread use as filler text for layouts, non-readability is of great importance: human perception is tuned to recognize certain patterns and repetitions in texts.</p>
                         <p class="text-muted mb-0">For this reason, dummy text usually consists of a more or less random series of words or syllables.</p>
@@ -621,14 +621,14 @@
         <!-- Offcanvas End -->
         
         <!-- javascript -->
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <script th:src="@{/js/bootstrap.bundle.min.js}" src="js/bootstrap.bundle.min.js"></script>
         <!-- SLIDER -->
-        <script src="js/tiny-slider.js"></script>
-        <script src="js/tiny-slider-init.js"></script>
+        <script th:src="@{/js/tiny-slider.js}" src="js/tiny-slider.js"></script>
+        <script th:src="@{/js/tiny-slider-init.js}" src="js/tiny-slider-init.js"></script>
         <!-- Icons -->
-        <script src="js/feather.min.js"></script>
+        <script th:src="@{/js/feather.min.js}" src="js/feather.min.js"></script>
         <!-- Main Js -->
-        <script src="js/app.js"></script>
+        <script th:src="@{/js/app.js}" src="js/app.js"></script>
         
     </body>
 
