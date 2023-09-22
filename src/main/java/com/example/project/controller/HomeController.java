@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import jakarta.servlet.http.HttpSession;
 import com.example.project.service.DoctorService;
 import com.example.project.service.ServiceService;
 
@@ -21,6 +22,10 @@ public class HomeController {
     public String home1(){
         return "home";
     }
+    @GetMapping("/user-profile")
+    public String userinfor(){
+        return "user-profile";
+    }
     
     @GetMapping("/home")
     public String home(Model model){
@@ -31,5 +36,11 @@ public class HomeController {
     
     
     
-
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("user");
+        return "redirect:/";
+    }
+        
+    
 }
