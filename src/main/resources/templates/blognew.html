@@ -34,7 +34,7 @@
     <!-- Loader -->
 
     <!-- Navbar STart -->
-    <header id="topnav" class=" sticky">
+    <header id="topnav" class="nav-sticky sticky">
         <div class="container">
             <!-- Logo container-->
             <div>
@@ -170,7 +170,7 @@
                     </tr>
                 </div>
                 <br>
-                <div>
+                <div alignt="left" >
                     <label class="form-label">Description</label>
                     <textarea id="editor" name="description" th:field="*{description}" class="form-control"></textarea>
 
@@ -201,7 +201,7 @@
                     <tr>
                         <label class="form-label">Image</label>
                         <td>
-                            <input type="file" th:field="*{image}" class="form-control" placeholder="Image" />
+                            <input type="text" th:field="*{image}" class="form-control" placeholder="Image" />
                         </td>
                     </tr>
                 </div>
@@ -216,7 +216,7 @@
 
 
     <!-- Start -->
-    <footer class="bg-footer">
+    <footer class="bg-footer mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-xl-5 col-lg-4 mb-0 mb-md-4 pb-0 pb-md-2">
@@ -372,8 +372,6 @@
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <!-- Icons -->
     <script th:src="@{/js/feather.min.js}"></script>
-    <!-- Main Js -->
-    <script th:src="@{/js/app.js}"></script>
 </body>
 
 </html>

@@ -17,7 +17,7 @@ import com.example.project.entity.user;
 // You can use the Optional methods like isPresent()
 // to check if a user was found and then retrieve the user with get() if it
 // exists.
-public interface UserRepo
+public interface UserRepository
             extends JpaRepository<user, Integer>/* type want to work with and type of key */ {
 
       @Query("SELECT u FROM user u WHERE email=?1 ")

@@ -21,7 +21,7 @@
     <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
     <!-- Css -->
     <link href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -30,7 +30,7 @@
     <!-- Loader -->
 
     <!-- Navbar STart -->
-    <header id="topnav" class="defaultscroll sticky">
+    <header id="topnav" class="sticky nav-sticky">
         <div class="container">
             <!-- Logo container-->
             <div>
@@ -139,9 +139,10 @@
     <!-- Navbar End -->
 
 
-    <div class=" container " style="min-height: 80vh; margin-top: 100px;">
-        <div class="panel-body">
-            <table class="table">
+    <div class="container position-relative " style="min-height: 80vh; margin-top: 100px;">
+
+        <div class="container">
+            <table class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
@@ -162,21 +163,29 @@
                         <td th:text="${listB.category_blog_id}"></td>
                         <td th:text="${listB.title}"></td>
                         <td th:text="${listB.date}"></td>
-                        <td th:text="${listB.description}"></td>
+                        <td th:text="${listB.description}" class=""></td>
                         <td th:text="${listB.status}"></td>
                         <td th:text="${listB.author}"></td>
                         <td th:text="${listB.image}"></td>
-                        <td>
-                            <a th:href="@{'/bloglistmanager/edit/' + ${listB.blog_id}}">Edit</a>
+                        <td class="text-center">
+                            <a th:href="@{'/bloglistmanager/edit/' + ${listB.blog_id}}">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
                         </td>
-                        <td>
-                            <a th:href="@{'/bloglistmanager/delete/' + ${listB.blog_id}}">Delete</a>
+                        <td class="text-center">
+                            <a th:href="@{'/bloglistmanager/delete/' + ${listB.blog_id}}">
+                                <i class="fa-sharp fa-solid fa-trash"></i>
+                            </a>
                         </td>
                     </tr>
                 </tbody>
             </table>
 
-            <a th:href="@{'/bloglistmanager/add'}">Create New Blog</a>
+            <a th:href="@{'/bloglistmanager/add'}">
+                <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                    Create New Post
+                </button>
+            </a>
 
         </div>
     </div>
@@ -413,7 +422,6 @@
     <!-- Icons -->
     <script src="js/feather.min.js"></script>
     <!-- Main Js -->
-    <script src="js/app.js"></script>
 
 </body>
 
