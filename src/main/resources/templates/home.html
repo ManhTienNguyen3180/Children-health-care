@@ -71,7 +71,7 @@
 
                     <li class="list-inline-item mb-0 ms-1">
                         <div class="dropdown dropdown-primary">
-                            <a href="user-profile"><button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button></a>
+                            <a href="user-profile"><button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img th:src="${session.user.image}" src="${session.user.image}" class="avatar avatar-ex-small rounded-circle" alt=""></button></a>
                             <a href="logout">Log out</a>
                         </div>
                         
