@@ -149,9 +149,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-3 col-lg-3 col-md-6" th:each="doctor : ${result}" >
-                        <div class="card team border-0 rounded shadow overflow-hidden">
+                        <div class="card team border-0 rounded shadow overflow-hidden" style="height: 450px;margin-bottom: 20px;">
                             <div class="team-img position-relative">
-                                <img th:src="${doctor.image}" class="img-fluid" alt="">
+                                <img th:src="${doctor.image}" class="img-fluid" alt="" style="height: 323px;">
                                 <ul class="list-unstyled team-social mb-0">
                                     <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
                                     <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
@@ -160,11 +160,11 @@
                                 </ul>
                             </div>
                             <div class="card-body content text-center ">
-                                <a th:href="@{/doctor-detail/{id}(id=${doctor.doctor_id})}" class="title text-dark h5 d-block mb-0" th:text="${doctor.doctor_name}"></a>
+                                <a th:href="@{/doctor-detail/{id}(id=${doctor.doctor_id})}" class="title text-dark h5 d-block mb-0" th:text="${doctor.doctor_name}" style="font-size: 15px;"></a>
                                 <small class="text-muted speciality" th:text="${doctor.position}"></small>
                             </div>
                         </div>
-                    </div><!--end col-->
+                    </div>
                     
                     
                     
