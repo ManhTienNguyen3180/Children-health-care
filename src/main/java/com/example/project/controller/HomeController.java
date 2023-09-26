@@ -68,6 +68,10 @@ public class HomeController {
                 .get(uploadDir + java.io.File.separator + file.getOriginalFilename());
             java.nio.file.Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
             user  user = (user) session.getAttribute("user");
+            if(user.getImage() != null){
+                java.io.File oldFile = new java.io.File(uploadDir + java.io.File.separator + getImageName(user.getImage()));
+                oldFile.delete();
+            }
             user.setImage("images" + "/" + file.getOriginalFilename());
             userService.save(user);
         } catch (Exception e) {
@@ -75,7 +79,11 @@ public class HomeController {
             session.setAttribute("message", "Fail to upload " + file.getOriginalFilename() + "!");
         }
          
-        return "redirect:/user-profile";
+        return "redirect:/logout";
+    }
+    public String getImageName(String name){
+        String[] arr = name.split("/");
+        return arr[arr.length - 1];
     }    
     
 
