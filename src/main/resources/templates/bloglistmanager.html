@@ -14,14 +14,15 @@
     <!-- favicon -->
     <link rel="shortcut icon" href="images/favicon.ico.png">
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
     <!-- Icons -->
-    <link href="css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/remixicon.css" rel="stylesheet" type="text/css" />
-    <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
+    <link th:href="@{/css/materialdesignicons.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/remixicon.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{https://unicons.iconscout.com/release/v3.0.6/css/line.css}" rel="stylesheet">
     <!-- Css -->
-    <link href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link th:href="@{/css/style.min.css}" rel="stylesheet" type="text/css" id="theme-opt" />
+    <link rel="stylesheet"
+        th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
 </head>
 
 <body>
@@ -36,10 +37,10 @@
             <div>
                 <a class="logo" href="index.html">
                     <span class="logo-light-mode">
-                        <img src="images/logo-dark.png" class="l-dark" height="24" alt="">
-                        <img src="images/logo-light.png" class="l-light" height="24" alt="">
+                        <img th:src="@{/images/logo-dark.png}" class="l-dark" height="24" alt="">
+                        <img th:src="@{/images/logo-light.png}" class="l-light" height="24" alt="">
                     </span>
-                    <img src="images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                    <img th:src="@{/images/logo-light.png}" height="24" class="logo-dark-mode" alt="">
                 </a>
             </div>
             <!-- End Logo container-->
@@ -74,12 +75,12 @@
                     <div class="dropdown dropdown-primary">
                         <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle"
+                                th:src="@{/images/doctors/01.jpg}" class="avatar avatar-ex-small rounded-circle"
                                 alt=""></button>
                         <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                             style="min-width: 200px;">
                             <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html">
-                                <img src="images/doctors/02.jpg"
+                                <img th:src="@{/images/doctors/02.jpg}"
                                     class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                 <div class="flex-1 ms-2">
                                     <span class="d-block mb-1">Calvin Carlo</span>
@@ -140,13 +141,33 @@
 
 
     <div class="container position-relative " style="min-height: 80vh; margin-top: 100px;">
-
+        <div class="container">
+            <div class="row">
+                <div class="title">Sort</div>
+                <!-- <div class="col-md">
+                    <a class="btn btn-link" id="categorySort" th:href="@{'/bloglistmanager/page/' + ${currentPage} + '?sortField=category_blog_id&sortDir=' + ${reverseSortDir}}">Category</a>
+                </div> -->
+                <div class="col-md">
+                    <a class="btn btn-link" id="titleSort" th:href="@{'/bloglistmanager/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir}}">
+                        Title</a>
+                </div>
+                <div class="col-md">
+                    <a class="btn btn-link" id="dateSort" th:href="@{'/bloglistmanager/page/' + ${currentPage} + '?sortField=date&sortDir=' + ${reverseSortDir}}">Date</a>
+                </div>
+                <div class="col-md">
+                    <a class="btn btn-link" id="statusSort" th:href="@{'/bloglistmanager/page/' + ${currentPage} + '?sortField=status&sortDir=' + ${reverseSortDir}}">Status</a>
+                </div>
+                <div class="col-md">
+                    <a class="btn btn-link" id="authorSort" th:href="@{'/bloglistmanager/page/' + ${currentPage} + '?sortField=author&sortDir=' + ${reverseSortDir}}">Author</a>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <table class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
-                        <th>CategoryID</th>
+                        <th>Category</th>
                         <th>Title</th>
                         <th>Date</th>
                         <th>Description</th>
@@ -169,12 +190,12 @@
                         <td th:text="${listB.image}"></td>
                         <td class="text-center">
                             <a th:href="@{'/bloglistmanager/edit/' + ${listB.blog_id}}">
-                                <i class="fa-solid fa-pen-to-square"></i>
+                                Edit
                             </a>
                         </td>
                         <td class="text-center">
                             <a th:href="@{'/bloglistmanager/delete/' + ${listB.blog_id}}">
-                                <i class="fa-sharp fa-solid fa-trash"></i>
+                                Delete
                             </a>
                         </td>
                     </tr>
@@ -182,10 +203,35 @@
             </table>
 
             <a th:href="@{'/bloglistmanager/add'}">
-                <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false"
+                    autocomplete="off">
                     Create New Post
                 </button>
             </a>
+            <div class="row">
+                <div class="col-12 mt-4">
+                    <ul class="pagination justify-content-end mb-0 list-unstyled">
+                        <li class="page-item">
+                            <a th:if="${currentPage >1}" th:href="@{'/bloglistmanager/page/' + ${currentPage - 1}}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}"
+                                class="page-link" href="" aria-label="Prev">Prev</a>
+                            <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                        </li>
+                        <span th:each="i:${#numbers.sequence(1,totalPages)}">
+                            <li class="page-item"><a th:if="${currentPage != i}"
+                                    th:href="@{'/bloglistmanager/page/'+${i}}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}" class="page-link" href="">[[${i}]]</a>
+                            </li>
+                            <li th:unless="${currentPage != i}" class="page-item active"><a class="page-link"
+                                    href="">[[${i}]]</a></li>
+                        </span>
+                        <li class="page-item">
+                            <a th:if="${currentPage < totalPages}"
+                                th:href="@{'/bloglistmanager/page/' + ${currentPage + 1}}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}" class="page-link" href=""
+                                aria-label="Next">Next</a>
+                            <span class="page-link pe-none" th:unless="${currentPage < totalPages}">Next</span>
+                        </li>
+                    </ul><!--end pagination-->
+                </div><!--end col-->
+            </div><!--end row-->
 
         </div>
     </div>
@@ -418,9 +464,9 @@
     <!-- Offcanvas End -->
 
     <!-- javascript -->
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <!-- Icons -->
-    <script src="js/feather.min.js"></script>
+    <script th:src="@{js/feather.min.js}"></script>
     <!-- Main Js -->
 
 </body>

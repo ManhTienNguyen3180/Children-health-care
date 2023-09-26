@@ -152,11 +152,13 @@
 
                 <div alight="left">
                     <tr>
-                        <label class="form-label">CategoryID</label>
+                        <label class="form-label">Category</label>
                         <td>
                             <input type="hidden" th:field="*{blog_id}" />
-                            <input type="text" th:field="*{category_blog_id}" class="form-control"
-                                placeholder="Blog CategoryID" />
+                            <select class="form-control" th:field="*{category_blog_id}" placeholder="Blog CategoryID">
+                                <option value="0">--Select Category--</option>
+                                <option th:each="cat : ${category}" th:value="${cat.category_blog_id}" th:text="${cat.category_blog_name}"></option>
+                            </select>
                         </td>
                     </tr>
                 </div>
@@ -170,9 +172,9 @@
                     </tr>
                 </div>
                 <br>
-                <div alignt="left" >
+                <div alignt="left" style="min-width: 50vw;">
                     <label class="form-label">Description</label>
-                    <textarea id="editor" name="description" th:field="*{description}" class="form-control"></textarea>
+                    <textarea style="min-height: 50px;" id="editor" name="description" th:field="*{description}" class="form-control" ></textarea>
 
                 </div>
 

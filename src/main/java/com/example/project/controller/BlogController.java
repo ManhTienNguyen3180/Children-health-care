@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.Calendar;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.project.entity.blog;
+import com.example.project.entity.service;
+import com.example.project.service.BlogCategoryService;
 import com.example.project.service.BlogService;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -26,57 +29,62 @@ public class BlogController {
     @Autowired
     private BlogService BlogService;
 
-    
+    @Autowired
+    private BlogCategoryService blogCategoryService;
+
     @GetMapping("/blog")
     public String getBlog(Model model) {
         model.addAttribute("result", BlogService.fetchBLogList());
         return "blog";
     }
 
-    // @RequestMapping("/blog-detail/{blog_id}")  
-    // public String getBlogById(@RequestParam(value="blog_id") String bid, Model model) {
-    //     int id=Integer.parseInt(bid);
-    //     model.addAttribute("blog", BlogService.findBlogById(id)) ;
-    //     return "blog-detail";
-    // }
-    
     @GetMapping("/blog-detail/{id}")
     public String viewBlogDetail(@PathVariable int id, Model model) {
-        
+        Optional<blog> b = BlogService.findBlogById(id);
+        int cate_id = b.get().getCategory_blog_id();
+        List<blog> list = BlogService.getBlogByCategoryId(cate_id);
+        model.addAttribute("listBlog", list);
         model.addAttribute("blog", BlogService.findBlogById(id).orElse(null));
         return "blog-detail";
     }
-    
-    // @GetMapping("/blog-detail")
-    // public String blogDetail(){
-    //     return "blog-detail";
-    // }
-
-
-
 
     // Read to manage
     @GetMapping("/bloglistmanager")
     public String viewBlogList(Model model) {
-        List<blog> list = BlogService.fetchBLogList();
-        model.addAttribute("listBlog", list);
-        return "bloglistmanager";
+        return findPaginated(1,"date","asc", model);
     }
 
-    @RequestMapping("/blog-detail/{blog_id}")
-    public String getBlogById(@RequestParam(value = "blog_id") int id, Model model) {
-        model.addAttribute("blog", BlogService.findBlogById(id));
-        return "blog-detail";
+    @GetMapping("/bloglistmanager/page/{pageNo}")
+    public String findPaginated(@PathVariable int pageNo,
+            @RequestParam("sortField") String sortField,
+            @RequestParam("sortDir") String sortDir,
+            Model model) {
+
+        int pageSize = 3;
+
+        Page<blog> page = BlogService.findPaginated(pageNo, pageSize, sortField, sortDir);
+        List<blog> list = page.getContent();
+
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("listBlog", list);
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+        return "bloglistmanager";
     }
 
     // Add Blog
     @GetMapping("/bloglistmanager/add")
     public String addBlog(Model model) {
+        model.addAttribute("category", blogCategoryService.fetchBLogCategoryList());
         model.addAttribute("blog", new blog());
         return "blognew";
     }
 
-    //Edit Blog
+    // Edit Blog
     @RequestMapping("/bloglistmanager/edit/{blog_id}")
     public ModelAndView showEditStudentPage(@PathVariable(name = "blog_id") int id) {
         ModelAndView mav = new ModelAndView("blognew");
@@ -101,8 +109,8 @@ public class BlogController {
         return "redirect:/bloglistmanager";
     }
 
-    //Save image
-    public void saveImage(File file){
-        
+    // Save image
+    public void saveImage(File file) {
+
     }
 }
