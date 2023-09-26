@@ -239,9 +239,9 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Service</label>
-                                                    <select class="form-control department-name select2input">
-                                                        <option value="EY" name="servicename" th:each="service:${listService}" th:text="${service.service_name}" 
-                                                        th:value="${service.service_name}" ></option>                                                     
+                                                    <select class="form-control department-name select2input" name="service_id">
+                                                        <option  th:each="service:${listService}" th:text="${service.service_name}" 
+                                                        th:value="${service.service_id}" ></option>                                                     
                                                     </select>
                                                 </div>
                                             </div>
@@ -249,7 +249,7 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Doctor</label>
-                                                    <select class="form-control doctor-name select2input">
+                                                    <select class="form-control doctor-name select2input" name="doctor_name">
                                                         <option value="CA" th:each="doctor : ${listDoctor}" th:text="${doctor.doctor_name}" th:value="${doctor.doctor_name}" ></option>
                                                     </select>
                                                 </div>

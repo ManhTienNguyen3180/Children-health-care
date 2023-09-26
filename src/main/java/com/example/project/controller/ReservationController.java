@@ -2,8 +2,6 @@ package com.example.project.controller;
 
 import java.util.Optional;
 
-import javax.swing.text.html.Option;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +14,6 @@ import com.example.project.entity.service;
 import com.example.project.service.DoctorService;
 import com.example.project.service.ReservationService;
 import com.example.project.service.ServiceService;
-
-import jakarta.websocket.server.PathParam;
 
 @Controller
 public class ReservationController {
