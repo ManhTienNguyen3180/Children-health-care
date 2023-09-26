@@ -23,7 +23,14 @@
     <link th:href="@{/css/style.min.css}" rel="stylesheet" type="text/css" id="theme-opt" />
     <link rel="stylesheet"
         th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
-</head>
+        <style>
+            /* Add margin between buttons */
+            .row.align-items-lg-stretch button {
+                margin:0 50px; /* Adjust the value as needed */
+                font-size: larger;
+            }
+        </style>
+    </head>
 
 <body>
     <!-- Loader -->
@@ -139,24 +146,20 @@
 
     <div class="container position-relative " style="min-height: 80vh; margin-top: 100px;">
         <div class="container">
-            <div class="row">
-                <div class="title">Sort</div>
-                <!-- <div class="col-md">
-                    <a class="btn btn-link" id="categorySort" th:href="@{'/bloglistmanager/page/' + ${currentPage} + '?sortField=category_blog_id&sortDir=' + ${reverseSortDir}}">Category</a>
-                </div> -->
-                <div class="col-md">
+            <div class="row align-items-lg-stretch">
+                <button class="col-md btn-light">
                     <a class="btn btn-link" id="titleSort" th:href="@{'/bloglistmanager/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir}}">
                         Title</a>
-                </div>
-                <div class="col-md">
+                </button>
+                <button class="col-md btn-light">
                     <a class="btn btn-link" id="dateSort" th:href="@{'/bloglistmanager/page/' + ${currentPage} + '?sortField=date&sortDir=' + ${reverseSortDir}}">Date</a>
-                </div>
-                <div class="col-md">
+                </button>
+                <button class="col-md btn-light">
                     <a class="btn btn-link" id="statusSort" th:href="@{'/bloglistmanager/page/' + ${currentPage} + '?sortField=status&sortDir=' + ${reverseSortDir}}">Status</a>
-                </div>
-                <div class="col-md">
+                </button>
+                <button class="col-md btn-light">
                     <a class="btn btn-link" id="authorSort" th:href="@{'/bloglistmanager/page/' + ${currentPage} + '?sortField=author&sortDir=' + ${reverseSortDir}}">Author</a>
-                </div>
+                </button>
             </div>
         </div>
         <div class="container">
@@ -181,10 +184,12 @@
                         <td th:text="${listB.category_blog_id}"></td>
                         <td th:text="${listB.title}"></td>
                         <td th:text="${listB.date}"></td>
-                        <td th:text="${listB.description}" class=""></td>
+                        <td th:utext="${listB.description}" class=""></td>
                         <td th:text="${listB.status}"></td>
                         <td th:text="${listB.author}"></td>
-                        <td th:text="${listB.image}"></td>
+                        <td>
+                            <img th:src="${listB.image}" alt="" srcset="" style="width: 100px;">
+                        </td>
                         <td class="text-center">
                             <a th:href="@{'/bloglistmanager/edit/' + ${listB.blog_id}}">
                                 Edit
