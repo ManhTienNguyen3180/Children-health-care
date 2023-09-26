@@ -39,12 +39,12 @@ public class BlogController {
     //     return "blog-detail";
     // }
     
-    @GetMapping("/blog-detail/{id}")
-    public String viewBlogDetail(@PathVariable int id, Model model) {
+    // @GetMapping("/blog-detail/{id}")
+    // public String viewBlogDetail(@PathVariable int id, Model model) {
         
-        model.addAttribute("blog", BlogService.findBlogById(id).orElse(null));
-        return "blog-detail";
-    }
+    //     model.addAttribute("blog", BlogService.findBlogById(id).orElse(null));
+    //     return "blog-detail";
+    // }
     
     // @GetMapping("/blog-detail")
     // public String blogDetail(){
@@ -62,11 +62,11 @@ public class BlogController {
         return "bloglistmanager";
     }
 
-    @RequestMapping("/blog-detail/{blog_id}")
-    public String getBlogById(@RequestParam(value = "blog_id") int id, Model model) {
-        Optional<blog> b =BlogService.findBlogById(id);
+    @GetMapping("/blog-detail/{blog_id}")
+    public String getBlogById(@PathVariable(value = "blog_id") int blog_id, Model model) {
+        Optional<blog> b =BlogService.findBlogById(blog_id);
         int cate_id=b.get().getCategory_blog_id();
-        model.addAttribute("blog", b);
+        model.addAttribute("blog", BlogService.findBlogById(blog_id).orElse(null));
         List<blog> list = BlogService.getBlogByCategoryId(cate_id);
         model.addAttribute("listBlog", list);
         return "blog-detail";
