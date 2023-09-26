@@ -2,6 +2,7 @@ package com.example.project.controller;
 
 import java.time.LocalDate;
 
+import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ public class RegisterController {
   public RegisterController(UserService userService) {
     this.userService = userService;
   }
+
 
   @PostMapping
   public String register(
