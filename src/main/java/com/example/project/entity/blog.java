@@ -17,12 +17,8 @@ public class blog {
     private String author;
     private String image;
     
-
-    
     public blog() {
     }
-
-
 
     public blog(int blog_id, int category_blog_id, String title, Date date, String description, int status,
             String author, String image) {
@@ -36,12 +32,9 @@ public class blog {
         this.image = image;
     }
 
-
-
     public int getBlog_id() {
         return blog_id;
     }
-
 
 
     public void setBlog_id(int blog_id) {
