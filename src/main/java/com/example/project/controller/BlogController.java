@@ -37,6 +37,27 @@ public class BlogController {
         return "blog";
     }
 
+    // @RequestMapping("/blog-detail/{blog_id}")  
+    // public String getBlogById(@RequestParam(value="blog_id") String bid, Model model) {
+    //     int id=Integer.parseInt(bid);
+    //     model.addAttribute("blog", BlogService.findBlogById(id)) ;
+    //     return "blog-detail";
+    // }
+    
+    // @GetMapping("/blog-detail/{id}")
+    // public String viewBlogDetail(@PathVariable int id, Model model) {
+        
+    //     model.addAttribute("blog", BlogService.findBlogById(id).orElse(null));
+    //     return "blog-detail";
+    // }
+    
+    // @GetMapping("/blog-detail")
+    // public String blogDetail(){
+    //     return "blog-detail";
+    // }
+
+
+
     @GetMapping("/blog-detail/{id}")
     public String viewBlogDetail(@PathVariable int id, Model model) {
         Optional<blog> b = BlogService.findBlogById(id);
@@ -53,6 +74,7 @@ public class BlogController {
         return findPaginated(1,"date","asc", model);
     }
 
+    
     @GetMapping("/bloglistmanager/page/{pageNo}")
     public String findPaginated(@PathVariable int pageNo,
             @RequestParam("sortField") String sortField,

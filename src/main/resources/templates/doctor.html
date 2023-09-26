@@ -148,7 +148,7 @@
                     <div class="col-xl-3 col-lg-3 col-md-6" th:each="doctor : ${result}" >
                         <div class="card team border-0 rounded shadow overflow-hidden">
                             <div class="team-img position-relative">
-                                <img src="images/doctors/01.jpg" class="img-fluid" alt="">
+                                <img th:src="${doctor.image}" class="img-fluid" alt="">
                                 <ul class="list-unstyled team-social mb-0">
                                     <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
                                     <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
@@ -158,136 +158,17 @@
                             </div>
                             <div class="card-body content text-center ">
                                 <a th:href="@{/doctor-detail/{id}(id=${doctor.doctor_id})}" class="title text-dark h5 d-block mb-0" th:text="${doctor.doctor_name}"></a>
-                                <small class="text-muted speciality">Eye Care</small>
+                                <small class="text-muted speciality" th:text="${doctor.position}"></small>
                             </div>
                         </div>
                     </div><!--end col-->
                     
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/02.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="card-body content text-center">
-                                <a href="#" class="title text-dark h5 d-block mb-0">Cristino Murphy</a>
-                                <small class="text-muted speciality">Gynecology</small>
-                            </div>
-                        </div>
-                    </div><!--end col-->
                     
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 mt-lg-0 pt-2 pt-lg-0">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/03.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="card-body content text-center">
-                                <a href="#" class="title text-dark h5 d-block mb-0">Alia Reddy</a>
-                                <small class="text-muted speciality">Psychotherapy</small>
-                            </div>
-                        </div>
-                    </div><!--end col-->
                     
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 mt-lg-0 pt-2 pt-lg-0">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/04.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="card-body content text-center">
-                                <a href="#" class="title text-dark h5 d-block mb-0">Toni Kovar</a>
-                                <small class="text-muted speciality">Orthopedic</small>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/05.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="card-body content text-center">
-                                <a href="#" class="title text-dark h5 d-block mb-0">Jessica McFarlane</a>
-                                <small class="text-muted speciality">Dentist</small>
-                            </div>
-                        </div>
-                    </div><!--end col-->
                     
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/06.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="card-body content text-center">
-                                <a href="#" class="title text-dark h5 d-block mb-0">Elsie Sherman</a>
-                                <small class="text-muted speciality">Gastrologist</small>
-                            </div>
-                        </div>
-                    </div><!--end col-->
                     
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/07.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="card-body content text-center">
-                                <a href="#" class="title text-dark h5 d-block mb-0">Bertha Magers</a>
-                                <small class="text-muted speciality">Urologist</small>
-                            </div>
-                        </div>
-                    </div><!--end col-->
                     
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="images/doctors/08.jpg" class="img-fluid" alt="">
-                                <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="card-body content text-center">
-                                <a href="#" class="title text-dark h5 d-block mb-0">Louis Batey</a>
-                                <small class="text-muted speciality">Neurologist</small>
-                            </div>
-                        </div>
-                    </div><!--end col-->
+                    
                 </div><!--end row-->
             </div><!--end container-->
         </section><!--end section-->
