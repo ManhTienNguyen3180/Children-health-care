@@ -15,13 +15,13 @@
         <!-- favicon -->
         <link rel="shortcut icon" href="images/favicon.ico.png">
         <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- Icons -->
-        <link href="css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
-        <link href="css/remixicon.css" rel="stylesheet" type="text/css" />
+        <link href="../static/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+        <link href="../static/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- Css -->
-        <link href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <link href="../static/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
 
     </head>
 
@@ -37,10 +37,10 @@
                 <div>
                     <a class="logo" href="index.html">
                         <span class="logo-light-mode">
-                            <img src="images/logo-dark.png" class="l-dark" height="24" alt="">
-                            <img src="images/logo-light.png" class="l-light" height="24" alt="">
+                            <img src="../static/images/logo-dark.png" class="l-dark" height="24" alt="">
+                            <img src="../static/images/logo-light.png" class="l-light" height="24" alt="">
                         </span>
-                        <img src="images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                        <img src="../static/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                     </a>
                 </div>
                 <!-- End Logo container-->
@@ -64,7 +64,7 @@
                 <!-- Start Dropdown -->
                 <ul class="dropdowns list-inline mb-0">
                     <li class="list-inline-item mb-0">
-                        <a href="" >
+                        <a href="bookingappointment" >
                             <div class="btn btn-primary">Book Appointment</div>
                         </a>
                     </li>
@@ -73,19 +73,19 @@
 
                     <li class="list-inline-item mb-0 ms-1">
                         <div class="dropdown dropdown-primary">
-                            <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button>
+                            <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img th:src="${session.user.image}" src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button>
                             <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
                                 <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html">
-                                    <img src="images/doctors/02.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                    <img th:src="${session.user.image}" src="images/doctors/02.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                     <div class="flex-1 ms-2">
-                                        <span class="d-block mb-1">Calvin Carlo</span>
+                                        <span th:text="${session.user.full_name}" class="d-block mb-1">Calvin Carlo</span>
                                         <small class="text-muted">Orthopedic</small>
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-dark" href="doctor-dashboard.html"><span class="mb-0 d-inline-block me-1"><i class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
                                 <a class="dropdown-item text-dark" href="doctor-profile-setting.html"><span class="mb-0 d-inline-block me-1"><i class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
                                 <div class="dropdown-divider border-top"></div>
-                                <a class="dropdown-item text-dark" href="login.html"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                                <a class="dropdown-item text-dark" href="logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                             </div>
                         </div>
                     </li>

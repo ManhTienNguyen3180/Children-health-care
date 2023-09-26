@@ -28,8 +28,5 @@ public class DoctorController {
         return "doctor-detail";
     }
 
-    // @GetMapping("/doctor-detail")
-    // public String doctorDetail(){
-    //     return "doctor-detail";
-    // }
+    
 }
