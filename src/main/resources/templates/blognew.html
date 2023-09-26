@@ -26,6 +26,7 @@
     <link th:href="@{/css/style.min.css}" href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
 
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+    
 </head>
 
 <body>
@@ -151,67 +152,36 @@
             <form action="#" th:action="@{/bloglistmanager/save}" th:object="${blog}" method="post">
 
                 <div alight="left">
-                    <tr>
-                        <label class="form-label">Category</label>
-                        <td>
-                            <input type="hidden" th:field="*{blog_id}" />
-                            <select class="form-control" th:field="*{category_blog_id}" placeholder="Blog CategoryID">
-                                <option value="0">--Select Category--</option>
-                                <option th:each="cat : ${category}" th:value="${cat.category_blog_id}" th:text="${cat.category_blog_name}"></option>
-                            </select>
-                        </td>
-                    </tr>
+                    <label class="form-label">Category</label>
+                    <input type="hidden" th:field="*{blog_id}" />
+                    <select required class="form-control" th:field="*{category_blog_id}" placeholder="Blog CategoryID">
+                        <option th:each="cat : ${category}" th:value="${cat.category_blog_id}"
+                            th:text="${cat.category_blog_name}"></option>
+                    </select>
                 </div>
                 <br>
                 <div alight="left">
-                    <tr>
-                        <label class="form-label">Title</label>
-                        <td>
-                            <input type="text" th:field="*{title}" class="form-control" placeholder="Title" />
-                        </td>
-                    </tr>
+                    <label class="form-label">Title</label>
+                    <input required type="text" th:field="*{title}" class="form-control" placeholder="Title" />
                 </div>
                 <br>
                 <div alignt="left" style="min-width: 50vw;">
                     <label class="form-label">Description</label>
-                    <textarea style="min-height: 50px;" id="editor" name="description" th:field="*{description}" class="form-control" ></textarea>
-
-                </div>
-
-                <br>
-
-                <br>
-                <div alight="left">
-                    <tr>
-                        <label class="form-label">Status</label>
-                        <td>
-                            <input type="text" th:field="*{status}" class="form-control" placeholder="Status" />
-                        </td>
-                    </tr>
+                    <textarea style="min-height: 50px;" id="editor" name="description"
+                        th:field="*{description}" class="form-control"></textarea>
                 </div>
                 <br>
                 <div alight="left">
-                    <tr>
-                        <label class="form-label">Author</label>
-                        <td>
-                            <input type="text" th:field="*{author}" class="form-control" placeholder="Author" />
-                        </td>
-                    </tr>
+                    <label class="form-label">Author</label>
+                    <input required type="text" th:field="*{author}" class="form-control" placeholder="Author" />
                 </div>
                 <br>
                 <div alight="left">
-                    <tr>
-                        <label class="form-label">Image</label>
-                        <td>
-                            <input type="text" th:field="*{image}" class="form-control" placeholder="Image" />
-                        </td>
-                    </tr>
+                    <label class="form-label">Image</label>
+                    <input required type="text" th:field="*{image}" class="form-control" placeholder="Image" />
                 </div>
                 <br>
-                <tr>
-                    <td colspan="2"><button type="submit" class="btn btn-info">Save</button> </td>
-                </tr>
-                </table>
+                <input type="submit" class="btn btn-info" value="Save"></input> 
             </form>
         </div>
     </div>
