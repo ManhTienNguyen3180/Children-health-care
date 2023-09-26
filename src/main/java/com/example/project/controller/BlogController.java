@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.project.entity.blog;
-import com.example.project.entity.service;
 import com.example.project.service.BlogCategoryService;
 import com.example.project.service.BlogService;
 import org.springframework.web.servlet.ModelAndView;
@@ -89,6 +88,7 @@ public class BlogController {
     public ModelAndView showEditStudentPage(@PathVariable(name = "blog_id") int id) {
         ModelAndView mav = new ModelAndView("blognew");
         Optional<blog> blog = BlogService.findBlogById(id);
+        mav.getModelMap().addAttribute("category", blogCategoryService.fetchBLogCategoryList());
         mav.addObject("blog", blog);
         return mav;
     }
@@ -98,6 +98,8 @@ public class BlogController {
     public String saveStudent(@ModelAttribute("blog") blog blog) {
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         blog.setDate(date);
+        blog.setStatus(1);
+
         BlogService.save(blog);
         return "redirect:/bloglistmanager";
     }
