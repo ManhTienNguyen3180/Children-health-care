@@ -16,13 +16,6 @@ public class ReservationService {
         repository.save(reservation);
     }
 
-
-    // public reservation findServiceByService_Name1(String servicename) {
-    //     Optional<reservation> useOptional = repository.findByService_ServiceName(servicename);
-    //     if (useOptional.isPresent()) {
-    //         reservation p = useOptional.get();
-    //         return p;
-    //     }
-    //     return null;
-    // }
+    
+    
 }

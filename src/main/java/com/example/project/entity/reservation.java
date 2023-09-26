@@ -11,14 +11,11 @@ public class reservation {
     @Id
     private int reservation_id;
     private int patient_id;
-    private int patient_name;
-    
+    private String patient_name;
+    private int service_id;
     private String service_name;
     private String doctor_name;
-    private String email;
-    private String phone;
     private Date date;
-    private Time time;
     private String description;
     private int price;
     private int num_person;
@@ -28,24 +25,19 @@ public class reservation {
     private Date create_at;
     private String create_by;
     
-    
-
     public reservation() {
     }
 
-    public reservation(int reservation_id, int patient_id, int patient_name, String service_name, String doctor_name,
-            String email, String phone, Date date, Time time, String description, int price, int num_person,
-            int total_cost, Date actual_date, int status, Date create_at, String create_by,
-            com.example.project.entity.service service) {
+    public reservation(int reservation_id, int patient_id, String patient_name, int service_id, String service_name,
+            String doctor_name, Date date, String description, int price, int num_person, int total_cost,
+            Date actual_date, int status, Date create_at, String create_by) {
         this.reservation_id = reservation_id;
         this.patient_id = patient_id;
         this.patient_name = patient_name;
+        this.service_id = service_id;
         this.service_name = service_name;
         this.doctor_name = doctor_name;
-        this.email = email;
-        this.phone = phone;
         this.date = date;
-        this.time = time;
         this.description = description;
         this.price = price;
         this.num_person = num_person;
@@ -54,7 +46,6 @@ public class reservation {
         this.status = status;
         this.create_at = create_at;
         this.create_by = create_by;
-        
     }
 
     public int getReservation_id() {
@@ -73,12 +64,20 @@ public class reservation {
         this.patient_id = patient_id;
     }
 
-    public int getPatient_name() {
+    public String getPatient_name() {
         return patient_name;
     }
 
-    public void setPatient_name(int patient_name) {
+    public void setPatient_name(String patient_name) {
         this.patient_name = patient_name;
+    }
+
+    public int getService_id() {
+        return service_id;
+    }
+
+    public void setService_id(int service_id) {
+        this.service_id = service_id;
     }
 
     public String getService_name() {
@@ -97,36 +96,12 @@ public class reservation {
         this.doctor_name = doctor_name;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
     }
 
     public String getDescription() {
@@ -192,7 +167,12 @@ public class reservation {
     public void setCreate_by(String create_by) {
         this.create_by = create_by;
     }
+    
+    
+    
+    
 
+    
     
 
     

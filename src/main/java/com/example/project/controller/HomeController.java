@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.persistence.criteria.Path;
 import jakarta.servlet.http.HttpSession;
 
 import com.example.project.entity.user;
