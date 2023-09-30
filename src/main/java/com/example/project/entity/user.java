@@ -21,7 +21,7 @@ public class user {
     private String email;
     private String image;
     private int status;
-    private int role_id;
+    private int role;
     private String create_by;
     private LocalDate create_at;
 
@@ -43,10 +43,26 @@ public class user {
         this.email = email;
         this.image = image;
         this.status = status;
-        this.role_id = role_id;
+        this.role = role_id;
         this.create_by = create_by;
         this.create_at = create_at;
         this.resetToken = resetToken;
+    }
+
+    public user(String username, String password, String full_name, int gender, int phone,
+            @Email(message = "Please provide a valid e-mail") @NotEmpty(message = "Please provide an e-mail") String email,
+            String image, int status, int role, String create_by, LocalDate create_at) {
+        this.username = username;
+        this.password = password;
+        this.full_name = full_name;
+        this.gender = gender;
+        this.phone = phone;
+        this.email = email;
+        this.image = image;
+        this.status = status;
+        this.role = role;
+        this.create_by = create_by;
+        this.create_at = create_at;
     }
 
     public int getUser_id() {
@@ -121,12 +137,12 @@ public class user {
         this.status = status;
     }
 
-    public int getRole_id() {
-        return role_id;
+    public int getRole() {
+        return role;
     }
 
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
+    public void setRole(int role_id) {
+        this.role = role_id;
     }
 
     public String getCreate_by() {

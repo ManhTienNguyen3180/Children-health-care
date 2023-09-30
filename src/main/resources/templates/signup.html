@@ -44,34 +44,37 @@
                     <div class="col-md-12">
                       <div class="mb-3">
                         <label class="form-label">Username <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Username" name="uname" required="" />
+                        <input type="text" class="form-control" placeholder="Username" name="uname" required=""
+                          th:value="${param.uname}" />
                       </div>
                       <div class="mb-3" th:text="${mUsername}" style="color: red;"> </div>
                     </div>
                     <div class="col-md-12">
                       <div class="mb-3">
                         <label class="form-label">Full name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Full Name" name="fullname" required="" />
+                        <input type="text" class="form-control" placeholder="Full Name" name="fullname" required=""
+                          th:value="${param.fullname}" />
                       </div>
                     </div>
                     <div class="col-md-12">
                       <div class="mb-3">
                         <label class="form-label">Your Email <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" placeholder="Email" name="email"
-                          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required="" />
+                        <input type="email" class="form-control" placeholder="Email" name="email" required=""
+                          th:value="${param.email} " />
                         <div class="mb-3" th:text="${mEmail}" style="color: red;"> </div>
                       </div>
                       <div class="col-md-12">
                         <div class="mb-3">
                           <label class="form-label">Gender <span class="text-danger">*</span></label>
+
                           <div class="form-check">
                             <input class="form-check-input" type="radio" value="0" name="Gender" id="" checked>
                             <label class="form-check-label" for="">
                               Male
                             </label>
                           </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" value="1" name="Gender" id="" checked>
+                          <div class="form-check" >
+                            <input class="form-check-input" type="radio" value="1" name="Gender" id="" checked  >
                             <label class="form-check-label" for="">
                               Female
                             </label>
@@ -82,7 +85,7 @@
                       <div class="col-md-12">
                         <div class="mb-3">
                           <label class="form-label">Phonne Number <span class="text-danger">*</span></label>
-                          <input type="tel" class="form-control" placeholder="+84" name="phonenum" required="" />
+                          <input type="tel" class="form-control" placeholder="+84" name="phonenum" required="" th:value="${param.phonenum}"/>
 
                         </div>
                       </div>
@@ -156,8 +159,12 @@
 
   <!-- javascript -->
   <script>
+    //The code begins by adding an event listener to the DOMContentLoaded event, 
+    //which fires when the HTML document has been completely loaded and parsed by the browser.
     document.addEventListener("DOMContentLoaded", function () {
+      // It selects the <input> element with the name attribute 
       const phoneNumberInput = document.querySelector('input[name="phonenum"]');
+      // It selects the first <form> element on the page.
       const form = document.querySelector("form");
 
       form.addEventListener("submit", function (event) {
@@ -250,10 +257,10 @@
 
 
   <script src="js/bootstrap.bundle.min.js"></script>
-      
-      <!-- Icons -->
-      <script src="js/feather.min.js"></script>
-  
+
+  <!-- Icons -->
+  <script src="js/feather.min.js"></script>
+
   <script src="js/app.js"></script>
 
 </body>

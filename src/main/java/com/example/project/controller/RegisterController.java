@@ -42,17 +42,16 @@ public class RegisterController {
     if (s == null) {
       s = userService.findUserByEmail(email);
       if (s == null) {
-        user u = new user(gender, username,
-            password,
-            fullname,
-            gender,
-            Integer.parseInt(phonenum),
-            email,
-            password,
-            1,
-            1,
-            username, LocalDate.now(),
-            "user");
+        user u = new user(username, 
+        password,
+         fullname,
+          gender, 
+          Integer.parseInt(phonenum),
+           email,
+            "https://th.bing.com/th/id/R.5097b0247a92d47178df598b82944f15?rik=GOBuYfESpwbvFA&pid=ImgRaw&r=0", 
+            0,
+             1, 
+             "user", LocalDate.now());
         userService.addNewUser(u);
 
       } else {

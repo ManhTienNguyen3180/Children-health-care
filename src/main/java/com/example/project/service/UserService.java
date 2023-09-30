@@ -34,7 +34,7 @@ public class UserService {
     Optional<user> userOptional = userRepository
         .findUserByEmail(user.getEmail());
     if (userOptional.isPresent()) {
-      throw new IllegalStateException("email taken");
+      throw new IllegalStateException();
     }
     userRepository.save(user);
   }
