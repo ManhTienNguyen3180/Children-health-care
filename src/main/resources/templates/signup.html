@@ -63,64 +63,64 @@
                           th:value="${param.email} " />
                         <div class="mb-3" th:text="${mEmail}" style="color: red;"> </div>
                       </div>
-                      <div class="col-md-12">
-                        <div class="mb-3">
-                          <label class="form-label">Gender <span class="text-danger">*</span></label>
 
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" value="0" name="Gender" id="" checked>
-                            <label class="form-check-label" for="">
-                              Male
-                            </label>
-                          </div>
-                          <div class="form-check" >
-                            <input class="form-check-input" type="radio" value="1" name="Gender" id="" checked  >
-                            <label class="form-check-label" for="">
-                              Female
-                            </label>
-                          </div>
 
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="mb-3">
-                          <label class="form-label">Phonne Number <span class="text-danger">*</span></label>
-                          <input type="tel" class="form-control" placeholder="+84" name="phonenum" required="" th:value="${param.phonenum}"/>
+                    </div>
 
-                        </div>
+                    <div class="col-md-12">
+                      <div class="mb-3">
+                        <label class="form-label">Gender <span class="text-danger">*</span></label>
+                        <input class="form-check-input" th:type="radio" th:value="0" th:name="Gender" th:checked="${Gender == 0 or param.Gender == null}" />
+                        <label class="form-check-label" for="maleRadio">
+                          Male
+                        </label>
+                        <input class="form-check-input" th:type="radio" th:value="1" th:name="Gender" th:checked="${Gender == 1}" />
+                        <label class="form-check-label" for="femaleRadio">
+                          Female
+                        </label>
+                       
                       </div>
+                     
+                    </div>
+                    <div class="col-md-12">
+                      <div class="mb-3">
+                        <label class="form-label">Phonne Number <span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control" placeholder="+84" name="phonenum" required=""
+                          th:value="${param.phonenum}" />
 
-                      <div class="col-md-12">
-                        <div class="mb-3">
-                          <label class="form-label">Password <span class="text-danger">*</span></label>
-                          <input type="password" class="form-control" placeholder="Password" name="password"
-                            required="" />
-                        </div>
                       </div>
-                      <div class="col-md-12">
-                        <div class="mb-3">
-                          <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
-                          <input type="password" class="form-control" placeholder="Password" name="cpassword"
-                            required="" />
-                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="mb-3">
+                        <label class="form-label">Password <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" placeholder="Password" name="password"
+                          required="" />
                       </div>
-                      <div class="col-md-12">
-                        <div class="mb-3">
-                          <div class="form-check">
-                            <input class="form-check-input align-middle" type="checkbox" value=""
-                              id="accept-tnc-check" />
-                            <label class="form-check-label" for="accept-tnc-check">I Accept
-                              <a href="#" class="text-primary">Terms And Condition</a></label>
-                          </div>
-                          <div th:text=${message} style="color: red;"></div>
-                          <!-- //test -->
-                        </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="mb-3">
+                        <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" placeholder="Password" name="cpassword"
+                          required="" />
                       </div>
-                      <div class="col-md-12">
-                        <div class="d-grid">
-                          <button class="btn btn-primary">Register</button>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="mb-3">
+                        <div class="form-check">
+                          <input class="form-check-input align-middle" type="checkbox" value="" id="accept-tnc-check" />
+                          <label class="form-check-label" for="accept-tnc-check">I Accept
+                            <a href="#" class="text-primary">Terms And Condition</a></label>
                         </div>
+                        <div th:text=${message} style="color: red;"></div>
+                        <!-- //test -->
                       </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="d-grid">
+                        <button class="btn btn-primary">Register</button>
+                      </div>
+                    </div>
                 </form>
                 <div class="col-lg-12 mt-3 text-center">
                   <h6 class="text-muted">Or</h6>
@@ -181,20 +181,7 @@
     });
   </script>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const passwordInput = document.querySelector('input[name="password"]');
-      const confirmPasswordInput = document.querySelector('input[name="cpassword"]');
-      const form = document.querySelector("form");
 
-      form.addEventListener("submit", function (event) {
-        if (passwordInput.value !== confirmPasswordInput.value) {
-          event.preventDefault(); // Prevent form submission
-          alert("Passwords do not match. Please re-enter.");
-        }
-      });
-    });
-  </script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const emailInput = document.querySelector('input[name="email"]');
@@ -204,12 +191,12 @@
         const email = emailInput.value;
 
         // Define the  email pattern
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
         // Check if the email matches the pattern
         if (!emailPattern.test(email)) {
           event.preventDefault(); // Prevent form submission
-          alert("Please enter a valid email address. \n exp:abc@ex.com");
+          alert("Please enter a gmail email . \n exp:abc@gmail.com");
         }
       });
     });
@@ -252,8 +239,6 @@
   </script>
 
   <!-- ... Remaining HTML code ... -->
-
-
 
 
   <script src="js/bootstrap.bundle.min.js"></script>

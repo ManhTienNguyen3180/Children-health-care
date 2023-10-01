@@ -4,9 +4,11 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.project.entity.user;
+import java.util.List;
 
 //Create a JPA repository
 //reponsible of data access and provides CRUD
@@ -26,6 +28,8 @@ public interface UserRepository
 
       @Query("SELECT u FROM user u WHERE username=?1")
       Optional<user> findUserByUsername(String username);
+
+
 
       Optional<user> findByEmail(String email);
 
