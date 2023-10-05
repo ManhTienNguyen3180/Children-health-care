@@ -21,6 +21,7 @@ public class user {
     private String email;
     private String image;
     private int status;
+    @Column(name = "role")
     private int role_id;
     private String create_by;
     private LocalDate create_at;

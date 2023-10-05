@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,7 +72,7 @@ public class BlogController {
     // Read to manage
     @GetMapping("/bloglistmanager")
     public String viewBlogList(Model model) {
-        return findPaginated(1,"date","asc", model);
+        return findPaginated(1,"date","asc",model);
     }
 
     
@@ -117,13 +118,22 @@ public class BlogController {
 
     // Save Blog
     @RequestMapping(value = "/bloglistmanager/save", method = RequestMethod.POST)
-    public String saveStudent(@ModelAttribute("blog") blog blog) {
+    public String saveStudent(@ModelAttribute("blog") blog blog, Model model) {
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         blog.setDate(date);
         blog.setStatus(1);
+        String mess;
+        if (blog.getBlog_id()>0) {
+            mess = "Edit successfully";
+        }else{
+            mess = "Add successfully";
+        }
+        
 
         BlogService.save(blog);
-        return "redirect:/bloglistmanager";
+
+        model.addAttribute("mess", mess);
+        return findPaginated(1,"date","asc",model);
     }
 
     // Delete Blog by ID
