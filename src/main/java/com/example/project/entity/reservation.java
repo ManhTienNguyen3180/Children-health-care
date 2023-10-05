@@ -1,8 +1,6 @@
 package com.example.project.entity;
 
 import java.sql.Date;
-import java.sql.Time;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 

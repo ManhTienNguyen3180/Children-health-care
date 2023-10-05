@@ -55,33 +55,36 @@
                 <!-- End Mobile Toggle -->
 
                 <!-- Start Dropdown -->
-                <ul class="dropdowns list-inline mb-0">
+                <ul  th:if="${#ctx.session.user != null}" class="dropdowns list-inline mb-0">
+
+                    <li class="list-inline-item mb-0 ms-1">
+                        <div class="dropdown dropdown-primary">
+                            <a href="user-profile"><button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"  aria-haspopup="true" aria-expanded="false"><img th:src="${session.user.image}" src="${session.user.image}" class="avatar avatar-ex-small rounded-circle" alt=""></button></a>
+                            <a href="logout">Log out</a>
+                        </div>
+                        
+                    </li>
+                </ul>
+                <ul  th:if="${#ctx.session.user == null}" class="dropdowns list-inline mb-0">
+
                     <li class="list-inline-item mb-0">
+                        <a href="login" >
+                            <div class="btn btn-primary">Login/signup</div>
+                        </a>
+                    </li>
+                </ul>
+                <ul  class="dropdowns list-inline mb-0">
+                    <!-- <li class="list-inline-item mb-0">
                         <a href="" >
                             <div class="btn btn-primary">Book Appointment</div>
                         </a>
+                    </li> -->
+                    <li class="list-inline-item mb-0">
+                        <a href="bookingappointment" >
+                            <div class="btn btn-primary">Book Appointment</div>
+                        </a>
                     </li>
-
                     
-                    
-                    <li class="list-inline-item mb-0 ms-1" >
-                        <div class="dropdown dropdown-primary">
-                            <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img th:src="${session.user.image}" src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button>
-                            <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
-                                <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html">
-                                    <img th:src="${session.user.image}" src="images/doctors/02.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                    <div class="flex-1 ms-2">
-                                        <span th:text="${session.user.full_name}" class="d-block mb-1" ></span>
-                                        <small class="text-muted">Orthopedic</small>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-dark" href="doctor-dashboard.html"><span class="mb-0 d-inline-block me-1"><i class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
-                                <a class="dropdown-item text-dark" href="doctor-profile-setting.html"><span class="mb-0 d-inline-block me-1"><i class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
-                                <div class="dropdown-divider border-top"></div>
-                                <a class="dropdown-item text-dark" href="logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
-                            </div>
-                        </div>
-                    </li>
                 </ul>
                 <!-- Start Dropdown -->
         
@@ -89,22 +92,22 @@
                     <!-- Navigation Menu-->   
                     <ul class="navigation-menu nav-left ">
                         <li class="has-submenu parent-menu-item">
-                            <a href="home">Home</a>
+                            <a href="/home">Home</a>
                             
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="doctor">Doctors</a>
+                            <a href="/doctor">Doctors</a>
                             
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="service">Services</a>
+                            <a href="/service">Services</a>
                             
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="blog">Blog</a>
+                            <a href="/blog">Blog</a>
                             
                         </li>
                         
@@ -146,9 +149,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-3 col-lg-3 col-md-6" th:each="doctor : ${result}" >
-                        <div class="card team border-0 rounded shadow overflow-hidden">
+                        <div class="card team border-0 rounded shadow overflow-hidden" style="height: 450px;margin-bottom: 20px;">
                             <div class="team-img position-relative">
-                                <img th:src="${doctor.image}" class="img-fluid" alt="">
+                                <img th:src="${doctor.image}" class="img-fluid" alt="" style="height: 323px;">
                                 <ul class="list-unstyled team-social mb-0">
                                     <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
                                     <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
@@ -157,11 +160,11 @@
                                 </ul>
                             </div>
                             <div class="card-body content text-center ">
-                                <a th:href="@{/doctor-detail/{id}(id=${doctor.doctor_id})}" class="title text-dark h5 d-block mb-0" th:text="${doctor.doctor_name}"></a>
+                                <a th:href="@{/doctor-detail/{id}(id=${doctor.doctor_id})}" class="title text-dark h5 d-block mb-0" th:text="${doctor.doctor_name}" style="font-size: 15px;"></a>
                                 <small class="text-muted speciality" th:text="${doctor.position}"></small>
                             </div>
                         </div>
-                    </div><!--end col-->
+                    </div>
                     
                     
                     
@@ -227,7 +230,7 @@
 
                                     <li class="d-flex align-items-center">
                                         <i data-feather="map-pin" class="fea icon-sm text-foot align-middle"></i>
-                                        <a href="javascript:void(0)" class="video-play-icon text-foot ms-2">View on Google map</a>
+                                        <!-- <a href="javascript:void(0)" class="video-play-icon text-foot ms-2">View on Google map</a> -->
                                     </li>
                                 </ul>
 
@@ -248,7 +251,7 @@
                     <div class="row align-items-center">
                         <div class="col-sm-6">
                             <div class="text-sm-start text-center">
-                                <p class="mb-0"><script>document.write(new Date().getFullYear())</script> © Doctris. Design with <i class="mdi mdi-heart text-danger"></i> by <a href="../../../index.html" target="_blank" class="text-reset">Shreethemes</a>.</p>
+                                <!-- <p class="mb-0"><script>document.write(new Date().getFullYear())</script> © Doctris. Design with <i class="mdi mdi-heart text-danger"></i> by <a href="../../../index.html" target="_blank" class="text-reset">Shreethemes</a>.</p> -->
                             </div>
                         </div><!--end col-->
     
@@ -267,7 +270,7 @@
         <!-- End -->
 
         <!-- Back to top -->
-        <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
+        <!-- <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a> -->
         <!-- Back to top -->
 
         <!-- Offcanvas Start -->
@@ -309,7 +312,7 @@
                         <!-- Style switcher -->
                         <div id="style-switcher">
                             <div>
-                                <ul class="text-center list-unstyled mb-0">
+                                <!-- <ul class="text-center list-unstyled mb-0">
                                     <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="../assets/images/layouts/landing-light-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
                                     <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
                                     <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="../assets/images/layouts/landing-dark-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
@@ -317,7 +320,7 @@
                                     <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
                                     <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
                                     <li class="d-grid"><a href="../admin/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
-                                </ul>
+                                </ul> -->
                             </div>
                         </div>
                         <!-- end Style switcher -->
@@ -325,7 +328,7 @@
                 </div><!--end row-->
             </div>
 
-            <div class="offcanvas-footer p-4 border-top text-center">
+            <!-- <div class="offcanvas-footer p-4 border-top text-center">
                 <ul class="list-unstyled social-icon mb-0">
                     <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris-template" target="_blank" class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
                     <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
@@ -334,8 +337,8 @@
                     <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
                     <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i class="uil uil-envelope align-middle" title="email"></i></a></li>
                     <li class="list-inline-item mb-0"><a href="../../../index.html" target="_blank" class="rounded"><i class="uil uil-globe align-middle" title="website"></i></a></li>
-                </ul><!--end icon-->
-            </div>
+                </ul>
+            </div> -->
         </div>
         <!-- Offcanvas End -->
         

@@ -99,7 +99,7 @@
 
                     <li class="list-inline-item mb-0 ms-1">
                         <div class="dropdown dropdown-primary">
-                            <a href="user-profile"><button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button></a>
+                            <a href="user-profile"><button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img th:src="${session.user.image}" src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button></a>
                             <a href="logout">Log out</a>
                         </div>
                         
@@ -134,22 +134,22 @@
                     <!-- Navigation Menu-->   
                     <ul class="navigation-menu nav-left nav-light">
                         <li class="has-submenu parent-menu-item">
-                            <a href="home">Home</a>
+                            <a href="/home">Home</a>
                             
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="doctor">Doctors</a>
+                            <a href="/doctor">Doctors</a>
                             
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="service">Services</a>
+                            <a href="/service">Services</a>
                             
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="blog">Blog</a>
+                            <a href="/blog">Blog</a>
                             
                         </li>
                         
@@ -165,8 +165,8 @@
                             
                         </li> -->
                         
-                    </ul><!--end navigation menu-->
-                </div><!--end navigation-->
+                    </ul>
+                </div>
             </div><!--end container-->
         </header><!--end header-->
         <!-- Navbar End -->
