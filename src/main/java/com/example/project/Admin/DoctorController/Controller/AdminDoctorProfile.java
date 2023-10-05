@@ -1,18 +1,14 @@
-package com.example.project.controller.admin;
+package com.example.project.Admin.DoctorController.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- * AdminAppointment
- */
 @Controller
-@RequestMapping("admin/appointment")
-public class AdminAppointment {
-
+@RequestMapping("admin/dr-profile")
+public class AdminDoctorProfile {
   @GetMapping
   public String page() {
-    return "admin/appointment";
+    return "admin/dr-profile";
   }
 }

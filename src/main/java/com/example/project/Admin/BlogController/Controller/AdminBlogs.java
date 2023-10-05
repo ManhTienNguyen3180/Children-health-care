@@ -1,19 +1,14 @@
-package com.example.project.controller.admin;
+package com.example.project.Admin.BlogController.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- * AdminInvoice
- */
-
 @Controller
-@RequestMapping("admin/invoice-list")
-public class AdminInvoiceList {
-
+@RequestMapping("admin/blogs")
+public class AdminBlogs {
   @GetMapping
   public String page() {
-    return "admin/invoice-list";
+    return "admin/blogs";
   }
 }
