@@ -31,7 +31,7 @@ public class BlogsController {
         List<Blog> listB = blogService.findAll();
         model.addAttribute("blogsCategory", blogCategoryService.findAll());
         model.addAttribute("blogs", listB);
-        return "blogs";
+        return "admin/blogs";
     }
 
     // Requets to saving Blogs
@@ -94,12 +94,12 @@ public class BlogsController {
         model.addAttribute("message", "Add Blog Successfully!");
         model.addAttribute("blogsCategory", blogCategoryService.findAll());
 
-        return "blogs";
+        return "admin/blogs";
     }
 
     @GetMapping(value = "/blogsManagement/edit/{id}")
     public String blogsDetail(Model model) {
-        return "blogs-detail";
+        return "admin/blogs-detail";
     }
 
 }
