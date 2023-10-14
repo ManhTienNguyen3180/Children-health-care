@@ -18,11 +18,27 @@
     <!-- simplebar -->
     <link th:href="@{/css/simplebar.css}" rel="stylesheet" type="text/css" />
     <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link th:href="@{/css/materialdesignicons.min.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/css/remixicon.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{https://unicons.iconscout.com/release/v3.0.6/css/line.css}" rel="stylesheet">
     <!-- Css -->
     <link th:href="@{/css/style.min.css}" rel="stylesheet" type="text/css" id="theme-opt" />
+
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <style>
+        .preview-box {
+            max-width: 100%;
+        }
+
+        .preview-box img {
+            max-width: 100%;
+            /* Ensure the image doesn't exceed the box width */
+            max-height: 100%;
+        }
+    </style>
 
 </head>
 
@@ -103,12 +119,21 @@
                         <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
                         <div class="sidebar-submenu">
                             <ul>
-                                <li><a href="blogs.html">Blogs</a></li>
+                                <li><a th:href="@{/blogsManagement}">Blogs</a></li>
                                 <li><a href="blog-detail.html">Blog Detail</a></li>
                             </ul>
                         </div>
                     </li>
 
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-user-md me-2 d-inline-block"></i>Services</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a class="" th:href="@{/servicesManagement}">Services</a></li>
+                                <li><a href="#">Service Detail</a></li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="sidebar-dropdown">
                         <a href="javascript:void(0)"><i class="uil uil-file me-2 d-inline-block"></i>Pages</a>
                         <div class="sidebar-submenu">
@@ -158,6 +183,21 @@
         <!-- sidebar-wrapper  -->
 
         <!-- Start Page Content -->
+        <div th:if="${message!=null}" th:text="${message}" id="notification" style="display: none;">
+        </div>
+        <script>
+            window.addEventListener("load", () => {
+                var notificationDiv = document.getElementById('notification');
+                notificationDiv.style.display = 'block';
+                notificationDiv.style.position = 'fixed';
+                notificationDiv.style.marginTop = '100px';
+                notificationDiv.style.marginLeft = '50vw';
+                notificationDiv.className = "alert alert-success";
+                setTimeout(function () {
+                    notificationDiv.style.display = 'none';
+                }, 3000); // 5 seconds
+            })
+        </script>
         <main class="page-content bg-light">
             <div class="top-header">
                 <div class="header-bar d-flex border-bottom">
@@ -186,15 +226,15 @@
                     </div>
 
 
-                    <li class="list-inline-item mb-0 ">
+                    <!-- <li class="list-inline-item mb-0 ">
                         <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                             aria-controls="offcanvasRight">
                             <div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="settings"
                                     class="fea icon-sm"></i></div>
                         </a>
-                    </li>
+                    </li> -->
 
-                    <li class="list-inline-item mb-0 ">
+                    <!-- <li class="list-inline-item mb-0 ">
                         <div class="dropdown dropdown-primary">
                             <button type="button" class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
@@ -266,7 +306,7 @@
                                 </a>
                             </div>
                         </div>
-                    </li>
+                    </li> -->
 
                     <li class="list-inline-item mb-0">
                         <div class="dropdown dropdown-primary">
@@ -301,25 +341,32 @@
                     </ul>
                 </div>
             </div>
-
+            <!-- Blog Div  -->
             <div class="container-fluid">
                 <div class="layout-specing">
                     <div class="d-md-flex justify-content-between">
-                        <div>
-                            <h5 class="mb-0">Lockdowns lead to fewer people seeking medical care</h5>
+                        <div class="d-flex ">
+                            <div>
+                                <h5 class="mb-0" th:text="${blogDetail.title}"></h5>
 
-                            <ul class="list-unstyled mt-2 mb-0">
-                                <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i> Calvin
-                                    Carlo</li>
-                                <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i> 1st
-                                    January, 2021</li>
-                            </ul>
+                                <ul class="list-unstyled mt-2 mb-0">
+                                    <li class="list-inline-item user text-muted me-2" th:text="${blogDetail.author}"><i
+                                            class="mdi mdi-account"></i> </li>
+                                    <li class="list-inline-item date text-muted" th:text="${blogDetail.date}"><i
+                                            class="mdi mdi-calendar-check"></i> </li>
+                                </ul>
+                            </div>
+                            <div th:if="${blogDetail.status==1}" th:text="Public"
+                                style="color: rgb(1, 255, 1); font-weight: bold; margin-top: 5px; margin-left: 10px;">
+                            </div>
+                            <div th:if="${blogDetail.status==0}" th:text="Hidden"
+                                style="color: red; font-weight: bold; margin-left: 10px; margin-top: 5px;"></div>
                         </div>
 
                         <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                             <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                                 <li class="breadcrumb-item"><a href="index.html">Doctris</a></li>
-                                <li class="breadcrumb-item"><a href="blogs.html">Blogs</a></li>
+                                <li class="breadcrumb-item"><a th:href="@{/blogsManagement}">Blogs</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Blog Detail</li>
                             </ul>
                         </nav>
@@ -328,26 +375,13 @@
                     <div class="row">
                         <div class="col-lg-8 col-lg-7 mt-4">
                             <div class="card rounded shadow border-0 overflow-hidden">
-                                <img th:src="@{/images/blog/single.jpg}" class="img-fluid" alt="">
 
                                 <div class="p-4">
-                                    <!-- <ul class="list-unstyled">
-                                            <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i> Calvin Carlo</li>
-                                            <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i> 1st January, 2021</li>
-                                        </ul> -->
+                                    <div th:utext="${blogDetail.content}">
 
-                                    <p class="text-muted">This is required when, for example, the final text is not yet
-                                        available. Dummy text is also known as 'fill text'. It is said that song
-                                        composers of the past used dummy texts as lyrics when writing melodies in order
-                                        to have a 'ready-made' text to sing with the melody. Dummy texts have been in
-                                        use by typesetters since the 16th century.</p>
-                                    <p class="text-muted">Due to its widespread use as filler text for layouts,
-                                        non-readability is of great importance: human perception is tuned to recognize
-                                        certain patterns and repetitions in texts.</p>
-                                    <p class="text-muted mb-0">For this reason, dummy text usually consists of a more or
-                                        less random series of words or syllables.</p>
+                                    </div>
 
-                                    <h5 class="card-title mt-4 mb-0">Comments :</h5>
+                                    <!-- <h5 class="card-title mt-4 mb-0">Comments :</h5>
 
                                     <ul class="media-list list-unstyled mb-0">
                                         <li class="mt-4">
@@ -373,86 +407,11 @@
                                                     have suffered alteration in some form, by injected humour "</p>
                                             </div>
                                         </li>
+                                    </ul> -->
 
-                                        <li class="mt-4">
-                                            <div class="d-flex justify-content-between">
-                                                <div class="d-flex align-items-center">
-                                                    <a class="pe-3" href="#">
-                                                        <img th:src="@{/images/client-img/02.jpg}"
-                                                            class="img-fluid avatar avatar-md-sm rounded-circle shadow"
-                                                            alt="img">
-                                                    </a>
-                                                    <div class="commentor-detail">
-                                                        <h6 class="mb-0"><a href="javascript:void(0)"
-                                                                class="media-heading text-dark">Tammy Camacho</a></h6>
-                                                        <small class="text-muted">15th August, 2019 at 05:44 pm</small>
-                                                    </div>
-                                                </div>
-                                                <a href="#" class="text-muted"><i class="mdi mdi-reply"></i> Reply</a>
-                                            </div>
-                                            <div class="mt-3">
-                                                <p class="text-muted font-italic p-3 bg-light rounded">" There are many
-                                                    variations of passages of Lorem Ipsum available, but the majority
-                                                    have suffered alteration in some form, by injected humour "</p>
-                                            </div>
-                                        </li>
+                                    <!-- <h5 class="card-title mt-4 mb-0">Leave A Comment :</h5> -->
 
-                                        <li class="mt-4">
-                                            <div class="d-flex justify-content-between">
-                                                <div class="d-flex align-items-center">
-                                                    <a class="pe-3" href="#">
-                                                        <img th:src="@{/images/client-img/03.jpg}"
-                                                            class="img-fluid avatar avatar-md-sm rounded-circle shadow"
-                                                            alt="img">
-                                                    </a>
-                                                    <div class="commentor-detail">
-                                                        <h6 class="mb-0"><a href="javascript:void(0)"
-                                                                class="media-heading text-dark">Tammy Camacho</a></h6>
-                                                        <small class="text-muted">16th August, 2019 at 03:44 pm</small>
-                                                    </div>
-                                                </div>
-                                                <a href="#" class="text-muted"><i class="mdi mdi-reply"></i> Reply</a>
-                                            </div>
-                                            <div class="mt-3">
-                                                <p class="text-muted font-italic p-3 bg-light rounded">" There are many
-                                                    variations of passages of Lorem Ipsum available, but the majority
-                                                    have suffered alteration in some form, by injected humour "</p>
-                                            </div>
-
-                                            <ul class="list-unstyled ps-4 ps-md-5 sub-comment">
-                                                <li class="mt-4">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="d-flex align-items-center">
-                                                            <a class="pe-3" href="#">
-                                                                <img th:src="@{/images/client-img/01.jpg}"
-                                                                    class="img-fluid avatar avatar-md-sm rounded-circle shadow"
-                                                                    alt="img">
-                                                            </a>
-                                                            <div class="commentor-detail">
-                                                                <h6 class="mb-0"><a href="javascript:void(0)"
-                                                                        class="text-dark media-heading">Lorenzo
-                                                                        Peterson</a></h6>
-                                                                <small class="text-muted">17th August, 2019 at 01:25
-                                                                    pm</small>
-                                                            </div>
-                                                        </div>
-                                                        <a href="#" class="text-muted"><i class="mdi mdi-reply"></i>
-                                                            Reply</a>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <p class="text-muted font-italic p-3 bg-light rounded">" There
-                                                            are many variations of passages of Lorem Ipsum available,
-                                                            but the majority have suffered alteration in some form, by
-                                                            injected humour "</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-
-                                    <h5 class="card-title mt-4 mb-0">Leave A Comment :</h5>
-
-                                    <form class="mt-3">
+                                    <!-- <form class="mt-3">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="mb-3">
@@ -460,7 +419,7 @@
                                                     <textarea id="message" placeholder="Your Comment" rows="5"
                                                         name="message" class="form-control" required=""></textarea>
                                                 </div>
-                                            </div><!--end col-->
+                                            </div>
 
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
@@ -469,7 +428,7 @@
                                                     <input id="name" name="name" type="text" placeholder="Name"
                                                         class="form-control" required="">
                                                 </div>
-                                            </div><!--end col-->
+                                            </div>
 
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
@@ -478,71 +437,45 @@
                                                     <input id="email" type="email" placeholder="Email" name="email"
                                                         class="form-control" required="">
                                                 </div>
-                                            </div><!--end col-->
+                                            </div>
 
                                             <div class="col-md-12">
                                                 <div class="send d-grid">
                                                     <button type="submit" class="btn btn-primary">Send Message</button>
                                                 </div>
-                                            </div><!--end col-->
-                                        </div><!--end row-->
-                                    </form><!--end form-->
+                                            </div>
+                                        </div>
+                                    </form> -->
+                                    <!--end form-->
                                 </div>
                             </div>
                         </div><!--end col-->
 
                         <div class="col-lg-4 col-md-5 mt-4">
-                            <div class="card border-0 sidebar sticky-bar rounded shadow">
-                                <div class="card-body">
-                                    <!-- SEARCH -->
-                                    <div class="widget mb-4 pb-2">
-                                        <h5 class="widget-title">Search</h5>
-                                        <div id="search2" class="widget-search mt-4 mb-0">
-                                            <form role="search" method="get" id="searchform1" class="searchform">
-                                                <div>
-                                                    <input type="text" class="border rounded" name="s" id="s1"
-                                                        placeholder="Search Keywords...">
-                                                    <input type="submit" id="searchsubmit1" value="Search">
-                                                </div>
+                            <div class="card border-0 sidebar sticky-bar rounded shadow ">
+                                <div class="card-body d-grid">
+                                    <div class="row">
+
+                                        <!-- DISPLAY -->
+                                        <div class="widget mb-4 pb-2 col">
+                                            <form th:action="@{/blogsManagement/changeStatus}" method="post">
+                                                <input name="blogID" style="display: none;"
+                                                    th:value="${blogDetail.blogId}">
+                                                <button th:if="${blogDetail.status==1}" class="col-12 btn btn-danger" type="submit">Hide</button>
+                                                <button th:if="${blogDetail.status==0}" class="col-12 btn btn-success" type="submit">Show</button>
                                             </form>
                                         </div>
-                                    </div>
-                                    <!-- SEARCH -->
-
-                                    <!-- RECENT POST -->
-                                    <div class="widget mb-4 pb-2">
-                                        <h5 class="widget-title">Recent Post</h5>
-                                        <div class="mt-4">
-                                            <div class="clearfix post-recent">
-                                                <div class="post-recent-thumb float-start"> <a href="jvascript:void(0)">
-                                                        <img alt="img" th:src="@{/images/blog/07.jpg}"
-                                                            class="img-fluid rounded"></a></div>
-                                                <div class="post-recent-content float-start"><a
-                                                        href="jvascript:void(0)">Consultant Business</a><span
-                                                        class="text-muted mt-2">15th June, 2019</span></div>
-                                            </div>
-                                            <div class="clearfix post-recent">
-                                                <div class="post-recent-thumb float-start"> <a href="jvascript:void(0)">
-                                                        <img alt="img" th:src="@{/images/blog/08.jpg}"
-                                                            class="img-fluid rounded"></a></div>
-                                                <div class="post-recent-content float-start"><a
-                                                        href="jvascript:void(0)">Look On The Glorious Balance</a> <span
-                                                        class="text-muted mt-2">15th June, 2019</span></div>
-                                            </div>
-                                            <div class="clearfix post-recent">
-                                                <div class="post-recent-thumb float-start"> <a href="jvascript:void(0)">
-                                                        <img alt="img" th:src="@{/images/blog/01.jpg}"
-                                                            class="img-fluid rounded"></a></div>
-                                                <div class="post-recent-content float-start"><a
-                                                        href="jvascript:void(0)">Research Financial.</a> <span
-                                                        class="text-muted mt-2">15th June, 2019</span></div>
-                                            </div>
+                                        <!-- DISPLAY -->
+                                        <!-- EDIT -->
+                                        <div class="mt-4 mt-sm-0 col text-center">
+                                            <a href="#" class=" col-12 btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#newblogadd">Edit Blog</a>
                                         </div>
+                                        <!-- EDIT -->
                                     </div>
-                                    <!-- RECENT POST -->
 
                                     <!-- TAG CLOUDS -->
-                                    <div class="widget mb-4 pb-2">
+                                    <!-- <div class="widget mb-4 pb-2">
                                         <h5 class="widget-title">Tags Cloud</h5>
                                         <div class="tagcloud mt-4">
                                             <a href="jvascript:void(0)" class="rounded">Business</a>
@@ -556,37 +489,10 @@
                                             <a href="jvascript:void(0)" class="rounded">Video</a>
                                             <a href="jvascript:void(0)" class="rounded">Audio</a>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- TAG CLOUDS -->
 
-                                    <!-- SOCIAL -->
-                                    <div class="widget">
-                                        <h5 class="widget-title">Follow us</h5>
-                                        <ul class="list-unstyled social-icon mb-0 mt-4">
-                                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
-                                                        data-feather="facebook" class="fea icon-sm fea-social"></i></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
-                                                        data-feather="instagram" class="fea icon-sm fea-social"></i></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
-                                                        data-feather="twitter" class="fea icon-sm fea-social"></i></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
-                                                        data-feather="linkedin" class="fea icon-sm fea-social"></i></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
-                                                        data-feather="github" class="fea icon-sm fea-social"></i></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
-                                                        data-feather="youtube" class="fea icon-sm fea-social"></i></a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
-                                                        data-feather="gitlab" class="fea icon-sm fea-social"></i></a>
-                                            </li>
-                                        </ul><!--end icon-->
-                                    </div>
-                                    <!-- SOCIAL -->
+
                                 </div>
                             </div>
                         </div><!--end col-->
@@ -615,6 +521,104 @@
         <!--End page-content" -->
     </div>
     <!-- page-wrapper -->
+
+    <!-- Start Modal -->
+    <div class="modal fade" id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-bottom p-3">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Blog</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body p-3 pt-4">
+
+                    <form name="addBlog" th:action="@{/blogsManagement/edit}" method="post"
+                        enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="d-grid">
+                                    <p class="text-muted">Upload your blog image here, Please click "Upload Image"
+                                        Button.
+                                    </p>
+                                    <div
+                                        class=" preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1">
+                                        <img th:src="${blogDetail.image}" alt="">
+                                    </div>
+                                    <input type="file" id="input-file" name="image" accept="image/*"
+                                        onchange={handleChange()} hidden />
+                                    <label class="btn-upload btn btn-primary mt-4" for="input-file">Upload Image</label>
+                                </div>
+                            </div><!--end col-->
+
+                            <div class="col-md-8 mt-4 mt-sm-0">
+                                <div class="ms-md-4">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="mb-3">
+                                                <input type="text" style="display: none;" name="blogId" th:value="${blogDetail.blogId}">
+                                                <label class="form-label">Title <span
+                                                        class="text-danger">*</span></label>
+                                                <input required name="title" id="name" type="text" class="form-control"
+                                                    th:value="${blogDetail.title}" placeholder="Title :">
+                                            </div>
+                                        </div><!--end col-->
+
+                                        <div class="col-md-7">
+                                            <div class="mb-3">
+                                                <label class="form-label">Category</label><span
+                                                    class="text-danger">*</span>
+                                                <select class="form-control" name="category">
+                                                    <option th:if="${blogDetail.categoryBlogId==cat.categoryBlogId}"
+                                                        selected th:each="cat : ${blogsCategory}"
+                                                        th:value="${cat.categoryBlogId}"
+                                                        th:text="${cat.categoryBlogName}"></option>
+                                                    <option th:if="${blogDetail.categoryBlogId!=cat.categoryBlogId}"
+                                                        th:each="cat : ${blogsCategory}"
+                                                        th:value="${cat.categoryBlogId}"
+                                                        th:text="${cat.categoryBlogName}"></option>
+                                                </select>
+                                            </div>
+                                        </div><!--end col-->
+
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Description <span
+                                                        class="text-danger">*</span></label>
+                                                <textarea required name="description" id="comments" rows="4"
+                                                    class="form-control" placeholder="Blog description :"
+                                                    th:text="${blogDetail.description}">
+                                                </textarea>
+                                            </div>
+                                        </div><!--end col-->
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Content <span
+                                                        class="text-danger">*</span></label>
+                                                <textarea name="content" id="editor1">
+                                                    <div th:text="${blogDetail.content}"></div></textarea>
+                                                <script>
+                                                    CKEDITOR.replace('editor1')
+                                                </script>
+                                            </div>
+                                        </div><!--end col-->
+                                        <div class="col-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Author </label>
+                                                <input name="author" id="name" type="text" class="form-control"
+                                                    placeholder="Author:" th:value="${blogDetail.author}">
+                                            </div>
+                                        </div><!--end col-->
+                                        <div class="col-lg-12 text-end">
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        </div><!--end col-->
+                                    </div>
+                    </form>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+    </div>
+    <!-- End modal -->
 
     <!-- Offcanvas Start -->
     <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight"
@@ -701,7 +705,28 @@
     <script th:src="@{/js/feather.min.js}"></script>
     <!-- Main Js -->
     <script th:src="@{/js/app.js}"></script>
+    <script>
+        const handleChange = () => {
+            const fileUploader = document.querySelector('#input-file');
+            const getFile = fileUploader.files
+            if (getFile.length !== 0) {
+                const uploadedFile = getFile[0];
+                readFile(uploadedFile);
+            }
+        }
 
+        const readFile = (uploadedFile) => {
+            if (uploadedFile) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const parent = document.querySelector('.preview-box');
+                    parent.innerHTML = `<img class="preview-content" src=${reader.result} />`;
+                };
+
+                reader.readAsDataURL(uploadedFile);
+            }
+        };
+    </script>
 </body>
 
 </html>

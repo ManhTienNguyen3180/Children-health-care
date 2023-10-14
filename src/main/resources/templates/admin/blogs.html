@@ -18,28 +18,30 @@
     <!-- simplebar -->
     <link th:href="@{/css/simplebar.css}" rel="stylesheet" type="text/css" />
     <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link th:href="@{/css/materialdesignicons.min.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/css/remixicon.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{https://unicons.iconscout.com/release/v3.0.6/css/line.css}" rel="stylesheet">
     <!-- Css -->
     <link th:href="@{/css/style.min.css}" rel="stylesheet" type="text/css" id="theme-opt" />
     <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+    <style>
+        .preview-box {
+            max-width: 100%;
+        }
 
+        .preview-box img {
+            max-width: 100%;
+            /* Ensure the image doesn't exceed the box width */
+            max-height: 100%;
+        }
+    </style>
 
 </head>
 
 <body>
-    <!-- Loader -->
-    <!-- <div id="preloader">
-            <div id="status">
-                <div class="spinner">
-                    <div class="double-bounce1"></div>
-                    <div class="double-bounce2"></div>
-                </div>
-            </div>
-        </div> -->
-    <!-- Loader -->
-
     <div class="page-wrapper doctris-theme toggled">
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
@@ -107,7 +109,16 @@
                         <div class="sidebar-submenu">
                             <ul>
                                 <li><a class="" th:href="@{/blogsManagement}">Blogs</a></li>
-                                <li><a href="blog-detail.html">Blog Detail</a></li>
+                                <li><a href="#">Blog Detail</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-user-md me-2 d-inline-block"></i>Services</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a class="" th:href="@{/servicesManagement}">Services</a></li>
+                                <li><a href="#">Service Detail</a></li>
                             </ul>
                         </div>
                     </li>
@@ -192,9 +203,11 @@
                         </a>
                         <div class="search-bar p-0 d-none d-lg-block ms-2">
                             <div id="search" class="menu-search mb-0">
-                                <form role="search" method="get" id="searchform" class="searchform">
+                                <form th:action="@{/blogsManagement/search}" role="search" method="get" id="searchform"
+                                    class="searchform">
                                     <div>
-                                        <input type="text" class="form-control border rounded-pill" name="s" id="s"
+                                        <input type="text" class="form-control border rounded-pill"
+                                            th:value="${searchText}" name="searchText" id="s"
                                             placeholder="Search Keywords...">
                                         <input type="submit" id="searchsubmit" value="Search">
                                     </div>
@@ -204,141 +217,6 @@
                     </div>
 
                     <ul class="list-unstyled mb-0">
-                        <!-- <li class="list-inline-item mb-0">
-                                <div class="dropdown dropdown-primary">
-                                    <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../static/images/language/american.png" class="avatar avatar-ex-small rounded-circle p-2" alt=""></button>
-                                    <div class="dropdown-menu dd-menu drop-ups dropdown-menu-end bg-white shadow border-0 mt-3 p-2" data-simplebar style="height: 175px;">
-                                        <a href="javascript:void(0)" class="d-flex align-items-center">
-                                            <img src="../static/images/language/chinese.png" class="avatar avatar-client rounded-circle shadow" alt="">
-                                            <div class="flex-1 text-left ms-2 overflow-hidden">
-                                                <small class="text-dark mb-0">Chinese</small>
-                                            </div>
-                                        </a>
-        
-                                        <a href="javascript:void(0)" class="d-flex align-items-center mt-2">
-                                            <img src="../static/images/language/european.png" class="avatar avatar-client rounded-circle shadow" alt="">
-                                            <div class="flex-1 text-left ms-2 overflow-hidden">
-                                                <small class="text-dark mb-0">European</small>
-                                            </div>
-                                        </a>
-        
-                                        <a href="javascript:void(0)" class="d-flex align-items-center mt-2">
-                                            <img src="../static/images/language/indian.png" class="avatar avatar-client rounded-circle shadow" alt="">
-                                            <div class="flex-1 text-left ms-2 overflow-hidden">
-                                                <small class="text-dark mb-0">Indian</small>
-                                            </div>
-                                        </a>
-        
-                                        <a href="javascript:void(0)" class="d-flex align-items-center mt-2">
-                                            <img src="../static/images/language/japanese.png" class="avatar avatar-client rounded-circle shadow" alt="">
-                                            <div class="flex-1 text-left ms-2 overflow-hidden">
-                                                <small class="text-dark mb-0">Japanese</small>
-                                            </div>
-                                        </a>
-        
-                                        <a href="javascript:void(0)" class="d-flex align-items-center mt-2">
-                                            <img src="../static/images/language/russian.png" class="avatar avatar-client rounded-circle shadow" alt="">
-                                            <div class="flex-1 text-left ms-2 overflow-hidden">
-                                                <small class="text-dark mb-0">Russian</small>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li> -->
-                        <!-- 
-                        <li class="list-inline-item mb-0 ms-1">
-                            <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                                aria-controls="offcanvasRight">
-                                <div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="settings"
-                                        class="fea icon-sm"></i></div>
-                            </a>
-                        </li> -->
-
-                        <!-- <li class="list-inline-item mb-0 ms-1">
-                            <div class="dropdown dropdown-primary">
-                                <button type="button"
-                                    class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                                        data-feather="mail" class="fea icon-sm"></i></button>
-                                <span
-                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">4
-                                    <span class="visually-hidden">unread mail</span></span>
-
-                                <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 px-2 py-2"
-                                    data-simplebar style="height: 320px; width: 300px;">
-                                    <a href="#" class="d-flex align-items-center justify-content-between py-2">
-                                        <div class="d-inline-flex position-relative overflow-hidden">
-                                            <img th:src="@{/images/client-img/02.jpg}"
-                                                class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                            <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
-                                                email from <b>Janalia</b> <small
-                                                    class="text-muted fw-normal d-inline-block">1 hour
-                                                    ago</small></small>
-                                        </div>
-                                    </a>
-
-                                    <a href="#"
-                                        class="d-flex align-items-center justify-content-between py-2 border-top">
-                                        <div class="d-inline-flex position-relative overflow-hidden">
-                                            <img th:src="@{/images/client-img/Codepen.svg}"
-                                                class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                            <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
-                                                email from <b>codepen</b> <small
-                                                    class="text-muted fw-normal d-inline-block">4 hour
-                                                    ago</small></small>
-                                        </div>
-                                    </a>
-
-                                    <a href="#"
-                                        class="d-flex align-items-center justify-content-between py-2 border-top">
-                                        <div class="d-inline-flex position-relative overflow-hidden">
-                                            <img th:src="@{/images/client-img/03.jpg}"
-                                                class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                            <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
-                                                email from <b>Cristina</b> <small
-                                                    class="text-muted fw-normal d-inline-block">5 hour
-                                                    ago</small></small>
-                                        </div>
-                                    </a>
-
-                                    <a href="#"
-                                        class="d-flex align-items-center justify-content-between py-2 border-top">
-                                        <div class="d-inline-flex position-relative overflow-hidden">
-                                            <img th:src="@{/images/client-img/dribbble.svg}"
-                                                class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                            <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
-                                                email from <b>Dribbble</b> <small
-                                                    class="text-muted fw-normal d-inline-block">24 hour
-                                                    ago</small></small>
-                                        </div>
-                                    </a>
-
-                                    <a href="#"
-                                        class="d-flex align-items-center justify-content-between py-2 border-top">
-                                        <div class="d-inline-flex position-relative overflow-hidden">
-                                            <img th:src="@{/images/client-img/06.jpg}"
-                                                class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                            <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
-                                                email from <b>Donald Aghori</b> <small
-                                                    class="text-muted fw-normal d-inline-block">1 day
-                                                    ago</small></small>
-                                        </div>
-                                    </a>
-
-                                    <a href="#"
-                                        class="d-flex align-items-center justify-content-between py-2 border-top">
-                                        <div class="d-inline-flex position-relative overflow-hidden">
-                                            <img th:src="@{//images/client-img/07.jpg}"
-                                                class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                            <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new
-                                                email from <b>Calvin</b> <small
-                                                    class="text-muted fw-normal d-inline-block">2 day
-                                                    ago</small></small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </li> -->
 
                         <li class="list-inline-item mb-0 ms-1">
                             <div class="dropdown dropdown-primary">
@@ -414,23 +292,25 @@
                             <tbody>
                                 <tr style="height: 100px; font-weight: 400;" th:each="listB:${blogs}">
                                     <td th:text="${listB.blogId}" class="text-center"></td>
-                                    <td th:text="${listB.categoryBlogId}" class="text-center"></td>
+                                    <td th:each="cat : ${blogsCategory}" th:text="${cat.categoryBlogName}"
+                                        th:if="${cat.categoryBlogId==listB.categoryBlogId}" class="text-center"></td>
                                     <td th:text="${listB.title}" class="text-center"></td>
                                     <td th:text="${listB.description}" class="text-center"></td>
-                                    <td th:if="${listB.status==1}" th:text="Public"
-                                        style="color: rgb(1, 255, 1); font-weight: bold;" class="text-center"></td>
-                                    <td th:if="${listB.status==0}" th:text="Hidden"
-                                        style="color: red; font-weight: bold;" class="text-center"></td>
+                                    <td th:if="${listB.status==1}">
+                                        <span th:text="Public" class="center-block badge bg-soft-success"></span>
+                                    </td>
+                                    <td th:if="${listB.status==0}">
+                                        <span th:text="Hidden" class="center-block badge bg-soft-danger"></span>
+                                    </td>
                                     <td th:text="${listB.author}" class="text-center"></td>
                                     <td class="text-center">
-                                        <img th:src="@{${listB.image}}" th:alt="${listB.image}"
-                                            class="img-fluid">
+                                        <img th:src="@{${listB.image}}" th:alt="${listB.image}" class="img-fluid">
                                     </td>
                                     <td th:text="${listB.update}" class="text-center"></td>
 
                                     <td class="text-center">
-                                        <a th:href="@{blogsManagement/edit/{id}(id=${listB.blogId})}">
-                                            Edit
+                                        <a th:href="@{/blogsManagement/blog-detail/{id}(id=${listB.blogId})}">
+                                            <i class="fa-solid fa-pen-to-square" style="width: 100%;"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -440,20 +320,60 @@
 
 
                     </div><!--end row-->
-
-                    <div class="row">
+                    <!--IF NUMBER OF BLOG < 5 OR TOTAL PAGE >1 DISPLAY, IF NOT DISAPPEAR-->
+                    <div th:if="${searchText==null&&totalPages>1}" class="row">
                         <div class="col-12 mt-4">
                             <ul class="pagination justify-content-end mb-0 list-unstyled">
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)"
-                                        aria-label="Previous">Prev</a></li>
-                                <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)"
-                                        aria-label="Next">Next</a></li>
+                                <li class="page-item">
+                                    <a th:if="${currentPage >1}"
+                                        th:href="@{'/blogsManagement/page/' + ${currentPage - 1}}" class="page-link"
+                                        href="" aria-label="Prev">Prev</a>
+                                    <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                                </li>
+                                <span th:each="i:${#numbers.sequence(1,totalPages)}">
+                                    <li class="page-item"><a th:if="${currentPage != i}"
+                                            th:href="@{'/blogsManagement/page/'+${i}}" class="page-link"
+                                            href="">[[${i}]]</a>
+                                    </li>
+                                    <li th:unless="${currentPage != i}" class="page-item active"><a class="page-link"
+                                            href="">[[${i}]]</a></li>
+                                </span>
+                                <li class="page-item">
+                                    <a th:if="${currentPage < totalPages}"
+                                        th:href="@{'/blogsManagement/page/' + ${currentPage + 1}}" class="page-link"
+                                        href="" aria-label="Next">Next</a>
+                                    <span class="page-link pe-none" th:unless="${currentPage < totalPages}">Next</span>
+                                </li>
                             </ul><!--end pagination-->
                         </div><!--end col-->
                     </div><!--end row-->
+                    <div th:if="${searchText!=null&&totalPages>1}" class="row">
+                        <div class="col-12 mt-4">
+                            <ul class="pagination justify-content-end mb-0 list-unstyled">
+                                <li class="page-item">
+                                    <a th:if="${currentPage >1}"
+                                        th:href="@{'/blogsManagement/page/' + ${currentPage - 1} +'/'+ ${searchText}}"
+                                        class="page-link" href="" aria-label="Prev">Prev</a>
+                                    <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                                </li>
+                                <span th:each="i:${#numbers.sequence(1,totalPages)}">
+                                    <li class="page-item"><a th:if="${currentPage != i}"
+                                            th:href="@{'/blogsManagement/page/'+${i}+'/'+ ${searchText}}"
+                                            class="page-link" href="">[[${i}]]</a>
+                                    </li>
+                                    <li th:unless="${currentPage != i}" class="page-item active"><a class="page-link"
+                                            href="">[[${i}]]</a></li>
+                                </span>
+                                <li class="page-item">
+                                    <a th:if="${currentPage < totalPages}"
+                                        th:href="@{'/blogsManagement/page/' + ${currentPage + 1}+'/'+ ${searchText}}"
+                                        class="page-link" href="" aria-label="Next">Next</a>
+                                    <span class="page-link pe-none" th:unless="${currentPage < totalPages}">Next</span>
+                                </li>
+                            </ul><!--end pagination-->
+                        </div><!--end col-->
+                    </div><!--end row-->
+
                 </div>
             </div><!--end container-->
 
@@ -567,7 +487,8 @@
 
                 <div class="modal-body p-3 pt-4">
 
-                    <form name="addBlog" th:action="@{/blogsManagerment/addBlog}" method="post" enctype="multipart/form-data">
+                    <form name="addBlog" th:action="@{/blogsManagement/addBlog}" method="post"
+                        enctype="multipart/form-data" onsubmit="return validatePrice()">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="d-grid">
@@ -575,7 +496,7 @@
                                         Button.
                                     </p>
                                     <div
-                                        class="preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1">
+                                        class=" preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1">
                                     </div>
                                     <input type="file" id="input-file" name="image" accept="image/*"
                                         onchange={handleChange()} hidden />
@@ -590,7 +511,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Title <span
                                                         class="text-danger">*</span></label>
-                                                <input name="title" id="name" type="text" class="form-control"
+                                                <input required name="title" id="name" type="text" class="form-control"
                                                     placeholder="Title :">
                                             </div>
                                         </div><!--end col-->
@@ -611,8 +532,8 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Description <span
                                                         class="text-danger">*</span></label>
-                                                <textarea name="description" id="comments" rows="4" class="form-control"
-                                                    placeholder="Blog description :"></textarea>
+                                                <textarea required name="description" id="comments" rows="4"
+                                                    class="form-control" placeholder="Blog description :"></textarea>
                                             </div>
                                         </div><!--end col-->
                                         <div class="col-lg-12">
@@ -622,8 +543,21 @@
                                                 <textarea name="content" id="editor1"></textarea>
                                                 <script>
                                                     CKEDITOR.replace('editor1')
+                                                    function validatePrice() {
+                                                        var descriptionInvalid = document.getElementById("descriptionInvalid");
+                                                        var editorContent = CKEDITOR.instances.editor1.getData().trim();
+                                                        if (editorContent.length === 0) {
+                                                            descriptionInvalid.innerHTML = "Content can not be blank.";
+                                                            descriptionInvalid.className = "alert alert-danger";
+                                                            descriptionInvalid.role = "alert";
+                                                            // Display error message
+                                                            return false; // Prevent form submission
+                                                        }
+                                                        return true;
+                                                    }
                                                 </script>
                                             </div>
+                                            <div id="descriptionInvalid"></div>
                                         </div><!--end col-->
                                         <div class="col-12">
                                             <div class="mb-3">
@@ -641,9 +575,6 @@
                 </div>
             </div><!--end col-->
         </div><!--end row-->
-    </div>
-    </div>
-    </div>
     </div>
     <!-- End modal -->
 

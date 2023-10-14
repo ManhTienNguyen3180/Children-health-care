@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.example.project.Admin.BlogController.Model.Blog;
@@ -33,5 +35,35 @@ public class BlogsServiceImpl implements BlogsService {
     public Optional<Blog> getBlogByID(int id) {
         return repo.findById(id);
     }
+
+    @Override
+    public Page<Blog> findPaginated(int pageNo, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.repo.findAll(pageable);
+    }
+
+    @Override
+    public Page<Blog> searchbyTitleAuthorordescription(String key, int pageNo, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNo-1,pageSize);
+        return this.repo.search(key, pageable);
+        
+     }
+
+    @Override
+    public Blog findByID(int id) {
+        return repo.findById(id).get();
+    }
+
+    @Override
+    public void saveStatus(int id, String udpdate, int status) {
+        repo.saveStatus(id, udpdate, status);
+    }
+
+    @Override
+    public void saveBlogChanges(Blog blog) {
+        repo.saveBlogChanges(blog.getBlogId(), blog.getCategoryBlogId(), blog.getTitle(), blog.getDate().toString(), blog.getDescription(), blog.getStatus(), blog.getAuthor(), blog.getImage(), blog.getContent(), blog.getUpdate().toString());
+    }
+
+   
 
 }
