@@ -143,7 +143,7 @@
                         <div class="search-bar p-0 d-none d-lg-block ms-2">
                             <div id="search" class="menu-search mb-0">
 
-                                <form action="usersSearch" role="search" method="get" id="searchform"
+                                <form th:action="@{usersSearch}" role="search" method="get" id="searchform"
                                     class="searchform">
                                     <div>
                                         <input type="text" class="form-control border rounded-pill" name="s" id="s"
@@ -199,7 +199,7 @@
                     <div class="d-md-flex justify-content-between">
                         <h5 class="mb-0">Users List</h5>
 
-                        <form action="usersSearch" method="post">
+                        <form th:action="@{usersSearch}" method="post">
                             <button type="submit" class="btn btn-soft-success m-1 btn-sm" value="default"
                                 name="order">Default</button>
                             <button class="btn btn-soft-success m-1 btn-sm" value="role" name="order"

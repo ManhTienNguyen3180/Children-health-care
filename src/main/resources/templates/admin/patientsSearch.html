@@ -142,7 +142,7 @@
                         </a>
                         <div class="search-bar p-0 d-none d-lg-block ms-2">
                             <div id="search" class="menu-search mb-0">
-                                <form action="patientsSearch" role="search" method="get" id="searchform"
+                                <form th:action="@{patientsSearch}" role="search" method="get" id="searchform"
                                     class="searchform">
                                     <div>
                                         <input type="text" class="form-control border rounded-pill" name="s" id="s"
@@ -195,7 +195,7 @@
                 <div class="layout-specing">
                     <div class="d-md-flex justify-content-between">
                         <h5 class="mb-0">Patients List</h5>
-                        <form action="patientsSearch" method="post">
+                        <form th:action="@{patientsSearch}" method="post">
                             <button type="submit" class="btn btn-soft-success m-1 btn-sm" value="default"
                                 name="order">Default</button>
                             <button class="btn btn-soft-success m-1 btn-sm" value="gender" name="order"

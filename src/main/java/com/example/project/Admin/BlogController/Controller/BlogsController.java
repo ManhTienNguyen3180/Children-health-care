@@ -66,7 +66,7 @@ public class BlogsController {
             try {
                 // We can save image in 'images' directory in roo
 
-                String uploadDir = "./healthcare/src/main/resources/static/images/blog";
+                String uploadDir = "./src/main/resources/static/images/blog";
                 java.nio.file.Path copyLocation = Paths
                         .get(uploadDir + java.io.File.separator + image.getOriginalFilename());
                 java.nio.file.Files.copy(image.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
