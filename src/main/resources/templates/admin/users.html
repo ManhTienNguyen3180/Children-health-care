@@ -109,7 +109,7 @@
                         </div>
                     </li>
 
-                    
+
 
                 </ul>
                 <!-- sidebar-menu  -->
@@ -143,7 +143,7 @@
                         <div class="search-bar p-0 d-none d-lg-block ms-2">
                             <div id="search" class="menu-search mb-0">
 
-                                <form action="usersSearch" role="search" method="get" id="searchform"
+                                <form th:action="@{usersSearch}" role="search" method="get" id="searchform"
                                     class="searchform">
                                     <div>
                                         <input type="text" class="form-control border rounded-pill" name="s" id="s"
@@ -204,12 +204,14 @@
                                 name="order">Default</button>
                             <button class="btn btn-soft-success m-1 btn-sm" value="role" name="order"
                                 th:hidden="${roleActive == -1}">Role</button>
-                            <button class="btn btn-soft-warning m-1 btn-sm" value="user" name="order"
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="ROLE_USER" name="order"
                                 th:hidden="${roleActive != -1}">User</button>
-                            <button class="btn btn-soft-warning m-1 btn-sm" value="manager" name="order"
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="ROLE_MANAGER" name="order"
                                 th:hidden="${roleActive != -1}">Manager</button>
-                            <button class="btn btn-soft-warning m-1 btn-sm" value="admin" name="order"
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="ROLE_ADMIN" name="order"
                                 th:hidden="${roleActive != -1}">Admin</button>
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="ROLE_DOCTOR" name="order"
+                                th:hidden="${roleActive != -1}">Doctor</button>
                             <button class="btn btn-soft-success m-1 btn-sm" value="gender" name="order"
                                 th:hidden="${genderActive == -1}">Gender</button>
                             <button class="btn btn-soft-warning m-1 btn-sm" value="female" name="order"

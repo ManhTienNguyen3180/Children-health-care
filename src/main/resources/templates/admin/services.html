@@ -382,7 +382,7 @@
                                                 </a>
                                             </td>
                                             <td class="p-3" th:text="${listS.price}+' $'"></td>
-                                            <td class="p-3" th:text="${listS.description}" ></td>
+                                            <td class="p-3"  ><div th:utext="${listS.description}" style="height: 60px; overflow-y: auto; "></div></td>
                                             <td class="p-3"><img width="80px" th:src="@{${listS.image}}" alt=""></td>
                                             <td th:each="cat : ${listCate}" th:text="${cat.name}"
                                                 th:if="${cat.id==listS.categoryId}" class="p-3">
