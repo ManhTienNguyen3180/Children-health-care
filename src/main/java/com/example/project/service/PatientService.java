@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.project.Repository.PatientRepo;
 import com.example.project.entity.patient;
-import com.example.project.entity.user;
+
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;

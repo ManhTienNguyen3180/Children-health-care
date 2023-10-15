@@ -97,7 +97,7 @@ public class AdminAddDoctor {
 
     //Tìm theo last id
 
-    doctor d = DoctorService.findDoctorByDoctorName(doctor_name);
+    doctor d = DoctorService.findLatestDoctor();
     int docid = d.getDoctor_id();
 
     for(Integer serviceId : service_id) {

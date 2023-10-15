@@ -44,4 +44,6 @@ public interface DoctorService {
     List<Object> getSlotByDoc(int id);
 
     List<Object> getDocReview(int id);
+
+    public doctor findLatestDoctor();
 }

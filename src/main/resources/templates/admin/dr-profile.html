@@ -251,6 +251,10 @@
                                                         <h6  th:text="${doctor.dob}"></h6>
                                                     </h6>
                                                     <br>
+                                                    <h6  class="mb-0">Phone: 
+                                                        <h6  th:text="'0' + ${doctor.phone}"></h6>
+                                                    </h6>
+                                                    <br>
                                                     <h6  class="mb-0" th:switch="${doctor.status}">Status: 
                                                         <h6 th:case="1" style="color: green;">Active</h6>
                                                         <h6 th:case="0" style="color: red;">Blocked</h6>
@@ -261,7 +265,7 @@
                                                             <li th:text="${service.service_name}"></li>
                                                         </ul>
                                                     </h6>
-                                                    <!-- <h6 th:each="service : {service}" th:text="${service.service_name}"></h6> -->
+                                                    
                                                 </div> 
                                                                                              
                                                 

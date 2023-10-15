@@ -62,15 +62,9 @@
                         <a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Apps</a>
                         <div class="sidebar-submenu">
                             <ul>
-<<<<<<< HEAD
                                 <li><a href="patients">All Patients</a></li>
                                 <li><a href="add-patient">Add Patients</a></li>
                                 
-=======
-                                <li><a href="chat.html">Chat</a></li>
-                                <li><a href="email.html">Email</a></li>
-                                <li><a href="calendar.html">Calendar</a></li>
->>>>>>> c1e24f047e193e2ed40e0b70f2c9a3380f8d7617
                             </ul>
                         </div>
                     </li>
@@ -80,16 +74,9 @@
                                 class="uil uil-shopping-cart me-2 d-inline-block"></i>Pharmacy</a>
                         <div class="sidebar-submenu">
                             <ul>
-<<<<<<< HEAD
                                 <li><a href="users">All Users</a></li>
                                 <li><a href="add-user">Add Users</a></li>
                                 <li><a href="user-profile" hidden>Profile</a></li>
-=======
-                                <li><a href="shop.html">Shop</a></li>
-                                <li><a href="product-detail.html">Shop Detail</a></li>
-                                <li><a href="shopcart.html">Shopcart</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
->>>>>>> c1e24f047e193e2ed40e0b70f2c9a3380f8d7617
                             </ul>
                         </div>
                     </li>
@@ -373,7 +360,7 @@
                                     enctype="multipart/form-data">
                                     <div th:if="${message}" th:text="${message}" class="alert alert-danger"></div>
                                     <div th:if="${successmessage}" th:text="${successmessage}"
-                                        class="alert alert-danger" style="background-color: lightgreen;"></div>
+                                        style="color: green;"></div>
                                     <div class="row">
 
                                         <div class="col-md-6">
@@ -395,7 +382,8 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label class="form-label">DoB</label>
+                                                <label class="form-label">DoB<a
+                                                    style="color: red;">*</a></label>
                                                 <input required name="docdob" id="email" type="Date"
                                                     class="form-control" placeholder="Dob :">
                                             </div>
@@ -411,8 +399,9 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label class="form-label">Service</label>
-                                                <select multiple class="form-control department-name select2input"
+                                                <label class="form-label">Service<a
+                                                    style="color: red;">*</a></label>
+                                                <select required multiple class="form-control department-name select2input"
                                                     name="service_id" id="ser">
                                                     <option th:each="service : ${servicelist}"
                                                         th:text="${service.service_name}"
@@ -423,8 +412,9 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label class="form-label">Gender</label>
-                                                <select class="form-control gender-name select2input" name="gender">
+                                                <label class="form-label">Gender<a
+                                                    style="color: red;">*</a></label>
+                                                <select required class="form-control gender-name select2input" name="gender">
                                                     <option th:value="Male">Male</option>
                                                     <option th:value="Female">Female</option>
                                                 </select>
@@ -441,8 +431,9 @@
 
                                         <div class="col-md-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Description</label>
-                                                <textarea name="docdes" id="comments" rows="3" class="form-control"
+                                                <label class="form-label">Description<a
+                                                    style="color: red;">*</a></label>
+                                                <textarea required name="docdes" id="comments" rows="3" class="form-control"
                                                     placeholder="Description :"></textarea>
                                             </div>
                                         </div>

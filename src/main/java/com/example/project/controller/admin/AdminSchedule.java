@@ -38,11 +38,11 @@ public class AdminSchedule {
             @RequestParam("endtime") String endtimeStr,
             @RequestParam("max") int max,
             Model model, ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
-        // Optional<doctor> doctor = DoctorService.findDoctorById(doctor_id);
-        // doctor d = doctor.get();
+
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         java.sql.Time starttime = null;
         java.sql.Time endtime = null;
+        Date now = new java.sql.Date(System.currentTimeMillis());
         try {
             java.util.Date starttimeUtil = format.parse(starttimeStr);
             java.util.Date endtimeUtil = format.parse(endtimeStr);
@@ -54,9 +54,21 @@ public class AdminSchedule {
 
         slot slot = new slot();
         slot.setDoctor_id(doctor_id);
-        slot.setDate(date);
-        slot.setStart_time(starttime);
-        slot.setEnd_time(endtime);
+        if(date.after(now)) {
+            slot.setDate(date);
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Date must after now");
+            return "redirect:/admin/schedule";
+        }
+        
+        if(starttime.equals(endtime)) {
+            redirectAttributes.addFlashAttribute("error", "Start time cannot be the same as end time");
+            return "redirect:/admin/schedule";
+        } else {
+            slot.setStart_time(starttime);
+            slot.setEnd_time(endtime);
+        }
+        
         slot.setMax_appointments_per_slot(max);
 
         redirectAttributes.addFlashAttribute("successmessage", "Doctor schedule added successfully!");

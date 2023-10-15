@@ -49,7 +49,7 @@ public class AdminDoctorProfile {
 
   //Delete doctor
   @RequestMapping("/admin/doctors/delete/{doctor_id}")
-  public String deleteDoctor(@PathVariable(name = "doctor_id") int id) {
+  public String deleteDoctor(@PathVariable(name = "doctor_id") int id, RedirectAttributes redirectAttributes) {
     
     List<doctorservice> ds = DoctorService.finDoctorservicesByDoctorID(id);
     for (doctorservice doctorservice : ds) {
@@ -61,9 +61,10 @@ public class AdminDoctorProfile {
       int slotid = s.getId();
       DoctorService.deleteSlot(slotid);
     }
-    
+
+    redirectAttributes.addFlashAttribute("successmessage", "Doctor deleted successfully!");
     DoctorService.deleteDoctor(id);
-      
+    
     return "redirect:/admin/doctors";
   }
 
@@ -113,9 +114,12 @@ public class AdminDoctorProfile {
     doctor doctor = doc.get();
     List<doctorservice> doctorservice = DoctorService.finDoctorservicesByDoctorID(doctor.getDoctor_id());
 
-    String uploadDir = "./src/main/resources/static/images";
 
-    try {
+    String uploadDir = "./src/main/resources/static/images";
+    if(file.isEmpty()) {
+      doctor.setImage(doctor.getImage());
+    } else {
+      try {
       java.nio.file.Path copyLocation = Paths
           .get(uploadDir + java.io.File.separator + file.getOriginalFilename());
       java.nio.file.Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
@@ -124,6 +128,8 @@ public class AdminDoctorProfile {
       e.printStackTrace();
       session.setAttribute("message", "Fail to upload " + file.getOriginalFilename() + "!");
     }
+    }
+    
 
     doctor.setDoctor_name(doctor_name);
     doctor.setPosition(position);
@@ -155,8 +161,37 @@ public class AdminDoctorProfile {
     DoctorService.save(doctor);
 
     int docid = doctor.getDoctor_id();
-    List<Integer> list = new ArrayList<>(Arrays.asList(service_id));
     
+    if(service_id == null) {
+      redirectAttributes.addFlashAttribute("successmessage", "Doctor changed successfully!");
+      return "redirect:/admin/doctors";
+    } else {
+      List<Integer> list = new ArrayList<>(Arrays.asList(service_id));
+
+    if(doctorservice.size() < list.size()) {
+      int n = list.size() - doctorservice.size();
+      for(int i=0; i< n; i++) {
+        doctorservice docservice = new doctorservice();
+        docservice.setDoctorID(docid);
+        docservice.setServiceID(0);
+        docservice.setStatus(1);
+        doctorservice.add(docservice);
+      }
+    }
+    if(doctorservice.size() > list.size()) {
+      int m = doctorservice.size() - list.size();
+      List<doctorservice> ds = DoctorService.finDoctorservicesByDoctorID(doctor_id);
+      for (doctorservice dss : ds) {
+        DoctorService.deleteDoctorService(dss.getId()); 
+      }
+      for(int i=0; i< m; i++) {
+        doctorservice docservice = new doctorservice();
+        docservice.setDoctorID(docid);
+        docservice.setServiceID(0);
+        docservice.setStatus(1);
+        doctorservice.add(docservice);
+      }
+    }
     for (doctorservice ds : doctorservice) {
       for (Integer id : list) {
         if(ds.getServiceID() == id) {
@@ -172,7 +207,7 @@ public class AdminDoctorProfile {
         }      
       }
     }
-
+    }
     redirectAttributes.addFlashAttribute("successmessage", "Doctor changed successfully!");
 
     return "redirect:/admin/doctors";

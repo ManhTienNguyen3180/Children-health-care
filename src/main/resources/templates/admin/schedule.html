@@ -296,7 +296,7 @@
                                     <form class="mt-4" th:action="@{/admin/schedule/save}" method="post" enctype="multipart/form-data">
                                         <div th:if="${successmessage}" th:text="${successmessage}" style="color: green;"></div>
                                         <div class="row">
-                                            <div class="mb-3" th:text="${message}" style="color: red;" >
+                                            <div class="mb-3" th:text="${error}" style="color: red;" >
                                             </div>
 
                                             <div class="col-md-6">
@@ -307,13 +307,14 @@
                                                     </select>
                                                 </div>
                                             </div><!--end col-->                          
-            
+                                            
+
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Date<a style="color: red;">*</a></label>
                                                     <input required name="docdate" id="email" type="Date" class="form-control" placeholder="Date :">
                                                 </div> 
-                                            </div><!--end col-->
+                                            </div><!--end col-->                              
             
                                             <div class="col-md-6">
                                                 <div class="mb-3">
@@ -332,7 +333,7 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Max Appointments Per Slot<a style="color: red;">*</a></label>
-                                                    <input required name="max" id="email" type="text" class="form-control" placeholder="">
+                                                    <input required name="max" id="email" type="number" class="form-control" placeholder="">
                                                 </div>
                                             </div><!--end col-->
             

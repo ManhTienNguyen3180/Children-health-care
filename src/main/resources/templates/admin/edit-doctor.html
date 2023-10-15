@@ -363,7 +363,7 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Image</label>
-                                                    <input name="docimg" id="name2" type="file" class="form-control" placeholder="Image :">
+                                                    <input name="docimg" id="name2" type="file" class="form-control" th:value="${doctor.image}">
                                                 </div>
                                             </div><!--end col-->
 
@@ -372,7 +372,7 @@
                                                     <label class="form-label">Status</label>
                                                     <select class="form-control gender-name select2input" name="docstatus" > 
                                                         <option th:value="Active">Active</option>
-                                                        <option th:value="Inactive">Inactive</option>
+                                                        <option th:value="Inactive">Blocked</option>
                                                     </select>
                                                 </div>
                                             </div><!--end col-->

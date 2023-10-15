@@ -40,4 +40,7 @@ public interface DoctorRepo extends JpaRepository<doctor, Integer> {
             "on r.reservation_id=f.reservation_id\n" + //
             "where r.doctor_id=?1", nativeQuery = true)
     List<Object> getDocReview(int id);
+
+    @Query( value ="select * from doctor d order by d.doctor_id desc limit 1",nativeQuery = true)
+    doctor getLatestDoctor();
 }
