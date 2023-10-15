@@ -45,9 +45,10 @@ public class AdminUsersSearch {
           !order.equalsIgnoreCase("gender") ||
           !order.equalsIgnoreCase("status")) {
         // filter role
-        if (order.equalsIgnoreCase("user") ||
-            order.equalsIgnoreCase("manager") ||
-            order.equalsIgnoreCase("admin")) {
+        if (order.equalsIgnoreCase("ROLE_USER") ||
+            order.equalsIgnoreCase("ROLE_MANAGER") ||
+            order.equalsIgnoreCase("ROLE_ADMIN") ||
+            order.equalsIgnoreCase("ROLE_DOCTOR")) {
           role rs = roleService.findUserByName(order);
 
           return findUsersContainAndFilterRoleWithPaging(r, rs, pageno, model);

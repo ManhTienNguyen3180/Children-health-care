@@ -202,14 +202,16 @@
                         <form th:action="@{usersSearch}" method="post">
                             <button type="submit" class="btn btn-soft-success m-1 btn-sm" value="default"
                                 name="order">Default</button>
-                            <button class="btn btn-soft-success m-1 btn-sm" value="role" name="order"
+                                <button class="btn btn-soft-success m-1 btn-sm" value="role" name="order"
                                 th:hidden="${roleActive == -1}">Role</button>
-                            <button class="btn btn-soft-warning m-1 btn-sm" value="user" name="order"
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="ROLE_USER" name="order"
                                 th:hidden="${roleActive != -1}">User</button>
-                            <button class="btn btn-soft-warning m-1 btn-sm" value="manager" name="order"
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="ROLE_MANAGER" name="order"
                                 th:hidden="${roleActive != -1}">Manager</button>
-                            <button class="btn btn-soft-warning m-1 btn-sm" value="admin" name="order"
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="ROLE_ADMIN" name="order"
                                 th:hidden="${roleActive != -1}">Admin</button>
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="ROLE_DOCTOR" name="order"
+                                th:hidden="${roleActive != -1}">Doctor</button>
                             <button class="btn btn-soft-success m-1 btn-sm" value="gender" name="order"
                                 th:hidden="${genderActive == -1}">Gender</button>
                             <button class="btn btn-soft-warning m-1 btn-sm" value="female" name="order"
@@ -276,7 +278,7 @@
 
                                             <td class="p-3" th:text="${users.phone}"></td>
 
-                                            <!-- <td class="p-3" th:text="${users.role.role_name}"></td> -->
+                                            <td class="p-3" th:text="${users.role_id.role_name}"></td>
 
                                             <td class="p-3" th:text="${users.create_at}"></td>
 
