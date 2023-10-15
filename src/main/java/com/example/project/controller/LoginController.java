@@ -36,10 +36,11 @@ public class LoginController {
       HttpSession session) {
     user s = userService.findUserByEmail(email);
     if (s != null) {
-
+      
       if (s.getPassword().equalsIgnoreCase(password)) {
         session.setAttribute("user", s);
-        return "redirect:/home";
+              return "redirect:/home";
+          
       } else {
         model.addAttribute("message", " wrong password");
       }
@@ -54,3 +55,4 @@ public class LoginController {
 
 
 }
+

@@ -171,16 +171,5 @@ public class user {
         this.resetToken = resetToken;
     }
 
-    // @Override
-    // public String toString() {
-    // return "user [user_id=" + user_id + ", username=" + username + ", password="
-    // + password + ", full_name="
-    // + full_name
-    // + ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", image="
-    // + image + ", status="
-    // + status
-    // + ", role_id=" + role_id + ", create_at=" + create_at + ", create_by=" +
-    // create_by + "]";
-    // }
 
 }

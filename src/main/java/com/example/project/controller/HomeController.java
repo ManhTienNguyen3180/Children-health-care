@@ -42,7 +42,9 @@ public class HomeController {
     }
     
     @GetMapping("/home")
-    public String home(Model model){
+    public String home(Model model,HttpSession session){
+        user u = (user)session.getAttribute("user");
+        model.addAttribute("u", u);
         model.addAttribute("doctor", DoctorService.fetchDoctorList());
         model.addAttribute("service", ServiceService.fechServicesList());
         model.addAttribute("blogNew", BlogService.getBlogsNew());
