@@ -287,80 +287,59 @@
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <div class="d-md-flex justify-content-between">
-                            <h5 class="mb-0">Add New Doctor</h5>
+                            <h5 class="mb-0">Add New Slot</h5>
                         </div>
                         
                         <div class="row">
                             <div class="col-lg-8 mt-4">
                                 <div class="card border-0 p-4 rounded shadow">                             
-                                    <form class="mt-4" th:action="@{/admin/add-doctor/save}" method="post" enctype="multipart/form-data">
-                                        <div th:if="${message}" th:text="${message}" class="alert alert-danger"></div>
-                                        <div th:if="${successmessage}" th:text="${successmessage}" class="alert alert-danger" style="background-color: lightgreen;"></div>
+                                    <form class="mt-4" th:action="@{/admin/schedule/save}" method="post" enctype="multipart/form-data">
+                                        <div th:if="${successmessage}" th:text="${successmessage}" style="color: green;"></div>
                                         <div class="row">
-                                            
+                                            <div class="mb-3" th:text="${message}" style="color: red;" >
+                                            </div>
+
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Doctor Name<a style="color: red;">*</a></label>
-                                                    <input required name="docname" id="name" type="text" class="form-control" placeholder="Doctor Name :">
+                                                    <select class="form-control department-name select2input" name="doctor_id">
+                                                        <option th:each="doctor : ${doctorlist}" th:text="${doctor.doctor_name}" th:value="${doctor.doctor_id}"></option>
+                                                    </select>
                                                 </div>
-                                            </div><!--end col-->
+                                            </div><!--end col-->                          
             
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Position<a style="color: red;">*</a></label>
-                                                    <input required name="docpos" id="name2" type="text" class="form-control" placeholder="Position :">
-                                                </div>
-                                            </div><!--end col-->
-            
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">DoB</label>
-                                                    <input required name="docdob" id="email" type="Date" class="form-control" placeholder="Dob :">
+                                                    <label class="form-label">Date<a style="color: red;">*</a></label>
+                                                    <input required name="docdate" id="email" type="Date" class="form-control" placeholder="Date :">
                                                 </div> 
                                             </div><!--end col-->
             
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Phone no.<a style="color: red;">*</a></label>
-                                                    <input required name="docphone" id="number" type="text" class="form-control" placeholder="Phone no :">
+                                                    <label class="form-label">Time start:<a style="color: red;">*</a></label>
+                                                    <input required name="starttime" id="number" type="time" class="form-control" placeholder="Start time:">
+                                                </div>                                                                               
+                                            </div><!--end col-->
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Time end:<a style="color: red;">*</a></label>
+                                                    <input required name="endtime" id="number" type="time" class="form-control" placeholder="End time:">
                                                 </div>                                                                               
                                             </div><!--end col-->
             
                                             <div class="col-md-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Service</label>
-                                                    <select multiple class="form-control department-name select2input" name="service_id" id="ser">
-                                                        <option th:each="service : ${servicelist}" th:text="${service.service_name}" th:value="${service.service_id}"></option>
-                                                    </select>
+                                                    <label class="form-label">Max Appointments Per Slot<a style="color: red;">*</a></label>
+                                                    <input required name="max" id="email" type="text" class="form-control" placeholder="">
                                                 </div>
                                             </div><!--end col-->
             
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Gender</label>
-                                                    <select class="form-control gender-name select2input" name="gender" > 
-                                                        <option th:value="Male">Male</option>
-                                                        <option th:value="Female">Female</option>
-                                                    </select>
-                                                </div>
-                                            </div><!--end col-->
-
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Image</label>
-                                                    <input name="docimg" id="name2" type="file" class="form-control" placeholder="Image :">
-                                                </div>
-                                            </div><!--end col-->
-          
-                                            <div class="col-md-12">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Description</label>
-                                                    <textarea name="docdes" id="comments" rows="3" class="form-control" placeholder="Description :"></textarea>
-                                                </div>
-                                            </div>
+                                            
                                         </div><!--end row-->
             
-                                        <button type="submit" class="btn btn-primary">Add Doctor</button>
+                                        <button type="submit" class="btn btn-primary">Add Slot</button>
                                     </form>
                                 </div>
                             </div><!--end col-->

@@ -2,12 +2,14 @@ package com.example.project.entity;
 
 import java.sql.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
 public class doctor {
     @Id
+    @Column(name = "doctor_id")
     private int doctor_id;
     private String doctor_name;
     private String position;

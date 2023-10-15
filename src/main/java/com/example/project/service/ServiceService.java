@@ -20,4 +20,9 @@ public class ServiceService {
     public Optional<service> findServiceById(int id){
         return repo.findById(id);
     }
+
+    public List<service> findServiceByDocID(int doctorID) {
+        return repo.findServiceByDoctorID(doctorID);
+    }
+    
 }
