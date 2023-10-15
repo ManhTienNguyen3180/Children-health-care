@@ -1,6 +1,7 @@
 package com.example.project.entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,23 +15,27 @@ public class patient {
     private int status;
     private Date Dob;
     private String patient_name;
-    private String descriptiob;
+    private String description;
     private Date create_at;
     private String create_by;
-    private int user_id;
-    
+    private Integer user_id;
+    private String patient_email;
+    private String patient_phone;
+    private String patient_address;
+    private LocalDate modify_at;
+
     public patient() {
     }
 
     public patient(int patient_id, int gender, String image, int status, Date dob, String patient_name,
-            String descriptiob, Date create_at, String create_by, int user_id) {
+            String description, Date create_at, String create_by, int user_id) {
         this.patient_id = patient_id;
         this.gender = gender;
         this.image = image;
         this.status = status;
         Dob = dob;
         this.patient_name = patient_name;
-        this.descriptiob = descriptiob;
+        this.description = description;
         this.create_at = create_at;
         this.create_by = create_by;
         this.user_id = user_id;
@@ -85,11 +90,11 @@ public class patient {
     }
 
     public String getDescriptiob() {
-        return descriptiob;
+        return description;
     }
 
-    public void setDescriptiob(String descriptiob) {
-        this.descriptiob = descriptiob;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getCreate_at() {
@@ -116,5 +121,44 @@ public class patient {
         this.user_id = user_id;
     }
 
-    
+    public String getDescription() {
+        return description;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getPatient_email() {
+        return patient_email;
+    }
+
+    public void setPatient_email(String patient_email) {
+        this.patient_email = patient_email;
+    }
+
+    public String getPatient_phone() {
+        return patient_phone;
+    }
+
+    public void setPatient_phone(String patient_phone) {
+        this.patient_phone = patient_phone;
+    }
+
+    public String getPatient_address() {
+        return patient_address;
+    }
+
+    public void setPatient_address(String patient_address) {
+        this.patient_address = patient_address;
+    }
+
+    public LocalDate getModify_at() {
+        return modify_at;
+    }
+
+    public void setModify_at(LocalDate modify_at) {
+        this.modify_at = modify_at;
+    }
+
 }

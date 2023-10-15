@@ -39,7 +39,29 @@ public class EmailServiceImpl implements EmailService {
                     link);
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            // TODO: handle exception
+          
+            LOGGER.error("failed to send email", e);
+            throw new IllegalStateException("failed to send email");
+        }
+    }
+
+    @Override
+    @Async
+    public void sendNotification(String to, String link, String pass) {
+        try {
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
+
+            helper.setTo(to);
+            helper.setFrom("taixexedo@gmail.com");
+            helper.setSubject("Account create");
+            helper.setText("Your account has been created by Admin\n" + //
+                    "Your password is: " + pass + "\n" +
+                    "Click here to login in your account \n" + //
+                    "" + link);
+            mailSender.send(mimeMessage);
+        } catch (MessagingException e) {
+            
             LOGGER.error("failed to send email", e);
             throw new IllegalStateException("failed to send email");
         }

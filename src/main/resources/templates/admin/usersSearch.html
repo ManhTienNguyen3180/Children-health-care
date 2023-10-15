@@ -17,15 +17,13 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- simplebar -->
     <link href="../css/simplebar.css" rel="stylesheet" type="text/css" />
-    <!-- Select2 -->
-    <link href="../css/select2.min.css" rel="stylesheet" />
     <!-- Icons -->
     <link href="../css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
     <link href="../css/remixicon.css" rel="stylesheet" type="text/css" />
     <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
     <!-- Css -->
     <link href="../css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-
+    <script src="https://kit.fontawesome.com/8320fc5394.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -72,10 +70,11 @@
                             <ul>
                                 <li><a href="patients">All Patients</a></li>
                                 <li><a href="add-patient">Add Patients</a></li>
-                                
+                              
                             </ul>
                         </div>
                     </li>
+
 
                     <li class="sidebar-dropdown">
                         <a href="javascript:void(0)"><i class="fa-solid fa-user fa-xs"></i>User</a>
@@ -83,11 +82,10 @@
                             <ul>
                                 <li><a href="users">All Users</a></li>
                                 <li><a href="add-user">Add Users</a></li>
-                                <li><a href="#" hidden>Profile</a></li>
+                                <li><a href="user-profile" hidden>Profile</a></li>
                             </ul>
                         </div>
                     </li>
-
 
                     <li class="sidebar-dropdown">
                         <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
@@ -149,13 +147,17 @@
                         </a>
                         <div class="search-bar p-0 d-none d-lg-block ms-2">
                             <div id="search" class="menu-search mb-0">
-                                <form role="search" method="get" id="searchform" class="searchform">
+
+                                <form action="usersSearch" role="search" method="get" id="searchform"
+                                    class="searchform">
                                     <div>
                                         <input type="text" class="form-control border rounded-pill" name="s" id="s"
-                                            placeholder="Search Keywords...">
-                                        <input type="submit" id="searchsubmit" value="Search">
+                                            placeholder="Search Keywords..." th:value="${param.s}">
+                                        <input type="submit" value="Search">
                                     </div>
                                 </form>
+
+
                             </div>
                         </div>
                     </div>
@@ -200,120 +202,150 @@
             <div class="container-fluid">
                 <div class="layout-specing">
                     <div class="d-md-flex justify-content-between">
-                        <h5 class="mb-0">Add New User</h5>
+                        <h5 class="mb-0">Users List</h5>
 
+                        <form action="usersSearch" method="post">
+                            <button type="submit" class="btn btn-soft-success m-1 btn-sm" value="default"
+                                name="order">Default</button>
+                            <button class="btn btn-soft-success m-1 btn-sm" value="role" name="order"
+                                th:hidden="${roleActive == -1}">Role</button>
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="user" name="order"
+                                th:hidden="${roleActive != -1}">User</button>
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="manager" name="order"
+                                th:hidden="${roleActive != -1}">Manager</button>
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="admin" name="order"
+                                th:hidden="${roleActive != -1}">Admin</button>
+                            <button class="btn btn-soft-success m-1 btn-sm" value="gender" name="order"
+                                th:hidden="${genderActive == -1}">Gender</button>
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="female" name="order"
+                                th:hidden="${genderActive != -1}">Female</button>
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="male" name="order"
+                                th:hidden="${genderActive != -1}">Male</button>
+                            <button class="btn btn-soft-success m-1 btn-sm" value="status" name="order"
+                                th:hidden="${statusActive == -1}">Status</button>
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="1" name="order"
+                                th:hidden="${statusActive != -1}">Active</button>
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="0" name="order"
+                                th:hidden="${statusActive != -1}">Blocked</button>
+
+                            <input type="hidden" name="s" th:value="${param.s}">
+                        </form>
+                        <label th:text="${searchName}" style="color:red;"></label>
                         <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                             <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                                 <li class="breadcrumb-item"><a href="dashboard">Doctris</a></li>
                                 <li class="breadcrumb-item" aria-current="page"><i
                                         class="fa-solid fa-caret-down fa-rotate-270"></i></li>
-                                <li class="breadcrumb-item"><a href="users">Users</a></li>
-                                <li class="breadcrumb-item" aria-current="page"><i
-                                        class="fa-solid fa-caret-down fa-rotate-270"></i></li>
-                                <li class="breadcrumb-item active" aria-current="page">Add User</li>
+                                <li class="breadcrumb-item active" aria-current="page">Users</li>
                             </ul>
                         </nav>
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-12 mt-4">
-                            <div class="card border-0 p-4 rounded shadow">
+                        <div class="col-12 mt-4">
+                            <div class="table-responsive shadow rounded">
+                                <table class="table table-center bg-white mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-bottom p-3" style="min-width: 50px;">Id</th>
+                                            <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
+                                            <th class="border-bottom p-3">Email</th>
+                                            <th class="border-bottom p-3">Gender</th>
 
-                                <form class="mt-4" action="add-user" method="post">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">UserName</label>
-                                                <input type="text" class="form-control" placeholder="Username"
-                                                    name="uname" required="" th:value="${param.uname}">
-                                            </div>
+                                            <th class="border-bottom p-3">Mobile No.</th>
+                                            <th class="border-bottom p-3">Role</th>
+                                            <th class="border-bottom p-3" style="min-width: 150px;">Create At</th>
+                                            <th class="border-bottom p-3">Create By</th>
+                                            <th class="border-bottom p-3">Status</th>
+                                            <th class="border-bottom p-3" style="min-width: 100px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                            <label class="form-label" th:text="${mUsername}"
-                                                style="color: tomato;"></label>
+                                        <tr th:each="users : ${listuser}">
+                                            <th class="p-3" th:text="${users.user_id}">1</th>
+                                            <td class="py-3">
+                                                <a href="#" class="text-dark">
+                                                    <div class="d-flex align-items-center">
+                                                        <img th:src="${users.image}"
+                                                            class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                        <span class="ms-2" th:text="${users.full_name}"></span>
+                                                    </div>
+                                                </a>
+                                            </td>
+                                            <td class="p-3" th:text="${users.email}"></td>
 
-                                        </div><!--end col-->
+                                            <td class="p-3" th:text="Male" th:if="${users.gender==0}"></td>
 
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Full name</label>
-                                                <input type="text" class="form-control" placeholder="Full Name"
-                                                    name="fullname" required="" th:value="${param.fullname}">
-                                            </div>
-                                        </div><!--end col-->
+                                            <td class="p-3" th:text="Female" th:if="${users.gender==1}"></td>
 
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Your Email</label>
-                                                <input type="email" class="form-control" placeholder="Email"
-                                                    name="email" required="" th:value="${param.email} ">
-                                            </div>
-                                            <label class="form-label" th:text="${mEmail}" style="color: tomato;"></label>
-                                        </div><!--end col-->
+                                            <td class="p-3" th:text="${users.phone}"></td>
 
-                                      
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Phone no.</label>
-                                                <input type="tel" class="form-control" placeholder="+84" name="phonenum"
-                                                    required="" th:value="${param.phonenum}">
-                                            </div>
-                                            <label class="form-label" th:text="${mPhone}"
-                                                style="color: tomato;"></label>
-                                        </div><!--end col-->
+                                            <td class="p-3" th:text="${users.role.role_name}"></td>
 
+                                            <td class="p-3" th:text="${users.create_at}"></td>
 
+                                            <td class="p-3" th:text="${users.create_by}"></td>
 
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Gender</label>
-                                                <select class="form-control gender-name select2input" name="gender">
-                                                    <option value="0" th:selected="${param.gender==0}">Male</option>
-                                                    <option value="1" th:selected="${param.gender==1}">Female</option>
-                                                </select>
-                                            </div>
-                                        </div><!--end col-->
-
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Password</label>
-                                                <div class="input-group flex-nowrap">
-                                                    <span
-                                                        class="input-group-text bg-white border border-end-0 text-dark"
-                                                        id="fb-id"></span>
-                                                    <input type="password" class="form-control" placeholder="Password"
-                                                        id="password" name="password" required="">
-                                                </div>
-                                                <label class="form-label" th:text="${mPassword}"
-                                                    style="color: tomato;"></label>
-                                                <label class="form-label" th:text="${mPasswordValid}"
-                                                    style="color: tomato;"></label>
-                                            </div>
-                                        </div><!--end col-->
+                                            <td class="p-3" th:if="${users.status==1}"><span
+                                                    class="badge bg-soft-success">Active</span></td>
+                                            <td class="p-3" th:if="${users.status==0}"><span
+                                                    class="badge bg-soft-warning">Blocked</span></td>
 
 
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Confirm Password</label>
-                                                <div class="input-group flex-nowrap">
-                                                    <span
-                                                        class="input-group-text bg-white border border-end-0 text-dark"
-                                                        id="fb-id"></span>
-                                                    <input type="password" class="form-control" placeholder="Password"
-                                                        id="confirmPassword" name="cpassword" required="">
-                                                </div>
-                                            </div>
-                                        </div><!--end col-->
+                                            <td class="text-end p-3">
+                                                <a th:href="@{'/admin/user-profile/' + ${users.user_id}}"
+                                                    class="btn btn-icon btn-pills btn-soft-success"><i
+                                                        class="uil uil-pen"></i></a>
+                                                <a th:href="@{'/admin/delete/' + ${users.user_id}}"
+                                                    class="btn btn-icon btn-pills btn-soft-danger"><i
+                                                        class="uil uil-trash"></i></a>
+                                            </td>
+
+                                        </tr>
 
 
-                                    </div><label class="form-label" th:text="${mess}" style="color: tomato;"></label>
-                                    <input type="submit" class="btn btn-primary" value="Add User"></input>
-                            </div><!--end row-->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div><!--end row-->
 
-                            </form>
+                    <div class="row text-center">
+                        <!-- PAGINATION START -->
+                        <div class="col-12 mt-4" th:if="${totalPage > 1}">
+                            <div class="d-md-flex align-items-center text-center justify-content-between">
+                                <span class="text-muted me-3">Showing 1 - 10 out of 50</span>
+                                <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
+                                    <li class="page-item"><a class="page-link" th:if="${currentPage!=1}"
+                                            th:href="@{'usersSearch?s='+${searchName}+'&'+'pageNo=1'+'&'+${orders}}" aria-label="Previous">First</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" th:if="${currentPage!=1}"
+                                            th:href="@{'usersSearch?s='+${searchName}+'&'+'pageNo='+${currentPage-1}+'&'+${orders}}"
+                                            aria-label="Previous">Prev</a>
+                                    </li>
+                                    <!-- <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a>
+                                    </li> -->
+                                    <li class="page-item" th:each="i: ${#numbers.sequence(1,totalPage)}">
+                                        <a class="page-link" th:if="${currentPage !=i}"
+                                            th:href="@{'usersSearch?s='+${searchName}+'&'+'pageNo='+${i}+'&'+${orders}}">[[${i}]]</a>
+                                    </li>
 
+                                    <li class="page-item">
+                                        <a class="page-link" th:if="${totalPage > currentPage}"
+                                            th:href="@{'usersSearch?s='+${searchName}+'&'+'pageNo='+${currentPage+1}+'&'+${orders}}"
+                                            aria-label="Next">Next</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" th:if="${totalPage > currentPage}"
+                                            th:href="@{'usersSearch?s='+${searchName}+'&'+'pageNo='+${totalPage}+'&'+${orders}}"
+                                            aria-label="Next">Last</a>
+                                    </li>
+                                </ul>
+
+                            </div>
                         </div><!--end col-->
-
-
+                        <!-- PAGINATION END -->
                     </div><!--end row-->
                 </div>
             </div><!--end container-->
@@ -342,16 +374,10 @@
 
 
 
-    <!-- Modal end -->
-    <script src="https://kit.fontawesome.com/8320fc5394.js" crossorigin="anonymous"></script>
     <!-- javascript -->
-    <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <!-- simplebar -->
     <script src="../js/simplebar.min.js"></script>
-    <!-- Select2 -->
-    <script src="../js/select2.min.js"></script>
-    <script src="../js/select2.init.js"></script>
     <!-- Icons -->
     <script src="../js/feather.min.js"></script>
     <!-- Main Js -->

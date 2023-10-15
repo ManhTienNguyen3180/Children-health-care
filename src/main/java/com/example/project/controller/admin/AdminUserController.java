@@ -11,14 +11,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.project.entity.patient;
-import com.example.project.service.PatientService;
+import com.example.project.entity.role;
+import com.example.project.entity.user;
+import com.example.project.service.RoleService;
+import com.example.project.service.UserService;
 
 @Controller
-@RequestMapping("admin/patients")
-public class AdminPatients {
+@RequestMapping("admin/users")
+public class AdminUserController {
+
   @Autowired
-  private PatientService patientService;
+  private RoleService roleService;
+  @Autowired
+  private final UserService userService;
+
+  public AdminUserController(UserService userService) {
+    this.userService = userService;
+  }
 
   @GetMapping
   public String page(Model model, @RequestParam(name = "pageNo", required = false) Integer pageno,
@@ -26,10 +35,19 @@ public class AdminPatients {
     if (pageno == null) {
       pageno = 1;
     }
-    if (order != null) {
-      if (!order.equalsIgnoreCase("gender") ||
-          !order.equalsIgnoreCase("status")) {
 
+    if (order != null) {
+      if (!order.equalsIgnoreCase("role") ||
+          !order.equalsIgnoreCase("gender") ||
+          !order.equalsIgnoreCase("status")) {
+        // filter role
+        if (order.equalsIgnoreCase("user") ||
+            order.equalsIgnoreCase("manager") ||
+            order.equalsIgnoreCase("admin")) {
+          role r = roleService.findUserByName(order);
+
+          return findPaginatedWithFilter(r, pageno, model);
+        }
         // filter gender
         if (order.equalsIgnoreCase("male") ||
             order.equalsIgnoreCase("female")) {
@@ -50,33 +68,58 @@ public class AdminPatients {
         }
       }
     }
-    return findPaginated(model, pageno);
+ 
+    return findPaginated(pageno, model);
   }
 
   @PostMapping
   public String Order(Model model,
       @RequestParam(name = "order") String order, @RequestParam(name = "pageNo", required = false) Integer pageno) {
 
-    if (order.equalsIgnoreCase("gender")) {
+    if (order.equalsIgnoreCase("role")) {
+
+      model.addAttribute("roleActive", -1);
+
+      return findPaginated(1, model);
+    } else if (order.equalsIgnoreCase("gender")) {
 
       model.addAttribute("genderActive", -1);
 
-      return findPaginated(model, 1);
+      return findPaginated(1, model);
     } else if (order.equalsIgnoreCase("status")) {
       model.addAttribute("statusActive", -1);
-      return findPaginated(model, 1);
+      return findPaginated(1, model);
     }
+
     return page(model, pageno, order);
   }
 
-  public String findPaginated(Model model, Integer pageno) {
+  public String findPaginated(Integer pageno,
+      Model model) {
     int pagesize = 3;
-    Page<patient> page = patientService.FindPaginated(pageno, pagesize);
-    List<patient> listPatient = page.getContent();
-    model.addAttribute("listPatients", listPatient);
+
+    Page<user> page = userService.FindPaginated(pageno, pagesize);
+    List<user> listuser = page.getContent();
+    model.addAttribute("listuser", listuser);
     model.addAttribute("currentPage", pageno);
     model.addAttribute("totalPage", page.getTotalPages());
-    return "admin/patients";
+
+    return "admin/users";
+  }
+
+  public String findPaginatedWithFilter(role r, Integer pageno,
+      Model model) {
+    int pagesize = 3;
+
+    Page<user> page = userService.findUsersAndFilterRole(r, pageno, pagesize);
+    List<user> listuser = page.getContent();
+    model.addAttribute("roleActive", -1);
+    model.addAttribute("listuser", listuser);
+    model.addAttribute("currentPage", pageno);
+    model.addAttribute("totalPage", page.getTotalPages());
+    model.addAttribute("orders", "order=" + r.getRole_name());
+
+    return "admin/users";
   }
 
   public String findUsersAndFilterGender(int r, Integer pageno,
@@ -86,28 +129,27 @@ public class AdminPatients {
     if (r == 0) {
       s = "male";
     }
-    Page<patient> page = patientService.findUsersAndFilterGender(r, pageno, pagesize);
-    List<patient> listuser = page.getContent();
+    Page<user> page = userService.findUsersAndFilterGender(r, pageno, pagesize);
+    List<user> listuser = page.getContent();
     model.addAttribute("genderActive", -1);
-    model.addAttribute("listPatients", listuser);
+    model.addAttribute("listuser", listuser);
     model.addAttribute("currentPage", pageno);
     model.addAttribute("totalPage", page.getTotalPages());
     model.addAttribute("orders", "order=" + s);
-    return "admin/patients";
+    return "admin/users";
   }
 
   public String findUsersAndFilterStatus(int r, Integer pageno,
       Model model) {
     int pagesize = 3;
 
-    Page<patient> page = patientService.findUsersAndFilterStatus(r, pageno, pagesize);
-    List<patient> listuser = page.getContent();
+    Page<user> page = userService.findUsersAndFilterStatus(r, pageno, pagesize);
+    List<user> listuser = page.getContent();
     model.addAttribute("statusActive", -1);
-    model.addAttribute("listPatients", listuser);
+    model.addAttribute("listuser", listuser);
     model.addAttribute("currentPage", pageno);
     model.addAttribute("totalPage", page.getTotalPages());
     model.addAttribute("orders", "order=" + r);
-    return "admin/patients";
+    return "admin/users";
   }
- 
 }

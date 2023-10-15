@@ -21,8 +21,9 @@ public class user {
     private String email;
     private String image;
     private int status;
-    @Column(name = "role")
-    private int role_id;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private role role_id;
     private String create_by;
     private LocalDate create_at;
 
@@ -34,7 +35,7 @@ public class user {
 
     public user(int user_id, String username, String password, String full_name, int gender, int phone,
             @Email(message = "Please provide a valid e-mail") @NotEmpty(message = "Please provide an e-mail") String email,
-            String image, int status, int role_id, String create_by, LocalDate create_at, String resetToken) {
+            String image, int status, role role_id, String create_by, LocalDate create_at, String resetToken) {
         this.user_id = user_id;
         this.username = username;
         this.password = password;
@@ -52,7 +53,7 @@ public class user {
 
     public user(String username, String password, String full_name, int gender, int phone,
             @Email(message = "Please provide a valid e-mail") @NotEmpty(message = "Please provide an e-mail") String email,
-            String image, int status, int role, String create_by, LocalDate create_at) {
+            String image, int status, role role, String create_by, LocalDate create_at) {
         this.username = username;
         this.password = password;
         this.full_name = full_name;
@@ -138,11 +139,11 @@ public class user {
         this.status = status;
     }
 
-    public int getRole() {
+    public role getRole() {
         return role_id;
     }
 
-    public void setRole(int role_id) {
+    public void setRole(role role_id) {
         this.role_id = role_id;
     }
 
@@ -170,21 +171,16 @@ public class user {
         this.resetToken = resetToken;
     }
 
-    
-
-
-    
-
-
-
-
     // @Override
     // public String toString() {
-    //     return "user [user_id=" + user_id + ", username=" + username + ", password=" + password + ", full_name="
-    //             + full_name
-    //             + ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", image=" + image + ", status="
-    //             + status
-    //             + ", role_id=" + role_id + ", create_at=" + create_at + ", create_by=" + create_by + "]";
+    // return "user [user_id=" + user_id + ", username=" + username + ", password="
+    // + password + ", full_name="
+    // + full_name
+    // + ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", image="
+    // + image + ", status="
+    // + status
+    // + ", role_id=" + role_id + ", create_at=" + create_at + ", create_by=" +
+    // create_by + "]";
     // }
 
 }

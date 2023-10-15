@@ -22,7 +22,6 @@ public class DoctorServiceImpl implements DoctorService{
 
     @Override
     public Optional<doctor> findDoctorById(int id) {
-        // TODO Auto-generated method stub
         return (Optional<doctor>) repo.findById(id);
     }
     

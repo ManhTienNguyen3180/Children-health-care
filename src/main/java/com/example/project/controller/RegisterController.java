@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.project.entity.user;
 import com.example.project.entity.token.ConfirmationTokenService;
+import com.example.project.service.RoleService;
 import com.example.project.service.UserService;
 
 @Controller
@@ -28,6 +29,8 @@ public class RegisterController {
 
   @Autowired
   private ConfirmationTokenService cTokenService;
+  @Autowired
+  private RoleService roleService;
 
   public RegisterController(UserService userService) {
     this.userService = userService;
@@ -54,7 +57,7 @@ public class RegisterController {
             email,
             "https://th.bing.com/th/id/R.5097b0247a92d47178df598b82944f15?rik=GOBuYfESpwbvFA&pid=ImgRaw&r=0",
             0,
-            1,
+            roleService.findUserById(1),
             "user", LocalDate.now());
         userService.addNewUser(u);
 
