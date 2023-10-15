@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.project.Repository.ServiceCategoryRepo;
-import com.example.project.entity.blog;
 import com.example.project.entity.service;
-import com.example.project.service.BlogCategoryService;
-import com.example.project.service.BlogService;
 import com.example.project.service.ServiceCategoryService;
 import com.example.project.service.ServiceService;
 

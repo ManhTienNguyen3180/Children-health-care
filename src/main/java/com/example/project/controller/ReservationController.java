@@ -39,28 +39,7 @@ public class ReservationController {
     }
 
     //post mapping get path variable from url and save into reservation table
-    @PostMapping("/bookingappointment/save")
-    public String saveReservation(@RequestParam("patient_name") String patient_name,
-                                @RequestParam("service_id") int service_id,
-                                @RequestParam("doctor_name") String doctor_name,Model model){
-        reservation reservation = new reservation();
-        Optional<service> service = ServiceService.findServiceById(service_id);
-        service s = service.get();
-        reservation.setPatient_name(patient_name);
-        reservation.setService_name(s.getService_name());
-        reservation.setService_id(service_id);
-        reservation.setDoctor_name(doctor_name);
-        reservation.setStatus(1);
-        reservation.setCreate_by("admin");
-        reservation.setCreate_at(new java.sql.Date(System.currentTimeMillis()));
-        reservation.setActual_date(new java.sql.Date(System.currentTimeMillis()));
-        reservation.setPatient_id(1);
-        reservation.setPrice(s.getPrice());
-        model.addAttribute("message", "Reservation saved successfully!");
-        ReservationService.save(reservation);
-        
-        return "redirect:/bookingappointment";
-    }
+    
 
 
     

@@ -60,7 +60,7 @@ public class HomeController {
     }
 
     //generate postmapping to save image into folder and save image path into database
-    @PostMapping("/upload")
+    @PostMapping("/upload") 
     public String saveFile(@RequestParam("file") MultipartFile file, HttpSession session) {
         // We can save image in 'images' directory in roo
         String uploadDir = "./src/main/resources/static/images";

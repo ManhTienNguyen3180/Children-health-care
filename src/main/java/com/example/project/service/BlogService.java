@@ -4,11 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-
 import com.example.project.entity.blog;
-import com.example.project.entity.review_blog;
-import com.example.project.entity.tags;
 
 
 public interface BlogService {

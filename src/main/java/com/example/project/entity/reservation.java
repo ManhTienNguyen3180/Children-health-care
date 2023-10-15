@@ -10,40 +10,36 @@ public class reservation {
     private int reservation_id;
     private int patient_id;
     private String patient_name;
-    private int service_id;
-    private String service_name;
     private String doctor_name;
     private Date date;
     private String description;
     private int price;
-    private int num_person;
     private int total_cost;
     private Date actual_date;
     private int status;
     private Date create_at;
     private String create_by;
+    private int doctor_id;
     
     public reservation() {
     }
 
-    public reservation(int reservation_id, int patient_id, String patient_name, int service_id, String service_name,
-            String doctor_name, Date date, String description, int price, int num_person, int total_cost,
-            Date actual_date, int status, Date create_at, String create_by) {
+    public reservation(int reservation_id, int patient_id, String patient_name, String doctor_name, Date date,
+            String description, int price, int total_cost, Date actual_date, int status, Date create_at,
+            String create_by, int doctor_id) {
         this.reservation_id = reservation_id;
         this.patient_id = patient_id;
         this.patient_name = patient_name;
-        this.service_id = service_id;
-        this.service_name = service_name;
         this.doctor_name = doctor_name;
         this.date = date;
         this.description = description;
         this.price = price;
-        this.num_person = num_person;
         this.total_cost = total_cost;
         this.actual_date = actual_date;
         this.status = status;
         this.create_at = create_at;
         this.create_by = create_by;
+        this.doctor_id = doctor_id;
     }
 
     public int getReservation_id() {
@@ -68,22 +64,6 @@ public class reservation {
 
     public void setPatient_name(String patient_name) {
         this.patient_name = patient_name;
-    }
-
-    public int getService_id() {
-        return service_id;
-    }
-
-    public void setService_id(int service_id) {
-        this.service_id = service_id;
-    }
-
-    public String getService_name() {
-        return service_name;
-    }
-
-    public void setService_name(String service_name) {
-        this.service_name = service_name;
     }
 
     public String getDoctor_name() {
@@ -116,14 +96,6 @@ public class reservation {
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public int getNum_person() {
-        return num_person;
-    }
-
-    public void setNum_person(int num_person) {
-        this.num_person = num_person;
     }
 
     public int getTotal_cost() {
@@ -165,6 +137,16 @@ public class reservation {
     public void setCreate_by(String create_by) {
         this.create_by = create_by;
     }
+
+    public int getDoctor_id() {
+        return doctor_id;
+    }
+
+    public void setDoctor_id(int doctor_id) {
+        this.doctor_id = doctor_id;
+    }
+
+    
     
     
     

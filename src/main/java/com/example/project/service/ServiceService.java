@@ -46,4 +46,9 @@ public class ServiceService {
     public List<Object> getDocByService(int id){
         return repo.getDocByService(id);
     }
+
+    public List<service> findServiceByDocID(int doctorID) {
+        return repo.findServiceByDoctorID(doctorID);
+    }
+    
 }

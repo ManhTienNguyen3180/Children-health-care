@@ -10,7 +10,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.project.entity.blog;
-import com.example.project.entity.tags;
 
 
 @Repository
