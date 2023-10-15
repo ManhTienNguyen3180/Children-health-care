@@ -29,7 +29,9 @@
         <link th:href="@{/css/style.min.css}" href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
 
     </head>
-
+    
+   
+    
     <body>
         
         <!-- Navbar STart -->
@@ -194,9 +196,11 @@
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label">Service</label>
-                                                    <select class="form-control department-name select2input" name="service_id">
-                                                        <option  th:each="service:${listService}" th:text="${service.service_name}" 
-                                                        th:value="${service.service_id}" ></option>                                                     
+                                                    <select multiple class="form-control department-name select2input" name="service_id" id="service-select">
+
+                                                        <option  th:each="service:${listSelected}" th:text="${service.service_name}" 
+                                                        th:value="${service.service_id}" >
+                                                        </option>                                                     
                                                     </select>
                                                 </div>
                                             </div>

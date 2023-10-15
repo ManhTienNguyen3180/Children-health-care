@@ -21,27 +21,17 @@
     <meta name="website" content="https://shreethemes.in" />
     <meta name="Version" content="v1.2.0" />
     <!-- favicon -->
-    <link rel="shortcut icon" href="images/favicon.ico.png" />
+    <link th:href="@{images/favicon.ico.png}" rel="shortcut icon" href="images/favicon.ico.png">
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/bootstrap.min.css}"  rel="stylesheet" type="text/css" />
     <!-- Icons -->
-    <link
-      href="css/materialdesignicons.min.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link href="css/remixicon.css" rel="stylesheet" type="text/css" />
-    <link
-      href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"
-      rel="stylesheet"
-    />
+    <link th:href="@{/css/materialdesignicons.min.css}" href="css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/remixicon.css}" href="css/remixicon.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/https://unicons.iconscout.com/release/v3.0.6/css/line.css}" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
+    <!-- SLIDER -->
+    <link rel="stylesheet" th:href="@{/css/tiny-slider.css}" href="css/tiny-slider.css"/>
     <!-- Css -->
-    <link
-      href="css/style.min.css"
-      rel="stylesheet"
-      type="text/css"
-      id="theme-opt"
-    />
+    <link th:href="@{/css/style.min.css}" href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
   </head>
 
   <body>

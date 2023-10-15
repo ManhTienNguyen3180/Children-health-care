@@ -24,7 +24,14 @@
         <link href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
 
     </head>
-
+    <style>
+        #buttoncus button{
+            border-radius: 5px;
+            border-color: blue;
+            background-color: white;
+            color: blue;
+        }
+    </style>
     <body>
         
         
@@ -32,16 +39,11 @@
         <header id="topnav" class="defaultscroll sticky">
             <div class="container">
                 <!-- Logo container-->
-                <div>
-                    <a class="logo" href="index.html">
-                        <span class="logo-light-mode">
-                            <img src="images/logo-dark.png" class="l-dark" height="24" alt="">
-                            <img src="images/logo-light.png" class="l-light" height="24" alt="">
-                        </span>
-                        <img src="images/logo-light.png" height="24" class="logo-dark-mode" alt="">
-                    </a>
-                </div>
-                <!-- End Logo container-->
+                <a class="logo" href="home">
+                    <img src="images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                    <img src="images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                </a>                
+                <!-- Logo End -->
                 
                 <!-- Start Mobile Toggle -->
                 <div class="menu-extras">
@@ -64,7 +66,7 @@
 
                     <li class="list-inline-item mb-0 ms-1">
                         <div class="dropdown dropdown-primary">
-                            <a href="user-profile"><button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img th:src="${session.user.image}" src="${session.user.image}" class="avatar avatar-ex-small rounded-circle" alt=""></button></a>
+                            <a href="user-profile"><button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"  aria-haspopup="true" aria-expanded="false"><img th:src="${session.user.image}" src="${session.user.image}" class="avatar avatar-ex-small rounded-circle" alt=""></button></a>
                             <a href="logout">Log out</a>
                         </div>
                         
@@ -95,24 +97,24 @@
         
                 <div id="navigation">
                     <!-- Navigation Menu-->   
-                    <ul class="navigation-menu nav-left nav-light">
+                    <ul class="navigation-menu nav-left ">
                         <li class="has-submenu parent-menu-item">
-                            <a href="home">Home</a>
+                            <a href="/home">Home</a>
                             
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="doctor">Doctors</a>
+                            <a href="/doctor">Doctors</a>
                             
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="service">Services</a>
+                            <a href="/service">Services</a>
                             
                         </li>
 
                         <li class="has-submenu parent-parent-menu-item">
-                            <a href="blog">Blog</a>
+                            <a href="/blog">Blog</a>
                             
                         </li>
                         
@@ -127,7 +129,7 @@
         <!-- Navbar End -->
 
         <!-- Start Hero -->
-        <section class="bg-half-170 d-table w-100" style="background: url('images/bg/department.jpg') center center;">
+        <!-- <section class="bg-half-170 d-table w-100" style="background: url('images/bg/department.jpg') center center;">
             <div class="bg-overlay bg-overlay-dark"></div>
             <div class="container">
                 <div class="row mt-5 justify-content-center">
@@ -143,10 +145,10 @@
                                 </ul>
                             </nav>
                         </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-        </section><!--end section-->
+                    </div>
+                </div>
+            </div>
+        </section> -->
         <div class="position-relative">
             <div class="shape overflow-hidden text-white">
                 <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -156,11 +158,43 @@
         </div>
         <!-- End Hero -->
 
+        <div class="d-flex align-items-center" style="padding-top: 100px;">
+            <div class="search-bar p-0 d-none d-lg-block ms-2">
+                <div id="search" class="menu-search mb-0" style="padding-top: 10px;padding-left: 200px;">
+                    <h4 style="padding-left: 10px;">Services</h4>
+                    <br>
+                    <form action="/service">
+                        <div style="display: flex; flex-direction: row;">
+                            <input type="text" class="form-control border rounded-pill" name="key"
+                                placeholder="Search Keywords...">
+        
+                            <button type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false"
+                                autocomplete="off">
+                                Search
+                            </button>
+                        </div>
+                    </form>
+                    <div style="margin-top: 20px;display: flex;flex-direction: row;">
+                        <div style="margin-left: 20px;" th:each="c :${listCategory}">
+                            <a th:href="'/service?category='+${c.id}">
+                                <button class="btn btn-primary" data-toggle="button"  autocomplete="off"
+                                    th:text="${c.name}">
+                    
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Start -->
         <section class="section">
             <div class="container">
                 <div class="row" style="margin-bottom: 30px;">
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-12" th:each="service,iterStat : ${result}" th:if="${iterStat.index &lt; 8}">
+                    <h4 th:if="${key!=null}" th:text="${'Result for: '+key}"></h4>
+                    
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-12" style="margin-top: 30px;" th:each="service: ${result}" >
                         <div class="card features feature-primary border-0">
                             <img th:src="${service.img}" class="img-fluid" alt="" style="width: 100%;height: 200px;">
                             <!-- <div class="icon text-center rounded-md">
@@ -169,7 +203,11 @@
                             <div class="card-body p-0 mt-3">
                                 <a th:href="@{/service-detail/{id}(id=${service.service_id})}" class="title text-dark h5" th:text="${service.service_name}"></a>
                                 <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a href="#" class="link">Read More </a>
+                                <!-- <a href="#" class="link">Read More </a> -->
+                            </div>
+                            <div id="buttoncus">
+                                <a th:href="'/service/add-service?id='+${service.service_id}"><button  >Add to reservation</button></a> 
+                                <button style="float: right">Feed back</button>
                             </div>
                         </div>
                     </div><!--end col-->
@@ -177,9 +215,64 @@
                     
                 </div><!--end row-->
             </div><!--end container-->
+            
+            <div class="row text-center">
+                <div class="col-12">
+                    <ul class="pagination justify-content-center mb-0 list-unstyled">
+                        
+                        <div style="display: flex;flex-direction: row;" th:if="${key == null && categoryId == null }">
+                            <!-- <li class="page-item">
+                                <a th:if="${currentPage >1}" class="page-link" th:href="@{'/blog?page=' + ${currentPage - 1}}" aria-label="Previous">Prev</a>
+                                <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                            </li> -->
+                            <li th:each="i : ${#numbers.sequence(1, result.totalPages )}" class="page-item">
+                                
+                                    <a th:if="${currentPage != i}" class="page-link " th:href="@{'/service?page=' + ${i}}"
+                                     >[[${i}]]</a>
+                                    
+                            </li>
+                            
+                            <!-- <li class="page-item"><a class="page-link" href="?page=${result.totalPages - 1}" aria-label="Next">Next</a></li> -->
+                        </div>
+
+                        <div style="display: flex;flex-direction: row;" th:if="${key != null && categoryId == null }">
+                            <!-- <li class="page-item">
+                                <a th:if="${currentPage >1}" class="page-link" th:href="@{'/blog?page=' + ${currentPage - 1}}" aria-label="Previous">Prev</a>
+                                <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                            </li> -->
+                            <li th:each="i : ${#numbers.sequence(1, result.totalPages )}" class="page-item"
+                                >
+                                
+                                    <a class="page-link active" th:href="@{'/service?page=' + ${i}+'&key='+${key}}"
+                                    th:text="${i }" ></a>
+                                    
+                            </li>
+                            <!-- <li class="page-item"><a class="page-link" href="?page=${result.totalPages - 1}" aria-label="Next">Next</a></li> -->
+                        </div>
+
+                        <div style="display: flex;flex-direction: row;" th:if="${key == null && categoryId != null }">
+                            <!-- <li class="page-item">
+                                <a th:if="${currentPage >1}" class="page-link" th:href="@{'/blog?page=' + ${currentPage - 1}}" aria-label="Previous">Prev</a>
+                                <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                            </li> -->
+                            <li th:each="i : ${#numbers.sequence(1, result.totalPages )}" class="page-item"
+                                >
+                                
+                                    <a class="page-link active" th:href="@{'/service?page=' + ${i}+'&category='+${categoryId}}"
+                                    th:text="${i }" ></a>
+                                    
+                            </li>
+                            <!-- <li class="page-item"><a class="page-link" href="?page=${result.totalPages - 1}" aria-label="Next">Next</a></li> -->
+                        </div>
+
+                        
+                    </ul>
+                </div><!--end col-->
+            </div><!--end row-->
+            
         </section><!--end section-->
         <!-- End -->
-
+        
         <!-- Start -->
         <footer class="bg-footer">
             <div class="container">
@@ -247,6 +340,9 @@
                         </div><!--end row-->
                     </div><!--end col-->
                 </div><!--end row-->
+
+                
+
             </div><!--end container-->
 
             <div class="container mt-5">

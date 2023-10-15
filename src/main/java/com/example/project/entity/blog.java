@@ -16,7 +16,10 @@ public class blog {
     private int status;
     private String author;
     private String image;
-    
+    private String content;
+    private Date update;
+
+
     public blog() {
     }
 
@@ -30,6 +33,22 @@ public class blog {
         this.status = status;
         this.author = author;
         this.image = image;
+    }
+
+    
+
+    public blog(int blog_id, int category_blog_id, String title, Date date, String description, int status,
+            String author, String image, String content, Date update) {
+        this.blog_id = blog_id;
+        this.category_blog_id = category_blog_id;
+        this.title = title;
+        this.date = date;
+        this.description = description;
+        this.status = status;
+        this.author = author;
+        this.image = image;
+        this.content = content;
+        this.update = update;
     }
 
     public int getBlog_id() {
@@ -123,6 +142,22 @@ public class blog {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Date getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(Date update) {
+        this.update = update;
     }
 
     

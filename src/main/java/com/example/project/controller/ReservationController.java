@@ -15,6 +15,8 @@ import com.example.project.service.DoctorService;
 import com.example.project.service.ReservationService;
 import com.example.project.service.ServiceService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class ReservationController {
     @Autowired 
@@ -27,7 +29,9 @@ public class ReservationController {
     ReservationService ReservationService;
 
     @GetMapping("bookingappointment")
-    public String getData(Model model){
+    public String getData(Model model, HttpSession session){
+        model.addAttribute("listSelected", session.getAttribute("selectedService"));
+
         model.addAttribute("listService", ServiceService.fechServicesList());  
         model.addAttribute("listDoctor", DoctorService.fetchDoctorList());  
         

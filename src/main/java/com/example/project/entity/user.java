@@ -21,7 +21,7 @@ public class user {
     private String email;
     private String image;
     private int status;
-    private int role_id;
+    private int role;
     private String create_by;
     private LocalDate create_at;
 
@@ -33,7 +33,7 @@ public class user {
 
     public user(int user_id, String username, String password, String full_name, int gender, int phone,
             @Email(message = "Please provide a valid e-mail") @NotEmpty(message = "Please provide an e-mail") String email,
-            String image, int status, int role_id, String create_by, LocalDate create_at, String resetToken) {
+            String image, int status, int role, String create_by, LocalDate create_at, String resetToken) {
         this.user_id = user_id;
         this.username = username;
         this.password = password;
@@ -43,7 +43,7 @@ public class user {
         this.email = email;
         this.image = image;
         this.status = status;
-        this.role_id = role_id;
+        this.role = role;
         this.create_by = create_by;
         this.create_at = create_at;
         this.resetToken = resetToken;
@@ -121,13 +121,7 @@ public class user {
         this.status = status;
     }
 
-    public int getRole_id() {
-        return role_id;
-    }
-
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
-    }
+    
 
     public String getCreate_by() {
         return create_by;
@@ -151,6 +145,14 @@ public class user {
 
     public void setResetToken(String resetToken) {
         this.resetToken = resetToken;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 
     

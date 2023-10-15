@@ -57,6 +57,16 @@
                 font-weight: 500;
                 font-size: larger;
             }
+
+            .limited-text {
+            overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 25px;
+    -webkit-line-clamp: 4;
+    height: 100px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+        }
         </style>
     </head>
 
@@ -151,6 +161,11 @@
                         <li class="has-submenu parent-parent-menu-item">
                             <a href="/blog">Blog</a>
                             
+                        </li>
+                        
+                            <li th:if="${u!=null && u.role==2}" class="has-submenu parent-parent-menu-item">
+                                <a href="#">Dashboard</a>
+                                
                         </li>
                         
                         
@@ -335,16 +350,19 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2 " th:each="blog : ${blogNew}">
-                            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                                <img src="images/blog/01.jpg" class="img-fluid" alt="">
+                            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden" >
+                                <a th:href="@{/blog-detail/{id}(id=${blog.blog_id})}" class="link">
+                                <img th:src="${blog.image}" class="img-fluid" alt="" style="height: 250px; object-fit: cover;">
+                            </a>
                                 <div class="card-body p-4" >
                                     <ul class="list-unstyled mb-2">
                                         <li class="list-inline-item text-muted small me-3" th:text="${blog.Date}"></li>
                                         <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
                                     </ul>
-                                    <a th:href="@{/blog-detail/{id}(id=${blog.blog_id})}" class="text-dark title h5" th:text="${blog.title}"></a>
+                                    <a th:href="@{/blog-detail/{id}(id=${blog.blog_id})}" class="text-dark title h5" th:text="${blog.title}" ></a>
+                                    <br><br><li class="list-inline-item text-muted small me-3 limited-text" th:text="${blog.description}"></li>
                                     <div class="post-meta d-flex justify-content-between mt-3">
-                                      
+                                        
                                         <a th:href="@{/blog-detail/{id}(id=${blog.blog_id})}" class="link">Read More </a>
                                     </div>
                                 </div>
