@@ -12,20 +12,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
 import com.example.project.entity.doctor;
-import com.example.project.entity.slot;
 import com.example.project.service.DoctorService;
-import com.example.project.service.ScheduleService;
 import com.example.project.service.ServiceService;
-
-import jakarta.mail.Service;
 
 @Controller
 public class AdminDoctor {
 
   @Autowired
   private DoctorService DoctorService;
-  @Autowired
-  private ScheduleService ScheduleService;
+  
   @Autowired
   private ServiceService ServiceService;
 

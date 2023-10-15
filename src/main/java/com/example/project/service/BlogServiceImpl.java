@@ -57,6 +57,7 @@ public class BlogServiceImpl implements BlogService {
         Sort.by(sortField).descending();
 
         PageRequest pageable = PageRequest.of(pageNo-1,pageSize,sort);
+        
         return this.repo.findAll(pageable);
     }
 

@@ -37,25 +37,6 @@ public class BlogController {
         return "blog";
     }
 
-    // @RequestMapping("/blog-detail/{blog_id}")  
-    // public String getBlogById(@RequestParam(value="blog_id") String bid, Model model) {
-    //     int id=Integer.parseInt(bid);
-    //     model.addAttribute("blog", BlogService.findBlogById(id)) ;
-    //     return "blog-detail";
-    // }
-    
-    // @GetMapping("/blog-detail/{id}")
-    // public String viewBlogDetail(@PathVariable int id, Model model) {
-        
-    //     model.addAttribute("blog", BlogService.findBlogById(id).orElse(null));
-    //     return "blog-detail";
-    // }
-    
-    // @GetMapping("/blog-detail")
-    // public String blogDetail(){
-    //     return "blog-detail";
-    // }
-
 
 
     @GetMapping("/blog-detail/{id}")
@@ -71,7 +52,7 @@ public class BlogController {
     // Read to manage
     @GetMapping("/bloglistmanager")
     public String viewBlogList(Model model) {
-        return findPaginated(1,"date","asc", model);
+        return findPaginated(1,"date","asc",model);
     }
 
     
@@ -117,13 +98,22 @@ public class BlogController {
 
     // Save Blog
     @RequestMapping(value = "/bloglistmanager/save", method = RequestMethod.POST)
-    public String saveStudent(@ModelAttribute("blog") blog blog) {
+    public String saveStudent(@ModelAttribute("blog") blog blog, Model model) {
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         blog.setDate(date);
         blog.setStatus(1);
+        String mess;
+        if (blog.getBlog_id()>0) {
+            mess = "Edit successfully";
+        }else{
+            mess = "Add successfully";
+        }
+        
 
         BlogService.save(blog);
-        return "redirect:/bloglistmanager";
+
+        model.addAttribute("mess", mess);
+        return findPaginated(1,"date","asc",model);
     }
 
     // Delete Blog by ID

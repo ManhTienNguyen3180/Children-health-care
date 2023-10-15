@@ -17,7 +17,6 @@ import com.example.project.Repository.DoctorServiceRepo;
 import com.example.project.Repository.SlotRepo;
 import com.example.project.entity.doctor;
 import com.example.project.entity.doctorservice;
-import com.example.project.entity.slot;
 
 
 @Service

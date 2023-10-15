@@ -21,7 +21,8 @@ public class user {
     private String email;
     private String image;
     private int status;
-    private int role;
+    @Column(name = "role")
+    private int role_id;
     private String create_by;
     private LocalDate create_at;
 
@@ -43,7 +44,7 @@ public class user {
         this.email = email;
         this.image = image;
         this.status = status;
-        this.role = role_id;
+        this.role_id = role_id;
         this.create_by = create_by;
         this.create_at = create_at;
         this.resetToken = resetToken;
@@ -60,7 +61,7 @@ public class user {
         this.email = email;
         this.image = image;
         this.status = status;
-        this.role = role;
+        this.role_id = role;
         this.create_by = create_by;
         this.create_at = create_at;
     }
@@ -138,11 +139,11 @@ public class user {
     }
 
     public int getRole() {
-        return role;
+        return role_id;
     }
 
     public void setRole(int role_id) {
-        this.role = role_id;
+        this.role_id = role_id;
     }
 
     public String getCreate_by() {
