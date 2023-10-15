@@ -12,6 +12,7 @@ public interface BlogService {
 
     List<blog> fetchBLogList();
 
+    List<Object[]> GetBlogAndCategory();
     //Get Blog by ID
     Optional<blog> findBlogById(int id);
 
@@ -29,4 +30,5 @@ public interface BlogService {
 
     //implement paginate
     Page<blog> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+
 }

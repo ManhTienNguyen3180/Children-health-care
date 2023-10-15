@@ -17,5 +17,9 @@ public interface BlogRepo extends JpaRepository<blog, Integer>{
     
     @Query( value ="select * from blog b  order by b.date desc limit 3",nativeQuery = true)
     List<blog> getBlogNew();
+
+    @Query(value ="select * from blog b join category_blog c on b.category_blog_id = c.category_blog_id",nativeQuery = true)
+    List<Object[]> findBlogAndCategory();
+
     
 }

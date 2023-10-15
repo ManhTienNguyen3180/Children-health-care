@@ -1,12 +1,13 @@
 package com.example.project.controller;
 
 import java.io.File;
-
+import java.io.IOException;
 import java.util.Optional;
 
 import java.util.Calendar;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +19,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.project.entity.blog;
+import com.example.project.entity.user;
 import com.example.project.service.BlogCategoryService;
 import com.example.project.service.BlogService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -37,44 +44,37 @@ public class BlogController {
         return "blog";
     }
 
-    // @RequestMapping("/blog-detail/{blog_id}")  
-    // public String getBlogById(@RequestParam(value="blog_id") String bid, Model model) {
-    //     int id=Integer.parseInt(bid);
-    //     model.addAttribute("blog", BlogService.findBlogById(id)) ;
-    //     return "blog-detail";
-    // }
-    
-    // @GetMapping("/blog-detail/{id}")
-    // public String viewBlogDetail(@PathVariable int id, Model model) {
-        
-    //     model.addAttribute("blog", BlogService.findBlogById(id).orElse(null));
-    //     return "blog-detail";
-    // }
-    
-    // @GetMapping("/blog-detail")
-    // public String blogDetail(){
-    //     return "blog-detail";
-    // }
+    @GetMapping("/blog-detail/savecmt")
+    public void saveComment(@RequestParam(value = "message") String mess, @RequestParam(value = "blogId") int id,
+            HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session)
+            throws IOException {
+        user u = (user) session.getAttribute("user");
+        if (u != null) {
+            response.sendRedirect("/home");
+        } else {
+            
+            response.sendRedirect("/login");
+        }
 
-
+    }
 
     @GetMapping("/blog-detail/{id}")
-    public String viewBlogDetail(@PathVariable int id, Model model) {
+    public String viewBlogDetail(@PathVariable int id, Model model,HttpSession session) {
         Optional<blog> b = BlogService.findBlogById(id);
         int cate_id = b.get().getCategory_blog_id();
         List<blog> list = BlogService.getBlogByCategoryId(cate_id);
+        session.setAttribute("blogId", id);
         model.addAttribute("listBlog", list);
         model.addAttribute("blog", BlogService.findBlogById(id).orElse(null));
-        return "blog-detail";
+        return "/blog-detail";
     }
 
     // Read to manage
     @GetMapping("/bloglistmanager")
     public String viewBlogList(Model model) {
-        return findPaginated(1,"date","asc", model);
+        return findPaginated(1, "date", "asc", model);
     }
 
-    
     @GetMapping("/bloglistmanager/page/{pageNo}")
     public String findPaginated(@PathVariable int pageNo,
             @RequestParam("sortField") String sortField,
@@ -117,13 +117,22 @@ public class BlogController {
 
     // Save Blog
     @RequestMapping(value = "/bloglistmanager/save", method = RequestMethod.POST)
-    public String saveStudent(@ModelAttribute("blog") blog blog) {
+    public String saveStudent(@ModelAttribute("blog") blog blog, Model model) {
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         blog.setDate(date);
         blog.setStatus(1);
 
+        String mess;
+        if (blog.getBlog_id() > 0) {
+            mess = "Edit successfully";
+        } else {
+            mess = "Add successfully";
+        }
+
         BlogService.save(blog);
-        return "redirect:/bloglistmanager";
+
+        model.addAttribute("mess", mess);
+        return findPaginated(1, "date", "asc", model);
     }
 
     // Delete Blog by ID

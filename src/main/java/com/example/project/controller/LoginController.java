@@ -1,16 +1,10 @@
 package com.example.project.controller;
 
-
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import com.example.project.entity.user;
 import com.example.project.service.UserService;
 
-import jakarta.servlet.http.HttpSession;
 /**
  * LoginController
  */
@@ -18,7 +12,7 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/login")
 public class LoginController {
   private final UserService userService;
-  
+
   public LoginController(UserService userService) {
     this.userService = userService;
   }
@@ -29,28 +23,13 @@ public class LoginController {
     return "login";
   }
 
-  @PostMapping
-  public String login(Model model,
-      @RequestParam("email") String email,
-      @RequestParam("password") String password,
-      HttpSession session) {
-    user s = userService.findUserByEmail(email);
-    if (s != null) {
-
-      if (s.getPassword().equalsIgnoreCase(password)) {
-        session.setAttribute("user", s);
-        return "redirect:/home";
-      } else {
-        model.addAttribute("message", " wrong password");
-      }
-    }else{
-       model.addAttribute("message", " Email is not exist");
-    }
-    return "login";
-  }
-
   
-
-
+  // @PostMapping
+  // public String profilePage(Principal p,Model model,HttpSession session) {
+  // String email = p.getName();
+  // user user = userService.findUserByEmail(email);
+  // session.setAttribute("user", user);
+  // return "redirect:/home";
+  // }
 
 }

@@ -37,10 +37,10 @@
                 <div>
                     <a class="logo" href="index.html">
                         <span class="logo-light-mode">
-                            <img src="../static/images/logo-dark.png" class="l-dark" height="24" alt="">
-                            <img src="../static/images/logo-light.png" class="l-light" height="24" alt="">
+                            <img src="images/logo-dark.png" class="l-dark" height="24" alt="">
+                            <img src="images/logo-light.png" class="l-light" height="24" alt="">
                         </span>
-                        <img src="../static/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                        <img src="images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                     </a>
                 </div>
                 <!-- End Logo container-->
@@ -62,7 +62,7 @@
                 <!-- End Mobile Toggle -->
 
                 <!-- Start Dropdown -->
-                <ul  th:if="${#ctx.session.user != null}" class="dropdowns list-inline mb-0">
+                <!-- <ul  th:if="${#ctx.session.user != null}" class="dropdowns list-inline mb-0">
 
                     <li class="list-inline-item mb-0 ms-1">
                         <div class="dropdown dropdown-primary">
@@ -70,6 +70,52 @@
                             <a href="logout">Log out</a>
                         </div>
                         
+                    </li>
+                </ul> -->
+                <ul th:if="${session.user != NULL}" class="dropdowns list-inline mb-0">
+                    <!-- <li class="list-inline-item mb-0">
+                        <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                            aria-controls="offcanvasRight">
+                            <div class="btn btn-icon btn-pills btn-primary"><i data-feather="settings"
+                                    class="fea icon-sm"></i></div>
+                        </a>
+                    </li> -->
+    
+                    <li class="list-inline-item mb-0 ms-1">
+                        <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                            <i class="uil uil-search"></i>
+                        </a>
+                    </li>
+    
+                    <li class="list-inline-item mb-0 ms-1">
+                        <div class="dropdown dropdown-primary">
+                            <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                    th:src="${session.user.image}"     src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle"
+                                    alt=""></button>
+                            <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
+                                style="min-width: 200px;">
+                                <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html">
+                                    <img th:src="${session.user.image}" src="images/doctors/01.jpg"
+                                        class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                    <div class="flex-1 ms-2">
+                                        <span  th:text="${session.user.full_name}" class="d-block mb-1">Calvin Carlo</span>
+                                        <!-- <small  class="text-muted">Orthopedic</small> -->
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-dark" href="doctor-dashboard.html"><span
+                                        class="mb-0 d-inline-block me-1"><i
+                                            class="uil uil-dashboard align-middle h6"></i></span> My reservation</a>
+                                <a class="dropdown-item text-dark" href="user-profile"><span
+                                        class="mb-0 d-inline-block me-1"><i
+                                            class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                                <div class="dropdown-divider border-top"></div>
+                                <a class="dropdown-item text-dark" th:href="@{/logout}" href="logout"><span
+                                        class="mb-0 d-inline-block me-1"><i
+                                            class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                            </div>
+                        </div>
                     </li>
                 </ul>
                 <ul  th:if="${#ctx.session.user == null}" class="dropdowns list-inline mb-0">
@@ -377,13 +423,13 @@
                         <div id="style-switcher">
                             <div>
                                 <ul class="text-center list-unstyled mb-0">
-                                    <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="../assets/images/layouts/landing-light-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="../assets/images/layouts/landing-dark-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
-                                    <li class="d-grid"><a href="../admin/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="images/layouts/landing-light-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="images/layouts/landing-dark-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
+                                    <li class="d-grid"><a href="index.html" target="_blank" class="mt-4"><img src="images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -400,7 +446,7 @@
                     <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank" class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
                     <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
                     <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i class="uil uil-envelope align-middle" title="email"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="../../../index.html" target="_blank" class="rounded"><i class="uil uil-globe align-middle" title="website"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="index.html" target="_blank" class="rounded"><i class="uil uil-globe align-middle" title="website"></i></a></li>
                 </ul><!--end icon-->
             </div>
         </div>

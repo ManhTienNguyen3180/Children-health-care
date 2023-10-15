@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.project.service.DoctorService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class DoctorController {
     
@@ -22,8 +24,8 @@ public class DoctorController {
 
     
     @GetMapping("/doctor-detail/{id}")
-    public String viewDoctorDetail(@PathVariable int id, Model model) {
-        
+    public String viewDoctorDetail(@PathVariable int id, Model model,HttpSession session) {
+        session.setAttribute("doctorIds", id);
         model.addAttribute("doc", DoctorService.findDoctorById(id).orElse(null));
         return "doctor-detail";
     }

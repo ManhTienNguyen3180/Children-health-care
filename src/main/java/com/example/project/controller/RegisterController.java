@@ -2,26 +2,26 @@ package com.example.project.controller;
 
 import java.time.LocalDate;
 
-import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.project.entity.user;
 import com.example.project.service.UserService;
 
 @Controller
-@RequestMapping("/signup")
 public class RegisterController {
-  @GetMapping
+  
+  
+  @GetMapping("/signup")
   public String registerpage(Model model) {
 
     return "signup";
   }
 
+  
   private final UserService userService;
 
   public RegisterController(UserService userService) {
@@ -29,43 +29,36 @@ public class RegisterController {
   }
 
 
-  @PostMapping
+  @PostMapping("/saveUser")
   public String register(
-      @RequestParam("uname") String username, // Use @RequestParam to capture form data
-      @RequestParam("fullname") String fullname,
-      @RequestParam("Gender") Integer gender,
-      @RequestParam("phonenum") String phonenum,
-      @RequestParam("email") String email,
-      @RequestParam("password") String password,
+      @RequestParam(name = "uname") String username, // Use @RequestParam to capture form data
+      @RequestParam(name= "fullname") String fullname,
+      @RequestParam(name = "Gender") Integer gender,
+      @RequestParam(name = "phonenum") String phonenum,
+      @RequestParam(name = "email") String email,
+      @RequestParam(name = "password") String password,
       Model model) {
-    user s = userService.findUserByUserN(username);
+    user s = userService.findUserByEmail(email);
     if (s == null) {
-      s = userService.findUserByEmail(email);
-      if (s == null) {
-        user u = new user(gender, username,
+        user u = new user(username,
             password,
             fullname,
             gender,
             Integer.parseInt(phonenum),
             email,
-            password,
-            1,
-            1,
-            username, LocalDate.now(),
-            "user");
-        userService.addNewUser(u);
+            "abc",
+            0,
+            "user",LocalDate.now(), "ROLE_USER"
+            );
+            System.out.println(u.toString());
+        userService.save(u);
 
-      } else {
-        model.addAttribute("mEmail", "email already used");
-        return "signup";
+       
+      // } else {
+      //   model.addAttribute("message", "Email already exists");
+      //   return "signup";
       }
-
-    } else {
-      model.addAttribute("mUsername", "username already used");
-      return "signup";
-    }
-
-    return "redirect:/login";
+      return "login";
   }
 
 }

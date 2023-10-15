@@ -2,11 +2,14 @@ package com.example.project.controller;
 
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,94 +23,90 @@ import com.example.project.service.ServiceService;
 
 @Controller
 public class HomeController {
-    
-    
-    @Autowired 
+
+    @Autowired
     private DoctorService DoctorService;
-    @Autowired 
+    @Autowired
     private ServiceService ServiceService;
-    @Autowired 
+    @Autowired
     private BlogService BlogService;
 
     @Autowired
     private com.example.project.service.UserService userService;
 
-    @GetMapping("/")
-    public String home1(){
-        return "home";
-    }
+    // @GetMapping("/")
+    // public String home1() {
+    //     return "home";
+    // }
+
     @GetMapping("/user-profile")
-    public String userinfor(){
+    public String userinfor() {
         return "user-profile";
     }
-    
+
+    @ModelAttribute
+    public void addAttributes(Model model, Principal principal, HttpSession session) {
+        if (principal != null) {
+            String email = principal.getName();
+            user user = userService.findUserByEmail(email);
+            model.addAttribute("user", user);
+            session.setAttribute("user", user);
+        }
+        
+    }
+
     @GetMapping("/home")
-    public String home(Model model){
+    public String home(Model model) {
         model.addAttribute("doctor", DoctorService.fetchDoctorList());
         model.addAttribute("service", ServiceService.fechServicesList());
         model.addAttribute("blogNew", BlogService.getBlogsNew());
         return "home";
     }
-    
-    
-    
     @GetMapping("/logout")
-    public String logout(HttpSession session){
-        session.removeAttribute("user");
-        return "redirect:/";
+    public String logout(Authentication authentication, HttpSession session) {
+        if (authentication != null) {
+            authentication.setAuthenticated(false);
+            session.removeAttribute("user");   
+        }
+        return "redirect:/home";
+    }
+    @GetMapping("/denied")
+    public String denied() {
+        return "denied";
     }
 
-    //generate postmapping to save image into folder and save image path into database
+    
     @PostMapping("/upload")
-    public String saveFile(@RequestParam("file") MultipartFile file, HttpSession session) {
-        // We can save image in 'images' directory in roo
+    public String saveFile(@RequestParam("file") MultipartFile file, HttpSession session
+            ) {
+       
         String uploadDir = "./src/main/resources/static/images";
 
         try {
             java.nio.file.Path copyLocation = Paths
-                .get(uploadDir + java.io.File.separator + file.getOriginalFilename());
+                    .get(uploadDir + java.io.File.separator + file.getOriginalFilename());
             java.nio.file.Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
-            user  user = (user) session.getAttribute("user");
-            if(user.getImage() != null){
-                java.io.File oldFile = new java.io.File(uploadDir + java.io.File.separator + getImageName(user.getImage()));
-                oldFile.delete();
-            }
+            
+            // if (user.getImage() != null) {
+            //     java.io.File oldFile = new java.io.File(
+            //             uploadDir + java.io.File.separator + getImageName(user.getImage()));
+            //     oldFile.delete();
+            // }
+            user user = (user) session.getAttribute("user");
             user.setImage("images" + "/" + file.getOriginalFilename());
-            userService.save(user);
+            userService.saveImage(user);
+
         } catch (Exception e) {
             e.printStackTrace();
-            session.setAttribute("message", "Fail to upload " + file.getOriginalFilename() + "!");
+            
         }
-         
-        return "redirect:/logout";
+
+        return "redirect:/user-profile";
     }
-    public String getImageName(String name){
+
+    public String getImageName(String name) {
         String[] arr = name.split("/");
         return arr[arr.length - 1];
-    }    
-    
+    }
 
-
-
-    
-    
-
-
-    
-    
-
-    
-
-
-            
-
-                
-
-
-
-
-
-    
-        
-    
 }

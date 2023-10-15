@@ -20,4 +20,10 @@ public class ServiceService {
     public Optional<service> findServiceById(int id){
         return repo.findById(id);
     }
+    public List<service> findListByServiceId(List<Integer> serviceIds){
+        return repo.findByServiceId(serviceIds);
+    }
+    public List<service> findListNotByServiceId(List<Integer> serviceIds){
+        return repo.findByServiceId(serviceIds);
+    }
 }

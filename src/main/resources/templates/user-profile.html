@@ -149,7 +149,7 @@
                         <div
                             class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
                             <img th:src="${session.user.image}" class="rounded-circle shadow-md avatar avatar-md-md">
-                            <h5 th:text="${#ctx.session.user.full_name}" class="mt-3 mb-1">Dr. Calvin Carlo</h5>
+                            <h5 th:text="${session.user.full_name}" class="mt-3 mb-1">Dr. Calvin Carlo</h5>
                             
                         </div>
 
@@ -175,7 +175,7 @@
                         
 
                         <div class="p-4">
-                            <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
+                            <form method="post" th:action="@{/upload}"   enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="mb-3">
@@ -186,7 +186,7 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">User Name</label>
-                                            <input th:value="${#ctx.session.user.username}" name="name" id="name" type="text" class="form-control"
+                                            <input th:value="${session.user.username}" name="name" id="name" type="text" class="form-control"
                                                 >
                                         </div>
                                     </div>
@@ -196,7 +196,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Your Email</label>
-                                            <input th:value="${#ctx.session.user.email}" name="email" id="email"
+                                            <input readonly th:value="${session.user.email}" name="email" id="email"
                                                 type="email" class="form-control">
                                         </div>
                                     </div><!--end col-->
@@ -204,7 +204,7 @@
                                     <div class="col-md-6">
                                         <div class="mb-3">
                                             <label class="form-label">Phone no.</label>
-                                            <input th:value="${#ctx.session.user.phone}" name="number" id="number"
+                                            <input th:value="${session.user.phone}" name="number" id="number"
                                                 type="text" class="form-control" placeholder="Phone no. :">
                                         </div>
                                     </div><!--end col-->
@@ -299,12 +299,12 @@
     <!-- End -->
 
     <!-- Back to top -->
-    <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i
-            data-feather="arrow-up" class="icons"></i></a>
+    <!-- <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i
+            data-feather="arrow-up" class="icons"></i></a> -->
     <!-- Back to top -->
 
     
-
+        
     
 
     <!-- javascript -->

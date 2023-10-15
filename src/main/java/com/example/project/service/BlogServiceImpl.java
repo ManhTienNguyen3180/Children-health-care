@@ -60,4 +60,11 @@ public class BlogServiceImpl implements BlogService {
         return this.repo.findAll(pageable);
     }
 
+    @Override
+    public List<Object[]> GetBlogAndCategory() {
+        return repo.findBlogAndCategory();
+    }
+
+    
+
 }

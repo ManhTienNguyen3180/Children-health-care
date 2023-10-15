@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.project.service.ServiceService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class ServiceController {   
 
@@ -26,8 +28,8 @@ public class ServiceController {
     }
 
     @GetMapping("/service-detail/{id}")
-    public String viewServiceDetail(@PathVariable int id, Model model) {
-        
+    public String viewServiceDetail(@PathVariable int id, Model model,HttpSession session) {
+        session.setAttribute("serviceIds", id);
         model.addAttribute("service", ServiceService.findServiceById(id).orElse(null));
         return "service-detail";
     }

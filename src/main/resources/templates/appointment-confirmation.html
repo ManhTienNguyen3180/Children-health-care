@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="color: #007BFF;">Appointment Confirmation</h1>
+    <p>Dear <span th:text="${patientName}" style="font-weight: bold;"></span>,</p>
+
+    <p>Your appointment with Dr. <span th:text="${doctorName}" style="font-weight: bold;"></span> on <span
+            th:text="${date}" style="font-weight: bold;"></span> has been confirmed.</p>
+
+    <p>Services:</p>
+    <ul>
+        <li th:each="service : ${services}" th:inline="text">
+            <span th:text="${service.service_name}" style="font-weight: bold;"></span> - $<span
+                th:text="${service.price}" style="font-weight: bold;"></span>
+        </li>
+    </ul>
+
+    <p>Total Cost: $<span th:text="${totalCost}" style="font-weight: bold;"></span></p>
+
+    <p>Thank you for choosing our healthcare service.</p>
+</body>
+
+</html>
