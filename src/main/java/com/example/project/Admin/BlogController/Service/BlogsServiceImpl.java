@@ -61,7 +61,20 @@ public class BlogsServiceImpl implements BlogsService {
 
     @Override
     public void saveBlogChanges(Blog blog) {
-        repo.saveBlogChanges(blog.getBlogId(), blog.getCategoryBlogId(), blog.getTitle(), blog.getDate().toString(), blog.getDescription(), blog.getStatus(), blog.getAuthor(), blog.getImage(), blog.getContent(), blog.getUpdate().toString());
+        repo.saveBlogChanges(blog.getBlogId(), blog.getCategoryBlogId(), blog.getTitle(), blog.getDate().toString(), blog.getDescription(), blog.getStatus(), blog.getAuthor(), blog.getImage(), blog.getContent(), blog.getUpdateDate().toString());
+    }
+
+    @Override
+    public Page<Blog> filterCategory(int id, int pageNo, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
+        return repo.filterCategory(id, pageable);
+
+    }
+
+    @Override
+    public Page<Blog> filterStatus(int id, int pageNo, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
+        return repo.filterStatus(id, pageable);
     }
 
    

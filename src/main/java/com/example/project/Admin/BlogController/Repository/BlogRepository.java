@@ -54,4 +54,10 @@ public interface BlogRepository extends JpaRepository<Blog, Integer> {
                         @Param("image") String image,
                         @Param("content") String content,
                         @Param("update") String update);
+
+        @Query(value = "SELECT * FROM blog  WHERE `category_blog_id`= ?1", nativeQuery = true)
+        Page<Blog> filterCategory(int id, PageRequest pageable);
+
+        @Query(value = "SELECT * FROM blog  WHERE `status`= ?1", nativeQuery = true)
+        Page<Blog> filterStatus(int id, PageRequest pageable);
 }

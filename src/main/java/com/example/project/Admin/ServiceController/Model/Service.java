@@ -24,12 +24,12 @@ public class Service {
     private int status;
     @Column(name = "create_at")
     private Date createDate;
-    @Column(name = "create_by")
+    @Column(name = "create_by") 
     private String createBy;
 
     public Service() {
     }
-
+ 
     public Service(String name, int price, String description, String image, int categoryId, int status,
             Date createDate, String createBy) {
         this.name = name;

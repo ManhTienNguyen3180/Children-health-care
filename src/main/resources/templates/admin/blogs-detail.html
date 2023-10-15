@@ -40,6 +40,7 @@
         }
     </style>
 
+    <script src="https://kit.fontawesome.com/8320fc5394.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -58,14 +59,15 @@
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                 <div class="sidebar-brand">
-                    <a href="index.html">
+                    <a th:href="@{/home}">
                         <img th:src="@{/images/logo-dark.png}" height="24" class="logo-light-mode" alt="">
                         <img th:src="@{/images/logo-light.png}" height="24" class="logo-dark-mode" alt="">
                     </a>
                 </div>
 
                 <ul class="sidebar-menu pt-3">
-                    <li><a href="index.html"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
+                    <li><a th:href="@{blogsManagement}"><i
+                                class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
                     <li><a href="appointment.html"><i
                                 class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a></li>
 
@@ -119,21 +121,28 @@
                         <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
                         <div class="sidebar-submenu">
                             <ul>
-                                <li><a th:href="@{/blogsManagement}">Blogs</a></li>
-                                <li><a href="blog-detail.html">Blog Detail</a></li>
+                                <li><a class="" th:href="@{/blogsManagement}">Blogs</a></li>
                             </ul>
                         </div>
                     </li>
-
                     <li class="sidebar-dropdown">
                         <a href="javascript:void(0)"><i class="uil uil-user-md me-2 d-inline-block"></i>Services</a>
                         <div class="sidebar-submenu">
                             <ul>
                                 <li><a class="" th:href="@{/servicesManagement}">Services</a></li>
-                                <li><a href="#">Service Detail</a></li>
                             </ul>
                         </div>
                     </li>
+                    
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-columns me-2 d-inline-block"></i>Sliders</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a class="" th:href="@{/slidersManagement}">Sliders</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
                     <li class="sidebar-dropdown">
                         <a href="javascript:void(0)"><i class="uil uil-file me-2 d-inline-block"></i>Pages</a>
                         <div class="sidebar-submenu">
@@ -543,7 +552,7 @@
                                     </p>
                                     <div
                                         class=" preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1">
-                                        <img th:src="${blogDetail.image}" alt="">
+                                        <img class="preview-content" th:src="${blogDetail.image}" alt="">
                                     </div>
                                     <input type="file" id="input-file" name="image" accept="image/*"
                                         onchange={handleChange()} hidden />
@@ -714,7 +723,6 @@
                 readFile(uploadedFile);
             }
         }
-
         const readFile = (uploadedFile) => {
             if (uploadedFile) {
                 const reader = new FileReader();

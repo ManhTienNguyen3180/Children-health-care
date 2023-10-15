@@ -20,8 +20,6 @@
         <link href="../css/simplebar.css" rel="stylesheet" type="text/css" />
         <!-- Select2 -->
         <link href="../css/select2.min.css" rel="stylesheet" />
-        <!-- Date picker -->
-        <link rel="stylesheet" href="../css/flatpickr.min.css">
         <!-- Icons -->
         <link href="../css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
         <link href="../css/remixicon.css" rel="stylesheet" type="text/css" />
@@ -79,7 +77,7 @@
                             </div>
                         </li>
 
-                         <li class="sidebar-dropdown">
+                        <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="fa-solid fa-user fa-xs"></i>User</a>
                             <div class="sidebar-submenu">
                                 <ul>
@@ -89,6 +87,7 @@
                                 </ul>
                             </div>
                         </li>
+
 
                         <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
@@ -187,25 +186,25 @@
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <div class="d-md-flex justify-content-between">
-                            <h5 class="mb-0">Add New Patient</h5>
+                            <h5 class="mb-0">Add New User</h5>
 
                             <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                                 <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                                     <li class="breadcrumb-item"><a href="dashboard">Doctris</a></li>
                                     <li class="breadcrumb-item" aria-current="page"><i class="fa-solid fa-caret-down fa-rotate-270"></i></li>
-                                    <li class="breadcrumb-item"><a href="patients">Patients</a></li>
+                                    <li class="breadcrumb-item"><a href="users">Users</a></li>
                                     <li class="breadcrumb-item" aria-current="page"><i class="fa-solid fa-caret-down fa-rotate-270"></i></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Add Patient</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Add User</li>
                                 </ul>
                             </nav>
                         </div>
                         
                         <div class="row">
-                            <div class="col-lg-8 mt-4">
+                            <div class="col-lg-12 mt-4">
                                 <div class="card border-0 p-4 rounded shadow">
                                     <div class="row align-items-center">
                                         <div class="col-lg-2 col-md-4">
-                                            <img src="../images/client/01.jpg" class="avatar avatar-md-md rounded-pill shadow mx-auto d-block" alt="">
+                                            <img src="../images/doctors/01.jpg" class="avatar avatar-md-md rounded-pill shadow mx-auto d-block" alt="">
                                         </div><!--end col-->
             
                                         <div class="col-lg-5 col-md-8 text-center text-md-start mt-4 mt-sm-0">
@@ -248,13 +247,6 @@
                                                     <input name="number" id="number" type="text" class="form-control" placeholder="Phone no. :">
                                                 </div>                                                                               
                                             </div><!--end col-->
-
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label"> Date : </label>
-                                                    <input name="date" type="text" class="flatpickr flatpickr-input form-control" id="checkin-date">
-                                                </div>
-                                            </div><!--end col-->
             
                                             <div class="col-md-6">
                                                 <div class="mb-3">
@@ -271,76 +263,71 @@
                                                     </select>
                                                 </div>
                                             </div><!--end col-->
+            
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Gender</label>
+                                                    <select class="form-control gender-name select2input">
+                                                        <option value="EY">Male</option>
+                                                        <option value="GY">Female</option>
+                                                    </select>
+                                                </div>
+                                            </div><!--end col-->
+            
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Instagram</label>
+                                                    <div class="input-group flex-nowrap">
+                                                        <span class="input-group-text bg-white border border-end-0 text-dark" id="insta-id"><i data-feather="instagram" class="fea icon-sm"></i></span>
+                                                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="insta-id">
+                                                    </div>
+                                                </div>
+                                            </div><!--end col-->
+            
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Facebook</label>
+                                                    <div class="input-group flex-nowrap">
+                                                        <span class="input-group-text bg-white border border-end-0 text-dark" id="fb-id"><i data-feather="facebook" class="fea icon-sm"></i></span>
+                                                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="fb-id">
+                                                    </div>
+                                                </div>
+                                            </div><!--end col-->
+            
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Linkedin</label>
+                                                    <div class="input-group flex-nowrap">
+                                                        <span class="input-group-text bg-white border border-end-0 text-dark" id="linke-pro"><i data-feather="linkedin" class="fea icon-sm"></i></span>
+                                                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="linke-pro">
+                                                    </div>
+                                                </div>
+                                            </div><!--end col-->
+            
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Twitter</label>
+                                                    <div class="input-group flex-nowrap">
+                                                        <span class="input-group-text bg-white border border-end-0 text-dark" id="twitter-id"><i data-feather="twitter" class="fea icon-sm"></i></span>
+                                                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="twitter-id">
+                                                    </div>
+                                                </div>
+                                            </div><!--end col-->
+            
+                                            <div class="col-md-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Your Bio Here</label>
+                                                    <textarea name="comments" id="comments" rows="3" class="form-control" placeholder="Bio :"></textarea>
+                                                </div>
+                                            </div>
                                         </div><!--end row-->
             
-                                        <button type="submit" class="btn btn-primary">Add Patient</button>
+                                        <button type="submit" class="btn btn-primary">Add User</button>
                                     </form>
                                 </div>
                             </div><!--end col-->
 
-                            <div class="col-lg-4 mt-4">
-                                <div class="card rounded border-0 shadow">
-                                    <div class="p-4 border-bottom">
-                                        <h5 class="mb-0">Doctors List</h5>
-                                    </div>
-
-                                    <ul class="list-unstyled mb-0 p-4" data-simplebar style="height: 664px;">
-                                        <li class="d-md-flex align-items-center text-center text-md-start">
-                                            <img src="../images/doctors/01.jpg" class="avatar avatar-medium rounded-md shadow" alt="">
-
-                                            <div class="ms-md-3 mt-4 mt-sm-0">
-                                                <a href="#" class="text-dark h6">Dr. Calvin Carlo</a>
-                                                <p class="text-muted my-1">Cardiologist</p>
-                                                <p class="text-muted mb-0">3 Years Experienced</p>
-                                            </div>
-                                        </li>
-
-                                        <li class="d-md-flex align-items-center text-center text-md-start mt-4">
-                                            <img src="../images/doctors/02.jpg" class="avatar avatar-medium rounded-md shadow" alt="">
-
-                                            <div class="ms-md-3 mt-4 mt-sm-0">
-                                                <a href="#" class="text-dark h6">Dr. Alex Smith</a>
-                                                <p class="text-muted my-1">Dentist</p>
-                                                <p class="text-muted mb-0">1 Years Experienced</p>
-                                            </div>
-                                        </li>
-
-                                        <li class="d-md-flex align-items-center text-center text-md-start mt-4">
-                                            <img src="../images/doctors/03.jpg" class="avatar avatar-medium rounded-md shadow" alt="">
-
-                                            <div class="ms-md-3 mt-4 mt-sm-0">
-                                                <a href="#" class="text-dark h6">Dr. Cristina Luly</a>
-                                                <p class="text-muted my-1">Orthopedic</p>
-                                                <p class="text-muted mb-0">5 Years Experienced</p>
-                                            </div>
-                                        </li>
-
-                                        <li class="d-md-flex align-items-center text-center text-md-start mt-4">
-                                            <img src="../images/doctors/04.jpg" class="avatar avatar-medium rounded-md shadow" alt="">
-
-                                            <div class="ms-md-3 mt-4 mt-sm-0">
-                                                <a href="#" class="text-dark h6">Dr. Dwayen Maria</a>
-                                                <p class="text-muted my-1">Gastrologist</p>
-                                                <p class="text-muted mb-0">2 Years Experienced</p>
-                                            </div>
-                                        </li>
-
-                                        <li class="d-md-flex align-items-center text-center text-md-start mt-4">
-                                            <img src="../images/doctors/05.jpg" class="avatar avatar-medium rounded-md shadow" alt="">
-
-                                            <div class="ms-md-3 mt-4 mt-sm-0">
-                                                <a href="#" class="text-dark h6">Dr. Jenelia Focia</a>
-                                                <p class="text-muted my-1">Psychotherapist</p>
-                                                <p class="text-muted mb-0">3 Years Experienced</p>
-                                            </div>
-                                        </li>
-
-                                        <li class="mt-4">
-                                            <a href="doctors" class="btn btn-primary">All Doctors</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            
                         </div><!--end row-->
                     </div>
                 </div><!--end container-->
@@ -520,9 +507,6 @@
         <!-- Select2 -->
         <script src="../js/select2.min.js"></script>
         <script src="../js/select2.init.js"></script>
-        <!-- Datepicker -->
-        <script src="../js/flatpickr.min.js"></script>
-        <script src="../js/flatpickr.init.js"></script>
         <!-- Icons -->
         <script src="../js/feather.min.js"></script>
         <!-- Main Js -->

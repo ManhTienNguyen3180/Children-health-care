@@ -124,6 +124,48 @@ public class BlogsController {
         }
     }
 
+    @GetMapping("/blogsManagement/filterCategory/{id}")
+    public String filterCategory(Model model, @PathVariable("id") int id) {
+        return filterCategoryAndPaginated(model, id, 1);
+    }
+
+    @GetMapping("/blogsManagement/filterCategory/{id}/{pageNo}")
+    public String filterCategoryAndPaginated(Model model, @PathVariable("id") int id,
+            @PathVariable(value = "pageNo") int pageNo) {
+        Page<Blog> page = blogService.filterCategory(id, pageNo, 5);
+        List<Blog> listB = page.getContent();
+
+        model.addAttribute("catId", id);
+
+        model.addAttribute("blogsCategory", blogCategoryService.findAll());
+
+        model.addAttribute("blogs", listB);
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        return "admin/blogs";
+    }
+
+    @GetMapping("/blogsManagement/filterStatus/{id}")
+    public String filterStatus(Model model, @PathVariable("id") int id) {
+        return filterStatusAndPaginated(model, id, 1);
+    }
+
+    @GetMapping("/blogsManagement/filterStatus/{id}/{pageNo}")
+    public String filterStatusAndPaginated(Model model, @PathVariable("id") int id,
+            @PathVariable(value = "pageNo") int pageNo) {
+        Page<Blog> page = blogService.filterStatus(id, pageNo, 5);
+        List<Blog> listB = page.getContent();
+
+        model.addAttribute("blogsCategory", blogCategoryService.findAll());
+
+        model.addAttribute("status", id);
+
+        model.addAttribute("blogs", listB);
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        return "admin/blogs";
+    }
+
     @GetMapping(value = "/blogsManagement/page/{pageNo}/{searchText}")
     public String searchandPaginated(@PathVariable("pageNo") int pageNo,
             @PathVariable("searchText") String search,
@@ -201,7 +243,7 @@ public class BlogsController {
         blog.setDescription(description);
         blog.setContent(content);
         blog.setAuthor(author);
-        blog.setUpdate(date);
+        blog.setUpdateDate(date);
         // Save Blog
         blogService.saveBlogChanges(blog);
 

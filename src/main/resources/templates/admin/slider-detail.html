@@ -27,7 +27,7 @@
     <!-- Css -->
     <link th:href="@{/css/style.min.css}" rel="stylesheet" type="text/css" id="theme-opt" />
 
-    <script th:href="@{https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js}"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
     <style>
         .preview-box {
             max-width: 100%;
@@ -262,20 +262,20 @@
                         <div class="d-md-flex justify-content-between">
                             <div class="d-flex ">
                                 <div>
-                                    <h3 class="mb-0" th:text="${serviceDetail.name}"></h3>
+                                    <h3 class="mb-0" th:text="${sliderDetail.title}"></h3>
                                 </div>
-                                <div th:if="${serviceDetail.status==1}" th:text="Available"
+                                <div th:if="${sliderDetail.status==1}" th:text="Available"
                                     style="color: rgb(1, 255, 1); font-weight: bold; margin-top: 10px; margin-left: 10px;">
                                 </div>
-                                <div th:if="${serviceDetail.status==0}" th:text="Unavailable"
+                                <div th:if="${sliderDetail.status==0}" th:text="Unavailable"
                                     style="color: red; font-weight: bold; margin-left: 10px; margin-top: 10px;"></div>
                             </div>
 
                             <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                                 <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                                     <li class="breadcrumb-item"><a href="index.html">Doctris</a></li>
-                                    <li class="breadcrumb-item"><a th:href="@{/servicesManagement}">Services</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Service Detail</li>
+                                    <li class="breadcrumb-item"><a th:href="@{/slidersManagement}">Sliders</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Slider Detail</li>
                                 </ul>
                             </nav>
                         </div>
@@ -286,29 +286,24 @@
                                     <div class="p-4 row">
                                         <h5>Image:</h5>
                                         <div>
-                                            <img width="300px" th:src="${serviceDetail.image}" alt="">
+                                            <img width="300px" th:src="${sliderDetail.image}" alt="">
                                         </div>
                                     </div>
                                     <div class="p-4 row">
-                                        <h5>Description:</h5>
-                                        <div th:utext="${serviceDetail.description}">
+                                        <h5>Title:</h5>
+                                        <div th:text="${sliderDetail.title}">
                                         </div>
                                     </div>
+
                                     <div class="p-4 row">
-                                        <h5>Category:</h5>
-                                        <div th:if="${serviceDetail.categoryId==cat.Id}" th:each="cat : ${listCate}"
-                                            th:text="${cat.name}">
-                                        </div>
+                                        <h5>Back Link :</h5>
+                                        <a th:href="@{${sliderDetail.backlink}}" th:text="${sliderDetail.backlink}" target="_blank">
+                                        </a>
                                     </div>
                                     <div class="p-4 row">
-                                        <div class="col-6">
-                                            <h6>Create by:</h6>
-                                            <div th:text="${serviceDetail.createBy}">
-                                            </div>
-                                        </div>
                                         <div class="col-6">
                                             <h6>Create at:</h6>
-                                            <div th:text="${serviceDetail.createDate}">
+                                            <div th:text="${sliderDetail.createDate}">
                                             </div>
                                         </div>
 
@@ -320,20 +315,6 @@
                                 <div class="card border-0 sidebar sticky-bar rounded shadow ">
                                     <div class="card-body d-grid">
                                         <div class="row">
-
-                                            <!-- DISPLAY -->
-                                            <div class="widget mb-4 pb-2 col">
-                                                <form th:action="@{/servicesManagement/changeStatusDetails}"
-                                                    method="post">
-                                                    <input name="Id" style="display: none;"
-                                                        th:value="${serviceDetail.Id}">
-                                                    <button th:if="${serviceDetail.status==1}"
-                                                        class="col-12 btn btn-danger" type="submit">Disable</button>
-                                                    <button th:if="${serviceDetail.status==0}"
-                                                        class="col-12 btn btn-success" type="submit">Enable</button>
-                                                </form>
-                                            </div>
-                                            <!-- DISPLAY -->
                                             <!-- EDIT -->
                                             <div class="mt-4 mt-sm-0 col text-center">
                                                 <a href="#" class=" col-12 btn btn-primary" data-bs-toggle="modal"
@@ -471,30 +452,30 @@
         </div>
         <!-- Offcanvas End -->
         <!-- Start Modal -->
-        <div class="modal fade" id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade position-fixed" id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header border-bottom p-3">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Service <span
-                                th:text="${serviceDetail.Id}"></span></h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Slider <span th:text="${sliderDetail.id}"></span></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body p-3 pt-4">
 
-                        <form name="addBlog" th:action="@{/servicesManagement/editService}" method="post"
-                            enctype="multipart/form-data" onsubmit="return validatePrice()">
-                            <input type="text" style="display: none;" name="Id" th:value="${serviceDetail.Id}">
+                        <form name="addBlog" th:action="@{/slidersManagement/saveSlider}" method="post"
+                            enctype="multipart/form-data" onsubmit="return validateLink();">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="d-grid">
-                                        <p class="text-muted">Upload your blog image here, Please click "Upload Image"
+                                        <p class="text-muted">Upload your slider image here, Please click "Upload Image"
                                             Button.
                                         </p>
                                         <div
                                             class=" preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1">
-                                            <img th:src="${serviceDetail.image}" alt="">
+                                            <img th:src="${sliderDetail.image}" alt="">
                                         </div>
+                                        <input type="text" name="id" id="" th:value="${sliderDetail.id}" style="display: none;">
                                         <input type="file" id="input-file" name="image" accept="image/*"
                                             onchange={handleChange()} hidden />
                                         <label class="btn-upload btn btn-primary mt-4" for="input-file">Upload
@@ -507,86 +488,42 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Service Name <span
+                                                    <label class="form-label">Slider Title <span
                                                             class="text-danger">*</span></label>
-                                                    <input required name="name" id="name" type="text"
-                                                        class="form-control" placeholder="Service Name :"
-                                                        th:value="${serviceDetail.name}">
+                                                    <input required name="title" id="name" type="text"
+                                                        class="form-control" placeholder="Slider Title :" th:value="${sliderDetail.title}">
                                                 </div>
                                             </div><!--end col-->
 
                                             <div class="col-12">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Price <span
+                                                    <label class="form-label">Back Link <span
                                                             class="text-danger">*</span></label>
-                                                    <input required name="price" id="price" type="number" step="1"
-                                                        class="form-control" placeholder="Price"
-                                                        th:value="${serviceDetail.price}">
-                                                    <script>
-                                                        function validatePrice() {
-                                                            var price = document.getElementById("price").value;
-                                                            var unvalidPrice = document.getElementById("priceUnvalid");
-                                                            var descriptionInvalid = document.getElementById("descriptionInvalid");
-                                                            if (parseFloat(price) <= 0 || isNaN(price)) {
-                                                                unvalidPrice.innerHTML = "Price must be a number greater than 0.";
-                                                                unvalidPrice.className = "alert alert-danger";
-                                                                unvalidPrice.role = "alert";
-                                                                return false;
-                                                            }
-                                                            var editorContent = CKEDITOR.instances.editor1.getData().trim();
-                                                            if (editorContent.length === 0) {
-                                                                descriptionInvalid.innerHTML = "Description can not be blank.";
-                                                                descriptionInvalid.className = "alert alert-danger";
-                                                                descriptionInvalid.role = "alert";
-                                                                // Display error message
-                                                                return false; // Prevent form submission
-                                                            }
-                                                            return true;
-                                                        }
-                                                    </script>
+                                                    <input required name="backlink" id="linkInput" type="text"
+                                                        class="form-control" placeholder="Back Link:" th:value="${sliderDetail.backlink}">
                                                 </div>
-                                                <div id="priceUnvalid"></div>
+                                                <div id="validationStatus" class="mt-2"></div>
                                             </div><!--end col-->
+                                            <script>
+                                                function validateLink() {
+                                                    var linkInput = document.getElementById("linkInput");
+                                                    var validationStatus = document.getElementById("validationStatus");
 
-                                            <div class="col-md-7">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Category</label><span
-                                                        class="text-danger">*</span>
-                                                    <select class="form-control" name="category">
-                                                        <option th:if="${serviceDetail.categoryId==cat.Id}" selected
-                                                            th:each="cat : ${listCate}" th:value="${cat.Id}"
-                                                            th:text="${cat.name}"></option>
-                                                        <option th:if="${serviceDetail.categoryId!=cat.Id}"
-                                                            th:each="cat : ${listCate}" th:value="${cat.Id}"
-                                                            th:text="${cat.name}"></option>
-                                                    </select>
-                                                </div>
-                                            </div><!--end col-->
+                                                    // Regular expression to match a valid URL
+                                                    var urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?$/;
 
-                                            <div class="col-lg-12">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Description <span
-                                                            class="text-danger">*</span></label>
-                                                    <textarea name="description" id="editor1" rows="4"
-                                                        class="form-control" placeholder="Service description :">
-                                                        <div th:text="${serviceDetail.description}"></div></textarea>
-                                                    <script>
-                                                        CKEDITOR.replace('editor1')
-                                                    </script>
-                                                </div>
-                                                <div id="descriptionInvalid"></div>
-                                            </div><!--end col-->
-                                            <div class="col-12">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Create By </label>
-                                                    <input name="createBy" id="createBy" type="text"
-                                                        class="form-control" placeholder="Author:"
-                                                        th:value="${serviceDetail.createBy}">
-                                                </div>
-                                            </div><!--end col-->
+                                                    if (urlPattern.test(linkInput.value)) {
+                                                        validationStatus.innerHTML = '<span class="text-success">Valid URL</span>';
+                                                        return true; // Allow form submission
+                                                    } else {
+                                                        validationStatus.innerHTML = '<span class="text-danger">Invalid URL</span>';
+                                                        return false; // Prevent form submission
+                                                    }
+                                                }
+                                            </script>
 
                                             <div class="col-lg-12 text-end">
-                                                <button type="submit" class="btn btn-primary">Add Service</button>
+                                                <button type="submit" class="btn btn-primary">Save Slider</button>
                                             </div><!--end col-->
                                         </div>
                         </form>
@@ -594,6 +531,7 @@
                 </div><!--end col-->
             </div><!--end row-->
         </div>
+
         <!-- End modal -->
         <!-- javascript -->
         <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

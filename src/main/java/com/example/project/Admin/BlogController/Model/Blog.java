@@ -30,6 +30,7 @@ public class Blog {
     private String author;
     private String image;
     private String content;
+    @Column(name="updateDate")
     private Date updateDate;
     
     @OneToMany
@@ -174,13 +175,13 @@ public class Blog {
 
 
 
-    public Date getUpdate() {
+    public Date getUpdateDate() {
         return updateDate;
     }
 
 
 
-    public void setUpdate(Date update) {
+    public void setUpdateDate(Date update) {
         this.updateDate = update;
     }
 

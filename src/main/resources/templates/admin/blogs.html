@@ -37,6 +37,31 @@
             /* Ensure the image doesn't exceed the box width */
             max-height: 100%;
         }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 120px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
     </style>
 
 </head>
@@ -109,7 +134,6 @@
                         <div class="sidebar-submenu">
                             <ul>
                                 <li><a class="" th:href="@{/blogsManagement}">Blogs</a></li>
-                                <li><a href="#">Blog Detail</a></li>
                             </ul>
                         </div>
                     </li>
@@ -118,7 +142,15 @@
                         <div class="sidebar-submenu">
                             <ul>
                                 <li><a class="" th:href="@{/servicesManagement}">Services</a></li>
-                                <li><a href="#">Service Detail</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-columns me-2 d-inline-block"></i>Sliders</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a class="" th:href="@{/slidersManagement}">Sliders</a></li>
                             </ul>
                         </div>
                     </li>
@@ -270,6 +302,83 @@
                             <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newblogadd">Add
                                 Blog</a>
                         </div>
+
+                    </div>
+                    <div class="d-md-flex justify-content-between mt-4 mb-4">
+                        <div class="mb-0">
+                            <span style="font-size: larger;">Filter: </span>
+                            <!-- Example single danger button -->
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false" th:if="${cat.categoryBlogId==catId&&catId!=null}"
+                                    th:each="cat : ${blogsCategory}" th:value="${cat.categoryBlogId}" th:text="${cat.categoryBlogName}">
+                                    Category
+                                </button><button type="button" class="btn btn-primary dropdown-toggle"
+                                    data-bs-toggle="dropdown" aria-expanded="false" th:if="${catId==null}">
+                                    Category
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" th:href="@{/blogsManagement}">--All Category--</a>
+                                    </li>
+                                    <li><a th:each="cat : ${blogsCategory}" th:value="${cat.categoryBlogId}" th:text="${cat.categoryBlogName}"
+                                            class="dropdown-item"
+                                            th:href="@{'/blogsManagement/filterCategory/'+${cat.categoryBlogId}}"></a></li>
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false" th:if="${status==1}" th:text="Public">
+                                    Status
+                                </button>
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false" th:if="${status==0}" th:text="Hidden">
+                                    Status
+                                </button>
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false" th:if="${status==null}">
+                                    Status
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" th:href="@{/blogsManagement}">--All Status--</a>
+                                    <li><a class="dropdown-item"
+                                            th:href="@{'/blogsManagement/filterStatus/'+'1'}">Public</a></li>
+                                    <li><a class="dropdown-item"
+                                            th:href="@{'/blogsManagement/filterStatus/'+'0'}">Hidden</a></li>
+                            </div>
+                        </div>
+                        <div class="d-md-flex">
+                            <!-- <span class="mb-0">Sort by:</span>
+                            <div class="dropdown " style="margin-left: 10px;">
+                                <div class="bg-soft-primary" style="width: 120px; text-align: center;"
+                                    onclick="toggleDropdown(this)" id="SortByName">Name</div>
+                                <div class="dropdown-content">
+                                    <a
+                                        th:href="@{'/blogsManagement/sort/'+'?sortField=name&sortDir=desc'}">Descending</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a
+                                        th:href="@{'/blogsManagement/sort/'+'?sortField=name&sortDir=asc'}">Ascending</a>
+                                </div>
+                            </div> -->
+                            <!-- <div class="dropdown " style="margin-left: 10px;">
+                                <div class="bg-soft-primary" style="width: 120px; text-align: center;"
+                                    onclick="toggleDropdown(this)" id="SortByPrice">Price</div>
+                                <div class="dropdown-content">
+                                    <a
+                                        th:href="@{'/servicesManagement/sort/'+'?sortField=price&sortDir=desc'}">Descending</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a
+                                        th:href="@{'/servicesManagement/sort/'+'?sortField=price&sortDir=asc'}">Ascending</a>
+                                </div>
+                            </div> -->
+
+                            <script>
+                                function toggleDropdown(element) {
+                                    const dropdownContent = element.nextElementSibling;
+                                    dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+                                }
+                            </script>
+                        </div>
+                        <div></div>
                     </div>
 
                     <div id="blogsList" class="row">
@@ -290,7 +399,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="height: 100px; font-weight: 400;" th:each="listB:${blogs}">
+                                <tr style="max-height: 150px; font-weight: 400;" th:each="listB:${blogs}">
                                     <td th:text="${listB.blogId}" class="text-center"></td>
                                     <td th:each="cat : ${blogsCategory}" th:text="${cat.categoryBlogName}"
                                         th:if="${cat.categoryBlogId==listB.categoryBlogId}" class="text-center"></td>
@@ -303,10 +412,10 @@
                                         <span th:text="Hidden" class="center-block badge bg-soft-danger"></span>
                                     </td>
                                     <td th:text="${listB.author}" class="text-center"></td>
-                                    <td class="text-center">
-                                        <img th:src="@{${listB.image}}" th:alt="${listB.image}" class="img-fluid">
+                                    <td class="text-center" style="height: 150px;">
+                                        <img style="height: 100%;" th:src="@{${listB.image}}" th:alt="${listB.image}" class="img-fluid">
                                     </td>
-                                    <td th:text="${listB.update}" class="text-center"></td>
+                                    <td th:text="${listB.updateDate}" class="text-center"></td>
 
                                     <td class="text-center">
                                         <a th:href="@{/blogsManagement/blog-detail/{id}(id=${listB.blogId})}">
@@ -321,7 +430,7 @@
 
                     </div><!--end row-->
                     <!--IF NUMBER OF BLOG < 5 OR TOTAL PAGE >1 DISPLAY, IF NOT DISAPPEAR-->
-                    <div th:if="${searchText==null&&totalPages>1}" class="row">
+                    <div th:if="${catId==null&&searchText==null&&totalPages>1}" class="row">
                         <div class="col-12 mt-4">
                             <ul class="pagination justify-content-end mb-0 list-unstyled">
                                 <li class="page-item">
@@ -341,6 +450,32 @@
                                 <li class="page-item">
                                     <a th:if="${currentPage < totalPages}"
                                         th:href="@{'/blogsManagement/page/' + ${currentPage + 1}}" class="page-link"
+                                        href="" aria-label="Next">Next</a>
+                                    <span class="page-link pe-none" th:unless="${currentPage < totalPages}">Next</span>
+                                </li>
+                            </ul><!--end pagination-->
+                        </div><!--end col-->
+                    </div><!--end row-->
+                    <div th:if="${catId!=null&&totalPages>1}" class="row">
+                        <div class="col-12 mt-4">
+                            <ul class="pagination justify-content-end mb-0 list-unstyled">
+                                <li class="page-item">
+                                    <a th:if="${currentPage >1}"
+                                        th:href="@{'/blogsManagement/filterCategory/'+${catId}+'/' + ${currentPage - 1}}" class="page-link"
+                                        href="" aria-label="Prev">Prev</a>
+                                    <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                                </li>
+                                <span th:each="i:${#numbers.sequence(1,totalPages)}">
+                                    <li class="page-item"><a th:if="${currentPage != i}"
+                                            th:href="@{'/blogsManagement/filterCategory/'+${catId}+'/'+${i}}" class="page-link"
+                                            href="">[[${i}]]</a>
+                                    </li>
+                                    <li th:unless="${currentPage != i}" class="page-item active"><a class="page-link"
+                                            href="">[[${i}]]</a></li>
+                                </span>
+                                <li class="page-item">
+                                    <a th:if="${currentPage < totalPages}"
+                                        th:href="@{'/blogsManagement/filterCategory/'+${catId}+'/' + ${currentPage + 1}}" class="page-link"
                                         href="" aria-label="Next">Next</a>
                                     <span class="page-link pe-none" th:unless="${currentPage < totalPages}">Next</span>
                                 </li>

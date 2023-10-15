@@ -14,7 +14,7 @@
     <!-- favicon -->
     <link rel="shortcut icon" th:href="@{/images/favicon.ico.png}">
     <!-- Bootstrap -->
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- simplebar -->
     <link th:href="@{/css/simplebar.css}" rel="stylesheet" type="text/css" />
     <!-- Icons -->
@@ -62,6 +62,44 @@
             padding: 12px 16px;
             text-decoration: none;
             display: block;
+        }
+
+        .bg-text {
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/opacity/see-through */
+            color: white;
+            font-weight: bold;
+            border: 3px solid #f1f1f1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -150%);
+            z-index: 2;
+            min-width: 80%;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #leftPosition,
+        #rightPosition {
+            width: 100%;
+            height: 500px;
+            margin: 10px;
+            overflow-y: scroll;
+        }
+
+        .list {
+            text-align: center;
+            border-radius: 10px;
+            background: rgb(33, 64, 150);
+            height: 60px;
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            cursor: grab;
+            color: #fff;
         }
     </style>
 </head>
@@ -306,23 +344,30 @@
             <div class="container-fluid">
                 <div class="layout-specing">
                     <div class="d-md-flex justify-content-between">
-                        <h3 class="mb-0">Services List</h3>
+                        <h3 class="mb-0">Slider List</h3>
 
                         <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                             <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                                 <li class="breadcrumb-item"><a href="dashboard">Doctris</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Services</li>
+                                <li class="breadcrumb-item active" aria-current="page">Sliders</li>
                             </ul>
                         </nav>
-                        <div class="mt-4 mt-sm-0">
-                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newblogadd">Add
-                                Service</a>
+                        <div class="d-md-flex justify-content-between">
+                            <div class="mt-4 mt-sm-0 mr-4">
+                                <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#editprofile">Slider
+                                    Position</a>
+                            </div>
+                            <div class="mt-4 mt-sm-0">
+                                <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#newblogadd">Add
+                                    Slider</a>
+                            </div>
                         </div>
                     </div>
                     <div class="d-md-flex justify-content-between mt-4">
                         <div class="mb-0">
-                            <span style="font-size: larger;">Filter: </span>
-                            <!-- Example single danger button -->
+                            <!-- <span style="font-size: larger;">Filter: </span>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false" th:if="${cat.Id==catId&&catId!=null}"
@@ -342,20 +387,10 @@
                             </div>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                                    aria-expanded="false" th:if="${status==1}" th:text="Available">
-                                    Status
-                                </button>
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                                    aria-expanded="false" th:if="${status==0}" th:text="Unavailable">
-                                    Status
-                                </button>
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                                    aria-expanded="false" th:if="${status==null}">
+                                    aria-expanded="false">
                                     Status
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" th:href="@{/servicesManagement}">--All Status--</a>
-                                    </li>
                                     <li><a class="dropdown-item"
                                             th:href="@{'/servicesManagement/filterStatus/'+'1'}">Available</a></li>
                                     <li><a class="dropdown-item"
@@ -385,7 +420,7 @@
                                     <a
                                         th:href="@{'/servicesManagement/sort/'+'?sortField=price&sortDir=asc'}">Ascending</a>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <script>
                                 function toggleDropdown(element) {
@@ -403,63 +438,46 @@
                                     <thead>
                                         <tr>
                                             <th class="border-bottom p-3" style="min-width: 50px;">Id</th>
-                                            <th class="border-bottom p-3" style="min-width: 180px;">Service Name</th>
-                                            <th class="border-bottom p-3">Price</th>
-                                            <th class="border-bottom p-3" style="min-width: 250px;">Description</th>
-                                            <th class="border-bottom p-3">Image</th>
-                                            <th class="border-bottom p-3">Category</th>
+                                            <th class="border-bottom p-3" style="min-width: 180px;">Slider Title</th>
+                                            <th class="border-bottom p-3" style="min-width: 100px;">Image</th>
+                                            <th class="border-bottom p-3">Back Link</th>
                                             <th class="border-bottom p-3">Status</th>
                                             <th class="border-bottom p-3" style="min-width: 150px;">Create Date</th>
-                                            <th class="border-bottom p-3">Create By</th>
+                                            <th class="border-bottom p-3">Order</th>
                                             <th class="border-bottom p-3" style="width: 30px;"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
-                                        <tr style="height: 50vh;" th:if="${totalService==0}">
+                                        <!-- <tr style="height: 50vh;" th:if="${totalService==0}">
                                             <td colspan="10" style="text-align: center;" class="bg-soft-dark"><span
                                                     style="font-size: xx-large; color: rgba(42, 54, 39, 0.575); font-weight: bold;">There
                                                     is no service for your Search</span></td>
-                                        </tr>
-                                        <tr style="height: 60px;" th:each="listS:${servicesList}">
-                                            <th class="p-3" th:text="${listS.Id}"></th>
+                                        </tr> -->
+                                        <tr style="height: 60px;" th:each="listS:${slidersList}">
+                                            <th class="p-3" th:text="${listS.id}"></th>
                                             <td class="py-3">
                                                 <a href="#" class="text-dark">
                                                     <div class="d-flex align-items-center">
-                                                        <span class="ms-2" th:text="${listS.name}"></span>
+                                                        <span class="ms-2" th:text="${listS.title}"></span>
                                                     </div>
                                                 </a>
                                             </td>
-                                            <td class="p-3" th:text="${listS.price}+' $'"></td>
-                                            <td class="p-3" th:text="${listS.description}"></td>
                                             <td class="p-3"><img width="80px" th:src="@{${listS.image}}" alt=""></td>
-                                            <td th:each="cat : ${listCate}" th:text="${cat.name}"
-                                                th:if="${cat.id==listS.categoryId}" class="p-3">
-                                            </td>
+                                            <td class="p-3"><a th:href="@{${listS.backlink}}" target="_blank"><span
+                                                        th:text="'Back Link for Slider '+${listS.id}"></span></a></td>
                                             <td th:if="${listS.status==1}">
-                                                <span th:text="Available"
+                                                <span th:text="Display"
                                                     class="center-block badge bg-soft-success"></span>
                                             </td>
                                             <td th:if="${listS.status==0}">
-                                                <span th:text="Unavailable"
-                                                    class="center-block badge bg-soft-danger"></span>
+                                                <span th:text="Hidden" class="center-block badge bg-soft-danger"></span>
                                             </td>
                                             <td class="p-3" th:text="${listS.createDate}"></td>
-                                            <td class="p-3" th:text="${listS.createBy}"></td>
+                                            <td class="p-3" th:text="${listS.position==0} ? '-':${listS.position}"></td>
 
                                             <td class="text-end p-3">
-                                                <form th:action="@{/servicesManagement/changeStatus}" method="post">
-                                                    <input class="d-none" name="Id" type="text" th:value="${listS.Id}">
-                                                    <input class="d-none" name="pageNo" type="text"
-                                                        th:value="${currentPage}">
-                                                    <button type="submit" th:if="${listS.status==0}" href="#"
-                                                        class="btn btn-icon btn-pills btn-soft-primary"><i
-                                                            class="uil uil-eye"></i></button>
-                                                    <button type="submit" th:if="${listS.status==1}" href="#"
-                                                        class="btn btn-icon btn-pills btn-soft-primary"><i
-                                                            class="uil uil-eye-slash"></i></button>
-                                                </form>
-                                                <a th:href="@{/servicesManagement/service-detail/{id}(id=${listS.Id})}"
+                                                <a th:href="@{/slidersManagement/slider-detail/{id}(id=${listS.id})}"
                                                     class="btn btn-icon btn-pills btn-soft-success"><i
                                                         class="uil uil-pen"></i></a>
                                             </td>
@@ -475,43 +493,18 @@
                         <!-- PAGINATION START -->
                         <div class="col-12 mt-4">
                             <div class="d-md-flex align-items-center text-center justify-content-between">
-                                <span class="text-muted me-3">Total Service : <span th:text="${totalService}"></span>
+                                <span class="text-muted me-3">Total Slider : <span th:text="${totalService}"></span>
                                 </span>
-                                <ul th:if="${catId!=null&&totalPages>1}"
-                                    class="pagination justify-content-end mb-0 list-unstyled">
+                                <ul th:if="${totalPages>1}" class="pagination justify-content-end mb-0 list-unstyled">
                                     <li class="page-item">
                                         <a th:if="${currentPage >1}"
-                                            th:href="@{'/servicesManagement/filterCategory/' +${catId}+'/'+ ${currentPage - 1} }"
+                                            th:href="@{'/slidersManagementfilterCategory/page/'+ ${currentPage - 1} }"
                                             class="page-link" href="" aria-label="Prev">Prev</a>
                                         <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
                                     </li>
                                     <span th:each="i:${#numbers.sequence(1,totalPages)}">
                                         <li class="page-item"><a th:if="${currentPage != i}"
-                                                th:href="@{'/servicesManagement/filterCategory/' +${catId}+'/'+${i}}"
-                                                class="page-link" href="">[[${i}]]</a>
-                                        </li>
-                                        <li th:unless="${currentPage != i}" class="page-item active"><a
-                                                class="page-link" href="">[[${i}]]</a></li>
-                                    </span>
-                                    <li class="page-item">
-                                        <a th:if="${currentPage < totalPages}"
-                                            th:href="@{'/servicesManagement/filterCategory/' +${catId}+'/'+ ${currentPage + 1}}"
-                                            class="page-link" href="" aria-label="Next">Next</a>
-                                        <span class="page-link pe-none"
-                                            th:unless="${currentPage < totalPages}">Next</span>
-                                    </li>
-                                </ul><!--end pagination-->
-                                <ul th:if="${sortField==null&&status==null&&catId==null&&searchText==null&&totalPages>1}"
-                                    class="pagination justify-content-end mb-0 list-unstyled">
-                                    <li class="page-item">
-                                        <a th:if="${currentPage >1}"
-                                            th:href="@{'/servicesManagement/page/' + ${currentPage - 1} }"
-                                            class="page-link" href="" aria-label="Prev">Prev</a>
-                                        <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
-                                    </li>
-                                    <span th:each="i:${#numbers.sequence(1,totalPages)}">
-                                        <li class="page-item"><a th:if="${currentPage != i}"
-                                                th:href="@{'/servicesManagement/page/'+${i}}" class="page-link"
+                                                th:href="@{'/slidersManagement/page/'+${i}}" class="page-link"
                                                 href="">[[${i}]]</a>
                                         </li>
                                         <li th:unless="${currentPage != i}" class="page-item active"><a
@@ -519,79 +512,7 @@
                                     </span>
                                     <li class="page-item">
                                         <a th:if="${currentPage < totalPages}"
-                                            th:href="@{'/servicesManagement/page/' + ${currentPage + 1}}"
-                                            class="page-link" href="" aria-label="Next">Next</a>
-                                        <span class="page-link pe-none"
-                                            th:unless="${currentPage < totalPages}">Next</span>
-                                    </li>
-                                </ul><!--end pagination-->
-                                <ul th:if="${sortField==null&&status==null&&catId==null&&searchText!=null&&totalPages>1}"
-                                    class="pagination justify-content-end mb-0 list-unstyled">
-                                    <li class="page-item">
-                                        <a th:if="${currentPage >1}"
-                                            th:href="@{'/servicesManagement/page/' + ${currentPage - 1}+'/'+ ${searchText} }"
-                                            class="page-link" href="" aria-label="Prev">Prev</a>
-                                        <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
-                                    </li>
-                                    <span th:each="i:${#numbers.sequence(1,totalPages)}">
-                                        <li class="page-item"><a th:if="${currentPage != i}"
-                                                th:href="@{'/servicesManagement/page/'+${i}+'/'+ ${searchText}}"
-                                                class="page-link" href="">[[${i}]]</a>
-                                        </li>
-                                        <li th:unless="${currentPage != i}" class="page-item active"><a
-                                                class="page-link" href="">[[${i}]]</a></li>
-                                    </span>
-                                    <li class="page-item">
-                                        <a th:if="${currentPage < totalPages}"
-                                            th:href="@{'/servicesManagement/page/' + ${currentPage + 1}+'/'+ ${searchText}}"
-                                            class="page-link" href="" aria-label="Next">Next</a>
-                                        <span class="page-link pe-none"
-                                            th:unless="${currentPage < totalPages}">Next</span>
-                                    </li>
-                                </ul><!--end pagination-->
-                                <ul th:if="${status!=null&&totalPages>1}"
-                                    class="pagination justify-content-end mb-0 list-unstyled">
-                                    <li class="page-item">
-                                        <a th:if="${currentPage >1}"
-                                            th:href="@{'/servicesManagement/filterStatus/'+${status}+'/' +${currentPage - 1}}"
-                                            class="page-link" href="" aria-label="Prev">Prev</a>
-                                        <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
-                                    </li>
-                                    <span th:each="i:${#numbers.sequence(1,totalPages)}">
-                                        <li class="page-item"><a th:if="${currentPage != i}"
-                                                th:href="@{'/servicesManagement/filterStatus/'+${status}+'/' +${i}}"
-                                                class="page-link" href="">[[${i}]]</a>
-                                        </li>
-                                        <li th:unless="${currentPage != i}" class="page-item active"><a
-                                                class="page-link" href="">[[${i}]]</a></li>
-                                    </span>
-                                    <li class="page-item">
-                                        <a th:if="${currentPage < totalPages}"
-                                            th:href="@{'/servicesManagement/filterStatus/'+${status}+'/' + ${currentPage + 1}}"
-                                            class="page-link" href="" aria-label="Next">Next</a>
-                                        <span class="page-link pe-none"
-                                            th:unless="${currentPage < totalPages}">Next</span>
-                                    </li>
-                                </ul><!--end pagination-->
-                                <ul th:if="${sortField!=null&&totalPages>1}"
-                                    class="pagination justify-content-end mb-0 list-unstyled">
-                                    <li class="page-item">
-                                        <a th:if="${currentPage >1}"
-                                            th:href="@{'/servicesManagement/sort/'+${currentPage - 1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
-                                            class="page-link" href="" aria-label="Prev">Prev</a>
-                                        <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
-                                    </li>
-                                    <span th:each="i:${#numbers.sequence(1,totalPages)}">
-                                        <li class="page-item"><a th:if="${currentPage != i}"
-                                                th:href="@{'/servicesManagement/sort/'+${i}}+'?sortField='+${sortField}+'&sortDir='+${sortDir} "
-                                                class="page-link" href="">[[${i}]]</a>
-                                        </li>
-                                        <li th:unless="${currentPage != i}" class="page-item active"><a
-                                                class="page-link" href="">[[${i}]]</a></li>
-                                    </span>
-                                    <li class="page-item">
-                                        <a th:if="${currentPage < totalPages}"
-                                            th:href="@{'/servicesManagement/sort/'+${currentPage + 1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+                                            th:href="@{'/slidersManagement/page/'+ ${currentPage + 1}}"
                                             class="page-link" href="" aria-label="Next">Next</a>
                                         <span class="page-link pe-none"
                                             th:unless="${currentPage < totalPages}">Next</span>
@@ -603,6 +524,56 @@
                     </div><!--end row-->
                 </div>
             </div><!--end container-->
+            <div class="container">
+                <div class="my-2">
+                    <h3 style="color: gray;">Preview:</h3>
+                    <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ul class="carousel-indicators">
+                            <li data-target="#imageCarousel" th:data-slide-to="${preview.position-1}"
+                                th:each="preview:${previewSlider}"></li>
+                        </ul>
+
+                        <!-- Slides -->
+                        <div class="carousel-inner">
+                            <div style="height: 600px;" class="carousel-item active" th:each="preview:${previewSlider}"
+                                th:if="${preview.position==1}">
+                                <a href="#" target="_blank">
+                                    <img style="width: 100%; object-fit: cover;   
+                                    filter: blur(2px); -webkit-filter: blur(2px);" th:src="@{${preview.image}}"
+                                        alt="Image 1">
+
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3 class="bg-text" th:text="${preview.title}"></h3>
+                                    </div>
+                                </a>
+                            </div>
+                            <div style="height: 600px;" class="carousel-item" th:each="preview:${previewSlider}"
+                                th:if="${preview.position!=1}">
+                                <a href="#" target="_blank">
+                                    <img style="width: 100%; object-fit: cover;   
+                                    filter: blur(2px); -webkit-filter: blur(2px);" th:src="@{${preview.image}}"
+                                        alt="Image 1">
+
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h3 class="bg-text" th:text="${preview.title}"></h3>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Left and right controls -->
+                        <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
             <!-- Footer Start -->
             <footer class="bg-white shadow py-3">
@@ -620,106 +591,123 @@
                     </div><!--end row-->
                 </div><!--end container-->
             </footer><!--end footer-->
-            <!-- End -->
-        </main>
-        <!--End page-content" -->
+    </div>
+    <!-- End -->
+    </main>
+    <!--End page-content" -->
     </div>
     <!-- page-wrapper -->
 
-    <!-- Offcanvas Start -->
-    <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight"
-        aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header p-4 border-bottom">
-            <h5 id="offcanvasRightLabel" class="mb-0">
-                <img src="../images/logo-dark.png" height="24" class="light-version" alt="">
-                <img src="../images/logo-light.png" height="24" class="dark-version" alt="">
-            </h5>
-            <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas"
-                aria-label="Close"><i class="uil uil-times fs-4"></i></button>
-        </div>
-        <div class="offcanvas-body p-4 px-md-5">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Style switcher -->
-                    <div id="style-switcher">
-                        <div>
-                            <ul class="text-center list-unstyled mb-0">
-                                <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light"
-                                        onclick="setTheme('style-rtl')"><img src="../images/layouts/light-dash-rtl.png"
-                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
-                                            class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light"
-                                        onclick="setTheme('style')"><img src="../images/layouts/light-dash.png"
-                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
-                                            class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark"
-                                        onclick="setTheme('style-dark-rtl')"><img
-                                            src="../images/layouts/dark-dash-rtl.png"
-                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
-                                            class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark"
-                                        onclick="setTheme('style-dark')"><img src="../images/layouts/dark-dash.png"
-                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
-                                            class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4"
-                                        onclick="setTheme('style-dark')"><img src="../images/layouts/dark-dash.png"
-                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
-                                            class="text-muted mt-2 d-block">Dark Version</span></a></li>
-                                <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4"
-                                        onclick="setTheme('style')"><img src="../images/layouts/light-dash.png"
-                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
-                                            class="text-muted mt-2 d-block">Light Version</span></a></li>
-                                <li class="d-grid"><a href="../landing/dashboard" target="_blank" class="mt-4"><img
-                                            src="../images/layouts/landing-light.png"
-                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
-                                            class="text-muted mt-2 d-block">Landing Demos</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- end Style switcher -->
-                </div><!--end col-->
-            </div><!--end row-->
-        </div>
 
-        <div class="offcanvas-footer p-4 border-top text-center">
-            <ul class="list-unstyled social-icon mb-0">
-                <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris-template" target="_blank"
-                        class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
-                <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank"
-                        class="rounded"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
-                <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank"
-                        class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
-                <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank"
-                        class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
-                <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank"
-                        class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
-                <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i
-                            class="uil uil-envelope align-middle" title="email"></i></a></li>
-                <li class="list-inline-item mb-0"><a href="../../../dashboard" target="_blank" class="rounded"><i
-                            class="uil uil-globe align-middle" title="website"></i></a></li>
-            </ul><!--end icon-->
-        </div>
-    </div>
-    <!-- Offcanvas End -->
-
-
-    <!-- Start Modal -->
-    <div class="modal fade" id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal start -->
+    <!-- Profile Settings Start -->
+    <div class="modal fade" id="editprofile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header border-bottom p-3">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Service</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Position Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-3 pt-4 row">
+                    <div class="col-6 align-items-center" style="border-right: 1px solid rgba(0, 0, 0, 0.288);">
+                        <h3 class="ml-3">Hidden Slider ID</h3>
+                        <div id="leftPosition">
+                            <input th:each="slider:${hiddenList}" class="list" draggable="true" th:value="${slider.id}"
+                                name="list">
+                            </input>
+                        </div>
+                    </div><!--end row-->
+                    <div class="col-6 align-items-center">
+                        <h3 class="ml-3">Display Slider ID</h3>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form th:action="@{/slidersManagement/position}" id="positionForm" method="post" onsubmit="return validPos();">
+                                    <div id="rightPosition" name="listItems">
+                                        <input th:each="slider: ${previewSlider}" class="list" draggable="true" th:value="${slider.id}" name="list"></input>
+                                    </div>
+                                    <div id="validationpos" class="mt-2"></div>
+                                </form>
+                                
+                                <input type="submit" id="submitButton" class="btn btn-primary" value="Save changes">
+                                
+                                <script>
+                                    document.getElementById("submitButton").addEventListener("click", function () {
+                                        document.getElementById("positionForm").submit();
+                                    });
+                                
+                                    function validPos() {
+                                        var rightPosition = document.getElementById("rightPosition");
+                                        var inputTags = rightPosition.getElementsByTagName("input");
+
+                                        console.log("Number of input tags:", inputTags.length); // Debugging statement
+
+                                        if (inputTags.length === 0) {
+                                            var validationpos = document.getElementById("validationpos");
+                                            validationpos.innerHTML = "Error: There are no input tags in the 'rightPosition' div.";
+                                            return false; // Prevent form submission
+                                        }
+
+                                        return true; // Allow form submission
+                                    }
+                                </script>
+                                
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let lists = document.getElementsByClassName("list")
+        let rightBox = document.getElementById("rightPosition")
+        var leftBox = document.getElementById("leftPosition")
+
+
+        for (let index = 0; index < lists.length; index++) {
+            const list = lists[index];
+            list.addEventListener("dragstart", function (e) {
+                let selected = e.target
+
+                rightBox.addEventListener("dragover", function (e) {
+                    e.preventDefault();
+                })
+                rightBox.addEventListener("drop", function (e) {
+                    rightBox.appendChild(selected)
+                    selected = null;
+                })
+                leftBox.addEventListener("dragover", function (e) {
+                    e.preventDefault();
+                })
+                leftBox.addEventListener("drop", function (e) {
+                    leftBox.appendChild(selected)
+                    selected = null;
+                })
+            })
+        }
+
+    </script>
+    <!-- Profile Settings End -->
+
+    <!-- Start Modal -->
+    <div class="modal fade position-fixed" id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-bottom p-3">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Slider</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body p-3 pt-4">
 
-                    <form name="addBlog" th:action="@{/servicesManagement/addService}" method="post"
-                        enctype="multipart/form-data" onsubmit="return validatePrice()">
+                    <form name="addBlog" th:action="@{/slidersManagement/addSlider}" method="post"
+                        enctype="multipart/form-data" onsubmit="return validateLink();">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="d-grid">
-                                    <p class="text-muted">Upload your blog image here, Please click "Upload Image"
+                                    <p class="text-muted">Upload your slider image here, Please click "Upload Image"
                                         Button.
                                     </p>
                                     <div
@@ -736,78 +724,42 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Service Name <span
+                                                <label class="form-label">Slider Title <span
                                                         class="text-danger">*</span></label>
-                                                <input required name="name" id="name" type="text" class="form-control"
-                                                    placeholder="Service Name :">
+                                                <input required name="title" id="name" type="text" class="form-control"
+                                                    placeholder="Slider Title :">
                                             </div>
                                         </div><!--end col-->
 
                                         <div class="col-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Price <span
+                                                <label class="form-label">Back Link <span
                                                         class="text-danger">*</span></label>
-                                                <input required name="price" id="price" type="number" step="1"
-                                                    class="form-control" placeholder="Price">
-                                                <script>
-                                                    function validatePrice() {
-                                                        var price = document.getElementById("price").value;
-                                                        var unvalidPrice = document.getElementById("priceUnvalid");
-                                                        var descriptionInvalid = document.getElementById("descriptionInvalid");
-                                                        if (parseFloat(price) <= 0 || isNaN(price)) {
-                                                            unvalidPrice.innerHTML = "Price must be a number greater than 0.";
-                                                            unvalidPrice.className = "alert alert-danger";
-                                                            unvalidPrice.role = "alert";
-                                                            return false;
-                                                        }
-                                                        var editorContent = CKEDITOR.instances.editor1.getData().trim();
-                                                        if (editorContent.length === 0) {
-                                                            descriptionInvalid.innerHTML = "Description can not be blank.";
-                                                            descriptionInvalid.className = "alert alert-danger";
-                                                            descriptionInvalid.role = "alert";
-                                                            // Display error message
-                                                            return false; // Prevent form submission
-                                                        }
-                                                        return true;
-                                                    }
-                                                </script>
+                                                <input required name="backlink" id="linkInput" type="text"
+                                                    class="form-control" placeholder="Back Link:">
                                             </div>
-                                            <div id="priceUnvalid"></div>
+                                            <div id="validationStatus" class="mt-2"></div>
                                         </div><!--end col-->
+                                        <script>
+                                            function validateLink() {
+                                                var linkInput = document.getElementById("linkInput");
+                                                var validationStatus = document.getElementById("validationStatus");
 
-                                        <div class="col-md-7">
-                                            <div class="mb-3">
-                                                <label class="form-label">Category</label><span
-                                                    class="text-danger">*</span>
-                                                <select class="form-control" name="category">
-                                                    <option th:each="cat : ${listCate}" th:value="${cat.Id}"
-                                                        th:text="${cat.name}"></option>
-                                                </select>
-                                            </div>
-                                        </div><!--end col-->
+                                                // Regular expression to match a valid URL
+                                                var urlPattern = /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?$/;
 
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Description <span
-                                                        class="text-danger">*</span></label>
-                                                <textarea name="description" id="editor1" rows="4" class="form-control"
-                                                    placeholder="Service description :"></textarea>
-                                                <script>
-                                                    CKEDITOR.replace('editor1')
-                                                </script>
-                                            </div>
-                                            <div id="descriptionInvalid"></div>
-                                        </div><!--end col-->
-                                        <div class="col-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Create By </label>
-                                                <input name="createBy" id="createBy" type="text" class="form-control"
-                                                    placeholder="Author:">
-                                            </div>
-                                        </div><!--end col-->
+                                                if (urlPattern.test(linkInput.value)) {
+                                                    validationStatus.innerHTML = '<span class="text-success">Valid URL</span>';
+                                                    return true; // Allow form submission
+                                                } else {
+                                                    validationStatus.innerHTML = '<span class="text-danger">Invalid URL</span>';
+                                                    return false; // Prevent form submission
+                                                }
+                                            }
+                                        </script>
 
                                         <div class="col-lg-12 text-end">
-                                            <button type="submit" class="btn btn-primary">Add Service</button>
+                                            <button type="submit" class="btn btn-primary">Add Slider</button>
                                         </div><!--end col-->
                                     </div>
                     </form>
@@ -815,13 +767,20 @@
             </div><!--end col-->
         </div><!--end row-->
     </div>
+
     <!-- End modal -->
+
     <!-- javascript -->
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <!-- simplebar -->
     <script th:src="@{/js/simplebar.min.js}"></script>
     <!-- Icons -->
     <script th:src="@{/js/feather.min.js}"></script>
+    <!-- bootstrap -->
+    <script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js}"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js}"></script>
+
     <!-- Main Js -->
     <script th:src="@{/js/app.js}"></script>
     <script>

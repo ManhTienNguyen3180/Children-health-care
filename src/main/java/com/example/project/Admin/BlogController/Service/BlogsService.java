@@ -32,4 +32,8 @@ public interface BlogsService {
     void saveStatus(int id, String update, int status);
 
     void saveBlogChanges(Blog blog);
+
+    Page<Blog> filterCategory(int id, int pageNo, int i);
+
+    Page<Blog> filterStatus(int id, int pageNo, int i);
 }
