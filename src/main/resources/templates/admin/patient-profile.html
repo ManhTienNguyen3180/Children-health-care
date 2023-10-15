@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Doctris - Doctor Appointment Booking System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
+    <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
+    <meta name="author" content="Shreethemes" />
+    <meta name="email" content="support@shreethemes.in" />
+    <meta name="website" content="../../../dashboard" />
+    <meta name="Version" content="v1.2.0" />
+    <!-- favicon -->
+    <link rel="shortcut icon" href="../images/favicon.ico.png">
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- simplebar -->
+    <link href="../css/simplebar.css" rel="stylesheet" type="text/css" />
+    <!-- Icons -->
+    <link href="../css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../css/remixicon.css" rel="stylesheet" type="text/css" />
+    <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
+    <!-- Css -->
+    <link href="../css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+    <script src="https://kit.fontawesome.com/8320fc5394.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Loader -->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Loader -->
+
+    <div class="page-wrapper doctris-theme toggled">
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
+                <div class="sidebar-brand">
+                    <a href="../home">
+                        <img src="../images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                        <img src="../images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                    </a>
+                </div>
+
+                <ul class="sidebar-menu pt-3">
+                    <li><a href="dashboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
+                    <li><a href="appointment"><i class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="doctors">Doctors</a></li>
+                                <li><a href="add-doctor">Add Doctor</a></li>
+                                <li><a href="dr-profile">Profile</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Patients</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="patients">All Patients</a></li>
+                                <li><a href="add-patient">Add Patients</a></li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="fa-solid fa-user fa-xs"></i>User</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="users">All Users</a></li>
+                                <li><a href="add-user">Add Users</a></li>
+                                <li><a href="user-profile" hidden>Profile</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a href="blogs">Blogs</a></li>
+                                <li><a href="blog-detail">Blog Detail</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-file me-2 d-inline-block"></i>Pages</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+
+                                <li><a href="review">Reviews</a></li>
+                                <li><a href="invoice-list">Invoice List</a></li>
+
+
+                            </ul>
+                        </div>
+                    </li>
+
+
+
+
+
+                    <li><a href="../home" target="_blank"><i class="uil uil-window me-2 d-inline-block"></i>Landing
+                            page</a></li>
+                </ul>
+                <!-- sidebar-menu  -->
+            </div>
+            <!-- sidebar-content  -->
+            <ul class="sidebar-footer list-unstyled mb-0">
+                <li class="list-inline-item mb-0 ms-1">
+                    <a href="#" class="btn btn-icon btn-pills btn-soft-primary">
+                        <i class="uil uil-comment icons"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- sidebar-wrapper  -->
+
+        <!-- Start Page Content -->
+        <main class="page-content bg-light">
+            <div class="top-header">
+                <div class="header-bar d-flex justify-content-between border-bottom">
+                    <div class="d-flex align-items-center">
+                        <a href="#" class="logo-icon">
+                            <img src="../images/logo-icon.png" height="30" class="small" alt="">
+                            <span class="big">
+                                <img src="../images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                                <img src="../images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                            </span>
+                        </a>
+                        <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
+                            <i class="uil uil-bars"></i>
+                        </a>
+                        <div class="search-bar p-0 d-none d-lg-block ms-2">
+                            <div id="search" class="menu-search mb-0">
+                                <form role="search" method="get" id="searchform" class="searchform">
+                                    <div>
+                                        <input type="text" class="form-control border rounded-pill" name="s" id="s"
+                                            placeholder="Search Keywords...">
+                                        <input type="submit" id="searchsubmit" value="Search">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="list-unstyled mb-0">
+
+
+                        <li class="list-inline-item mb-0 ms-1">
+                            <div class="dropdown dropdown-primary">
+                                <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                        src="../images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle"
+                                        alt=""></button>
+                                <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
+                                    style="min-width: 200px;">
+                                    <a class="dropdown-item d-flex align-items-center text-dark"
+                                        href="https://shreethemes.in/doctris/layouts/admin/profile">
+                                        <img src="../images/doctors/01.jpg"
+                                            class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                        <div class="flex-1 ms-2">
+                                            <span class="d-block mb-1">Calvin Carlo</span>
+                                            <small class="text-muted">Orthopedic</small>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item text-dark" href="dashboard"><span
+                                            class="mb-0 d-inline-block me-1"><i
+                                                class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
+                                    <a class="dropdown-item text-dark" href="dr-profile"><span
+                                            class="mb-0 d-inline-block me-1"><i
+                                                class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                                    <div class="dropdown-divider border-top"></div>
+                                    <a class="dropdown-item text-dark" href="lock-screen"><span
+                                            class="mb-0 d-inline-block me-1"><i
+                                                class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="layout-specing">
+                    <div class="d-md-flex justify-content-between">
+                        <h5 class="mb-0">Patient Profile</h5>
+
+                        <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
+                            <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
+                                <li class="breadcrumb-item"><a href="dashboard">Doctris</a></li>
+                                <li class="breadcrumb-item" aria-current="page"><i
+                                        class="fa-solid fa-caret-down fa-rotate-270"></i></li>
+                                <li class="breadcrumb-item"><a href="patients">Patients</a></li>
+                                <li class="breadcrumb-item" aria-current="page"><i
+                                        class="fa-solid fa-caret-down fa-rotate-270"></i></li>
+                                <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 mt-4">
+                            <div class="bg-white rounded shadow overflow-hidden">
+                                <div class="card border-0">
+                                    <img src="../images/bg/bg-profile.jpg" class="img-fluid" alt="">
+                                </div>
+
+                                <div
+                                    class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                                    <img th:src="${patient.image}" class="rounded-circle shadow-md avatar avatar-md-md"
+                                        alt="">
+                                    <h5 class="mt-3 mb-1" th:text="${patient.patient_name}"></h5>
+                                    <p class="text-muted mb-0" th:text="${age}+' years old'"></p>
+                                </div>
+
+                                <div class="list-unstyled p-4">
+                                    <div class="d-flex align-items-center mt-2">
+                                        <i class="uil uil-user align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                        <h6 class="mb-0">Gender</h6>
+                                        <p class="text-muted mb-0 ms-2" th:if="${patient.gender==1}">Female</p>
+                                        <p class="text-muted mb-0 ms-2" th:if="${patient.gender==0}">Male</p>
+                                    </div>
+
+                                    <div class="d-flex align-items-center mt-2">
+                                        <i class="uil uil-envelope align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                        <h6 class="mb-0">Birthday</h6>
+                                        <p class="text-muted mb-0 ms-2" th:text="${patient.dob}"></p>
+                                    </div>
+
+                                    <div class="d-flex align-items-center mt-2">
+                                        <i class="uil uil-book-open align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                        <h6 class="mb-0">Phone No.</h6>
+                                        <p class="text-muted mb-0 ms-2" th:text="${patient.patient_phone}"></p>
+                                    </div>
+
+                                    <div class="d-flex align-items-center mt-2">
+                                        <i class="uil uil-italic align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                        <h6 class="mb-0">Address</h6>
+                                        <p class="text-muted mb-0 ms-2" th:text="${patient.patient_address}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+
+                        <div class="col-lg-7 col-md-7 mt-4">
+                            <div class="card border-0 shadow overflow-hidden">
+                                <ul class="nav nav-pills nav-justified flex-column flex-sm-row rounded-0 shadow overflow-hidden bg-white mb-0"
+                                    id="pills-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link rounded-0 active" id="overview-tab" data-bs-toggle="pill"
+                                            href="#pills-overview" role="tab" aria-controls="pills-overview"
+                                            aria-selected="false">
+                                            <div class="text-center pt-1 pb-1">
+                                                <h4 class="title fw-normal mb-0">Profile</h4>
+                                            </div>
+                                        </a><!--end nav link-->
+                                    </li><!--end nav item-->
+
+                                    <li class="nav-item">
+                                        <a class="nav-link rounded-0" id="experience-tab" data-bs-toggle="pill"
+                                            href="#pills-experience" role="tab" aria-controls="pills-experience"
+                                            aria-selected="false">
+                                            <div class="text-center pt-1 pb-1">
+                                                <h4 class="title fw-normal mb-0">Profile Settings</h4>
+                                            </div>
+                                        </a><!--end nav link-->
+                                    </li><!--end nav item-->
+                                </ul>
+
+                                <div class="tab-content p-4" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="pills-overview" role="tabpanel"
+                                        aria-labelledby="overview-tab">
+                                        <h5 class="mb-0">Introduction:</h5>
+
+                                        <p class="text-muted mt-4 mb-0" th:text="${patient.description}"></p>
+
+                                        <div class="row">
+                                            <div class="col-lg-6 col-12 mt-4">
+                                                <h5>Appointment List</h5>
+
+                                                <div class="d-flex justify-content-between align-items-center rounded p-3 shadow mt-3"
+                                                    th:each="reservation:${reservation}">
+                                                    <i class="fa-solid fa-stethoscope fa-2xl"></i>
+                                                    <div class="flex-1 overflow-hidden ms-2">
+                                                        <h6 class="mb-0" th:text="${reservation.service_name}"></h6>
+                                                        <p class="text-muted mb-0 text-truncate small"
+                                                            th:text="${reservation.doctor_name}">
+                                                        </p>
+                                                    </div>
+                                                    <span class="mb-0" th:text="${reservation.date}"></span>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="col-lg-6 col-12 mt-4">
+                                                <h5>Payment List</h5>
+
+                                                <div class="d-flex justify-content-between align-items-center rounded p-3 shadow mt-3"
+                                                    th:each="reservation:${reservation}">
+                                                    <div class="flex-1 overflow-hidden">
+                                                        <h6 class="flex-1 mb-0" th:text="${reservation.service_name}">
+                                                        </h6>
+                                                        <p class="text-muted mb-0 text-truncate small"
+                                                            th:text="${reservation.total_cost+'vnd'}">
+                                                        </p>
+                                                    </div>
+                                                    <a href="#" class="btn btn-icon btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#view-invoice"><i
+                                                            class="uil uil-clipboard-notes icons"></i></a>
+                                                </div>
+
+
+
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="tab-pane fade" id="pills-experience" role="tabpanel"
+                                        aria-labelledby="experience-tab">
+                                        <h5 class="mb-0">Personal Information :</h5>
+
+
+                                        <form class="mt-4" action="patient-profile" method="post">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Full Name</label>
+                                                        <input name="name" id="name" type="text" class="form-control"
+                                                            placeholder="Full Name :" th:value="${patient.patient_name}"
+                                                            readonly>
+                                                    </div>
+                                                </div><!--end col-->
+
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Your Email</label>
+                                                        <input name="email" id="email" type="email" class="form-control"
+                                                            placeholder="Your email :"
+                                                            th:value="${patient.patient_email}" readonly>
+                                                    </div>
+                                                </div><!--end col-->
+
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Phone no.</label>
+                                                        <input name="number" id="number" type="text"
+                                                            class="form-control" placeholder="Phone no. :"
+                                                            th:value="${patient.patient_phone}" readonly>
+                                                    </div>
+                                                </div><!--end col-->
+
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label"> Date of birth: </label>
+                                                        <input name="dob" type="date"
+                                                            class="flatpickr flatpickr-input form-control"
+                                                            id="checkin-date" th:value="${patient.dob}" readonly>
+                                                    </div>
+                                                </div><!--end col-->
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label"> Address: </label>
+                                                        <input name="dob" type="text"
+                                                            class="flatpickr flatpickr-input form-control"
+                                                            id="checkin-date" placeholder="Address:"
+                                                            th:value="${patient.patient_address}" readonly>
+                                                    </div>
+                                                </div><!--end col-->
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label"> Gender: </label>
+                                                        <select class="form-control gender-name select2input"
+                                                            name="gender">
+                                                            <option value="0" th:selected="${patient.gender==0}">Male
+                                                            </option>
+                                                            <option value="1" th:selected="${patient.gender==1}">Female
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div><!--end col-->
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label"> Status: </label>
+                                                        <select class="form-control gender-name select2input"
+                                                            name="status">
+                                                            <option value="1" th:selected="${patient.status==1}">Active
+                                                            </option>
+                                                            <option value="0" th:selected="${patient.status==0}">Blocked
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div><!--end col-->
+                                                <div class="col-md-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label"> Description </label>
+                                                        <textarea name="comments" id="comments" rows="4"
+                                                            class="form-control" placeholder="Description :"
+                                                            th:utext="${patient.description}"></textarea>
+
+                                                    </div>
+                                                </div><!--end col-->
+                                                <input type="hidden" name="id" th:value="${param.id}">
+
+                                                <div class="mt-4 pt-2">
+
+                                                    <div class="mt-4">
+                                                        <input type="submit" value="Save Change" class="btn btn-warning"></input>
+                                                    </div><!--end col-->
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div><!--end col-->
+
+
+                        </div><!--end row-->
+                    </div>
+                </div><!--end container-->
+
+                <!-- Footer Start -->
+                <footer class="bg-white shadow py-3">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <div class="text-sm-start text-center">
+                                    <p class="mb-0 text-muted">
+                                        <script>document.write(new Date().getFullYear())</script> © Doctris. Design with
+                                        <i class="mdi mdi-heart text-danger"></i> by <a href="../../../dashboard"
+                                            target="_blank" class="text-reset">Shreethemes</a>.
+                                    </p>
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end container-->
+                </footer><!--end footer-->
+                <!-- End -->
+        </main>
+        <!--End page-content" -->
+    </div>
+    <!-- page-wrapper -->
+
+
+
+    <!-- Offcanvas End -->
+
+
+
+    <!-- javascript -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <!-- simplebar -->
+    <script src="../js/simplebar.min.js"></script>
+    <!-- Icons -->
+    <script src="../js/feather.min.js"></script>
+    <!-- Main Js -->
+    <script src="../js/app.js"></script>
+
+</body>
+
+</html>

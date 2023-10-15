@@ -5,9 +5,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.project.entity.reservation;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ReservationRepo extends JpaRepository<reservation, Integer> {
@@ -22,4 +25,7 @@ public interface ReservationRepo extends JpaRepository<reservation, Integer> {
 
     @Query(value = "select count(reservation_id) from reservation r where r.doctor_id = ?1 and r.date = ?2", nativeQuery = true)
     int countByReservationId(int doctorid, Date date);
+
+    @Query("SELECT u FROM reservation u where patient_id=?1")
+    List<reservation> findByPatient_id(int patient_id);
 }

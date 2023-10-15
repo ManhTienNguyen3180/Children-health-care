@@ -44,13 +44,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                .requestMatchers("/error","/denied","/thankyou", "/reservationcontact/save", "/getSlotsByDoctor/**","/reservationcontact",
+                .requestMatchers("/service/add-service?id=","/signup/confirm","/error","/denied","/thankyou", "/reservationcontact/save", "/getSlotsByDoctor/**","/reservationcontact",
                         "/bookingappointment", "/getDoctorsByService/**", "/home", "/signup", "/saveUser",
                         "/forgot",
                         "/doctor", "/service/**","service-detail/**","/doctor-detail/**", "/blog", "/reset", "/logout")
                 .permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()              
-                .requestMatchers("/bloglistmanager").hasRole("ADMIN")
+                .requestMatchers("admin/**").hasRole("ADMIN")
                 .requestMatchers("/blog-detail/{id}").permitAll()
                 .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin

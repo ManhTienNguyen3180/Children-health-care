@@ -25,7 +25,7 @@ import jakarta.mail.internet.MimeMessage;
 
 @Service
 public class ReservationService {
-    
+
     @Autowired
     ReservationRepo repository;
     @Autowired 
@@ -110,5 +110,7 @@ public class ReservationService {
         helper.setText(emailContent, true);    
         emailSender.send(message);
     }
-    
+    public List<reservation> listReservationByPatientId(int patientId) {
+        return repository.findByPatient_id(patientId);
+    }
 }

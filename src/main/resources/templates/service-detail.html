@@ -115,13 +115,16 @@
         <!-- Navbar End -->
 
         <!-- Start Hero -->
-        <section class="bg-half-150 d-table w-100 bg-light">
-            <div class="container">
-                <div class="row mt-5 justify-content-center">
+        <!-- <section class="bg-half-150 d-table w-100 bg-light" >
+            <div class="bg-overlay bg-overlay-dark" style="max-width: 100%;height: auto;display: block;transform: scaleX(2);
+            transform-origin:left center  ">
+                <img th:src="${service.img}" alt="" >
+            </div>
+            <div class="container" >
+                <div class="row mt-5 justify-content-center" >
                     <div class="col-12">
                         <div class="section-title text-center">
                             <h3 class="sub-title mb-4">Service</h3>
-                            <!-- <p class="para-desc mx-auto text-muted">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p> -->
                             
                             <nav aria-label="breadcrumb" class="d-inline-block mt-3">
                                 <ul class="breadcrumb bg-transparent rounded mb-0">
@@ -130,10 +133,10 @@
                                 </ul>
                             </nav>
                         </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-        </section><!--end section-->
+                    </div>
+                </div>
+            </div>
+        </section> -->
         <div class="position-relative">
             <div class="shape overflow-hidden text-white">
                 <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -144,15 +147,23 @@
         <!-- End Hero -->
 
         <!-- Start -->
-        <section class="section">
-            <div class="container">
+        <section class="section" style="display: flex;flex-direction: row;">
+            
+            <div class="container" style="margin-left: 60px;">
                 <div class="row justify-content-center">
                     <div class="col-lg-9">
+                        
                         <div class="card shadow rounded border-0">
                             <div class="card-body">
-                                <h5 class="card-title" th:text="${service.service_name}"></h5>
+                                <img th:src="${service.img}" alt="" style="width: 100%;
+                                height: 100%;
+                                object-fit: cover; margin-bottom: 10px;">
+                                <h4  class="card-title" th:text="${service.service_name}"></h4>
+                                <h5 th:text=" 'Category: '+${cateName}"></h5>
                                 <h5 class="card-title">Description:</h5>
-                                <p class="text-muted" th:text="${service.description}"></p>
+                                <p class="text" th:text="${service.description}"></p>
+
+                                <h5 th:text="'Price: $'+${service.price}"></h5>
                                 <!-- <p class="text-muted">In the 1960s, the text suddenly became known beyond the professional circle of typesetters and layout designers when it was used for Letraset sheets (adhesive letters on transparent film, popular until the 1980s) Versions of the text were subsequently included in DTP programmes such as PageMaker etc.</p>
                                 <p class="text-muted">There is now an abundance of readable dummy texts. These are usually used when a text is required purely to fill a space. These alternatives to the classic Lorem Ipsum texts are often amusing and tell short, funny or nonsensical stories.</p>
                             
@@ -175,7 +186,80 @@
                     </div><!--end col-->
                 </div><!--end row-->
             </div><!--end container-->
+
+            <div class="col-3 mt-4 mt-sm-0 pt-2 pt-sm-0" style="margin-right: 100px;">
+                <div class="card border-0 sidebar sticky-bar rounded shadow">
+                    <div class="card-body">
+                        <!-- SEARCH -->
+                        <div class="widget mb-4 pb-2">
+                            <h5 class="widget-title">Search</h5>
+                            <div id="search2" class="widget-search mt-4 mb-0">
+                                <form action="/service">
+                                    <div style="display: flex; flex-direction: row;">
+                                        <input type="text" class="form-control border rounded-pill" name="key"
+                                            placeholder="Search Keywords...">
+                    
+                                        <button type="submit" class="btn btn-primary" data-toggle="button" aria-pressed="false"
+                                            autocomplete="off">
+                                            Search
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- SEARCH -->
+
+                        
+
+                        <!-- TAG CLOUDS -->
+                        <div class="widget mb-4 pb-2">
+                            <h5>Category</h5>
+                            
+                            <div th:each="c: ${listCategory}">
+                                <a th:href="'/service?category='+${c.id}">
+                                <button class="btn btn-primary" data-toggle="button"  autocomplete="off"
+                                th:text="${c.name}" style="margin-top: 10px;width: 150px;">
+                
+                                </button>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- TAG CLOUDS -->
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div><!--end row-->
+
         </section><!--end section-->
+
+       
+            <div class="container">
+                <h4>Doctors in charge:</h4>
+                <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-md-6" th:each="doctor : ${docs}" >
+                        <div class="card team border-0 rounded shadow overflow-hidden" style="height: 450px;margin-bottom: 20px;">
+                            <div class="team-img position-relative">
+                                <img th:src="${doctor[5]}" class="img-fluid" alt="" style="height: 323px;">
+                                <!-- <ul class="list-unstyled team-social mb-0">
+                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
+                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
+                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
+                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
+                                </ul> -->
+                            </div>
+                            <div class="card-body content text-center ">
+                                <a th:href="@{/doctor-detail/{id}(id=${doctor[0]})}" class="title text-dark h5 d-block mb-0" th:text="${doctor[1]}" style="font-size: 15px;"></a>
+                                <small class="text-muted speciality" th:text="${doctor[2]}"></small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div><!--end row-->
+            </div><!--end container-->
+        
+        
         <!-- End -->
 
         <!-- Start -->

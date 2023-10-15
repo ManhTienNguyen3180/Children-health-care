@@ -33,7 +33,7 @@ public class CustomAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         user user = userService.findUserByEmail(email);
         session.setAttribute("user", user);
         if (roles.contains("ROLE_ADMIN")) {
-            getRedirectStrategy().sendRedirect(request, response, "/bloglistmanager");
+            getRedirectStrategy().sendRedirect(request, response, "admin/doctors");
 
         }
         else if(savedRequest != null && savedRequest.getRedirectUrl().equalsIgnoreCase("http://localhost:8080/abc?continue")){
@@ -53,7 +53,7 @@ public class CustomAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
             String continueUrl = savedRequest.getRedirectUrl();
             System.out.println(continueUrl + "/blogdetail");
             int id = (Integer) session.getAttribute("blogId");
-            session.removeAttribute("blogId");
+            
             getRedirectStrategy().sendRedirect(request, response, "/blog-detail/" + id);
 
         } else if(savedRequest != null && savedRequest.getRedirectUrl().equalsIgnoreCase("http://localhost:8080/assets/images/layouts/dark-dash-rtl.png?continue")){

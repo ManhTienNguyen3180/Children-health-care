@@ -168,58 +168,92 @@
         <!-- Navbar End -->
 
         <!-- Start Hero -->
-        <section class="bg-half-150 bg-light d-table w-100">
-            <div class="container">
-                <div class="row mt-5 justify-content-center">
-                    <div class="col-12">
-                        <div class="section-title text-center">
-                            <h3 class="sub-title mb-4">Doctors team</h3>
-                            <p class="para-desc mx-auto text-muted">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
-                        
-                            <nav aria-label="breadcrumb" class="d-inline-block mt-3">
-                                <ul class="breadcrumb bg-transparent mb-0">
-                                    <li class="breadcrumb-item"><a href="index.html">Doctris</a></li>
-                                    <li class="breadcrumb-item"><a href="#">Doctors</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Team one</li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-        </section><!--end section-->
+        
         <!-- End Hero -->
+
+        <div class="d-flex align-items-center" style="margin-top: 70px;">
+            <div class="search-bar p-0 d-none d-lg-block ms-2">
+                <div id="search" class="menu-search mb-0" style="padding-top: 10px;padding-left: 200px;">
+                    <h4 style="padding-left: 20px;">Service</h4>
+                    <div style="display: flex;flex-direction: row;">
+                        <div style="margin-left: 20px;" th:each="c :${listCategory}">
+                            <a th:href="'/doctor?category='+${c.id}">
+                                <button class="btn btn-primary" data-toggle="button"  autocomplete="off"
+                                    th:text="${c.name}">
+                    
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Start -->
         <section class="section">
+            
             <div class="container">
                 <div class="row">
                     <div class="col-xl-3 col-lg-3 col-md-6" th:each="doctor : ${result}" >
                         <div class="card team border-0 rounded shadow overflow-hidden" style="height: 450px;margin-bottom: 20px;">
                             <div class="team-img position-relative">
-                                <img th:src="${doctor.image}" class="img-fluid" alt="" style="height: 323px;">
+                                <a th:href="@{/doctor-detail/{id}(id=${doctor.doctor_id})}" class="title text-dark h5 d-block mb-0" >
+                                    <img th:src="${doctor.image}" class="img-fluid" alt="" style="height: 323px;">
+                                </a>
                                 <ul class="list-unstyled team-social mb-0">
-                                    <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
-                                    <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
+                                    
                                 </ul>
                             </div>
                             <div class="card-body content text-center ">
-                                <a th:href="@{/doctor-detail/{id}(id=${doctor.doctor_id})}" class="title text-dark h5 d-block mb-0" th:text="${doctor.doctor_name}" style="font-size: 15px;"></a>
-                                <small class="text-muted speciality" th:text="${doctor.position}"></small>
+                                <a th:href="@{/doctor-detail/{id}(id=${doctor.doctor_id})}" class="title text-dark h5 d-block mb-0" th:text="${doctor.doctor_name}" style="font-size: 20px;"></a>
+                                <small class="text-muted speciality" th:text="${doctor.position}" style="font-size: 15px;"></small>
                             </div>
                         </div>
                     </div>
                     
-                    
-                    
-                    
-                    
-                    
-                    
                 </div><!--end row-->
             </div><!--end container-->
+
+            <div class="row text-center">
+                <div class="col-12">
+                    <ul class="pagination justify-content-center mb-0 list-unstyled">
+                        
+                        <div style="display: flex;flex-direction: row;" th:if="${categoryId == null }">
+                            <!-- <li class="page-item">
+                                <a th:if="${currentPage >1}" class="page-link" th:href="@{'/blog?page=' + ${currentPage - 1}}" aria-label="Previous">Prev</a>
+                                <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                            </li> -->
+                            <li th:each="i : ${#numbers.sequence(1, result.totalPages )}" class="page-item">
+                                
+                                    <a th:if="${currentPage != i}" class="page-link " th:href="@{'/doctor?page=' + ${i}}"
+                                     >[[${i}]]</a>
+                                    
+                            </li>
+                            
+                            <!-- <li class="page-item"><a class="page-link" href="?page=${result.totalPages - 1}" aria-label="Next">Next</a></li> -->
+                        </div>
+
+                        <div style="display: flex;flex-direction: row;" th:if="${categoryId != null }">
+                            <!-- <li class="page-item">
+                                <a th:if="${currentPage >1}" class="page-link" th:href="@{'/blog?page=' + ${currentPage - 1}}" aria-label="Previous">Prev</a>
+                                <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                            </li> -->
+                            <li th:each="i : ${#numbers.sequence(1, result.totalPages )}" class="page-item"
+                                >
+                                
+                                    <a class="page-link active" th:href="@{'/doctor?page=' + ${i}+'&category='+${categoryId}}"
+                                    th:text="${i }" ></a>
+                                    
+                            </li>
+                            <!-- <li class="page-item"><a class="page-link" href="?page=${result.totalPages - 1}" aria-label="Next">Next</a></li> -->
+                        </div>
+
+                        
+                        
+                    </ul>
+                </div><!--end col-->
+            </div><!--end row-->
+
         </section><!--end section-->
         <!-- End -->
 

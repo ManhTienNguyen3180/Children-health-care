@@ -1,16 +1,19 @@
 package com.example.project.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class doctorservice {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int doctorID;
     private int serviceID;
     private int status;
-
+    
     public doctorservice() {
     }
 
@@ -52,5 +55,6 @@ public class doctorservice {
     public void setStatus(int status) {
         this.status = status;
     }
-        
+
+    
 }

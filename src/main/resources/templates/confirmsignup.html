@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Doctris - Doctor Appointment Booking System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
+    <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
+    <meta name="author" content="Shreethemes" />
+    <meta name="email" content="support@shreethemes.in" />
+    <meta name="website" content="https://shreethemes.in" />
+    <meta name="Version" content="v1.2.0" />
+    <!-- favicon -->
+    <link rel="shortcut icon" href="../images/favicon.ico.png">
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Icons -->
+    <link href="../css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../css/remixicon.css" rel="stylesheet" type="text/css" />
+    <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
+    <!-- Css -->
+    <link href="../css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+
+</head>
+
+<body>
+    
+
+    <div class="back-to-home rounded d-none d-sm-block">
+        <a href="../home" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
+    </div>
+
+    <!-- Hero Start -->
+    <section class="bg-home d-flex bg-light align-items-center"
+        style="background: url('images/bg/bg-lines-one.png') center;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-8">
+                    <img src="../images/logo-dark.png" height="24" class="mx-auto d-block" alt="">
+                    <div class="card login-page bg-white shadow mt-4 rounded border-0">
+                        <div class="card-body">
+                            <h4 class="text-center">Confirm Account</h4>
+                            <p th:text="${message}" style="text-align: center;"></p>
+                            <p style="text-align: center;">Redirecting in <span id="countdown">5</span> seconds...</p>
+                        </div>
+                    </div><!---->
+                </div> <!--end col-->
+            </div><!--end row-->
+        </div> <!--end container-->
+    </section><!--end section-->
+    <!-- Hero End -->
+    <script>
+        // Define the URL you want to redirect to
+        var redirectTo = "../login"; // Thay thế bằng URL mong muốn
+        var countdownElement = document.getElementById("countdown");
+        var countdown = 5; // Thời gian đếm ngược (số giây)
+
+        function updateCountdown() {
+            countdownElement.textContent = countdown;
+            countdown--;
+
+            if (countdown < 0) {
+                // Redirect to the specified URL when countdown reaches 0
+                window.location.href = redirectTo;
+            } else {
+                // Gọi lại hàm này sau 1 giây
+                setTimeout(updateCountdown, 1000); // 1000 mili giây = 1 giây
+            }
+        }
+
+        // Bắt đầu đếm ngược khi trang web được tải
+        setTimeout(updateCountdown, 1000);
+    </script>
+    <!-- javascript -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <!-- Icons -->
+    <script src="../js/feather.min.js"></script>
+    <!-- Main Js -->
+    <script src="../js/app.js"></script>
+
+</body>
+
+</html>

@@ -49,7 +49,8 @@ public class ReservationController {
     private CrudRepository<reservationdetail, Integer> ReservationDetailService;
 
     @GetMapping("bookingappointment")
-    public String getData(Model model) {
+    public String getData(Model model, HttpSession session) {
+        model.addAttribute("listSelected", session.getAttribute("selectedService"));
         model.addAttribute("listService", ServiceService.fechServicesList());
         model.addAttribute("listDoctor", DoctorService.fetchDoctorList());
 
@@ -113,7 +114,7 @@ public class ReservationController {
             patient.setPatient_email(patient_email);
             patient.setPatient_phone(patient_phone);
             patient.setPatient_address(patient_address);
-            patient.setPatient_note(patient_note);
+            patient.setDescription(patient_note);
             patient.setStatus(1);
             patient.setCreate_by("admin");
             patient.setCreate_at(new java.sql.Date(System.currentTimeMillis()));
@@ -125,7 +126,7 @@ public class ReservationController {
             patient.setPatient_email(patient_email);
             patient.setPatient_phone(patient_phone);
             patient.setPatient_address(patient_address);
-            patient.setPatient_note(patient_note);
+            patient.setDescription(patient_note);
             patient.setStatus(1);
             patient.setCreate_by("admin");
             patient.setCreate_at(new java.sql.Date(System.currentTimeMillis()));

@@ -56,7 +56,9 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String home(Model model) {
+    public String home(Model model,HttpSession session){
+        user u = (user)session.getAttribute("user");
+        model.addAttribute("u", u);
         model.addAttribute("doctor", DoctorService.fetchDoctorList());
         model.addAttribute("service", ServiceService.fechServicesList());
         model.addAttribute("blogNew", BlogService.getBlogsNew());
@@ -75,11 +77,10 @@ public class HomeController {
         return "denied";
     }
 
-    
+    //generate postmapping to save image into folder and save image path into database
     @PostMapping("/upload")
-    public String saveFile(@RequestParam("file") MultipartFile file, HttpSession session
-            ) {
-       
+    public String saveFile(@RequestParam("file") MultipartFile file, HttpSession session) {
+        // We can save image in 'images' directory in roo
         String uploadDir = "./src/main/resources/static/images";
 
         try {
