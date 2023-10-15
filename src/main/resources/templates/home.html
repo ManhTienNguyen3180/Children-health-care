@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-    <html lang="en">
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
     <head>
         <meta charset="utf-8" />
@@ -57,6 +57,16 @@
                 font-weight: 500;
                 font-size: larger;
             }
+
+            .limited-text {
+            overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 25px;
+    -webkit-line-clamp: 4;
+    height: 100px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+        }
         </style>
     </head>
 
@@ -92,20 +102,48 @@
                         <!-- End mobile menu toggle-->
                     </div>
                 </div>
-                <!-- End Mobile Toggle -->
-
-                <!-- Start Dropdown -->
-                <ul  th:if="${#ctx.session.user != null}" class="dropdowns list-inline mb-0">
-
+                
+                <ul th:if="${session.user != NULL}" class="dropdowns list-inline mb-0">
+                    
+    
+                    <li class="list-inline-item mb-0 ms-1">
+                        <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                            <i class="uil uil-search"></i>
+                        </a>
+                    </li>
+    
                     <li class="list-inline-item mb-0 ms-1">
                         <div class="dropdown dropdown-primary">
-                            <a href="user-profile"><button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img th:src="${session.user.image}" src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button></a>
-                            <a href="logout">Log out</a>
+                            <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                    th:src="${session.user.image}"     src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle"
+                                    alt=""></button>
+                            <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
+                                style="min-width: 200px;">
+                                <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html">
+                                    <img th:src="${session.user.image}" src="images/doctors/01.jpg"
+                                        class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                    <div class="flex-1 ms-2">
+                                        <span  th:text="${session.user.full_name}" class="d-block mb-1">Calvin Carlo</span>
+                                        <!-- <small  class="text-muted">Orthopedic</small> -->
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-dark" href="doctor-dashboard.html"><span
+                                        class="mb-0 d-inline-block me-1"><i
+                                            class="uil uil-dashboard align-middle h6"></i></span> My reservation</a>
+                                <a class="dropdown-item text-dark" href="user-profile"><span
+                                        class="mb-0 d-inline-block me-1"><i
+                                            class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                                <div class="dropdown-divider border-top"></div>
+                                <a class="dropdown-item text-dark" th:href="@{/logout}" href="logout"><span
+                                        class="mb-0 d-inline-block me-1"><i
+                                            class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                            </div>
                         </div>
-                        
                     </li>
                 </ul>
-                <ul  th:if="${#ctx.session.user == null}" class="dropdowns list-inline mb-0">
+                <ul  th:if="${session.user == NULL}" class="dropdowns list-inline mb-8">
 
                     <li class="list-inline-item mb-0">
                         <a href="login" >
@@ -113,15 +151,15 @@
                         </a>
                     </li>
                 </ul>
-                <ul  class="dropdowns list-inline mb-0">
+                <ul  class="dropdowns list-inline mb-8" >
                     <!-- <li class="list-inline-item mb-0">
                         <a href="" >
                             <div class="btn btn-primary">Book Appointment</div>
                         </a>
                     </li> -->
-                    <li class="list-inline-item mb-0">
+                    <li class="list-inline-item mb-0" >
                         <a href="bookingappointment" >
-                            <div class="btn btn-primary">Book Appointment</div>
+                            <div class="btn btn-primary">Book Reservation</div>
                         </a>
                     </li>
                     
@@ -134,7 +172,7 @@
                     <!-- Navigation Menu-->   
                     <ul class="navigation-menu nav-left nav-light">
                         <li class="has-submenu parent-menu-item">
-                            <a href="/home">Home</a>
+                            <a href="home">Home</a>
                             
                         </li>
 
@@ -151,19 +189,13 @@
                         <li class="has-submenu parent-parent-menu-item">
                             <a href="/blog">Blog</a>
                             
-                        </li>
-                        
-                        
-                        <!-- <li class="has-submenu parent-parent-menu-item">
-                            <a href="">About</a>
-                            
-                        </li> -->
-                        
                         <!-- </li>
-                        <li class="has-submenu parent-parent-menu-item">
-                            <a href="booking-appointment">Book an apointment</a>
-                            
+                        
+                            <li th:if="${u!=null && u.role==2}" class="has-submenu parent-parent-menu-item">
+                                <a href="#">Dashboard</a>
+                                
                         </li> -->
+                                 
                         
                     </ul>
                 </div>
@@ -171,48 +203,7 @@
         </header><!--end header-->
         <!-- Navbar End -->
 
-        <!-- Start Hero -->
-         <!--<section class="bg-half-170 d-table w-100" id="home">
-            <div class="bg-overlay bg-overlay-dark"></div>
-            <div class="container">
-                <div class="row justify-content-center mt-5">
-                    <div class="col-xl-10">
-                        <div class="heading-title text-center">
-                            <img src="images/logo-icon.png" height="50" alt="">
-                            <h4 class="heading fw-bold text-white title-dark mt-3 mb-4">Booking Your Appointments</h4>
-                            <p class="para-desc mx-auto text-white-50 mb-0">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
-                            
-                            <!-- <div class="mt-4 pt-2">
-                                <form class="rounded text-start shadow p-4 bg-white-50">
-                                    <div class="row align-items-center">
-                                        <div class="col-md">
-                                            <div class="input-group bg-white border rounded" style="opacity: 0.7;">
-                                                <span class="input-group-text bg-white border-0"></span>
-                                                <input name="name" id="location" type="text" class="form-control border-0" placeholder="Location:">
-                                            </div>
-                                        </div>end col-->
-
-                                        <!-- <div class="col-md mt-4 mt-sm-0">
-                                            <div class="input-group bg-white border rounded" style="opacity: 0.7;">
-                                                <span class="input-group-text bg-white border-0"></span>
-                                                <input name="name" id="name" type="text" class="form-control border-0" placeholder="Doctor Name:">
-                                            </div>
-                                        </div>end col-->
-                                        
-                                        <!-- <div class="col-md-auto mt-4 mt-sm-0">
-                                            <div class="d-grid d-md-block">
-                                                <button type="submit" class="btn btn-primary">Search</button>
-                                            </div>
-                                        </div>end col-->
-                                    </div><!--end row-->
-                                </form><!--end form-->
-                            </div>  
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-        </section><!--end section-->
-        <!-- End Hero -->
+        
         
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
@@ -335,16 +326,19 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2 " th:each="blog : ${blogNew}">
-                            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                                <img src="images/blog/01.jpg" class="img-fluid" alt="">
+                            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden" >
+                                <a th:href="@{/blog-detail/{id}(id=${blog.blog_id})}" class="link">
+                                <img th:src="${blog.image}" class="img-fluid" alt="" style="height: 250px; object-fit: cover;">
+                            </a>
                                 <div class="card-body p-4" >
                                     <ul class="list-unstyled mb-2">
                                         <li class="list-inline-item text-muted small me-3" th:text="${blog.Date}"></li>
                                         <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
                                     </ul>
-                                    <a th:href="@{/blog-detail/{id}(id=${blog.blog_id})}" class="text-dark title h5" th:text="${blog.title}"></a>
+                                    <a th:href="@{/blog-detail/{id}(id=${blog.blog_id})}" class="text-dark title h5" th:text="${blog.title}" ></a>
+                                    <br><br><li class="list-inline-item text-muted small me-3 limited-text" th:text="${blog.description}"></li>
                                     <div class="post-meta d-flex justify-content-between mt-3">
-                                      
+                                        
                                         <a th:href="@{/blog-detail/{id}(id=${blog.blog_id})}" class="link">Read More </a>
                                     </div>
                                 </div>
@@ -580,95 +574,7 @@
                         </div>
                     </div><!--end col-->
 
-                    <div class="col-md-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                        <div class="card border-0 rounded shadow p-4 ms-xl-3">
-                            <div class="custom-form">
-                                <form>
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Patient Name <span class="text-danger">*</span></label>
-                                                <input name="name" id="name1" type="text" class="form-control" placeholder="Patient Name :">
-                                            </div>
-                                        </div><!--end col-->
-                                        
-                                        <div class="col-lg-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Departments</label>
-                                                <select class="form-control department-name select2input">
-                                                    <option value="EY">Eye Care</option>
-                                                    <option value="GY">Gynecologist</option>
-                                                    <option value="PS">Psychotherapist</option>
-                                                    <option value="OR">Orthopedic</option>
-                                                    <option value="DE">Dentist</option>
-                                                    <option value="GA">Gastrologist</option>
-                                                    <option value="UR">Urologist</option>
-                                                    <option value="NE">Neurologist</option>
-                                                </select>
-                                            </div>
-                                        </div><!--end col-->
-                                        
-                                        <div class="col-lg-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Doctor</label>
-                                                <select class="form-control doctor-name select2input">
-                                                    <option value="CA">Dr. Calvin Carlo</option>
-                                                    <option value="CR">Dr. Cristino Murphy</option>
-                                                    <option value="AL">Dr. Alia Reddy</option>
-                                                    <option value="TO">Dr. Toni Kovar</option>
-                                                    <option value="JE">Dr. Jessica McFarlane</option>
-                                                    <option value="EL">Dr. Elsie Sherman</option>
-                                                    <option value="BE">Dr. Bertha Magers</option>
-                                                    <option value="LO">Dr. Louis Batey</option>
-                                                </select>
-                                            </div>
-                                        </div><!--end col-->
-
-                                        <div class="col-lg-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Your Email <span class="text-danger">*</span></label>
-                                                <input name="email" id="email" type="email" class="form-control" placeholder="Your email :">
-                                            </div> 
-                                        </div><!--end col-->
-
-                                        <div class="col-lg-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Your Phone <span class="text-danger">*</span></label>
-                                                <input name="phone" id="phone" type="tel" class="form-control" placeholder="Your Phone :">
-                                            </div> 
-                                        </div><!--end col-->
-
-                                        <div class="col-lg-6">
-                                            <div class="mb-3">
-                                                <label class="form-label"> Date <span class="text-danger">*</span></label>
-                                                <input name="date" type="text" class="flatpickr flatpickr-input form-control" id="checkin-date">
-                                            </div>
-                                        </div><!--end col-->
-
-                                        <div class="col-lg-6">
-                                            <div class="mb-3">
-                                                <label class="form-label" for="input-time">Time <span class="text-danger">*</span></label>
-                                                <input name="time" type="text" class="form-control timepicker" id="input-time" placeholder="03:30 PM">
-                                            </div> 
-                                        </div><!--end col-->
-
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Comments <span class="text-danger">*</span></label>
-                                                <textarea name="comments" id="comments" rows="4" class="form-control" placeholder="Your Message :"></textarea>
-                                            </div>
-                                        </div><!--end col-->
-
-                                        <div class="col-lg-12">
-                                            <div class="d-grid">
-                                                <button type="submit" class="btn btn-primary">Book An Appointment</button>
-                                            </div>
-                                        </div><!--end col-->
-                                    </div><!--end row-->
-                                </form>
-                            </div>
-                        </div>
-                    </div><!--end col-->
+                    
                 </div><!--end row-->
             </div><!--end container-->
         </section><!--end section-->
@@ -752,8 +658,8 @@
         
         
         <!-- javascript -->
-        <!-- <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script> -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
         <!-- SLIDER -->
         <script src="js/tiny-slider.js"></script>
         <script src="js/tiny-slider-init.js"></script>

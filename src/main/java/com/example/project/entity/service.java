@@ -5,23 +5,15 @@ import java.sql.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import java.util.List;
+
 @Entity
 public class service {
-//     service_id int AI PK 
-// service_name varchar(250) 
-// price int 
-// description longtext 
-// img varchar(250) 
-// category_id int 
-// status tinyint 
-// create_at date 
-// create_by varchar(100)
 
     @Id
     private int service_id;
     private String service_name;
     private int price;
-    private String description;
+    private String description; 
     private String img;
     private int category_id;
     private int status;

@@ -78,18 +78,27 @@
                 </div>
 
                 <ul class="sidebar-menu pt-3">
-                    <li><a th:href="@{blogsManagement}"><i
+                    <li><a th:href="@{/admin/dashboard}"><i
                                 class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
-                    <li><a href="appointment.html"><i
+                    <li><a th:href="@{/admin/appointment}"><i
                                 class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a></li>
-
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="fa-solid fa-user fa-xs"
+                                style="margin-right: 5px;"></i>User</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a th:href="@{/admin/users}">All Users</a></li>
+                                <li><a th:href="@{/admin/add-user}">Add Users</a></li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="sidebar-dropdown">
                         <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>
                         <div class="sidebar-submenu">
                             <ul>
-                                <li><a href="doctors.html">Doctors</a></li>
-                                <li><a href="add-doctor.html">Add Doctor</a></li>
-                                <li><a href="dr-profile.html">Profile</a></li>
+                                <li><a th:href="@{/admin/doctors}">Doctors</a></li>
+                                <li><a th:href="@{/admin/add-doctor}">Add Doctor</a></li>
+                                <li><a th:href="@{/admin/schedule}">Schedule</a></li>
                             </ul>
                         </div>
                     </li>
@@ -98,33 +107,7 @@
                         <a href="javascript:void(0)"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Patients</a>
                         <div class="sidebar-submenu">
                             <ul>
-                                <li><a href="patients.html">All Patients</a></li>
-                                <li><a href="add-patient.html">Add Patients</a></li>
-                                <li><a href="patient-profile.html">Profile</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Apps</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a href="chat.html">Chat</a></li>
-                                <li><a href="email.html">Email</a></li>
-                                <li><a href="calendar.html">Calendar</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i
-                                class="uil uil-shopping-cart me-2 d-inline-block"></i>Pharmacy</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a href="shop.html">Shop</a></li>
-                                <li><a href="product-detail.html">Shop Detail</a></li>
-                                <li><a href="shopcart.html">Shopcart</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
+                                <li><a th:href="@{/admin/patients}">All Patients</a></li>
                             </ul>
                         </div>
                     </li>
@@ -138,7 +121,7 @@
                         </div>
                     </li>
                     <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-user-md me-2 d-inline-block"></i>Services</a>
+                        <a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Services</a>
                         <div class="sidebar-submenu">
                             <ul>
                                 <li><a class="" th:href="@{/servicesManagement}">Services</a></li>
@@ -155,40 +138,8 @@
                         </div>
                     </li>
 
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-file me-2 d-inline-block"></i>Pages</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a href="faqs.html">FAQs</a></li>
-                                <li><a href="review.html">Reviews</a></li>
-                                <li><a href="invoice-list.html">Invoice List</a></li>
-                                <li><a href="invoice.html">Invoice</a></li>
-                                <li><a href="terms.html">Terms & Policy</a></li>
-                                <li><a href="privacy.html">Privacy Policy</a></li>
-                                <li><a href="error.html">404 !</a></li>
-                                <li><a href="blank-page.html">Blank Page</a></li>
-                            </ul>
-                        </div>
-                    </li>
+                    
 
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i
-                                class="uil uil-sign-in-alt me-2 d-inline-block"></i>Authentication</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a href="login.html">Login</a></li>
-                                <li><a href="signup.html">Signup</a></li>
-                                <li><a href="forgot-password.html">Forgot Password</a></li>
-                                <li><a href="lock-screen.html">Lock Screen</a></li>
-                                <li><a href="thankyou.html">Thank you...!</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li><a href="components.html"><i class="uil uil-cube me-2 d-inline-block"></i>Components</a></li>
-
-                    <li><a href="../landing/index-two.html" target="_blank"><i
-                                class="uil uil-window me-2 d-inline-block"></i>Landing page</a></li>
                 </ul>
                 <!-- sidebar-menu  -->
             </div>
@@ -311,7 +262,8 @@
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false" th:if="${cat.categoryBlogId==catId&&catId!=null}"
-                                    th:each="cat : ${blogsCategory}" th:value="${cat.categoryBlogId}" th:text="${cat.categoryBlogName}">
+                                    th:each="cat : ${blogsCategory}" th:value="${cat.categoryBlogId}"
+                                    th:text="${cat.categoryBlogName}">
                                     Category
                                 </button><button type="button" class="btn btn-primary dropdown-toggle"
                                     data-bs-toggle="dropdown" aria-expanded="false" th:if="${catId==null}">
@@ -320,9 +272,10 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" th:href="@{/blogsManagement}">--All Category--</a>
                                     </li>
-                                    <li><a th:each="cat : ${blogsCategory}" th:value="${cat.categoryBlogId}" th:text="${cat.categoryBlogName}"
-                                            class="dropdown-item"
-                                            th:href="@{'/blogsManagement/filterCategory/'+${cat.categoryBlogId}}"></a></li>
+                                    <li><a th:each="cat : ${blogsCategory}" th:value="${cat.categoryBlogId}"
+                                            th:text="${cat.categoryBlogName}" class="dropdown-item"
+                                            th:href="@{'/blogsManagement/filterCategory/'+${cat.categoryBlogId}}"></a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="btn-group">
@@ -413,7 +366,8 @@
                                     </td>
                                     <td th:text="${listB.author}" class="text-center"></td>
                                     <td class="text-center" style="height: 150px;">
-                                        <img style="height: 100%;" th:src="@{${listB.image}}" th:alt="${listB.image}" class="img-fluid">
+                                        <img style="height: 100%;" th:src="@{${listB.image}}" th:alt="${listB.image}"
+                                            class="img-fluid">
                                     </td>
                                     <td th:text="${listB.updateDate}" class="text-center"></td>
 
@@ -461,22 +415,22 @@
                             <ul class="pagination justify-content-end mb-0 list-unstyled">
                                 <li class="page-item">
                                     <a th:if="${currentPage >1}"
-                                        th:href="@{'/blogsManagement/filterCategory/'+${catId}+'/' + ${currentPage - 1}}" class="page-link"
-                                        href="" aria-label="Prev">Prev</a>
+                                        th:href="@{'/blogsManagement/filterCategory/'+${catId}+'/' + ${currentPage - 1}}"
+                                        class="page-link" href="" aria-label="Prev">Prev</a>
                                     <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
                                 </li>
                                 <span th:each="i:${#numbers.sequence(1,totalPages)}">
                                     <li class="page-item"><a th:if="${currentPage != i}"
-                                            th:href="@{'/blogsManagement/filterCategory/'+${catId}+'/'+${i}}" class="page-link"
-                                            href="">[[${i}]]</a>
+                                            th:href="@{'/blogsManagement/filterCategory/'+${catId}+'/'+${i}}"
+                                            class="page-link" href="">[[${i}]]</a>
                                     </li>
                                     <li th:unless="${currentPage != i}" class="page-item active"><a class="page-link"
                                             href="">[[${i}]]</a></li>
                                 </span>
                                 <li class="page-item">
                                     <a th:if="${currentPage < totalPages}"
-                                        th:href="@{'/blogsManagement/filterCategory/'+${catId}+'/' + ${currentPage + 1}}" class="page-link"
-                                        href="" aria-label="Next">Next</a>
+                                        th:href="@{'/blogsManagement/filterCategory/'+${catId}+'/' + ${currentPage + 1}}"
+                                        class="page-link" href="" aria-label="Next">Next</a>
                                     <span class="page-link pe-none" th:unless="${currentPage < totalPages}">Next</span>
                                 </li>
                             </ul><!--end pagination-->

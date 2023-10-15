@@ -1,24 +1,17 @@
 package com.example.project.Admin.BlogController.Model;
 
 import java.sql.Date;
-import java.util.List;
-
-import com.example.project.Admin.TagController.Model.Tag;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "blog")
 public class Blog {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "blog_id")
     private int blogId;
     @Column(name = "category_blog_id")
@@ -32,19 +25,6 @@ public class Blog {
     private String content;
     @Column(name="updateDate")
     private Date updateDate;
-    
-    @OneToMany
-    @JoinColumn(name = "blog_id")
-    private  List<Tag> tags;
-
-    @Override
-    public String toString() {
-        return "Blog [blogId=" + blogId + ", categoryBlogId=" + categoryBlogId + ", title=" + title + ", date=" + date
-                + ", description=" + description + ", status=" + status + ", author=" + author + ", image=" + image
-                + ", content=" + content + ", updatedate=" + updateDate + "]";
-    }
-
-
 
     public Blog() {
     }

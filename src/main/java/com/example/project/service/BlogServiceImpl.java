@@ -61,4 +61,68 @@ public class BlogServiceImpl implements BlogService {
         return this.repo.findAll(pageable);
     }
 
+    //search
+    @Override
+    public List<blog> findBlogByTitleOrTags(String key) {
+        
+        return repo.findByTitleOrTags(key);
+    }
+
+    @Override
+    public List<Object> getComment(int blogId) {
+        return repo.getComment(blogId);
+    }
+
+    @Override
+    public List<Object> getTags(int blogId) {
+        return repo.getTags(blogId);
+    }
+
+    @Override
+    public Page<blog> findPaginated(int pageNo, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNo-1,pageSize);
+        return this.repo.findAll(pageable);
+    }
+
+    @Override
+    public List<blog> getBlogByTags(String name) {
+        return repo.getBlogByTags(name);
+    }
+
+    //page phan trang
+    @Override
+    public Page<blog> findBlogByTitleOrTagsPaged(String key, int page, int size) {
+        PageRequest pageable = PageRequest.of(page-1,size);
+        return this.repo.findByTitleOrTags(key,pageable);
+    }
+
+    @Override
+    public Page<blog> getBlogByCategoryIdPaged(int category_blog_id, int page, int size) {
+        PageRequest pageable = PageRequest.of(page-1,size);
+        return this.repo.findByCategory_blog_id(category_blog_id,pageable);
+    }
+
+    @Override
+    public Page<blog> getBlogByTagsPaged(String name, int page, int size) {
+        PageRequest pageable = PageRequest.of(page-1,size);
+        return this.repo.getBlogByTags(name,pageable);
+    }
+
+    @Override
+    public Page<Object> getComment(int blogId, int page, int size) {
+        PageRequest pageable = PageRequest.of(page-1,size);
+        return this.repo.getComment(blogId,pageable);
+    }
+
+    
+
+    
+
+    @Override
+    public List<Object[]> GetBlogAndCategory() {
+        return repo.findBlogAndCategory();
+    }
+
+    
+
 }

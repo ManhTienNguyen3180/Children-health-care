@@ -1,12 +1,17 @@
 package com.example.project.entity;
 
 import java.time.LocalDate;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Table(name = "user")
 public class user {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,20 +26,22 @@ public class user {
     private String email;
     private String image;
     private int status;
-    @Column(name = "role")
-    private int role_id;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private role role_id;
     private String create_by;
     private LocalDate create_at;
-
     @Column(name = "reset_token")
     private String resetToken;
+    @Column(name = "rolename")
+    private String rolename;
 
     public user() {
     }
 
     public user(int user_id, String username, String password, String full_name, int gender, int phone,
             @Email(message = "Please provide a valid e-mail") @NotEmpty(message = "Please provide an e-mail") String email,
-            String image, int status, int role_id, String create_by, LocalDate create_at, String resetToken) {
+            String image, int status, role role_id, String create_by, LocalDate create_at, String resetToken) {
         this.user_id = user_id;
         this.username = username;
         this.password = password;
@@ -50,9 +57,11 @@ public class user {
         this.resetToken = resetToken;
     }
 
-    public user(String username, String password, String full_name, int gender, int phone,
+    public user(int user_id, String username, String password, String full_name, int gender, int phone,
             @Email(message = "Please provide a valid e-mail") @NotEmpty(message = "Please provide an e-mail") String email,
-            String image, int status, int role, String create_by, LocalDate create_at) {
+            String image, int status, role role_id, String create_by, LocalDate create_at, String resetToken,
+            String rolename) {
+        this.user_id = user_id;
         this.username = username;
         this.password = password;
         this.full_name = full_name;
@@ -61,7 +70,25 @@ public class user {
         this.email = email;
         this.image = image;
         this.status = status;
-        this.role_id = role;
+        this.role_id = role_id;
+        this.create_by = create_by;
+        this.create_at = create_at;
+        this.resetToken = resetToken;
+        this.rolename = rolename;
+    }
+    
+    public user(String username, String password, String full_name, int gender, int phone,
+            @Email(message = "Please provide a valid e-mail") @NotEmpty(message = "Please provide an e-mail") String email,
+            String image, int status, role role_id, String create_by, LocalDate create_at) {
+        this.username = username;
+        this.password = password;
+        this.full_name = full_name;
+        this.gender = gender;
+        this.phone = phone;
+        this.email = email;
+        this.image = image;
+        this.status = status;
+        this.role_id = role_id;
         this.create_by = create_by;
         this.create_at = create_at;
     }
@@ -138,11 +165,11 @@ public class user {
         this.status = status;
     }
 
-    public int getRole() {
+    public role getRole_id() {
         return role_id;
     }
 
-    public void setRole(int role_id) {
+    public void setRole_id(role role_id) {
         this.role_id = role_id;
     }
 
@@ -170,21 +197,13 @@ public class user {
         this.resetToken = resetToken;
     }
 
+    public String getRolename() {
+        return rolename;
+    }
+
+    public void setRolename(String rolename) {
+        this.rolename = rolename;
+    }
     
-
-
-    
-
-
-
-
-    // @Override
-    // public String toString() {
-    //     return "user [user_id=" + user_id + ", username=" + username + ", password=" + password + ", full_name="
-    //             + full_name
-    //             + ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", image=" + image + ", status="
-    //             + status
-    //             + ", role_id=" + role_id + ", create_at=" + create_at + ", create_by=" + create_by + "]";
-    // }
 
 }

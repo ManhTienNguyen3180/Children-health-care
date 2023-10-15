@@ -152,6 +152,7 @@
     <div class="container position-relative " style="min-height: 80vh; margin-top: 100px;">
         <p th:text="${mess}" class="alert alert-success"></p>
         <div class="container">
+            
             <div class="row align-items-lg-stretch">
                 <button class="col-md btn-light">
                     <a class="btn btn-link" id="titleSort" th:href="@{'/bloglistmanager/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir}}">

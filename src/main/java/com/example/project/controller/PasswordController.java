@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -141,17 +142,19 @@ public class PasswordController {
 	public String changeUserPass(@RequestParam("oldPass") String password, @RequestParam("newPass") String newPassword,
 			@RequestParam("reNewPass") String confirmPassword, RedirectAttributes redir, HttpSession session) {
 		user user = (user) session.getAttribute("user");
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		boolean isPasswordCorrect = passwordEncoder.matches(password,user.getPassword());
 		if (!newPassword.equals(confirmPassword)) {
 			redir.addFlashAttribute("errorMessage", "Your new password and confirm password are not match.");
 			return "redirect:/user-profile";
 		}
-		if (!password.equals(user.getPassword())) {
+		if (!isPasswordCorrect) {
 			redir.addFlashAttribute("errorMessage", "Your old password is not correct.");
 			return "redirect:/user-profile";
 		}
-		if (password.equalsIgnoreCase(user.getPassword()) && newPassword.equalsIgnoreCase(confirmPassword)) {
-			user.setPassword(newPassword);
-			userService.save(user);
+		if (isPasswordCorrect && newPassword.equalsIgnoreCase(confirmPassword)) {
+			user.setPassword(passwordEncoder.encode(newPassword));
+			userService.saveImage(user);
 			redir.addFlashAttribute("successMessage", "Change password successfully.");
 			return "redirect:/user-profile";
 		}

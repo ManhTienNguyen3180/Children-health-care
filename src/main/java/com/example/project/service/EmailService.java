@@ -6,5 +6,5 @@ public interface EmailService {
     public void sendMail(SimpleMailMessage email);
 
     public void sendConfirm(String to,String email);
-    
+    public void sendNotification(String to, String link,String passs) ;
 }
