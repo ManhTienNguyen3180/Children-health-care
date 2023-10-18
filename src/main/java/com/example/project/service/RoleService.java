@@ -18,7 +18,7 @@ public class RoleService {
   private RoleRepository roleRepository;
 
   public List<role> getRole() {
-    return roleRepository.findAll();
+    return roleRepository.GetRole();
 
   }
   public role findUserByName(String name){
