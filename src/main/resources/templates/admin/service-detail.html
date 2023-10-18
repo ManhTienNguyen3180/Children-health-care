@@ -27,7 +27,7 @@
     <!-- Css -->
     <link th:href="@{/css/style.min.css}" rel="stylesheet" type="text/css" id="theme-opt" />
 
-    <script th:href="@{https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js}"></script>
+    <script th:src="@{https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js}"></script>
     <style>
         .preview-box {
             max-width: 100%;
@@ -520,7 +520,8 @@
                                                             class="text-danger">*</span></label>
                                                     <textarea name="description" id="editor1" rows="4"
                                                         class="form-control" placeholder="Service description :">
-                                                        <div th:text="${serviceDetail.description}"></div></textarea>
+                                                        <div th:text="${serviceDetail.description}"></div>
+                                                    </textarea>
                                                     <script>
                                                         CKEDITOR.replace('editor1')
                                                     </script>

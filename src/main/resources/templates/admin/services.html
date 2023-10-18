@@ -139,7 +139,7 @@
                         </div>
                     </li>
 
-                    
+
 
                 </ul>
                 <!-- sidebar-menu  -->
@@ -372,7 +372,7 @@
                                                     style="font-size: xx-large; color: rgba(42, 54, 39, 0.575); font-weight: bold;">There
                                                     is no service for your Search</span></td>
                                         </tr>
-                                        <tr style="height: 60px;" th:each="listS:${servicesList}">
+                                        <tr style="height: 100px; overflow-y: hidden; " th:each="listS:${servicesList}">
                                             <th class="p-3" th:text="${listS.Id}"></th>
                                             <td class="py-3">
                                                 <a href="#" class="text-dark">
@@ -382,7 +382,9 @@
                                                 </a>
                                             </td>
                                             <td class="p-3" th:text="${listS.price}+' $'"></td>
-                                            <td class="p-3" th:text="${listS.description}"></td>
+                                            <td class="p-3" >
+                                                <div th:utext="${listS.description}" style="height: 100px; overflow-y: auto; margin: 0px; box-sizing:border-box; padding: 0px;"></div>
+                                            </td>
                                             <td class="p-3"><img width="80px" th:src="@{${listS.image}}" alt=""></td>
                                             <td th:each="cat : ${listCate}" th:text="${cat.name}"
                                                 th:if="${cat.id==listS.categoryId}" class="p-3">
