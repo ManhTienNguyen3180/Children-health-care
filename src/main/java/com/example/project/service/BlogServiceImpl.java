@@ -9,8 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.project.Admin.BlogController.Model.Blog;
 import com.example.project.Repository.BlogRepo;
-import com.example.project.entity.blog;
 
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -19,19 +19,19 @@ public class BlogServiceImpl implements BlogService {
     private BlogRepo repo;
 
     @Override
-    public List<blog> fetchBLogList() {
-        return (List<blog>) repo.findAll();
+    public List<Blog> fetchBLogList() {
+        return (List<Blog>) repo.findAll();
     }
 
     @Override
-    public Optional<blog> findBlogById(int id) {
-        return (Optional<blog>) repo.findById(id);
+    public Optional<Blog> findBlogById(int id) {
+        return (Optional<Blog>) repo.findById(id);
 
     }
 
     // Save Blog
     @Override
-    public void save(blog blog) {
+    public void save(Blog blog) {
         repo.save(blog);
     }
 
@@ -42,17 +42,17 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<blog> getBlogByCategoryId(int category_id) {
+    public List<Blog> getBlogByCategoryId(int category_id) {
         return repo.findByCategory_blog_id(category_id);
     }
 
     @Override
-    public List<blog> getBlogsNew() {
+    public List<Blog> getBlogsNew() {
         return repo.getBlogNew();
     }
 
     @Override
-    public Page<blog> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+    public Page<Blog> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
         Sort.by(sortField).descending();
 
@@ -63,7 +63,7 @@ public class BlogServiceImpl implements BlogService {
 
     //search
     @Override
-    public List<blog> findBlogByTitleOrTags(String key) {
+    public List<Blog> findBlogByTitleOrTags(String key) {
         
         return repo.findByTitleOrTags(key);
     }
@@ -79,31 +79,31 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Page<blog> findPaginated(int pageNo, int pageSize) {
+    public Page<Blog> findPaginated(int pageNo, int pageSize) {
         PageRequest pageable = PageRequest.of(pageNo-1,pageSize);
         return this.repo.findAll(pageable);
     }
 
     @Override
-    public List<blog> getBlogByTags(String name) {
+    public List<Blog> getBlogByTags(String name) {
         return repo.getBlogByTags(name);
     }
 
     //page phan trang
     @Override
-    public Page<blog> findBlogByTitleOrTagsPaged(String key, int page, int size) {
+    public Page<Blog> findBlogByTitleOrTagsPaged(String key, int page, int size) {
         PageRequest pageable = PageRequest.of(page-1,size);
         return this.repo.findByTitleOrTags(key,pageable);
     }
 
     @Override
-    public Page<blog> getBlogByCategoryIdPaged(int category_blog_id, int page, int size) {
+    public Page<Blog> getBlogByCategoryIdPaged(int category_blog_id, int page, int size) {
         PageRequest pageable = PageRequest.of(page-1,size);
         return this.repo.findByCategory_blog_id(category_blog_id,pageable);
     }
 
     @Override
-    public Page<blog> getBlogByTagsPaged(String name, int page, int size) {
+    public Page<Blog> getBlogByTagsPaged(String name, int page, int size) {
         PageRequest pageable = PageRequest.of(page-1,size);
         return this.repo.getBlogByTags(name,pageable);
     }

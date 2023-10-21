@@ -4,38 +4,39 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
-import com.example.project.entity.blog;
+
+import com.example.project.Admin.BlogController.Model.Blog;
 
 
 public interface BlogService {
 
-    List<blog> fetchBLogList();
+    List<Blog> fetchBLogList();
 
     List<Object[]> GetBlogAndCategory();
     //Get Blog by ID
-    Optional<blog> findBlogById(int id);
+    Optional<Blog> findBlogById(int id);
 
     //Save blog
-    void save(blog blog);
+    void save(Blog blog);
 
     //Detele blog
     void delete(int id);
 
     //get list blog by cate_id
-    List<blog> getBlogByCategoryId(int category_id);
+    List<Blog> getBlogByCategoryId(int category_id);
 
     //get list blog by status
-    List<blog> getBlogsNew();
+    List<Blog> getBlogsNew();
 
     //implement paginate
-    Page<blog> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+    Page<Blog> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 
     
     //search theo title va tags
-    List<blog> findBlogByTitleOrTags(String key);
+    List<Blog> findBlogByTitleOrTags(String key);
 
     //get BLog by Tags
-    List<blog> getBlogByTags(String name);
+    List<Blog> getBlogByTags(String name);
 
     //get cmt
     List<Object> getComment(int blogId);
@@ -43,13 +44,13 @@ public interface BlogService {
 
 
     //phan trang blog list(public)
-    Page<blog> findPaginated(int pageNo, int pageSize);
+    Page<Blog> findPaginated(int pageNo, int pageSize);
 
-    Page<blog> findBlogByTitleOrTagsPaged(String key, int page, int size);
+    Page<Blog> findBlogByTitleOrTagsPaged(String key, int page, int size);
 
-    Page<blog> getBlogByCategoryIdPaged(int category_blog_id, int page, int size);
+    Page<Blog> getBlogByCategoryIdPaged(int category_blog_id, int page, int size);
 
-    Page<blog> getBlogByTagsPaged(String key, int page, int size);
+    Page<Blog> getBlogByTagsPaged(String key, int page, int size);
 
     Page<Object> getComment(int blogId,int page, int size);
 }

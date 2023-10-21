@@ -531,7 +531,7 @@
                             $("#date").val("").trigger("change");
                             $("#time").val("").trigger("change");
                             $("#doctorId").val("").trigger("change");
-                            $("#serviceId").val("").trigger("change");
+                            $("#serviceId").empty();
 
                             $.each(data, function (key, value) {
                                 $("#serviceId").append('<option value="' + value.service_id + '">' + value.service_name + '</option>');
@@ -544,7 +544,7 @@
                         success: function (data) {
                             $("#doctorId").empty();
                             $("#date").empty();
-                            $("#time").empty();
+                            $("#time").empty();          
                             $("#doctorId").append('<option value="">Select Doctor</option>');
                             $.each(data, function (key, value) {
                                 $("#doctorId").append('<option value="' + value.doctor_id + '">' + value.doctor_name + '</option>');
