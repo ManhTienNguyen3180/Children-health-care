@@ -1,7 +1,12 @@
 package com.example.project.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
@@ -14,10 +19,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.project.Admin.ServiceCategoryController.Model.ServiceCategory;
 import com.example.project.Repository.ReservationDetailRepo;
 import com.example.project.dto.doctorserviceDTO;
 import com.example.project.dto.slotDTO;
 import com.example.project.entity.doctor;
+import com.example.project.entity.doctorservice;
 import com.example.project.entity.patient;
 import com.example.project.entity.reservation;
 import com.example.project.entity.reservationdetail;
@@ -26,6 +33,8 @@ import com.example.project.entity.user;
 import com.example.project.service.DoctorService;
 import com.example.project.service.PatientService;
 import com.example.project.service.ReservationService;
+import com.example.project.service.ScheduleService;
+import com.example.project.service.ServiceCategoryService;
 import com.example.project.service.ServiceService;
 
 import jakarta.mail.MessagingException;
@@ -45,54 +54,113 @@ public class ReservationController {
     PatientService PatientService;
     @Autowired
     ReservationDetailRepo detailRepo;
-
-    private CrudRepository<reservationdetail, Integer> ReservationDetailService;
+    @Autowired
+    ServiceCategoryService serviceCategoryService;
+    @Autowired
+    ScheduleService scheduleService;
 
     @GetMapping("bookingappointment")
     public String getData(Model model, HttpSession session) {
         model.addAttribute("listSelected", session.getAttribute("selectedService"));
         model.addAttribute("listService", ServiceService.fechServicesList());
         model.addAttribute("listDoctor", DoctorService.fetchDoctorList());
+        model.addAttribute("listCategoryService", serviceCategoryService.fetchServiceCategoryList());
 
         return "bookingappointment";
     }
 
-    @GetMapping("/getDoctorsByService/{serviceIds}")
+    @GetMapping("/getServiceByCategoryServiceId/{categoryId}")
     @ResponseBody
-    public List<doctorserviceDTO> chooseDoc(@PathVariable List<Integer> serviceIds) {
-
-        return ReservationService.getDoctorService(serviceIds);
-
+    public List<service> chooseService(@PathVariable(value = "categoryId") int categoryId) {
+        return ServiceService.findServiceByCategoryId(categoryId);
     }
+
+    @GetMapping("/getDoctorByCategoryServiceId/{categoryId}")
+    @ResponseBody
+    public List<doctor> chooseDoctor(@PathVariable(value = "categoryId") int categoryId) {
+        System.out.println(DoctorService.getDoctorByDoctorServiceID(categoryId).size());
+        return DoctorService.getDoctorByDoctorServiceID(categoryId);
+    }
+
+    // @GetMapping("/getDoctorsByService/{serviceIds}")
+    // @ResponseBody
+    // public List<doctorserviceDTO> chooseDoc(@PathVariable List<Integer>
+    // serviceIds) {
+
+    // return ReservationService.getDoctorService(serviceIds);
+
+    // }
 
     @GetMapping("getSlotsByDoctor/{doctorId}")
     @ResponseBody
-    public List<slotDTO> chooseSlot(@PathVariable(value = "doctorId") int doctorId) {
+    public List<slotDTO> chooseSlot(@PathVariable(value = "doctorId") int doctorId, HttpSession session) {
+
         return ReservationService.getDoctorSlot(doctorId);
+
+    }
+
+    @GetMapping("getDate")
+    @ResponseBody
+    public List<slotDTO> getDate(HttpSession session) {
+        return ReservationService.getDate();
+    }
+
+    @GetMapping("getTime/{date}")
+    @ResponseBody
+    public List<slotDTO> getTime(@PathVariable(value = "date",required = false) String date, HttpSession session) {
+        // get number of week day from date
+        int dayOfWeek = getDayOfWeek(date);
+        System.out.println("day= " + dayOfWeek);
+        return ReservationService.getTime(dayOfWeek);
+    }
+
+    @GetMapping("getTimeByDoctorAndDate/{doctorId}/{date}")
+    @ResponseBody
+    public List<slotDTO> chooseTime(@PathVariable(value = "doctorId") int doctorId,
+            @PathVariable(value = "date") String date, HttpSession session) {
+        // get number of week day from date
+        int dayOfWeek = getDayOfWeek(date);
+        System.out.println("day= " + dayOfWeek);
+        return ReservationService.getTimeSlotDTOs(doctorId, dayOfWeek);
 
     }
 
     @GetMapping("/reservationcontact")
     public String getContact(
-            @RequestParam("serviceId") List<Integer> service_id,
-            @RequestParam("doctorId") int doctorId, @RequestParam("date") String date, Model model,RedirectAttributes redirAttr,
+            @RequestParam(value = "serviceId", required = false) List<Integer> service_id,
+            @RequestParam(value = "doctorId", required = false) Integer doctorId, @RequestParam("date") String date,
+            @RequestParam("time") String time, Model model,
+            RedirectAttributes redirAttr,
             HttpSession session) {
-        int count = ReservationService.countByReservationId(doctorId, java.sql.Date.valueOf(date));
-        if (count >= 5) {
-            redirAttr.addFlashAttribute("messageReser", "*This doctor is full on this day, please choose another day or another doctor");
-            return "redirect:/bookingappointment";
-        } else {
+
+        if (service_id != null) {
             Optional<doctor> optionalDoctor = DoctorService.findDoctorById(doctorId);
             doctor doctor = optionalDoctor.get();
-
+            double totalPrice = 0.0;
+            List<service> services = ServiceService.findListByServiceId(service_id);
+            for (service service : services) {
+                // Cập nhật tổng số tiền bằng cách thêm giá của mỗi dịch vụ
+                totalPrice += service.getPrice();
+            }
             model.addAttribute("doctor", doctor);
             model.addAttribute("service", ServiceService.findListByServiceId(service_id));
             model.addAttribute("date", date);
+            model.addAttribute("time", time);
+            model.addAttribute("totalPrice", totalPrice);
             session.setAttribute("selectedDate", date);
             session.setAttribute("selectedServices", ServiceService.findListByServiceId(service_id));
             session.setAttribute("selectedDoctors", doctor);
+        }else{
+            model.addAttribute("doctor", null);
+            model.addAttribute("date", date);
+            model.addAttribute("time", time);
+            session.setAttribute("selectedDate", date);
+            session.setAttribute("selectedServices", null);
+            session.setAttribute("selectedDoctors", null);
             return "reservationcontact";
         }
+
+        return "reservationcontact";
 
     }
 
@@ -174,6 +242,39 @@ public class ReservationController {
         session.removeAttribute("selectedDate");
 
         return "redirect:/thankyou";
+    }
+
+    public int getDayOfWeek(String dateStr) {
+        try {
+            // Định dạng của chuỗi ngày
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            Date date = dateFormat.parse(dateStr);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+            if (dayOfWeek == Calendar.SUNDAY) {
+                return 0;
+            } else if (dayOfWeek == Calendar.MONDAY) {
+                return 1;
+            } else if (dayOfWeek == Calendar.TUESDAY) {
+                return 2;
+            } else if (dayOfWeek == Calendar.WEDNESDAY) {
+                return 3;
+            } else if (dayOfWeek == Calendar.THURSDAY) {
+                return 4;
+            } else if (dayOfWeek == Calendar.FRIDAY) {
+                return 5;
+            } else {
+                return 6;
+            }
+        } catch (ParseException e) {
+            // Xử lý lỗi khi định dạng ngày không hợp lệ
+            e.printStackTrace();
+            return -1; // Trả về một giá trị ngày không hợp lệ nếu có lỗi
+        }
     }
 
     @GetMapping("/thankyou")

@@ -3,6 +3,7 @@ package com.example.project.entity;
 import java.sql.Date;
 import java.sql.Time;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -15,7 +16,7 @@ public class slot {
     private Time start_time;
     private Time end_time;
     private int max_appointments_per_slot;
-
+    private int dayof_week;
     public slot() {
     }
 
@@ -26,6 +27,19 @@ public class slot {
         this.start_time = start_time;
         this.end_time = end_time;
         this.max_appointments_per_slot = max_appointments_per_slot;
+    }
+    
+    
+    
+    public slot(int id, int doctor_id, Date date, Time start_time, Time end_time, int max_appointments_per_slot,
+            int dayof_week) {
+        this.id = id;
+        this.doctor_id = doctor_id;
+        this.date = date;
+        this.start_time = start_time;
+        this.end_time = end_time;
+        this.max_appointments_per_slot = max_appointments_per_slot;
+        this.dayof_week = dayof_week;
     }
 
     public int getId() {
@@ -75,6 +89,16 @@ public class slot {
     public void setMax_appointments_per_slot(int max_appointments_per_slot) {
         this.max_appointments_per_slot = max_appointments_per_slot;
     }
+
+    public int getDayof_week() {
+        return dayof_week;
+    }
+
+    public void setDayof_week(int dayof_week) {
+        this.dayof_week = dayof_week;
+    }
+
+    
 
 
 }

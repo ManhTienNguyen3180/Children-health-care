@@ -149,6 +149,11 @@ public class DoctorServiceImpl implements DoctorService {
         return repo.getLatestDoctor();
     }
 
+    @Override
+    public List<doctor> getDoctorByDoctorServiceID(int id) {
+        return repo.getDoctorByDoctorServiceID(id);
+    }
+
 }
 
     

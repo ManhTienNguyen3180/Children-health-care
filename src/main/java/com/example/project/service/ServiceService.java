@@ -57,4 +57,8 @@ public class ServiceService {
     public List<service> findListNotByServiceId(List<Integer> serviceIds){
         return repo.findByServiceId(serviceIds);
     }
+    //find service by category id
+    public List<service> findServiceByCategoryId(int categoryId){
+        return repo.findServiceByCategoryId(categoryId);
+    }
 }

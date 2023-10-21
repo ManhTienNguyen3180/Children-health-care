@@ -27,7 +27,7 @@ public interface BlogRepo extends JpaRepository<blog, Integer>{
     
     //search
     @Query(value ="select b.blog_id,b.category_blog_id,b.title,b.date,\n" + //
-            "b.description,b.status,b.author,b.image,b.content,b.update from blog b join tags t on b.blog_id=t.id\n" + //
+            "b.description,b.status,b.author,b.image,b.content,b.updateDate from blog b join tags t on b.blog_id=t.id\n" + //
             "and (b.title LIKE %:key% or t.name LIKE %:key%)",nativeQuery = true)
     List<blog> findByTitleOrTags(@Param("key")String key);
 
@@ -42,7 +42,7 @@ public interface BlogRepo extends JpaRepository<blog, Integer>{
     
     
     @Query( value ="select b.blog_id,b.category_blog_id,b.title,b.date,\n" + //
-            "b.description,b.status,b.author,b.image,b.content,b.update from blog b join tags t on b.blog_id=t.blog_id\n" + //
+            "b.description,b.status,b.author,b.image,b.content,b.updateDate from blog b join tags t on b.blog_id=t.blog_id\n" + //
             "where t.name like %:name%",nativeQuery = true)
     List<blog> getBlogByTags(@Param("name")String name);
 
@@ -53,12 +53,12 @@ public interface BlogRepo extends JpaRepository<blog, Integer>{
     Page<blog> findByCategory_blog_id(int category_blog_id,PageRequest pageable);
 
     @Query( value ="select b.blog_id,b.category_blog_id,b.title,b.date,\n" + //
-            "b.description,b.status,b.author,b.image,b.content,b.update from blog b join tags t on b.blog_id=t.blog_id\n" + //
+            "b.description,b.status,b.author,b.image,b.content,b.updateDate from blog b join tags t on b.blog_id=t.blog_id\n" + //
             "where t.name like %:name%",nativeQuery = true)
     Page<blog> getBlogByTags(@Param("name")String name,PageRequest pageable);
 
     @Query(value ="select b.blog_id,b.category_blog_id,b.title,b.date,\n" + //
-            "b.description,b.status,b.author,b.image,b.content,b.update from blog b join tags t on b.blog_id=t.id\n" + //
+            "b.description,b.status,b.author,b.image,b.content,b.updateDate from blog b join tags t on b.blog_id=t.id\n" + //
             "and (b.title LIKE %:key% or t.name LIKE %:key%)",nativeQuery = true)
     Page<blog> findByTitleOrTags(@Param("key")String key,PageRequest pageable);
 

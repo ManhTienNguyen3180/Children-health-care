@@ -199,7 +199,7 @@
                     <div class="d-md-flex justify-content-between">
                         <h5 class="mb-0">Users List</h5>
 
-                        <form th:action="@{/admin/users}" action="admin/users" method="POST">
+                        <form th:action="@{/admin/users}"  method="POST">
                             <button type="submit" class="btn btn-soft-success m-1 btn-sm" value="default"
                                 name="order">Default</button>
                             <button class="btn btn-soft-success m-1 btn-sm" value="role" name="order"
@@ -275,7 +275,7 @@
 
                                             <td class="p-3" th:text="${users.phone}"></td>
 
-                                            <td class="p-3" th:text="${users.rolename}"></td>
+                                            <td class="p-3" th:text="${users.role_id.role_name}"></td>
 
                                             <td class="p-3" th:text="${users.create_at}"></td>
 

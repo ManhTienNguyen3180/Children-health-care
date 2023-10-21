@@ -2,6 +2,7 @@ package com.example.project.entity;
 
 import java.sql.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -17,7 +18,8 @@ public class blog {
     private String author;
     private String image;
     private String content;
-    private Date updateDate;
+    @Column(name = "updateDate")
+    private Date update;
 
 
     public blog() {
@@ -48,7 +50,7 @@ public class blog {
         this.author = author;
         this.image = image;
         this.content = content;
-        this.updateDate = update;
+        this.update = update;
     }
 
     public int getBlog_id() {
@@ -152,12 +154,12 @@ public class blog {
         this.content = content;
     }
 
-    public Date getUpdateDate() {
-        return updateDate;
+    public Date getUpdate() {
+        return update;
     }
 
-    public void setUpdateDate(Date update) {
-        this.updateDate = update;
+    public void setUpdate(Date update) {
+        this.update = update;
     }
 
     

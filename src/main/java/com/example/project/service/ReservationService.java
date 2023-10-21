@@ -14,6 +14,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import com.example.project.Repository.ReservationDetailRepo;
 import com.example.project.Repository.ReservationRepo;
+import com.example.project.Repository.SlotRepo;
 import com.example.project.dto.doctorserviceDTO;
 import com.example.project.dto.slotDTO;
 import com.example.project.entity.reservation;
@@ -36,7 +37,8 @@ public class ReservationService {
     private JavaMailSender emailSender;
     @Autowired
     private SpringTemplateEngine templateEngine;
-
+    @Autowired
+    private SlotRepo slotRepo;
 
     public void save(reservation reservation) {
         repository.save(reservation);
@@ -62,15 +64,49 @@ public class ReservationService {
         }
         return listofdoctorDTO;
     }
+
     public List<slotDTO> getDoctorSlot(int doctorid){
         List<Object[]> listofslot = repository.findDoctorSlot(doctorid);
         List<slotDTO> listofslotDTO = new ArrayList<>();
         for(Object[] obj : listofslot) {
             slotDTO slotDTO = new slotDTO();
-            slotDTO.setId(Integer.parseInt(String.valueOf(obj[0])));
+            slotDTO.setDayof_week(Integer.parseInt(String.valueOf(obj[0])));
             slotDTO.setDoctor_id(Integer.parseInt(String.valueOf(obj[1])));
-            slotDTO.setDate(String.valueOf(obj[2]));
-            slotDTO.setMaxAppointmentsPerSlot(Integer.parseInt(String.valueOf(obj[3])));
+            listofslotDTO.add(slotDTO);
+        }
+        return listofslotDTO;
+    }
+
+    public List<slotDTO> getDate(){
+        List<Object[]> listofslot = slotRepo.findDayOfWeek();
+        List<slotDTO> listofslotDTO = new ArrayList<>();
+        for(Object[] obj : listofslot) {
+            slotDTO slotDTO = new slotDTO();
+            slotDTO.setDayof_week(Integer.parseInt(String.valueOf(obj[0])));
+            listofslotDTO.add(slotDTO);
+        }
+        return listofslotDTO;
+    }
+
+    public List<slotDTO> getTime(int dayofweek){
+        List<Object[]> listofslot = slotRepo.findTime(dayofweek);
+        List<slotDTO> listofslotDTO = new ArrayList<>();
+        for(Object[] obj : listofslot) {
+            slotDTO slotDTO = new slotDTO();
+            slotDTO.setStart_time(String.valueOf(obj[0]));
+            slotDTO.setEnd_time(String.valueOf(obj[1]));
+            listofslotDTO.add(slotDTO);
+        }
+        return listofslotDTO;
+    }
+
+    public List<slotDTO> getTimeSlotDTOs(int doctorid, int dayofweek){
+        List<Object[]> listofslot = slotRepo.findSlotByDoctorIdAndDayOfWeek(doctorid, dayofweek);
+        List<slotDTO> listofslotDTO = new ArrayList<>();
+        for(Object[] obj : listofslot) {
+            slotDTO slotDTO = new slotDTO();
+            slotDTO.setStart_time(String.valueOf(obj[0]));
+            slotDTO.setEnd_time(String.valueOf(obj[1]));
             listofslotDTO.add(slotDTO);
         }
         return listofslotDTO;

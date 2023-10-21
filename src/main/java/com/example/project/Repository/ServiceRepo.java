@@ -33,4 +33,8 @@ public interface ServiceRepo extends JpaRepository<service, Integer>{
     List<service> findServiceByDoctorID(int doctorID);
     @Query("Select s from service s where s.service_id NOT IN ?1")
     List<service> findNotByServiceId(List<Integer> serviceIds); 
+    //find service by category id
+    @Query("Select s from service s where s.category_id = ?1")
+    List<service> findServiceByCategoryId(int categoryId);
+
 }

@@ -16,12 +16,15 @@
     <!-- Bootstrap -->
     <link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Icons -->
-    <link th:href="@{/css/materialdesignicons.min.css}" href="css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/materialdesignicons.min.css}" href="css/materialdesignicons.min.css" rel="stylesheet"
+        type="text/css" />
     <link th:href="@{/css/remixicon.css}" href="css/remixicon.css" rel="stylesheet" type="text/css" />
-    <link th:href="@{/https://unicons.iconscout.com/release/v3.0.6/css/line.css}" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
+    <link th:href="@{/https://unicons.iconscout.com/release/v3.0.6/css/line.css}"
+        href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
     <!-- Css -->
     <link th:href="@{/css/style.min.css}" href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
 </head>
 
 <body>
@@ -162,18 +165,6 @@
 
                     </li>
 
-
-                    <!-- <li class="has-submenu parent-parent-menu-item">
-                            <a href="">About</a>
-                            
-                        </li> -->
-
-                    <!-- </li>
-                        <li class="has-submenu parent-parent-menu-item">
-                            <a href="booking-appointment">Book an apointment</a>
-                            
-                        </li> -->
-
                 </ul>
             </div>
         </div><!--end container-->
@@ -195,142 +186,224 @@
     <section class="section">
         <div class="container">
             <div class="row">
-                <div class="col-md-5 col-lg-4 order-md-last">
+                <div th:if="${doctor != null}" class="col-md-5 col-lg-4 order-md-last">
                     <div class="card rounded shadow p-4 border-0">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <span class="h5 mb-0">Your service</span>
-                            
+
                         </div>
                         <ul class="list-group mb-3 border">
-                            <li th:each="service:${service}" class="d-flex justify-content-between lh-sm p-3 border-bottom">
+                            <li th:each="service:${service}"
+                                class="d-flex justify-content-between lh-sm p-3 border-bottom">
                                 <div>
                                     <h6 class="my-0" th:text="${service.service_name}"></h6>
+
+                                </div>
+                                <span class="text-muted"
+                                    th:text="${#numbers.formatDecimal(service.price, 0, 'COMMA', 0, 'POINT')+'đ'}">12
+                                    VND</span>
+                            </li>
+                            <li class="d-flex justify-content-between lh-sm  border-bottom">
+                                <div >
+                                    <h6 class="my-0" style="margin-left: 15px;padding: 10px 0;">Phí đặt lịch</h6>
                                     
                                 </div>
-                                <span class="text-muted" th:text="${#numbers.formatCurrency(service.price)}">12 VND</span>
+                                <span class="text-muted" style="padding: 10px 0;margin-right: 15px;">Miễn phí</span>
                             </li>
-                            
+                            <div style="display: flex; justify-content: space-between;">
+                                <h6 class="my-0" style="margin-left: 15px;padding: 10px 0;">Tổng cộng</h6>
+                                <span class="text-muted" style="padding: 10px 0;margin-right: 15px;"
+                                    th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT') + 'đ'}">12
+                                    VND</span>
+                            </div>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="h5 mb-0">Your date</span>
+
+                        </div>
+                        <ul class="list-group mb-3 border">
                             <li class="d-flex justify-content-between p-3">
-                                <strong>Date: </strong>
+                                <strong>Ngày hẹn: </strong>
                                 <span th:text="${date}"> </span>
+
+                            </li>
+                            <li class="d-flex justify-content-between p-3">
+                                <strong>Thời gian: </strong>
+                                <span th:text="${time}"></span>
+
                             </li>
                         </ul>
-                        
-                        
+
                     </div>
                     <hr>
                     <div class="card rounded shadow p-4 border-0">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <span class="h5 mb-0">Your Doctor</span>
-                            
+
                         </div>
-                        
+
                         <ul class="list-group mb-3 border">
                             <li th:object="${doctor}" class="d-flex justify-content-between lh-sm p-3 border-bottom">
                                 <div>
                                     <h6 class="my-0" th:text="*{doctor_name}">doc</h6>
                                     <img src="" th:src="*{image}" style="width: 100%;">
                                 </div>
-                                
+
                             </li>
-      
+
                         </ul>
-                        
+
                     </div>
                 </div><!--end col-->
+                <div th:if="${doctor == null}" class="col-md-5 col-lg-4 order-md-last">
+                    <div class="card rounded shadow p-4 border-0">              
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="h5 mb-0">Your date</span>
 
+                        </div>
+                        <ul class="list-group mb-3 border">
+                            <li class="d-flex justify-content-between p-3">
+                                <strong>Ngày hẹn: </strong>
+                                <span th:text="${date}"> </span>
+
+                            </li>
+                            <li class="d-flex justify-content-between p-3">
+                                <strong>Thời gian: </strong>
+                                <span th:text="${time}"></span>
+
+                            </li>
+                        </ul>
+
+                    </div>                    
+                </div><!--end col-->
                 <div th:if="${session.user != null}" class="col-md-7 col-lg-8">
                     <div class="card rounded shadow p-4 border-0">
                         <h5 class="mb-3">Reservation Contact</h5>
                         <form class="needs-validation" novalidate method="get" action="/reservationcontact/save">
                             <div class="row g-3">
+                                <span style="color: cornflowerblue;">Thông tin người đặt</span>
                                 <div class="col-12">
-                                    <label for="name" class="form-label">Full name <span
-                                            class="text-muted"></span></label>
-                                    <input th:value="${session.user.full_name}" name="patient_name" type="text" class="form-control" id="fullname">
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-user" aria-hidden="true"></i></span>
+                                        <input style="border: none;outline: none;" name="patient_name" type="text"
+                                            class="form-control" placeholder="Họ tên người đặt" id="fullname">
+                                    </div>
+
+
                                     <div class="invalid-feedback">
                                         Please enter a valid email address for shipping updates.
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <label for="email" class="form-label">Email <span class="text-muted"></span></label>
-                                    <input th:value="${session.user.email}" name="patient_email" type="email" class="form-control" id="email">
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-phone" aria-hidden="true"></i></span>
+
+                                        <input style="border: none;outline: none;" name="patient_phone" type="text"
+                                            class="form-control" placeholder="Số điện thoại liên hệ (bắt buộc)"
+                                            id="phone" required>
+                                    </div>
+
+                                    <div class="invalid-feedback">
+                                        Please enter your shipping address.
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-envelope"
+                                                aria-hidden="true"></i></span>
+
+                                        <input style="border: none;outline: none;" name="patient_email" type="email"
+                                            placeholder="Email" class="form-control" id="email">
+                                    </div>
+
                                     <div class="invalid-feedback">
                                         Please enter a valid email address for shipping updates.
                                     </div>
                                 </div>
-                                
-                                
-                                
+                                <span style="color: cornflowerblue;">Thông tin bệnh nhân</span>
                                 <div class="col-12">
-                                    <label for="address" class="form-label">Address</label>
-                                    <input type="text" name="patient_address" class="form-control" id="address" required>
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-user" aria-hidden="true"></i></span>
+
+                                        <input style="border: none;outline: none;" name="patient_name" type="text"
+                                            placeholder="Họ tên bệnh nhân (bắt buộc)" class="form-control"
+                                            id="fullname">
+                                    </div>
+
+                                    <div class="invalid-feedback">
+                                        Please enter a valid email address for shipping updates.
+                                    </div>
+                                </div>
+                                <input type="radio" name="gender" value="1" class="col-1"><span class="col-2">Nam</span>
+                                <input type="radio" name="gender" value="0" class="col-1"><span class="col-2">Nữ</span>
+                                <div class="col-12">
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-phone" aria-hidden="true"></i></span>
+
+                                        <input style="border: none;outline: none;" name="patient_phone" type="text"
+                                            class="form-control" placeholder="Số điện thoại bệnh nhân" id="phone"
+                                            required>
+                                    </div>
+
                                     <div class="invalid-feedback">
                                         Please enter your shipping address.
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <label for="address" class="form-label">Phone number</label>
-                                    <input th:value="${session.user.phone}" name="patient_phone" type="text" class="form-control" id="phone" required>
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-calendar"
+                                                aria-hidden="true"></i></span>
+
+                                        <input style="border: none;outline: none;" name="patient_date" type="date"
+                                            class="form-control" placeholder="Ngày/Tháng/Năm Sinh" id="date" required>
+                                    </div>
+
                                     <div class="invalid-feedback">
                                         Please enter your shipping address.
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <label for="address" class="form-label">Note</label>
-                                    <textarea class="form-control" name="patient_note" cols="50" rows="5"></textarea>
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-map-marker"
+                                                aria-hidden="true"></i></span>
+
+                                        <input style="border: none;outline: none;" type="text" name="patient_address"
+                                            placeholder="Địa chỉ" class="form-control" id="address" required>
+                                    </div>
+
                                     <div class="invalid-feedback">
                                         Please enter your shipping address.
                                     </div>
                                 </div>
 
+                                <div class="col-12">
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-plus-circle"
+                                                aria-hidden="true"></i></span>
+                                        <textarea style="border: none;outline: none;" class="form-control"
+                                            name="patient_note" placeholder="Lý do khám" cols="50" rows="5"></textarea>
 
+                                    </div>
 
-
-
+                                    <div class="invalid-feedback">
+                                        Please enter your shipping address.
+                                    </div>
+                                </div>
 
                             </div>
 
                             <hr class="my-4">
-
-
-
-                            <!-- <div class="row gy-3">
-                                    <div class="col-md-6">
-                                        <label for="cc-name" class="form-label">Name on card</label>
-                                        <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                                        <small class="text-muted">Full name as displayed on card</small>
-                                        <div class="invalid-feedback">
-                                            Name on card is required
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="cc-number" class="form-label">Credit card number</label>
-                                        <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                                        <div class="invalid-feedback">
-                                            Credit card number is required
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3 mb-3">
-                                        <label for="cc-expiration" class="form-label">Expiration</label>
-                                        <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                                        <div class="invalid-feedback">
-                                            Expiration date required
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3 mb-3">
-                                        <label for="cc-cvv" class="form-label">CVV</label>
-                                        <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                                        <div class="invalid-feedback">
-                                            Security code required
-                                        </div>
-                                    </div>
-                                </div> -->
-
-                                <a class="w-50 btn btn-soft-primary" style="margin-right: 10px;display: inline;" href="/service">&larr; Choose more service</a><button class="w-50 btn btn-primary" type="submit">Continue to checkout</button>
+                            <a class="w-50 btn btn-soft-primary" style="margin-right: 10px;display: inline;"
+                                href="/service">&larr; Choose more service</a><button class="w-50 btn btn-primary"
+                                type="submit">Continue to checkout</button>
                         </form>
                     </div>
                 </div>
@@ -339,93 +412,144 @@
                         <h5 class="mb-3">Reservation Contact</h5>
                         <form class="needs-validation" novalidate method="get" action="/reservationcontact/save">
                             <div class="row g-3">
+                                <span style="color: cornflowerblue;">Thông tin người đặt</span>
                                 <div class="col-12">
-                                    <label for="name" class="form-label">Full name <span
-                                            class="text-muted"></span></label>
-                                    <input  name="patient_name" type="text" class="form-control" id="fullname">
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-user" aria-hidden="true"></i></span>
+                                        <input style="border: none;outline: none;" name="user_name" type="text"
+                                            class="form-control" placeholder="Họ tên người đặt" id="fullname" required>
+                                    </div>
+
+
                                     <div class="invalid-feedback">
                                         Please enter a valid email address for shipping updates.
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <label for="email" class="form-label">Email <span class="text-muted"></span></label>
-                                    <input  name="patient_email" type="email" class="form-control" id="email">
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-phone" aria-hidden="true"></i></span>
+
+                                        <input style="border: none;outline: none;" name="user_phone" type="text"
+                                            class="form-control" placeholder="Số điện thoại liên hệ (bắt buộc)"
+                                            id="phone" required>
+                                    </div>
+
+                                    <div class="invalid-feedback">
+                                        Please enter your shipping address.
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-envelope"
+                                                aria-hidden="true"></i></span>
+
+                                        <input style="border: none;outline: none;" name="user_email" type="email"
+                                            placeholder="Email" class="form-control" id="email" required>
+                                    </div>
+
                                     <div class="invalid-feedback">
                                         Please enter a valid email address for shipping updates.
                                     </div>
                                 </div>
-                                
-                                
-                                
+                                <span style="color: cornflowerblue;">Thông tin bệnh nhân</span>
                                 <div class="col-12">
-                                    <label for="address" class="form-label">Address</label>
-                                    <input type="text" name="patient_address" class="form-control" id="address" required>
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-user" aria-hidden="true"></i></span>
+
+                                        <input style="border: none;outline: none;" name="patient_name" type="text"
+                                            placeholder="Họ tên bệnh nhân (bắt buộc)" class="form-control"
+                                            id="fullname" required>
+                                    </div>
+
+                                    <div class="invalid-feedback">
+                                        Please enter a valid email address for shipping updates.
+                                    </div>
+                                </div>
+                                <input type="radio" name="gender" value="1" class="col-1" checked><span class="col-2" >Nam</span>
+                                <input type="radio" name="gender" value="0" class="col-1"><span class="col-2">Nữ</span>
+                                <!-- <div class="col-12">
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-phone" aria-hidden="true"></i></span>
+
+                                        <input style="border: none;outline: none;" name="patient_phone" type="text"
+                                            class="form-control" placeholder="Số điện thoại bệnh nhân" id="phone"
+                                            required>
+                                    </div>
+
+                                    <div class="invalid-feedback">
+                                        Please enter your shipping address.
+                                    </div>
+                                </div> -->
+                                <div class="col-12">
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-calendar"
+                                                aria-hidden="true"></i></span>
+
+                                        <input style="border: none;outline: none;" name="patient_date" type="date"
+                                            class="form-control" placeholder="Ngày/Tháng/Năm Sinh" id="date" required>
+                                    </div>
+
                                     <div class="invalid-feedback">
                                         Please enter your shipping address.
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <label for="address" class="form-label">Phone number</label>
-                                    <input  name="patient_phone" type="text" class="form-control" id="phone" required>
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-map-marker"
+                                                aria-hidden="true"></i></span>
+
+                                        <input style="border: none;outline: none;" type="text" name="patient_address"
+                                            placeholder="Địa chỉ" class="form-control" id="address" required>
+                                    </div>
+
                                     <div class="invalid-feedback">
                                         Please enter your shipping address.
                                     </div>
                                 </div>
+
                                 <div class="col-12">
-                                    <label for="address" class="form-label">Note</label>
-                                    <textarea class="form-control" name="patient_note" cols="50" rows="5"></textarea>
+                                    <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                        <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
+                                                style="color: #666;" class="fa fa-plus-circle"
+                                                aria-hidden="true"></i></span>
+                                        <textarea style="border: none;outline: none;" class="form-control"
+                                            name="patient_note" placeholder="Lý do khám" cols="50" rows="5"></textarea>
+
+                                    </div>
+
                                     <div class="invalid-feedback">
                                         Please enter your shipping address.
                                     </div>
                                 </div>
-
-
-
-
-
 
                             </div>
 
                             <hr class="my-4">
 
-
-
-                            <!-- <div class="row gy-3">
-                                    <div class="col-md-6">
-                                        <label for="cc-name" class="form-label">Name on card</label>
-                                        <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                                        <small class="text-muted">Full name as displayed on card</small>
-                                        <div class="invalid-feedback">
-                                            Name on card is required
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="cc-number" class="form-label">Credit card number</label>
-                                        <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                                        <div class="invalid-feedback">
-                                            Credit card number is required
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3 mb-3">
-                                        <label for="cc-expiration" class="form-label">Expiration</label>
-                                        <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                                        <div class="invalid-feedback">
-                                            Expiration date required
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3 mb-3">
-                                        <label for="cc-cvv" class="form-label">CVV</label>
-                                        <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                                        <div class="invalid-feedback">
-                                            Security code required
-                                        </div>
-                                    </div>
-                                </div> -->
+                            <!-- <span style="color: cornflowerblue;">Hình thức thanh toán</span><br>
+                            <div class="col-12">
+                                <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
+                                    <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i style="color: #666;" class="fa fa-plus-circle" aria-hidden="true"></i></span>
+                                    <textarea style="border: none;outline: none;" class="form-control" name="patient_note" placeholder="Lý do khám" cols="50" rows="5"></textarea>
+                                    
+                                </div>
                                 
-                                <a class="w-50 btn btn-soft-primary" style="margin-right: 10px;display: inline;" href="/service">&larr; Choose more service</a><button class="w-50 btn btn-primary" type="submit">Continue to checkout</button>
+                                <div class="invalid-feedback">
+                                    Please enter your shipping address.
+                                </div>
+                            </div> -->
+
+
+                            <a class="w-40 btn btn-soft-primary" style="margin-right: 10px;display: inline;"
+                                href="/service">&larr; Choose more service</a><button class="w-60 btn btn-primary"
+                                type="submit">Continue to checkout</button>
                         </form>
                     </div>
                 </div>
@@ -527,7 +651,7 @@
                 <div class="row align-items-center">
                     <div class="col-sm-6">
                         <div class="text-sm-start text-center">
-                            
+
                         </div>
                     </div><!--end col-->
 
@@ -551,11 +675,11 @@
     <!-- Back to top -->
 
     <!-- Offcanvas Start -->
-    
+
     <!-- Offcanvas End -->
 
     <!-- Offcanvas Start -->
-    
+
     <!-- Offcanvas End -->
 
     <!-- javascript -->
