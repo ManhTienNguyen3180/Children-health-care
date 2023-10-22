@@ -28,4 +28,7 @@ public interface ReservationRepo extends JpaRepository<reservation, Integer> {
 
     @Query("SELECT u FROM reservation u where patient_id=?1")
     List<reservation> findByPatient_id(int patient_id);
+
+    @Query("select r from reservation r where r.doctor_id = ?1 and r.date = ?2 and r.time = ?3")
+    reservation findByDoctor_idAndDateAndTime(int doctor_id, Date date, String time);
 }

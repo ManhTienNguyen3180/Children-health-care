@@ -26,6 +26,7 @@ public class reservation {
     private Date create_at;
     private String create_by;
     private int doctor_id;
+    private String time;
     public reservation() {
     }
     public reservation(int reservation_id, int patient_id, String patient_name, int service_id, String service_name,
@@ -47,6 +48,28 @@ public class reservation {
         this.create_by = create_by;
         this.doctor_id = doctor_id;
     }
+    
+    public reservation(int reservation_id, int patient_id, String patient_name, int service_id, String service_name,
+            String doctor_name, Date date, String description, int price, int total_cost, Date actual_date, int status,
+            Date create_at, String create_by, int doctor_id, String time) {
+        this.reservation_id = reservation_id;
+        this.patient_id = patient_id;
+        this.patient_name = patient_name;
+        this.service_id = service_id;
+        this.service_name = service_name;
+        this.doctor_name = doctor_name;
+        this.date = date;
+        this.description = description;
+        this.price = price;
+        this.total_cost = total_cost;
+        this.actual_date = actual_date;
+        this.status = status;
+        this.create_at = create_at;
+        this.create_by = create_by;
+        this.doctor_id = doctor_id;
+        this.time = time;
+    }
+    
     public int getReservation_id() {
         return reservation_id;
     }
@@ -136,6 +159,12 @@ public class reservation {
     }
     public void setDoctor_id(int doctor_id) {
         this.doctor_id = doctor_id;
+    }
+    public String getTime() {
+        return time;
+    }
+    public void setTime(String time) {
+        this.time = time;
     }
     
     

@@ -107,7 +107,7 @@ public class ReservationController {
 
     @GetMapping("getTime/{date}")
     @ResponseBody
-    public List<slotDTO> getTime(@PathVariable(value = "date",required = false) String date, HttpSession session) {
+    public List<slotDTO> getTime(@PathVariable(value = "date", required = false) String date, HttpSession session) {
         // get number of week day from date
         int dayOfWeek = getDayOfWeek(date);
         System.out.println("day= " + dayOfWeek);
@@ -132,35 +132,45 @@ public class ReservationController {
             @RequestParam("time") String time, Model model,
             RedirectAttributes redirAttr,
             HttpSession session) {
-
-        if (service_id != null) {
-            Optional<doctor> optionalDoctor = DoctorService.findDoctorById(doctorId);
-            doctor doctor = optionalDoctor.get();
-            double totalPrice = 0.0;
-            List<service> services = ServiceService.findListByServiceId(service_id);
-            for (service service : services) {
-                // Cập nhật tổng số tiền bằng cách thêm giá của mỗi dịch vụ
-                totalPrice += service.getPrice();
+        if (doctorId == null) {
+            doctorId = 0;
+        }
+        reservation r = ReservationService.findByDoctor_idAndDateAndTime(doctorId, java.sql.Date.valueOf(date), time);
+        if (r != null) {
+            redirAttr.addFlashAttribute("messageReser", "This time slot is not available");
+            return "redirect:/bookingappointment";
+        } else {
+            if (service_id != null) {
+                Optional<doctor> optionalDoctor = DoctorService.findDoctorById(doctorId);
+                doctor doctor = optionalDoctor.get();
+                double totalPrice = 0.0;
+                List<service> services = ServiceService.findListByServiceId(service_id);
+                for (service service : services) {
+                    // Cập nhật tổng số tiền bằng cách thêm giá của mỗi dịch vụ
+                    totalPrice += service.getPrice();
+                }
+                model.addAttribute("doctor", doctor);
+                model.addAttribute("service", ServiceService.findListByServiceId(service_id));
+                model.addAttribute("date", date);
+                model.addAttribute("time", time);
+                model.addAttribute("totalPrice", totalPrice);
+                session.setAttribute("selectedDate", date);
+                session.setAttribute("selectedServices", ServiceService.findListByServiceId(service_id));
+                session.setAttribute("selectedDoctors", doctor);
+                session.setAttribute("selectedTime", time);
+            } else {
+                model.addAttribute("doctor", null);
+                model.addAttribute("date", date);
+                model.addAttribute("time", time);
+                session.setAttribute("selectedDate", date);
+                session.setAttribute("selectedTime", time);
+                session.setAttribute("selectedServices", null);
+                session.setAttribute("selectedDoctors", null);
+                return "reservationcontact";
             }
-            model.addAttribute("doctor", doctor);
-            model.addAttribute("service", ServiceService.findListByServiceId(service_id));
-            model.addAttribute("date", date);
-            model.addAttribute("time", time);
-            model.addAttribute("totalPrice", totalPrice);
-            session.setAttribute("selectedDate", date);
-            session.setAttribute("selectedServices", ServiceService.findListByServiceId(service_id));
-            session.setAttribute("selectedDoctors", doctor);
-        }else{
-            model.addAttribute("doctor", null);
-            model.addAttribute("date", date);
-            model.addAttribute("time", time);
-            session.setAttribute("selectedDate", date);
-            session.setAttribute("selectedServices", null);
-            session.setAttribute("selectedDoctors", null);
+
             return "reservationcontact";
         }
-
-        return "reservationcontact";
 
     }
 
@@ -170,13 +180,31 @@ public class ReservationController {
             @RequestParam("patient_address") String patient_address,
             @RequestParam("patient_note") String patient_note) throws MessagingException {
         reservation reservation = new reservation();
+        int doctor_id;
+        String doctor_name;
+        int service_ids = 0;
         // get data from session
         List<service> services = (List<service>) session.getAttribute("selectedServices");
+        if (services == null) {
+            service_ids = 0;
+        }else{
+            service_ids = 1;
+        }
         doctor doctor = (doctor) session.getAttribute("selectedDoctors");
+        if (doctor == null) {
+            doctor_id = 0;
+            doctor_name = "No doctor";
+        } else {
+            doctor_id = doctor.getDoctor_id();
+            doctor_name = doctor.getDoctor_name();
+        }
         String date = (String) session.getAttribute("selectedDate");
+        String time = (String) session.getAttribute("selectedTime");
+
         // create new patient and save into database
         patient patient = new patient();
         user user = (user) session.getAttribute("user");
+
         if (user != null) {
             patient.setPatient_name(patient_name);
             patient.setPatient_email(patient_email);
@@ -207,41 +235,52 @@ public class ReservationController {
         // save reservation
         reservation.setPatient_id(patient_id);
         reservation.setPatient_name(patient_name);
-        reservation.setDoctor_id(doctor.getDoctor_id());
-        reservation.setDoctor_name(doctor.getDoctor_name());
+        reservation.setDoctor_id(doctor_id);
+        reservation.setDoctor_name(doctor_name);
         reservation.setDate(java.sql.Date.valueOf(date));
         reservation.setStatus(1);
         reservation.setCreate_at(new java.sql.Date(System.currentTimeMillis()));
         reservation.setCreate_by("admin");
-        // total cost equal all service price in list service
-        int total_cost = 0;
-        for (service service : services) {
-            total_cost += service.getPrice();
+        reservation.setTime(time);
+
+        if (service_ids != 0) {
+            int total_cost = 0;
+            for (service service : services) {
+                total_cost += service.getPrice();
+            }
+            reservation.setTotal_cost(total_cost);
+            // save reservation
+            ReservationService.save(reservation);
+            // get last reservation id
+            int reservation_id = ReservationService.getLastReservationId();
+            // save reservation detail
+
+            for (service service : services) {
+                // convert stirng date to date
+                java.sql.Date date1 = java.sql.Date.valueOf(date);
+                ReservationService.mergeReservationDetail(reservation_id, service.getService_id(),
+                        service.getService_name(),
+                        service.getPrice(), date1, "admin", doctor.getDoctor_id(), doctor.getDoctor_name());
+
+            }
+            // send email of reservation to patient email
+            ReservationService.sendEmail(patient_email, patient_name, doctor.getDoctor_name(), date, services,
+                    total_cost);
+
+            // remove session
+            session.removeAttribute("selectedServices");
+            session.removeAttribute("selectedDoctors");
+            session.removeAttribute("selectedDate");
+
+            return "redirect:/thankyou";
+        }else{
+            ReservationService.save(reservation);
+            session.removeAttribute("selectedServices");
+            session.removeAttribute("selectedDoctors");
+            session.removeAttribute("selectedDate");
+            return "redirect:/thankyou";
         }
-        reservation.setTotal_cost(total_cost);
-        // save reservation
-        ReservationService.save(reservation);
-        // get last reservation id
-        int reservation_id = ReservationService.getLastReservationId();
-        // save reservation detail
-
-        for (service service : services) {
-            // convert stirng date to date
-            java.sql.Date date1 = java.sql.Date.valueOf(date);
-            ReservationService.mergeReservationDetail(reservation_id, service.getService_id(),
-                    service.getService_name(),
-                    service.getPrice(), date1, "admin", doctor.getDoctor_id(), doctor.getDoctor_name());
-
-        }
-        // send email of reservation to patient email
-        ReservationService.sendEmail(patient_email, patient_name, doctor.getDoctor_name(), date, services, total_cost);
-
-        // remove session
-        session.removeAttribute("selectedServices");
-        session.removeAttribute("selectedDoctors");
-        session.removeAttribute("selectedDate");
-
-        return "redirect:/thankyou";
+        
     }
 
     public int getDayOfWeek(String dateStr) {
@@ -256,19 +295,19 @@ public class ReservationController {
             int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
             if (dayOfWeek == Calendar.SUNDAY) {
-                return 0;
-            } else if (dayOfWeek == Calendar.MONDAY) {
                 return 1;
-            } else if (dayOfWeek == Calendar.TUESDAY) {
+            } else if (dayOfWeek == Calendar.MONDAY) {
                 return 2;
-            } else if (dayOfWeek == Calendar.WEDNESDAY) {
+            } else if (dayOfWeek == Calendar.TUESDAY) {
                 return 3;
-            } else if (dayOfWeek == Calendar.THURSDAY) {
+            } else if (dayOfWeek == Calendar.WEDNESDAY) {
                 return 4;
-            } else if (dayOfWeek == Calendar.FRIDAY) {
+            } else if (dayOfWeek == Calendar.THURSDAY) {
                 return 5;
-            } else {
+            } else if (dayOfWeek == Calendar.FRIDAY) {
                 return 6;
+            } else {
+                return 7;
             }
         } catch (ParseException e) {
             // Xử lý lỗi khi định dạng ngày không hợp lệ

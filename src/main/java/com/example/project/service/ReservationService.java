@@ -111,7 +111,9 @@ public class ReservationService {
         }
         return listofslotDTO;
     }
-
+    public reservation findByDoctor_idAndDateAndTime(int doctor_id, Date date, String time) {
+        return repository.findByDoctor_idAndDateAndTime(doctor_id, date, time);
+    }
     public int getLastReservationId() {
         return repository.getLastReservationId();
     }
