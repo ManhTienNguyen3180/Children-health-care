@@ -12,8 +12,6 @@ import com.example.project.entity.doctor;
 import com.example.project.service.DoctorService;
 import com.example.project.service.ServiceCategoryService;
 
-import jakarta.servlet.http.HttpSession;
-
 @Controller
 public class DoctorController {
     

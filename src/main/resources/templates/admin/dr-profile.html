@@ -193,7 +193,7 @@
             <div class="container-fluid">
                 <div class="layout-specing">
                     <div class="d-md-flex justify-content-between">
-                        <h5 class="mb-0">Doctor Profile</h5>
+                        <h5 class="mb-0">Thông tin bác sĩ</h5>
 
                         <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                             <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
@@ -215,7 +215,6 @@
                                     alt="">
                                 <div class="mt-4 ms-3 pt-3">
                                     <h5 class="mt-3 mb-1" th:text="${doctor.doctor_name}"></h5>
-                                    <p class="text-muted mb-0" th:text="${doctor.description}"></p>
                                 </div>
                             </div>
                         </div>
@@ -230,7 +229,7 @@
                                                 href="#pills-overview" role="tab" aria-controls="pills-overview"
                                                 aria-selected="false">
                                                 <div class="text-center pt-1 pb-1">
-                                                    <h4 class="title fw-normal mb-0">Overview</h4>
+                                                    <h4 class="title fw-normal mb-0">Tổng quan</h4>
                                                 </div>
                                             </a><!--end nav link-->
                                         </li><!--end nav item-->
@@ -240,7 +239,7 @@
                                                 href="#pills-review" role="tab" aria-controls="pills-review"
                                                 aria-selected="false">
                                                 <div class="text-center pt-1 pb-1">
-                                                    <h4 class="title fw-normal mb-0">Reviews</h4>
+                                                    <h4 class="title fw-normal mb-0">Phản hồi</h4>
                                                 </div>
                                             </a><!--end nav link-->
                                         </li><!--end nav item-->
@@ -250,7 +249,7 @@
                                                 href="#pills-timetable" role="tab" aria-controls="pills-timetable"
                                                 aria-selected="false">
                                                 <div class="text-center pt-1 pb-1">
-                                                    <h4 class="title fw-normal mb-0">Time Table</h4>
+                                                    <h4 class="title fw-normal mb-0">Lịch làm việc</h4>
                                                 </div>
                                             </a><!--end nav link-->
                                         </li><!--end nav item-->
@@ -261,35 +260,29 @@
                                         <div class="tab-pane fade show active" id="pills-overview" role="tabpanel"
                                             aria-labelledby="overview-tab">
 
-
-                                            <h6 class="mb-0">Position:
+                                            <h6 class="mb-0">Chức vụ:
                                                 <h6 th:text="${doctor.position}"></h6>
                                             </h6>
                                             <br>
-                                            <h6 class="mb-0" th:switch="${doctor.gender}">Gender:
-                                                <h6 th:case="1">Male</h6>
-                                                <h6 th:case="0">Female</h6>
+                                            <h6 class="mb-0" th:switch="${doctor.gender}">Giới tính:
+                                                <h6 th:case="1">Nam</h6>
+                                                <h6 th:case="0">Nữ</h6>
                                             </h6>
                                             <br>
-                                            <h6 class="mb-0">DoB:
+                                            <h6 class="mb-0">Sinh nhật:
                                                 <h6 th:text="${doctor.dob}"></h6>
                                             </h6>
                                             <br>
-                                            <h6 class="mb-0">Phone:
-                                                <h6 th:text="'0' + ${doctor.phone}"></h6>
+                                            <h6 class="mb-0">Khoa:
+                                                <h6 th:text="${service.name}"></h6>
                                             </h6>
                                             <br>
-                                            <h6 class="mb-0" th:switch="${doctor.status}">Status:
-                                                <h6 th:case="1" style="color: green;">Active</h6>
-                                                <h6 th:case="0" style="color: red;">Blocked</h6>
+                                            <h6 class="mb-0" th:switch="${doctor.status}">Trạng thái:
+                                                <h6 th:case="1" style="color: green;">Hoạt dộng</h6>
+                                                <h6 th:case="0" style="color: red;">Khóa</h6>
                                             </h6>
                                             <br>
-                                            <h6 class="mb-0">Service:
-                                                <ul th:each="service : ${service}">
-                                                    <li th:text="${service.service_name}"></li>
-                                                </ul>
-                                            </h6>
-
+                                            <p class="text-muted mb-0" th:utext="${doctor.description}"></p>
                                         </div>
 
 
@@ -493,11 +486,16 @@
                                                     <div class="card border-0 p-3 rounded shadow">
                                                         <ul class="list-unstyled mb-0" th:each="slot : ${slot}">
                                                             <li class="d-flex justify-content-between">
-                                                                <p class="text-muted mb-0" th:text="${slot.date}"><i
-                                                                        class="ri-time-fill text-primary align-middle h5 mb-0"></i>
-                                                                </p>
-                                                                <p class="text-primary mb-0"><span
-                                                                        class="text-dark">Time:</span>
+                                                                <div class="text-muted mb-0" th:switch="${slot.dayof_week}">
+                                                                    <h6 th:case="1">Thứ 2</h6>
+                                                                    <h6 th:case="2">Thứ 3</h6>
+                                                                    <h6 th:case="3">Thứ 4</h6>
+                                                                    <h6 th:case="4">Thứ 5</h6>
+                                                                    <h6 th:case="5">Thứ 6</h6>
+                                                                    <h6 th:case="6">Thứ 7</h6>
+                                                                    <h6 th:case="0">Chủ Nhật</h6>
+                                                                </div>
+                                                                
                                                                 <p th:text="${slot.start_time}"></p> -
                                                                 <p th:text="${slot.end_time}"></p>
                                                                 </p>

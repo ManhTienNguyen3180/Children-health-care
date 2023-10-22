@@ -1,6 +1,5 @@
 package com.example.project.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -8,17 +7,14 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.project.Admin.BlogController.Model.Blog;
@@ -33,8 +29,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import com.example.project.service.ReviewBlogService;
-
-import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 

@@ -19,7 +19,6 @@ import com.example.project.service.ServiceService;
 
 import jakarta.servlet.http.HttpSession;
 
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ServiceController {   
