@@ -47,7 +47,7 @@ public class SecurityConfig {
                 .requestMatchers("getTime/**","getDate","/getTimeByDoctorAndDate/**","/getDoctorByCategoryServiceId/**","/getServiceByCategoryServiceId/**","/service/add-service?id=","/signup/confirm","/error","/denied","/thankyou", "/reservationcontact/**", "/getSlotsByDoctor/**",
                         "/bookingappointment", "/getDoctorsByService/**", "/home", "/signup", "/saveUser",
                         "/forgot",
-                        "/doctor", "/service/**","service-detail/**","/doctor-detail/**", "/blog", "/reset", "/logout")
+                        "/doctor", "/service/**","service-detail/**","doctor-detail/**", "/blog", "/reset", "/logout")
                 .permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()              
                 .requestMatchers("admin/**").hasRole("ADMIN")

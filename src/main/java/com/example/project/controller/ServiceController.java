@@ -62,9 +62,11 @@ public class ServiceController {
 
     @GetMapping("/service-detail/{id}")
     public String viewServiceDetail(@PathVariable int id, Model model) {
+        service service = ServiceService.findServiceById(id).orElse(null);
+        int cate = service.getCategory_id();
         model.addAttribute("listCategory", serviceCategoryService.fetchServiceCategoryList());
         model.addAttribute("cateName", ServiceService.getServiceCategoryName(id));
-        model.addAttribute("docs", ServiceService.getDocByService(id));
+        model.addAttribute("docs", ServiceService.getDocByService(cate));
         model.addAttribute("service", ServiceService.findServiceById(id).orElse(null));
         return "service-detail";
     }

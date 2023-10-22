@@ -21,10 +21,7 @@ public interface DoctorRepo extends JpaRepository<doctor, Integer> {
     @Query("SELECT p FROM doctor p WHERE CONCAT(p.doctor_name, p.position, p.phone) LIKE %?1%")
     public Page<doctor> search(String keyword, Pageable pageable);
 
-    @Query(value = "select d.doctor_id,d.doctor_name,d.position,d.gender,d.phone,d.image,\n" + //
-            "d.description,d.dob,d.status,d.create_at,d.create_by,d.doctorservice_id from doctor d , doctorservice ds, service s\n" + //
-            "where d.doctor_id = ds.doctorID and s.service_id=ds.serviceID\n" + //
-            "and s.service_id=?1", nativeQuery = true)
+    @Query(value = "select d.doctor_id,d.doctor_name,d.position,d.gender,d.phone,d.image,d.description,d.dob,d.status,d.create_at,d.create_by,d.doctorservice_id from doctor d , category_service c where d.doctorservice_id=c.id and c.id=?1", nativeQuery = true)
     Page<doctor> getDocByService(int id, PageRequest pageable);
 
     @Query(value = "select * from doctor d , doctorservice ds, service s\n" + //
