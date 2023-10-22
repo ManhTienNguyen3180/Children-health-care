@@ -46,7 +46,7 @@ public class SliderController {
             try {
                 // We can save image in 'images' directory in roo
 
-                String uploadDir = "./healthcare/src/main/resources/static/images/slider";
+                String uploadDir = "./src/main/resources/static/images/slider";
                 java.nio.file.Path copyLocation = Paths
                         .get(uploadDir + java.io.File.separator + image.getOriginalFilename());
                 java.nio.file.Files.copy(image.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
@@ -83,13 +83,13 @@ public class SliderController {
             try {
                 // We can save image in 'images' directory in roo
 
-                String uploadDir = "./healthcare/src/main/resources/static/images/slider";
+                String uploadDir = "./src/main/resources/static/images/slider";
                 java.nio.file.Path copyLocation = Paths
                         .get(uploadDir + java.io.File.separator + image.getOriginalFilename());
                 java.nio.file.Files.copy(image.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
                 imageAddress = "/images/slider" + "/" + image.getOriginalFilename();
             } catch (Exception e) {
-                return "redirect:/slidersManagement/addFail";
+                imageAddress = "/images/slider" + "/" + image.getOriginalFilename();
             }
         }
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());

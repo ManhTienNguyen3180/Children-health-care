@@ -199,7 +199,7 @@
     <section class="section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-7">
+                <div class="col-lg-8 col-lg-7" id="blogContent">
                     <img src="images/blog/single.jpg" class="img-fluid rounded shadow" alt="">
 
                     <!-- <ul class="list-unstyled mt-4">
@@ -209,8 +209,13 @@
                     <h3 th:text="${blog.title}"></h3>
                     <p class="text-muted mt-4" th:utext="${blog.description}"></p>
                     <img th:src="${blog.image}" alt="" style="object-fit: cover;width: 100%;">
-
-                    <p class=" mt-4" th:utext="${blog.content}"></p>
+                    <style>
+                        #blogContent p img{
+                            object-fit: cover;
+                            max-width: 100%;
+                        }
+                    </style>
+                    <p  class=" mt-4" th:utext="${blog.content}"></p>
                     <h5 class="card-title mt-4 mb-0">Comments :</h5>
                     <div th:if="${!cmt.isEmpty()}">
                         <div id="scroll">
@@ -268,12 +273,12 @@
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <label class="form-label">Your Comment</label>
-                                    <input type="text" th:value="${blog.blog_id}" name="id" hidden>
+                                    <input type="text" th:value="${blog.blogId}" name="id" hidden>
                                     <textarea id="message" placeholder="Your Comment" rows="5" name="text"
                                         class="form-control" required=""></textarea>
                                 </div>
                             </div><!--end col-->
-                            <input type="hidden" name="blogId" th:value="${blog.blog_id}">
+                            <input type="hidden" name="blogId" th:value="${blog.blogId}">
                             <!-- <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label class="form-label">Name <span class="text-danger">*</span></label>
@@ -356,24 +361,24 @@
                     <div class="slider-range-three">
                         <div class="tiny-slide" th:each="blog: ${listBlog}">
                             <div class="card blog blog-primary border-0 shadow rounded overflow-hidden m-1">
-                                <a th:href="@{/blog-detail/{id}(id=${blog.blog_id})}" class="link">
+                                <a th:href="@{/blog-detail/{id}(id=${blog.blogId})}" class="link">
                                     <img th:src="${blog.image}" class="img-fluid" alt=""
                                         style="height: 250px; object-fit: cover;">
                                 </a>
                                 <div class="card-body p-4">
                                     <ul class="list-unstyled mb-2">
-                                        <li class="list-inline-item text-muted small me-3" th:text="${blog.Date}"></li>
+                                        <li class="list-inline-item text-muted small me-3" th:text="${blog.date}"></li>
                                         <li class="list-inline-item text-muted small"><i
                                                 class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
                                     </ul>
-                                    <a th:href="@{/blog-detail/{id}(id=${blog.blog_id})}" class="text-dark title h5"
+                                    <a th:href="@{/blog-detail/{id}(id=${blog.blogId})}" class="text-dark title h5"
                                         th:text="${blog.title}"></a>
                                     <br><br>
                                     <li class="list-inline-item text-muted small me-3 limited-text"
                                         th:utext="${blog.description}"></li>
                                     <div class="post-meta d-flex justify-content-between mt-3">
 
-                                        <a th:href="@{/blog-detail/{id}(id=${blog.blog_id})}" class="link">Read More
+                                        <a th:href="@{/blog-detail/{id}(id=${blog.blogId})}" class="link">Read More
                                         </a>
                                     </div>
                                 </div>

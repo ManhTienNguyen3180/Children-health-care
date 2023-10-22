@@ -139,7 +139,7 @@
                         </div>
                     </li>
 
-                    
+
 
                 </ul>
                 <!-- sidebar-menu  -->
@@ -372,17 +372,23 @@
                                                     style="font-size: xx-large; color: rgba(42, 54, 39, 0.575); font-weight: bold;">There
                                                     is no service for your Search</span></td>
                                         </tr>
-                                        <tr style="height: 60px;" th:each="listS:${servicesList}">
+                                        <tr style="height: 100px; overflow-y: hidden; " th:each="listS:${servicesList}">
                                             <th class="p-3" th:text="${listS.Id}"></th>
                                             <td class="py-3">
-                                                <a href="#" class="text-dark">
-                                                    <div class="d-flex align-items-center">
+                                                <a th:href="@{/servicesManagement/service-detail/{id}(id=${listS.Id})}" class="text-dark">
+                                                    <div class="d-flex align-items-center fw-bold">
                                                         <span class="ms-2" th:text="${listS.name}"></span>
                                                     </div>
                                                 </a>
                                             </td>
                                             <td class="p-3" th:text="${listS.price}+' $'"></td>
-                                            <td class="p-3" th:text="${listS.description}" ></td>
+<<<<<<< HEAD
+                                            <td class="p-3"  ><div th:utext="${listS.description}" style="height: 60px; overflow-y: auto; "></div></td>
+=======
+                                            <td class="p-3" >
+                                                <div th:utext="${listS.description}" style="height: 100px; overflow-y: auto; margin: 0px; box-sizing:border-box; padding: 0px;"></div>
+                                            </td>
+>>>>>>> 357712dd55e812489e2a55bc529973c54db55a4b
                                             <td class="p-3"><img width="80px" th:src="@{${listS.image}}" alt=""></td>
                                             <td th:each="cat : ${listCate}" th:text="${cat.name}"
                                                 th:if="${cat.id==listS.categoryId}" class="p-3">
@@ -677,7 +683,7 @@
                                         class=" preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1">
                                     </div>
                                     <input type="file" id="input-file" name="image" accept="image/*"
-                                        onchange={handleChange()} hidden />
+                                        onchange={handleChange()} />
                                     <label class="btn-upload btn btn-primary mt-4" for="input-file">Upload Image</label>
                                 </div>
                             </div><!--end col-->

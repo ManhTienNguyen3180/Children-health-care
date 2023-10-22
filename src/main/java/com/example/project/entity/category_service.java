@@ -7,15 +7,6 @@ import jakarta.persistence.Id;
 
 @Entity
 public class category_service {
-    
-
-//     id int AI PK 
-// name varchar(150) 
-// note varchar(45) 
-// status tinyint 
-// create_at date 
-// create_by varchar(100)
-
     @Id
     private int id;
     private String name;

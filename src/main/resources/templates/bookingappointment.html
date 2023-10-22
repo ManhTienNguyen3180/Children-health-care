@@ -251,77 +251,41 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label class="form-label">Service</label>
-                                                <select th:if="session.selectedServices == null" multiple
-                                                    class="form-control department-name select2input" id="serviceId"
-                                                    name="serviceId">
+                                                <label class="form-label">Chuyen Khoa</label>
+                                                <select class="form-control department-name select2input"
+                                                    id="categoryserviceId" name="categoryserviceId">
                                                     <option value="">Select Service</option>
-                                                    <option th:each="service:${listService}"
-                                                        th:text="${service.service_name}"
-                                                        th:value="${service.service_id}"></option>
+                                                    <option value="0">Chưa xác định chuyên khoa</option>
+                                                    <option th:each="service:${listCategoryService}"
+                                                        th:text="${service.name}" th:value="${service.id}"></option>
 
                                                 </select>
-                                                <!-- <select th:if="session.selectedServices != null" multiple
-                                                    class="form-control department-name select2input" id="serviceId"
-                                                    name="serviceId" >
-                        
-                                                    <option>Select Service</option>    
-                                                    <option th:each="service : ${session.selectedServices}"
-                                                        th:text="${service.service_name}"
-                                                        th:value="${service.service_id}" selected></option>       
-                                                        
-                                                    <option th:each="service : ${listService}"
-                                                        th:text="${service.service_name}"
-                                                        th:value="${service.service_id}"
 
-                                                        th:selected="${session.selectedServices != null and session.selectedServices.contains(service)}" >
-                                                    </option>
+                                                <div class="text-danger" id="errorCategory"></div>
+                                            </div>
 
-                                                </select> -->
+                                        </div>
 
+                                        <div class="col-md-6" id="serviceIds">
+                                            <div class="mb-3">
+                                                <label class="form-label">Service</label>
 
-                                                <select th:if="session.selectedServices != null" multiple
-                                                    class="form-control department-name select2input" id="serviceId"
-                                                    name="serviceId">
-                                                    <option>Select Service</option>
-                                                    <option th:each="service : ${session.selectedServices}"
-                                                        th:text="${service.service_name}"
-                                                        th:value="${service.service_id}" selected>
-                                                        
-                                                    </option>
-                                                    <!-- <option th:each="service : ${listService}"
-                                                        th:text="${service.service_name}"
-                                                        th:value="${service.service_id}">
-                                                    </option> -->
+                                                <select multiple class="form-control department-name select2input"
+                                                    id="serviceId" name="serviceId">
+
                                                 </select>
                                                 <div class="text-danger" id="errorService"></div>
                                             </div>
 
                                         </div>
-
-                                        <div class="col-md-6">
+                                        <div class="col-md-6" id="doctorIds">
                                             <div class="mb-3">
                                                 <label class="form-label">Doctor</label>
-                                                <select th:if="session.selectedDoctors != null"
-                                                    class="form-control department-name " id="doctorId" name="doctorId">
+                                                <select class="form-control department-name " id="doctorId"
+                                                    name="doctorId">
 
-                                                    <!-- <option th:object="${session.selectedDoctors}"
-                                                        th:text="*{doctor_name}"
-                                                        th:value="*{doctor_id}" selected></option> -->
-                                                    <!-- <option th:each="doctor:${listDoctor}"
-                                                        th:text="${doctor.doctor_name}"
-                                                        th:value="${doctor.doctor_id}"></option>     -->
-                                                    <option th:each="doctor : ${session.selectedDoctors}"
-                                                        th:value="${doctor.doctor_id}" th:text="${doctor.doctor_name}"
-                                                        selected="selected"></option>
                                                 </select>
-                                                <select th:if="session.selectedDoctors == null"
-                                                    class="form-control department-name " id="doctorId" name="doctorId">
 
-                                                    <!-- <option  th:each="doctor:${listDoctor}"
-                                                        th:text="${doctor.doctor_name}"
-                                                        th:value="${doctor.doctor_id}"></option> -->
-                                                </select>
                                                 <div class="text-danger" id="errorDoctor"></div>
                                             </div>
                                         </div>
@@ -332,23 +296,21 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Date</label>
-                                                <select th:if="session.selectedDate == null"
-                                                    class="form-control department-name " id="date" name="date">
 
-                                                    <!-- <option th:each="doctor:${listDoctor}"
-                                                        th:text="${doctor.doctor_name}"
-                                                        th:value="${doctor.doctor_id}"></option> -->
-                                                </select>
-                                                <select th:if="session.selectedDate != null"
-                                                    class="form-control department-name " id="date" name="date">
-
-                                                    <option th:text="${session.selectedDate}"
-                                                        th:value="${session.selectedDate}" selected></option>
+                                                <select class="form-control department-name " id="date" name="date">
                                                 </select>
                                                 <div class="text-danger" id="errorDate"></div>
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Time</label>
+                                                <select class="form-control department-name" id="time" name="time">
 
+                                                </select>
+                                                <div class="text-danger" id="errorTime"></div>
+                                            </div>
+                                        </div>
 
 
 
@@ -498,114 +460,183 @@
     <!-- <script th:src="@{/js/app.js}" src="js/app.js"></script> -->
 
     <script>
-        //onchange  multiple service input -> doctor id 
+        //onchange  category service id  -> list service append to serviceId 
         $(document).ready(function () {
-            $("#serviceId").change(function () {
-                //get selected values from input service
-                var serviceIds = [];
-                $("#serviceId :selected").each(function () {
-                    serviceIds.push($(this).val());
-                });
-                //get doctor by selected values
-                $.get("getDoctorsByService/" + serviceIds, function (data) {
-                    $("#doctorId").empty();
-                    $("#doctorId").append("<option value=''>Select Doctor</option>");
-                    $.each(data, function (index, doctor) {
-                        $("#doctorId").append("<option value='" + doctor.doctor_id + "'>" + doctor.doctor_name + "</option>");
-                    });
-                });
 
+            $("#categoryserviceId").change(function () {
+                var categoryserviceId = $("#categoryserviceId").val();
+                if (categoryserviceId == 0) {
 
+                    // $("#date").val("").trigger("change");
+                    // $("#time").val("").trigger("change");
+                    $("#doctorId").val("").trigger("change");
+                    $("#serviceId").val("").trigger("change");
+                    $("#date").append('<option value="">Select Date</option>');
+                    $.ajax({
+                        url: "getDate",
+                        type: "GET",
+                        success: function (data) {
+                            // $("#date").val("").trigger("change");
+                            // $("#time").val("").trigger("change");
+                            $("#doctorId").val("").trigger("change");
+                            $("#serviceId").val("").trigger("change");
+                            const today = new Date();
+                            today.setHours(0, 0, 0, 0);
 
-            });
-        });
-
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var dateInput = document.getElementById("date");
-
-            dateInput.addEventListener("input", function () {
-                var selectedDate = new Date(this.value);
-                var today = new Date();
-                today.setHours(0, 0, 0, 0);
-
-                if (selectedDate < today) {
-                    var error = document.getElementById("error");
-                    error.innerHTML = "*Please select date greater than or equal to current";
-                    dateInput.addEventListener("input", function () {
-                        var selectedDate = new Date(this.value);
-                        var today = new Date();
-                        today.setHours(0, 0, 0, 0);
-                        if (selectedDate >= today) {
-                            error.innerHTML = "";
+                            $.each(data, function (key, value) {
+                                const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                                const dayIndex = value.dayof_week;
+                                const targetDate = new Date(today);
+                                if (dayIndex <= today.getDay()) {
+                                    targetDate.setDate(targetDate.getDate() + (7 - today.getDay() + dayIndex));
+                                }
+                                else {
+                                    targetDate.setDate(targetDate.getDate() + (dayIndex - today.getDay()));
+                                }
+                                let dayOfWeek = daysOfWeek[value.dayof_week - 1];
+                                if (dayOfWeek == undefined) {
+                                    dayOfWeek = daysOfWeek[6];
+                                }
+                                const dateStr = targetDate.toISOString().slice(0, 10);
+                                $("#date").append('<option value="' + dateStr + '">' + dayOfWeek + ', ' + dateStr + '</option>');
+                            });
                         }
                     });
-                    this.value = "";
+                    $("#date").change(function () {
+                        var date = $("#date").val();
+                        $.ajax({
+                            url: "getTime/" + date,
+                            type: "GET",
+                            success: function (data) {
+                                $("#time").empty();
+                                $("#time").append('<option value="">Select Time</option>');
+                                $.each(data, function (key, value) {
+                                    var time = value.start_time + ' - ' + value.end_time;
+                                    $("#time").append('<option value="' + time + '">' + value.start_time + ' - ' + value.end_time + '</option>');
+                                });
+                            }
+                        });
+                    });
+
+                } else {
+                    //show  input service and doctor
+                    $("#date").val("").trigger("change");
+                    $("#time").val("").trigger("change");
+                    $("#doctorId").val("").trigger("change");
+                    $("#serviceId").val("").trigger("change");
+                    $.ajax({
+                        url: "getServiceByCategoryServiceId/" + categoryserviceId,
+                        type: "GET",
+                        success: function (data) {
+                            $("#date").val("").trigger("change");
+                            $("#time").val("").trigger("change");
+                            $("#doctorId").val("").trigger("change");
+                            $("#serviceId").empty();
+
+                            $.each(data, function (key, value) {
+                                $("#serviceId").append('<option value="' + value.service_id + '">' + value.service_name + '</option>');
+                            });
+                        }
+                    });
+                    $.ajax({
+                        url: "getDoctorByCategoryServiceId/" + categoryserviceId,
+                        type: "GET",
+                        success: function (data) {
+                            $("#doctorId").empty();
+                            $("#date").empty();
+                            $("#time").empty();          
+                            $("#doctorId").append('<option value="">Select Doctor</option>');
+                            $.each(data, function (key, value) {
+                                $("#doctorId").append('<option value="' + value.doctor_id + '">' + value.doctor_name + '</option>');
+                            });
+                        }
+                    });
                 }
+
             });
         });
     </script>
     <script>
-        //onchange doctor id, date -> slot id
-        $(document).ready(function () {
-            $("#doctorId").change(function () {
-                var doctorId = $(this).val();
-                $.get("getSlotsByDoctor/" + doctorId, function (data) {
-                    $("#date").empty();
-                    $("#date").append("<option value=''>Select Date</option>");
-                    $.each(data, function (index, slot) {
-                        //append slot after current day to input date 
-                        var today = new Date();
-                        today.setHours(0, 0, 0, 0);
-                        var date = new Date(slot.date);
-                        if (date >= today) {
-                            $("#date").append("<option value='" + slot.date + "'>" + slot.date + "</option>");
-                        }
 
-                    });
+        //onchange doctorId -> list date append to date 
+        $(document).ready(function () {
+
+            $("#doctorId").change(function () {
+                var doctorId = $("#doctorId").val();
+                $.ajax({
+                    url: "getSlotsByDoctor/" + doctorId,
+                    type: "GET",
+                    success: function (data) {
+                        $("#date").empty();
+                        $("#date").append('<option value="">Select Date</option>');
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
+
+                        $.each(data, function (key, value) {
+                            const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                            const dayIndex = value.dayof_week;
+                            const targetDate = new Date(today);
+                            if (dayIndex <= today.getDay()) {
+                                targetDate.setDate(targetDate.getDate() + (7 - today.getDay() + dayIndex));
+                            }
+
+                            else {
+                                targetDate.setDate(targetDate.getDate() + (dayIndex - today.getDay()));
+                            }
+                            let dayOfWeek = daysOfWeek[value.dayof_week - 1];
+                            if (dayOfWeek == undefined) {
+                                dayOfWeek = daysOfWeek[6];
+                            }
+                            const dateStr = targetDate.toISOString().slice(0, 10);
+                            $("#date").append('<option value="' + dateStr + '">' + dayOfWeek + ', ' + dateStr + '</option>');
+                        });
+                    }
                 });
             });
         });
     </script>
     <script>
-        //check service,doctor,date if not selected -> show error message and disable button
+        //onchange date -> list time append to time 
         $(document).ready(function () {
-            $("#btnContinue").click(function () {
-                var serviceId = $("#serviceId").val();
+            $("#date").change(function () {
                 var doctorId = $("#doctorId").val();
                 var date = $("#date").val();
-                if (serviceId == "") {
-                    $("#errorService").html("*Please select service");
-                    return false;
-                } else {
-                    $("#errorService").html("");
-                }
-                if (doctorId == "") {
-                    $("#errorDoctor").html("*Please select doctor");
-                    return false;
-                } else {
-                    $("#errorDoctor").html("");
-                }
-                if (date == "") {
-                    $("#errorDate").html("*Please select date");
-                    return false;
-                } else {
-                    $("#errorDate").html("");
-                }
+                $.ajax({
+                    url: "getTimeByDoctorAndDate/" + doctorId + "/" + date,
+                    type: "GET",
+                    success: function (data) {
+                        $("#time").empty();
+                        $("#time").append('<option value="">Select Time</option>');
+                        $.each(data, function (key, value) {
+                            const time = value.start_time + ' - ' + value.end_time;
+                            $("#time").append('<option value="' + time + '">' + value.start_time + ' - ' + value.end_time + '</option>');
+                        });
+                    }
+                });
             });
         });
-
     </script>
     <script>
-        //onchange service -> messReser = "" 
+        //if categoryserviceId == 0 -> disable input service and doctor
         $(document).ready(function () {
-            $("#serviceId").change(function () {
-                $("#messReser").html("");
+            $("#categoryserviceId").change(function () {
+                var categoryserviceId = $("#categoryserviceId").val();
+                if (categoryserviceId == 0) {
+                    $("#serviceId").prop('disabled', true);
+                    $("#doctorId").prop('disabled', true);
+                    $("#serviceIds").css("display", "none");
+                    $("#doctorIds").css("display", "none");
+                } else {
+                    $("#serviceId").prop('disabled', false);
+                    $("#doctorId").prop('disabled', false);
+                    $("#serviceIds").css("display", "block");
+                    $("#doctorIds").css("display", "block");
+                }
             });
         });
     </script>
-    
+
+
 </body>
 
 </html>

@@ -66,7 +66,7 @@ public class BlogsController {
             try {
                 // We can save image in 'images' directory in roo
 
-                String uploadDir = "./src/main/resources/static/images/blog";
+                String uploadDir = "./healthcare/src/main/resources/static/images/blog";
                 java.nio.file.Path copyLocation = Paths
                         .get(uploadDir + java.io.File.separator + image.getOriginalFilename());
                 java.nio.file.Files.copy(image.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
@@ -77,7 +77,7 @@ public class BlogsController {
 
         }
         // =========
-
+ 
         // Save Blog
         blogService.addBlog(category, title, toDay, description, 1, authorB, imageAddress, content, toDay);
         // } catch (Exception e) {
@@ -117,7 +117,7 @@ public class BlogsController {
 
     @GetMapping(value = "/blogsManagement/search")
     public String search(@RequestParam("searchText") String search, Model model) {
-        if (search != "") {
+        if (search.trim() != "") {
             return searchandPaginated(1, search, model);
         } else {
             return findPaginated(1, model);
@@ -170,7 +170,7 @@ public class BlogsController {
     public String searchandPaginated(@PathVariable("pageNo") int pageNo,
             @PathVariable("searchText") String search,
             Model model) {
-        Page<Blog> blogPage = blogService.searchbyTitleAuthorordescription(search, pageNo, 5);
+        Page<Blog> blogPage = blogService.searchbyTitleAuthorordescription(search.trim(), pageNo, 5);
         List<Blog> listB = blogPage.getContent();
 
         model.addAttribute("searchText", search);
@@ -222,12 +222,13 @@ public class BlogsController {
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         String imageAddress = "";
         if (image.isEmpty()) {
-            imageAddress = "/images/blog/default-blog.png";
+            Blog b = blogService.findByID(id);
+            imageAddress = b.getImage();
         } else {
             try {
                 // We can save image in 'images' directory in roo
 
-                String uploadDir = "./healthcare/src/main/resources/static/images/blog";
+                String uploadDir = "./src/main/resources/static/images/blog";
                 java.nio.file.Path copyLocation = Paths
                         .get(uploadDir + java.io.File.separator + image.getOriginalFilename());
                 java.nio.file.Files.copy(image.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);

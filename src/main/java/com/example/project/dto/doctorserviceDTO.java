@@ -1,11 +1,5 @@
 package com.example.project.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-
 public class doctorserviceDTO {
     private int doctor_id;
     private String doctor_name;

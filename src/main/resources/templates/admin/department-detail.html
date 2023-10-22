@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Doctris - Doctor Appointment Booking System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
+    <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
+    <meta name="author" content="Shreethemes" />
+    <meta name="email" content="support@shreethemes.in" />
+    <meta name="website" content="../../../index.html" />
+    <meta name="Version" content="v1.2.0" />
+    <!-- favicon -->
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico.png}">
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <!-- simplebar -->
+    <link th:href="@{/css/simplebar.css}" rel="stylesheet" type="text/css" />
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link th:href="@{/css/materialdesignicons.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/remixicon.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{https://unicons.iconscout.com/release/v3.0.6/css/line.css}" rel="stylesheet">
+    <!-- Css -->
+    <link th:href="@{/css/style.min.css}" rel="stylesheet" type="text/css" id="theme-opt" />
+
+    <script th:src="@{https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js}"></script>
+    <style>
+        .preview-box {
+            max-width: 100%;
+        }
+
+        .preview-box img {
+            max-width: 100%;
+            /* Ensure the image doesn't exceed the box width */
+            max-height: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Loader -->
+    <!-- <div id="preloader">
+            <div id="status">
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+            </div> -->
+    </div>
+    <!-- Loader -->
+
+    <div class="page-wrapper doctris-theme toggled">
+        <div class="page-wrapper doctris-theme toggled">
+            <nav id="sidebar" class="sidebar-wrapper">
+                <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
+                    <div class="sidebar-brand">
+                        <a th:href="@{/home}">
+                            <img th:src="@{/images/logo-dark.png}" height="24" class="logo-light-mode" alt="">
+                            <img th:src="@{/images/logo-light.png}" height="24" class="logo-dark-mode" alt="">
+                        </a>
+                    </div>
+    
+                    <ul class="sidebar-menu pt-3">
+                        <li><a th:href="@{/admin/dashboard}"><i
+                                    class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
+                        <li><a th:href="@{/admin/appointment}"><i
+                                    class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a></li>
+                        <li class="sidebar-dropdown">
+                            <a href="javascript:void(0)"><i class="fa-solid fa-user fa-xs"
+                                    style="margin-right: 5px;"></i>User</a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a th:href="@{/admin/users}">All Users</a></li>
+                                    <li><a th:href="@{/admin/add-user}">Add Users</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a th:href="@{/admin/doctors}">Doctors</a></li>
+                                    <li><a th:href="@{/admin/add-doctor}">Add Doctor</a></li>
+                                    <li><a th:href="@{/admin/schedule}">Schedule</a></li>
+                                </ul>
+                            </div>
+                        </li>
+    
+                        <li class="sidebar-dropdown">
+                            <a href="javascript:void(0)"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Patients</a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a th:href="@{/admin/patients}">All Patients</a></li>
+                                </ul>
+                            </div>
+                        </li>
+    
+                        <li class="sidebar-dropdown">
+                            <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a class="" th:href="@{/blogsManagement}">Blogs</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Services</a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a class="" th:href="@{/servicesManagement}">Services</a></li>
+                                </ul>
+                            </div>
+                        </li>
+    
+                        <li class="sidebar-dropdown">
+                            <a href="javascript:void(0)"><i class="uil uil-columns me-2 d-inline-block"></i>Sliders</a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a class="" th:href="@{/slidersManagement}">Sliders</a></li>
+                                </ul>
+                            </div>
+                        </li>
+    
+                        
+    
+                    </ul>
+                    <!-- sidebar-menu  -->
+                </div>
+                <!-- sidebar-content  -->
+                <ul class="sidebar-footer list-unstyled mb-0">
+                    <li class="list-inline-item mb-0 ms-1">
+                        <a href="#" class="btn btn-icon btn-pills btn-soft-primary">
+                            <i class="uil uil-comment icons"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- sidebar-wrapper  -->
+
+            <!-- Start Page Content -->
+            <div th:if="${message!=null}" th:text="${message}" id="notification" style="display: none;">
+            </div>
+            <script>
+                window.addEventListener("load", () => {
+                    var notificationDiv = document.getElementById('notification');
+                    notificationDiv.style.display = 'block';
+                    notificationDiv.style.position = 'fixed';
+                    notificationDiv.style.marginTop = '100px';
+                    notificationDiv.style.marginLeft = '50vw';
+                    notificationDiv.className = "alert alert-success";
+                    setTimeout(function () {
+                        notificationDiv.style.display = 'none';
+                    }, 3000); // 5 seconds
+                })
+            </script>
+            <main class="page-content bg-light">
+                <div class="top-header">
+                    <div class="header-bar d-flex border-bottom">
+                        <div class="d-flex align-items-center">
+                            <a href="#" class="logo-icon">
+                                <img th:src="@{/images/logo-icon.png}" height="30" class="small" alt="">
+                                <span class="big">
+                                    <img th:src="@{/images/logo-dark.png}" height="24" class="logo-light-mode" alt="">
+                                    <img th:src="@{/images/logo-light.png}" height="24" class="logo-dark-mode" alt="">
+                                </span>
+                            </a>
+                            <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
+                                <i class="uil uil-bars"></i>
+                            </a>
+
+                        </div>
+                        <li class="list-inline-item mb-0">
+                            <div class="dropdown dropdown-primary">
+                                <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                        th:src="@{/images/doctors/01.jpg}" class="avatar avatar-ex-small rounded-circle"
+                                        alt=""></button>
+                                <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
+                                    style="min-width: 200px;">
+                                    <a class="dropdown-item d-flex align-items-center text-dark"
+                                        href="https://shreethemes.in/doctris/layouts/admin/profile.html">
+                                        <img th:src="@{/images/doctors/01.jpg}"
+                                            class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                        <div class="flex-1 ms-2">
+                                            <span class="d-block mb-1">Calvin Carlo</span>
+                                            <small class="text-muted">Orthopedic</small>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item text-dark" href="index.html"><span
+                                            class="mb-0 d-inline-block me-1"><i
+                                                class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
+                                    <a class="dropdown-item text-dark" href="dr-profile.html"><span
+                                            class="mb-0 d-inline-block me-1"><i
+                                                class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                                    <div class="dropdown-divider border-top"></div>
+                                    <a class="dropdown-item text-dark" href="lock-screen.html"><span
+                                            class="mb-0 d-inline-block me-1"><i
+                                                class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Blog Div  -->
+                <div class="container-fluid">
+                    <div class="layout-specing">
+                        <div class="d-md-flex justify-content-between">
+                            <div class="d-flex ">
+                                <div>
+                                    <h3 class="mb-0" th:text="${serviceDetail.name}"></h3>
+                                </div>
+                                <div th:if="${serviceDetail.status==1}" th:text="Available"
+                                    style="color: rgb(1, 255, 1); font-weight: bold; margin-top: 10px; margin-left: 10px;">
+                                </div>
+                                <div th:if="${serviceDetail.status==0}" th:text="Unavailable"
+                                    style="color: red; font-weight: bold; margin-left: 10px; margin-top: 10px;"></div>
+                            </div>
+
+                            <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
+                                <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
+                                    <li class="breadcrumb-item"><a href="index.html">Doctris</a></li>
+                                    <li class="breadcrumb-item"><a th:href="@{/servicesManagement}">Services</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Service Detail</li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-8 col-lg-7 mt-4">
+                                <div class="card rounded shadow border-0 overflow-hidden d-grid">
+                                    <div class="p-4 row">
+                                        <h5>Image:</h5>
+                                        <div>
+                                            <img width="300px" th:src="${serviceDetail.image}" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="p-4 row">
+                                        <h5>Description:</h5>
+                                        <div th:utext="${serviceDetail.description}">
+                                        </div>
+                                    </div>
+                                    <div class="p-4 row">
+                                        <h5>Category:</h5>
+                                        <div th:if="${serviceDetail.categoryId==cat.Id}" th:each="cat : ${listCate}"
+                                            th:text="${cat.name}">
+                                        </div>
+                                    </div>
+                                    <div class="p-4 row">
+                                        <div class="col-6">
+                                            <h6>Create by:</h6>
+                                            <div th:text="${serviceDetail.createBy}">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <h6>Create at:</h6>
+                                            <div th:text="${serviceDetail.createDate}">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div><!--end col-->
+
+                            <div class="col-lg-4 col-md-5 mt-4">
+                                <div class="card border-0 sidebar sticky-bar rounded shadow ">
+                                    <div class="card-body d-grid">
+                                        <div class="row">
+
+                                            <!-- DISPLAY -->
+                                            <div class="widget mb-4 pb-2 col">
+                                                <form th:action="@{/servicesManagement/changeStatusDetails}"
+                                                    method="post">
+                                                    <input name="Id" style="display: none;"
+                                                        th:value="${serviceDetail.Id}">
+                                                    <button th:if="${serviceDetail.status==1}"
+                                                        class="col-12 btn btn-danger" type="submit">Disable</button>
+                                                    <button th:if="${serviceDetail.status==0}"
+                                                        class="col-12 btn btn-success" type="submit">Enable</button>
+                                                </form>
+                                            </div>
+                                            <!-- DISPLAY -->
+                                            <!-- EDIT -->
+                                            <div class="mt-4 mt-sm-0 col text-center">
+                                                <a href="#" class=" col-12 btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#newblogadd">Edit Service</a>
+                                            </div>
+                                            <!-- EDIT -->
+                                        </div>
+
+                                        <!-- TAG CLOUDS -->
+                                        <!-- <div class="widget mb-4 pb-2">
+                                        <h5 class="widget-title">Tags Cloud</h5>
+                                        <div class="tagcloud mt-4">
+                                            <a href="jvascript:void(0)" class="rounded">Business</a>
+                                            <a href="jvascript:void(0)" class="rounded">Finance</a>
+                                            <a href="jvascript:void(0)" class="rounded">Marketing</a>
+                                            <a href="jvascript:void(0)" class="rounded">Fashion</a>
+                                            <a href="jvascript:void(0)" class="rounded">Bride</a>
+                                            <a href="jvascript:void(0)" class="rounded">Lifestyle</a>
+                                            <a href="jvascript:void(0)" class="rounded">Travel</a>
+                                            <a href="jvascript:void(0)" class="rounded">Beauty</a>
+                                            <a href="jvascript:void(0)" class="rounded">Video</a>
+                                            <a href="jvascript:void(0)" class="rounded">Audio</a>
+                                        </div>
+                                    </div> -->
+                                        <!-- TAG CLOUDS -->
+
+
+                                    </div>
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div>
+                </div><!--end container-->
+
+                <!-- Footer Start -->
+                <footer class="bg-white shadow py-3">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <div class="text-sm-start text-center">
+                                    <p class="mb-0 text-muted">
+                                        <script>document.write(new Date().getFullYear())</script> © Doctris. Design with
+                                        <i class="mdi mdi-heart text-danger"></i> by <a href="../../../index.html"
+                                            target="_blank" class="text-reset">Shreethemes</a>.
+                                    </p>
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end container-->
+                </footer><!--end footer-->
+                <!-- End -->
+            </main>
+            <!--End page-content" -->
+        </div>
+        <!-- page-wrapper -->
+
+
+
+        <!-- Offcanvas Start -->
+        <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight"
+            aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header p-4 border-bottom">
+                <h5 id="offcanvasRightLabel" class="mb-0">
+                    <img th:src="@{/images/logo-dark.png}" height="24" class="light-version" alt="">
+                    <img th:src="@{/images/logo-light.png}" height="24" class="dark-version" alt="">
+                </h5>
+                <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas"
+                    aria-label="Close"><i class="uil uil-times fs-4"></i></button>
+            </div>
+            <div class="offcanvas-body p-4 px-md-5">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Style switcher -->
+                        <div id="style-switcher">
+                            <div>
+                                <ul class="text-center list-unstyled mb-0">
+                                    <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light"
+                                            onclick="setTheme('style-rtl')"><img
+                                                th:src="@{/images/layouts/light-dash-rtl.png}"
+                                                class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                                class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light"
+                                            onclick="setTheme('style')"><img th:src="@{/images/layouts/light-dash.png}"
+                                                class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                                class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark"
+                                            onclick="setTheme('style-dark-rtl')"><img
+                                                th:src="@{/images/layouts/dark-dash-rtl.png}"
+                                                class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                                class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark"
+                                            onclick="setTheme('style-dark')"><img
+                                                th:src="@{/images/layouts/dark-dash.png}"
+                                                class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                                class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4"
+                                            onclick="setTheme('style-dark')"><img
+                                                th:src="@{/images/layouts/dark-dash.png}"
+                                                class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                                class="text-muted mt-2 d-block">Dark Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4"
+                                            onclick="setTheme('style')"><img th:src="@{/images/layouts/light-dash.png}"
+                                                class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                                class="text-muted mt-2 d-block">Light Version</span></a></li>
+                                    <li class="d-grid"><a href="../landing/index.html" target="_blank" class="mt-4"><img
+                                                th:src="@{/images/layouts/landing-light.png}"
+                                                class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                                class="text-muted mt-2 d-block">Landing Demos</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- end Style switcher -->
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+
+            <div class="offcanvas-footer p-4 border-top text-center">
+                <ul class="list-unstyled social-icon mb-0">
+                    <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris-template" target="_blank"
+                            class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank"
+                            class="rounded"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank"
+                            class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank"
+                            class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank"
+                            class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i
+                                class="uil uil-envelope align-middle" title="email"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="../../../index.html" target="_blank" class="rounded"><i
+                                class="uil uil-globe align-middle" title="website"></i></a></li>
+                </ul><!--end icon-->
+            </div>
+        </div>
+        <!-- Offcanvas End -->
+        <!-- Start Modal -->
+        <div class="modal fade" id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom p-3">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Service <span
+                                th:text="${serviceDetail.Id}"></span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body p-3 pt-4">
+
+                        <form name="addBlog" th:action="@{/servicesManagement/editService}" method="post"
+                            enctype="multipart/form-data" onsubmit="return validatePrice()">
+                            <input type="text" style="display: none;" name="Id" th:value="${serviceDetail.Id}">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="d-grid">
+                                        <p class="text-muted">Upload your blog image here, Please click "Upload Image"
+                                            Button.
+                                        </p>
+                                        <div
+                                            class=" preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1">
+                                            <img th:src="${serviceDetail.image}" alt="">
+                                        </div>
+                                        <input type="file" id="input-file" name="image" accept="image/*"
+                                            onchange={handleChange()} hidden />
+                                        <label class="btn-upload btn btn-primary mt-4" for="input-file">Upload
+                                            Image</label>
+                                    </div>
+                                </div><!--end col-->
+
+                                <div class="col-md-8 mt-4 mt-sm-0">
+                                    <div class="ms-md-4">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Service Name <span
+                                                            class="text-danger">*</span></label>
+                                                    <input required name="name" id="name" type="text"
+                                                        class="form-control" placeholder="Service Name :"
+                                                        th:value="${serviceDetail.name}">
+                                                </div>
+                                            </div><!--end col-->
+
+                                            <div class="col-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Price <span
+                                                            class="text-danger">*</span></label>
+                                                    <input required name="price" id="price" type="number" step="1"
+                                                        class="form-control" placeholder="Price"
+                                                        th:value="${serviceDetail.price}">
+                                                    <script>
+                                                        function validatePrice() {
+                                                            var price = document.getElementById("price").value;
+                                                            var unvalidPrice = document.getElementById("priceUnvalid");
+                                                            var descriptionInvalid = document.getElementById("descriptionInvalid");
+                                                            if (parseFloat(price) <= 0 || isNaN(price)) {
+                                                                unvalidPrice.innerHTML = "Price must be a number greater than 0.";
+                                                                unvalidPrice.className = "alert alert-danger";
+                                                                unvalidPrice.role = "alert";
+                                                                return false;
+                                                            }
+                                                            var editorContent = CKEDITOR.instances.editor1.getData().trim();
+                                                            if (editorContent.length === 0) {
+                                                                descriptionInvalid.innerHTML = "Description can not be blank.";
+                                                                descriptionInvalid.className = "alert alert-danger";
+                                                                descriptionInvalid.role = "alert";
+                                                                // Display error message
+                                                                return false; // Prevent form submission
+                                                            }
+                                                            return true;
+                                                        }
+                                                    </script>
+                                                </div>
+                                                <div id="priceUnvalid"></div>
+                                            </div><!--end col-->
+
+                                            <div class="col-md-7">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Category</label><span
+                                                        class="text-danger">*</span>
+                                                    <select class="form-control" name="category">
+                                                        <option th:if="${serviceDetail.categoryId==cat.Id}" selected
+                                                            th:each="cat : ${listCate}" th:value="${cat.Id}"
+                                                            th:text="${cat.name}"></option>
+                                                        <option th:if="${serviceDetail.categoryId!=cat.Id}"
+                                                            th:each="cat : ${listCate}" th:value="${cat.Id}"
+                                                            th:text="${cat.name}"></option>
+                                                    </select>
+                                                </div>
+                                            </div><!--end col-->
+
+                                            <div class="col-lg-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Description <span
+                                                            class="text-danger">*</span></label>
+                                                    <textarea name="description" id="editor1" rows="4"
+                                                        class="form-control" placeholder="Service description :">
+                                                        <div th:text="${serviceDetail.description}"></div>
+                                                    </textarea>
+                                                    <script>
+                                                        CKEDITOR.replace('editor1')
+                                                    </script>
+                                                </div>
+                                                <div id="descriptionInvalid"></div>
+                                            </div><!--end col-->
+                                            <div class="col-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Create By </label>
+                                                    <input name="createBy" id="createBy" type="text"
+                                                        class="form-control" placeholder="Author:"
+                                                        th:value="${serviceDetail.createBy}">
+                                                </div>
+                                            </div><!--end col-->
+
+                                            <div class="col-lg-12 text-end">
+                                                <button type="submit" class="btn btn-primary">Add Service</button>
+                                            </div><!--end col-->
+                                        </div>
+                        </form>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div>
+        <!-- End modal -->
+        <!-- javascript -->
+        <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+        <!-- simplebar -->
+        <script th:src="@{/js/simplebar.min.js}"></script>
+        <!-- Icons -->
+        <script th:src="@{/js/feather.min.js}"></script>
+        <!-- Main Js -->
+        <script th:src="@{/js/app.js}"></script>
+        <script>
+            const handleChange = () => {
+                const fileUploader = document.querySelector('#input-file');
+                const getFile = fileUploader.files
+                if (getFile.length !== 0) {
+                    const uploadedFile = getFile[0];
+                    readFile(uploadedFile);
+                }
+            }
+
+            const readFile = (uploadedFile) => {
+                if (uploadedFile) {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        const parent = document.querySelector('.preview-box');
+                        parent.innerHTML = `<img class="preview-content" src=${reader.result} />`;
+                    };
+
+                    reader.readAsDataURL(uploadedFile);
+                }
+            };
+        </script>
+</body>
+
+</html>

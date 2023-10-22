@@ -68,7 +68,7 @@ public class ServicesController {
             try {
                 // We can save image in 'images' directory in roo
 
-                String uploadDir = "./healthcare/src/main/resources/static/images/service";
+                String uploadDir = "./src/main/resources/static/images/service";
                 java.nio.file.Path copyLocation = Paths
                         .get(uploadDir + java.io.File.separator + image.getOriginalFilename());
                 java.nio.file.Files.copy(image.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
@@ -97,12 +97,13 @@ public class ServicesController {
             @RequestParam("image") MultipartFile image) {
         String imageAddress = "";
         if (image.isEmpty()) {
-            imageAddress = "/images/service/default-service.jpg";
+            Service s = service.findById(id);
+            imageAddress = s.getImage();
         } else {
             try {
                 // We can save image in 'images' directory in roo
 
-                String uploadDir = "./healthcare/src/main/resources/static/images/service";
+                String uploadDir = "./src/main/resources/static/images/service";
                 java.nio.file.Path copyLocation = Paths
                         .get(uploadDir + java.io.File.separator + image.getOriginalFilename());
                 java.nio.file.Files.copy(image.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
@@ -258,7 +259,7 @@ public class ServicesController {
     @GetMapping(value = "/servicesManagement/search")
     public String search(@RequestParam("searchText") String search, Model model) {
         model.addAttribute("searchText", search);
-        return searchandPaginated(1, search, model);
+        return searchandPaginated(1, search.trim(), model);
     }
 
     @GetMapping(value = "/servicesManagement/page/{pageNo}/{searchText}")
