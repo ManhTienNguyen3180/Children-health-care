@@ -375,8 +375,8 @@
                                         <tr style="height: 100px; overflow-y: hidden; " th:each="listS:${servicesList}">
                                             <th class="p-3" th:text="${listS.Id}"></th>
                                             <td class="py-3">
-                                                <a href="#" class="text-dark">
-                                                    <div class="d-flex align-items-center">
+                                                <a th:href="@{/servicesManagement/service-detail/{id}(id=${listS.Id})}" class="text-dark">
+                                                    <div class="d-flex align-items-center fw-bold">
                                                         <span class="ms-2" th:text="${listS.name}"></span>
                                                     </div>
                                                 </a>
@@ -683,7 +683,7 @@
                                         class=" preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1">
                                     </div>
                                     <input type="file" id="input-file" name="image" accept="image/*"
-                                        onchange={handleChange()} hidden />
+                                        onchange={handleChange()} />
                                     <label class="btn-upload btn btn-primary mt-4" for="input-file">Upload Image</label>
                                 </div>
                             </div><!--end col-->

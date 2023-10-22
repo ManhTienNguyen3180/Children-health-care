@@ -97,7 +97,8 @@ public class ServicesController {
             @RequestParam("image") MultipartFile image) {
         String imageAddress = "";
         if (image.isEmpty()) {
-            imageAddress = "/images/service/default-service.jpg";
+            Service s = service.findById(id);
+            imageAddress = s.getImage();
         } else {
             try {
                 // We can save image in 'images' directory in roo
@@ -258,7 +259,7 @@ public class ServicesController {
     @GetMapping(value = "/servicesManagement/search")
     public String search(@RequestParam("searchText") String search, Model model) {
         model.addAttribute("searchText", search);
-        return searchandPaginated(1, search, model);
+        return searchandPaginated(1, search.trim(), model);
     }
 
     @GetMapping(value = "/servicesManagement/page/{pageNo}/{searchText}")
