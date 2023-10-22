@@ -10,7 +10,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.example.project.Repository.PatientDetail;
 import com.example.project.Repository.PatientRepo;
+import com.example.project.entity.details_Patient;
 import com.example.project.entity.patient;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -21,6 +23,8 @@ import jakarta.transaction.Transactional;
 public class PatientService {
   @Autowired
   private PatientRepo patientRepo;
+  @Autowired
+  private PatientDetail patientDetailRepo;
 
   public List<patient> getPatient() {
     return patientRepo.findAll();
@@ -59,12 +63,23 @@ public class PatientService {
   }
 
   public void addPatient(patient p) {
-    try {
-      patientRepo.save(p);
-    } catch (Exception e) {
-      throw new IllegalStateException();
-    }
 
+    if (findByPatientId(p.getPatient_id()) == null) {
+      // If the patient with the given ID doesn't exist, save the new patient
+      save(p);
+    } else {
+      // If the patient with the given ID already exists, you can choose to handle it
+      // differently, such as throwing an exception or logging a message
+      throw new IllegalStateException("Patient with the same ID already exists.");
+    }
+  }
+
+  public patient findByPatientEmail(String patient_email) {
+    if (patientRepo.findbyEmail(patient_email).isPresent()) {
+      return patientRepo.findbyEmail(patient_email).get();
+    } else {
+      return null;
+    }
   }
 
   public void updatePatientBypatientId(int patientId, patient p) {
@@ -72,15 +87,10 @@ public class PatientService {
         .findById(patientId);
     if (patientOptional.isPresent()) {
       patient foundUser = patientOptional.get();
-      foundUser.setCreate_at(p.getCreate_at());
-      foundUser.setCreate_by(p.getCreate_by());
-      foundUser.setDescription(p.getDescription());
-      foundUser.setDob(p.getDob());
-      foundUser.setGender(p.getGender());
-      foundUser.setImage(p.getImage());
+
       foundUser.setPatient_address(p.getPatient_address());
       foundUser.setPatient_email(p.getPatient_email());
-      foundUser.setPatient_name(p.getPatient_name());
+
       foundUser.setPatient_phone(p.getPatient_phone());
       foundUser.setStatus(p.getStatus());
       foundUser.setModify_at(LocalDate.now());
@@ -107,5 +117,32 @@ public class PatientService {
   // select last patient id from database by query mysql
   public int getLastPatientId() {
     return patientRepo.getLastPatientId();
+  }
+  // Detail patient
+
+  public Optional<details_Patient> findByPatientDetailId(int patientid) {
+    if (patientDetailRepo.findPatientDetailById(patientid).isPresent()) {
+      return patientDetailRepo.findPatientDetailById(patientid);
+    }
+    return null;
+  }
+
+  public Optional<details_Patient> findByPatientIdDetail(patient patientid) {
+    if (patientDetailRepo.findByPatientId(patientid).isPresent()) {
+      return patientDetailRepo.findByPatientId(patientid);
+    }
+    return null;
+  }
+
+  public void addPatient(details_Patient p) {
+
+    if (findByPatientDetailId(p.getDetailsPatientId()) == null) {
+      // If the patient with the given ID doesn't exist, save the new patient
+      patientDetailRepo.save(p);
+    } else {
+      // If the patient with the given ID already exists, you can choose to handle it
+      // differently, such as throwing an exception or logging a message
+      throw new IllegalStateException("Patient with the same ID already exists.");
+    }
   }
 }

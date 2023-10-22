@@ -1,4 +1,5 @@
 package com.example.project.service;
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class ReservationService {
 
     @Autowired
     ReservationRepo repository;
-    @Autowired 
+    @Autowired
     ReservationDetailRepo detailRepo;
     @Autowired
     EmailService EmailService;
@@ -37,15 +38,14 @@ public class ReservationService {
     @Autowired
     private SpringTemplateEngine templateEngine;
 
-
     public void save(reservation reservation) {
         repository.save(reservation);
     }
 
-    public  List<doctorserviceDTO> getDoctorService(List<Integer> serviceid) {
+    public List<doctorserviceDTO> getDoctorService(List<Integer> serviceid) {
         List<Object[]> listofdoctor = repository.findDoctorService(serviceid);
         List<doctorserviceDTO> listofdoctorDTO = new ArrayList<>();
-        for(Object[] obj : listofdoctor) {
+        for (Object[] obj : listofdoctor) {
             doctorserviceDTO doctorserviceDTO = new doctorserviceDTO();
             doctorserviceDTO.setDoctor_id(Integer.parseInt(String.valueOf(obj[0])));
             doctorserviceDTO.setDoctor_name(String.valueOf(obj[1]));
@@ -62,10 +62,11 @@ public class ReservationService {
         }
         return listofdoctorDTO;
     }
-    public List<slotDTO> getDoctorSlot(int doctorid){
+
+    public List<slotDTO> getDoctorSlot(int doctorid) {
         List<Object[]> listofslot = repository.findDoctorSlot(doctorid);
         List<slotDTO> listofslotDTO = new ArrayList<>();
-        for(Object[] obj : listofslot) {
+        for (Object[] obj : listofslot) {
             slotDTO slotDTO = new slotDTO();
             slotDTO.setId(Integer.parseInt(String.valueOf(obj[0])));
             slotDTO.setDoctor_id(Integer.parseInt(String.valueOf(obj[1])));
@@ -79,16 +80,19 @@ public class ReservationService {
     public int getLastReservationId() {
         return repository.getLastReservationId();
     }
+
     public int countByReservationId(int doctorid, Date date) {
         return repository.countByReservationId(doctorid, date);
     }
-    public void mergeReservationDetail(int reservation_id, int service_id, String service_name, int price, Date create_at, String create_by, int doctor_id, String doctor_name) {
-        detailRepo.mergeReservationDetail(reservation_id,service_id,service_name,price,create_at,create_by,doctor_id,doctor_name);
+
+    public void mergeReservationDetail(int reservation_id, int service_id, String service_name, int price,
+            Date create_at, String create_by, int doctor_id, String doctor_name) {
+        detailRepo.mergeReservationDetail(reservation_id, service_id, service_name, price, create_at, create_by,
+                doctor_id, doctor_name);
     }
 
-
     public void sendEmail(String patient_email, String patient_name, String doctor_name, String date,
-        List<service> services, int total_cost) throws MessagingException {
+            List<service> services, int total_cost) throws MessagingException {
 
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
@@ -98,7 +102,7 @@ public class ReservationService {
         helper.setSubject("Appointment Confirmation");
 
         Context context = new Context();
-        
+
         // Đặt các biến để truyền dữ liệu vào mẫu
         context.setVariable("patientName", patient_name);
         context.setVariable("doctorName", doctor_name);
@@ -107,10 +111,15 @@ public class ReservationService {
         context.setVariable("totalCost", total_cost);
 
         String emailContent = templateEngine.process("appointment-confirmation", context);
-        helper.setText(emailContent, true);    
+        helper.setText(emailContent, true);
         emailSender.send(message);
     }
+
     public List<reservation> listReservationByPatientId(int patientId) {
         return repository.findByPatient_id(patientId);
+    }
+
+    public List<reservation> findByPatientDate(int patient_id, String date) {
+        return repository.findByPatientDate(patient_id, date);
     }
 }

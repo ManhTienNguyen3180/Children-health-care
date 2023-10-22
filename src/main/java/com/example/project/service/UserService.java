@@ -176,14 +176,18 @@ public class UserService {
     }
   }
 
+  public void updateRoleName(){
+    
+  }
   // update user status and role
   public void updateUserByUserid2(int userid, String statusUpdate, String roleUpdate) {
     Optional<user> useOptional = userRepository
         .findById(userid);
     if (useOptional.isPresent()) {
       user foundUser = useOptional.get();
+      foundUser.setRolename(roleService.findRoleById(Integer.parseInt(roleUpdate)).getRole_name());
       foundUser.setStatus(Integer.parseInt(statusUpdate));
-      foundUser.setRole_id(roleService.findUserById(Integer.parseInt(roleUpdate)));
+      foundUser.setRole_id(roleService.findRoleById(Integer.parseInt(roleUpdate)));
       userRepository.save(foundUser);
     } else {
       // Handle the case where the user is not found

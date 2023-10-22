@@ -16,6 +16,9 @@ public interface RoleRepository extends
     @Query("SELECT r FROM role r WHERE role_name=?1 ")
     Optional<role> findByRole_Name(String roleName);
 
+    @Query("SELECT r FROM role r WHERE role_id=?1 ")
+    Optional<role> findByRole_Id(int roleName);
+
     @Query("SELECT r FROM role r")
-     List<role> GetRole();
+    List<role> GetRole();
 }

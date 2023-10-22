@@ -26,6 +26,7 @@ public class AdminPatients {
     if (pageno == null) {
       pageno = 1;
     }
+    
     if (order != null) {
       if (!order.equalsIgnoreCase("gender") ||
           !order.equalsIgnoreCase("status")) {
@@ -87,9 +88,9 @@ public class AdminPatients {
       s = "male";
     }
     Page<patient> page = patientService.findUsersAndFilterGender(r, pageno, pagesize);
-    List<patient> listuser = page.getContent();
+    List<patient> listpPatients = page.getContent();
     model.addAttribute("genderActive", -1);
-    model.addAttribute("listPatients", listuser);
+    model.addAttribute("listPatients", listpPatients);
     model.addAttribute("currentPage", pageno);
     model.addAttribute("totalPage", page.getTotalPages());
     model.addAttribute("orders", "order=" + s);
@@ -101,9 +102,9 @@ public class AdminPatients {
     int pagesize = 3;
 
     Page<patient> page = patientService.findUsersAndFilterStatus(r, pageno, pagesize);
-    List<patient> listuser = page.getContent();
+    List<patient> listpPatients = page.getContent();
     model.addAttribute("statusActive", -1);
-    model.addAttribute("listPatients", listuser);
+    model.addAttribute("listPatients", listpPatients);
     model.addAttribute("currentPage", pageno);
     model.addAttribute("totalPage", page.getTotalPages());
     model.addAttribute("orders", "order=" + r);

@@ -30,9 +30,9 @@ public class RoleService {
     return null;
   }
 
-  public role findUserById(int roleid) {
+  public role findRoleById(int roleid) {
     Optional<role> useOptional = roleRepository
-        .findById(roleid);
+        .findByRole_Id(roleid);
     if (useOptional.isPresent()) {
       role u = useOptional.get();
       return u;

@@ -111,7 +111,7 @@
                         </div>
                     </li>
 
-                    
+
 
                 </ul>
                 <!-- sidebar-menu  -->
@@ -259,15 +259,6 @@
 
 
 
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Gender</label>
-                                                <select class="form-control gender-name select2input" name="gender">
-                                                    <option value="0" th:selected="${param.gender==0}">Male</option>
-                                                    <option value="1" th:selected="${param.gender==1}">Female</option>
-                                                </select>
-                                            </div>
-                                        </div><!--end col-->
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
@@ -299,40 +290,61 @@
                                                 </div>
                                             </div>
                                         </div><!--end col-->
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Gender</label>
+                                                <select class="form-control gender-name select2input" name="gender">
+                                                    <option value="0" th:selected="${param.gender==0}">Male</option>
+                                                    <option value="1" th:selected="${param.gender==1}">Female</option>
+                                                </select>
+                                            </div>
+                                        </div><!--end col-->
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Role</label>
+                                                <select class="form-control gender-name select2input" name="role">
+                                                    <option th:each="role : ${listrole}" th:value="${role.role_id}"
+                                                        th:text="${role.role_name}"></option>
+
+                                                </select>
+                                               
+                                            </div>
+                                        </div><!--end col-->
+                                    </div><!--end col-->
 
 
-                                    </div><label class="form-label" th:text="${mess}" style="color: tomato;"></label>
-                                    <input type="submit" class="btn btn-primary" value="Add User"></input>
-                            </div><!--end row-->
+                            </div><label class="form-label" th:text="${mess}" style="color: tomato;"></label>
+                            <input type="submit" class="btn btn-primary" value="Add User"></input>
+                        </div><!--end row-->
 
-                            </form>
+                        </form>
 
-                        </div><!--end col-->
+                    </div><!--end col-->
 
 
-                    </div><!--end row-->
-                </div>
-            </div><!--end container-->
+                </div><!--end row-->
+            </div>
+    </div><!--end container-->
 
-            <!-- Footer Start -->
-            <footer class="bg-white shadow py-3">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <div class="text-sm-start text-center">
-                                <p class="mb-0 text-muted">
-                                    <script>document.write(new Date().getFullYear())</script> © Doctris. Design with <i
-                                        class="mdi mdi-heart text-danger"></i> by <a href="../../../dashboard"
-                                        target="_blank" class="text-reset">Shreethemes</a>.
-                                </p>
-                            </div>
-                        </div><!--end col-->
-                    </div><!--end row-->
-                </div><!--end container-->
-            </footer><!--end footer-->
-            <!-- End -->
-        </main>
-        <!--End page-content" -->
+    <!-- Footer Start -->
+    <footer class="bg-white shadow py-3">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="text-sm-start text-center">
+                        <p class="mb-0 text-muted">
+                            <script>document.write(new Date().getFullYear())</script> © Doctris. Design with <i
+                                class="mdi mdi-heart text-danger"></i> by <a href="../../../dashboard" target="_blank"
+                                class="text-reset">Shreethemes</a>.
+                        </p>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </footer><!--end footer-->
+    <!-- End -->
+    </main>
+    <!--End page-content" -->
     </div>
     <!-- page-wrapper -->
 

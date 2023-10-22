@@ -79,6 +79,7 @@
                         <div class="sidebar-submenu">
                             <ul>
                                 <li><a th:href="@{/admin/patients}">All Patients</a></li>
+                                <li><a th:href="@{/admin/patientDashboard}">Dashboard</a></li>
                             </ul>
                         </div>
                     </li>
@@ -109,7 +110,7 @@
                         </div>
                     </li>
 
-                    
+
 
                 </ul>
                 <!-- sidebar-menu  -->
@@ -142,7 +143,7 @@
                         </a>
                         <div class="search-bar p-0 d-none d-lg-block ms-2">
                             <div id="search" class="menu-search mb-0">
-                                <form action="patientsSearch" role="search" method="get" id="searchform"
+                                <form th:action="@{patientsSearch}" role="search" method="get" id="searchform"
                                     class="searchform">
                                     <div>
                                         <input type="text" class="form-control border rounded-pill" name="s" id="s"
@@ -195,6 +196,7 @@
                 <div class="layout-specing">
                     <div class="d-md-flex justify-content-between">
                         <h5 class="mb-0">Patients List</h5>
+
                         <form th:action="@{/admin/patients}" method="post">
                             <button type="submit" class="btn btn-soft-success m-1 btn-sm" value="default"
                                 name="order">Default</button>
@@ -207,9 +209,9 @@
                             <button class="btn btn-soft-success m-1 btn-sm" value="status" name="order"
                                 th:hidden="${statusActive == -1}">Status</button>
                             <button class="btn btn-soft-warning m-1 btn-sm" value="1" name="order"
-                                th:hidden="${statusActive != -1}">Active</button>
+                                th:hidden="${statusActive != -1}">Reservation ended</button>
                             <button class="btn btn-soft-warning m-1 btn-sm" value="0" name="order"
-                                th:hidden="${statusActive != -1}">Blockeds</button>
+                                th:hidden="${statusActive != -1}">In process</button>
                         </form>
                         <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                             <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
@@ -218,6 +220,10 @@
                                         class="fa-solid fa-caret-down fa-rotate-270"></i></li>
                                 <li class="breadcrumb-item active" aria-current="page">Patients</li>
                             </ul>
+                            <form th:action="@{/admin/add-patient}">
+                                <input type="submit" value="Add Patient"
+                                    class="btn btn-soft-primary m-1 btn-sm"></input>
+                            </form>
                         </nav>
                     </div>
 
@@ -229,13 +235,12 @@
                                         <tr>
                                             <th class="border-bottom p-3" style="min-width: 50px;">Id</th>
                                             <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
-                                            <th class="border-bottom p-3">Dob</th>
+                                            <th class="border-bottom p-3">Date of Birth</th>
                                             <th class="border-bottom p-3">Gender</th>
                                             <th class="border-bottom p-3">Email</th>
                                             <th class="border-bottom p-3">Phone</th>
-                                            <th class="border-bottom p-3">Address</th>
+
                                             <th class="border-bottom p-3">Create by</th>
-                                            <th class="border-bottom p-3">Account</th>
                                             <th class="border-bottom p-3">Status</th>
                                         </tr>
                                     </thead>
@@ -253,30 +258,27 @@
                                                     </div>
                                                 </a>
                                             </td>
-                                            <td class="p-3" th:text="${patients.Dob}"></td>
+                                            <td class="p-3" th:text="${#dates.format(patients.Dob, 'yyyy-MM-dd')}"></td>
 
                                             <td class="p-3" th:text="Female" th:if="${patients.gender == 1}"></td>
                                             <td class="p-3" th:text="Male" th:if="${patients.gender == 0}"></td>
                                             <td class="p-3" th:text="${patients.patient_email}"></td>
                                             <td class="p-3" th:text="${patients.patient_phone}"></td>
-                                            <td class="p-3" th:text="${patients.patient_address}"></td>
+
                                             <td class="p-3" th:text="${patients.create_by}"></td>
-
-                                            <td class="p-3" th:if="${patients.user_id!=0}"><span
-                                                    class="badge bg-soft-success">Has account</span></td>
-                                            <td class="p-3" th:if="${patients.user_id==0}"><span
-                                                    class="badge bg-soft-warning">Non account</span></td>
-
-
                                             <td class="p-3" th:if="${patients.status==1}"><span
-                                                    class="badge bg-soft-success">Active</span></td>
+                                                    class="badge bg-soft-success">Reservation ended</span></td>
                                             <td class="p-3" th:if="${patients.status==0}"><span
-                                                    class="badge bg-soft-warning">Blocked</span></td>
+                                                    class="badge bg-soft-warning">In
+                                                    Process</span></td>
                                             <td class="text-end p-3">
                                                 <a th:href="@{'/admin/patient-profile?id=' + ${patients.patient_id}}"
+                                                    class="btn btn-icon btn-pills btn-soft-primary"><i
+                                                        class="uil uil-eye"></i></a>
+                                                <a th:href="@{'/admin/add-patientDetails?id=' + ${patients.patient_id}}"
                                                     class="btn btn-icon btn-pills btn-soft-success"><i
                                                         class="uil uil-pen"></i></a>
-                                                <a href="" class="btn btn-icon btn-pills btn-soft-danger"><i
+                                                <a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i
                                                         class="uil uil-trash"></i></a>
                                             </td>
 
@@ -328,22 +330,7 @@
             </div>
     </div><!--end container-->
 
-    <!-- Footer Start -->
-    <footer class="bg-white shadow py-3">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col">
-                    <div class="text-sm-start text-center">
-                        <p class="mb-0 text-muted">
-                            <script>document.write(new Date().getFullYear())</script> © Doctris. Design with <i
-                                class="mdi mdi-heart text-danger"></i> by <a href="../../../dashboard" target="_blank"
-                                class="text-reset">Shreethemes</a>.
-                        </p>
-                    </div>
-                </div><!--end col-->
-            </div><!--end row-->
-        </div><!--end container-->
-    </footer><!--end footer-->
+    
     <!-- End -->
     </main>
     <!--End page-content" -->
