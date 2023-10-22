@@ -22,7 +22,7 @@ public interface DoctorRepo extends JpaRepository<doctor, Integer> {
     public Page<doctor> search(String keyword, Pageable pageable);
 
     @Query(value = "select d.doctor_id,d.doctor_name,d.position,d.gender,d.phone,d.image,\n" + //
-            "d.description,d.dob,d.status,d.create_at,d.create_by from doctor d , doctorservice ds, service s\n" + //
+            "d.description,d.dob,d.status,d.create_at,d.create_by,d.doctorservice_id from doctor d , doctorservice ds, service s\n" + //
             "where d.doctor_id = ds.doctorID and s.service_id=ds.serviceID\n" + //
             "and s.service_id=?1", nativeQuery = true)
     Page<doctor> getDocByService(int id, PageRequest pageable);
@@ -43,4 +43,9 @@ public interface DoctorRepo extends JpaRepository<doctor, Integer> {
 
     @Query( value ="select * from doctor d order by d.doctor_id desc limit 1",nativeQuery = true)
     doctor getLatestDoctor();
+
+    //get doctor by doctorserviceid 
+    @Query("SELECT d FROM doctor d where d.doctorserviceId=?1")
+    public List<doctor> getDoctorByDoctorServiceID(int id); 
+       
 }

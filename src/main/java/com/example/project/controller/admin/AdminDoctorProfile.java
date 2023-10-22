@@ -56,11 +56,12 @@ public class AdminDoctorProfile {
       DoctorService.deleteDoctorService(doctorservice.getId()); 
     }
       
-    slot s = ScheduleService.findSlotByDoctorID(id);
-    if(s != null) {
-      int slotid = s.getId();
-      DoctorService.deleteSlot(slotid);
+    List<slot> s = ScheduleService.getSlotsByDoctorId(id);
+    for (slot slot : s) {
+      DoctorService.deleteSlot(slot.getId());
     }
+      
+    
 
     redirectAttributes.addFlashAttribute("successmessage", "Doctor deleted successfully!");
     DoctorService.deleteDoctor(id);

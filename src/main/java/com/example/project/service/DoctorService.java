@@ -46,4 +46,5 @@ public interface DoctorService {
     List<Object> getDocReview(int id);
 
     public doctor findLatestDoctor();
+    List<doctor> getDoctorByDoctorServiceID(int id);
 }

@@ -21,7 +21,8 @@ public class doctor {
     private int status;
     private Date create_at;
     private String create_by;
-    
+    @Column(name = "doctorservice_id")
+    private int doctorserviceId;
     public doctor() {
     }
 
@@ -39,7 +40,23 @@ public class doctor {
         this.create_at = create_at;
         this.create_by = create_by;
     }
-
+    
+    public doctor(int doctor_id, String doctor_name, String position, int gender, int phone, String image,
+            String description, Date dob, int status, Date create_at, String create_by, int doctorserviceId) {
+        this.doctor_id = doctor_id;
+        this.doctor_name = doctor_name;
+        this.position = position;
+        this.gender = gender;
+        this.phone = phone;
+        this.image = image;
+        this.description = description;
+        this.dob = dob;
+        this.status = status;
+        this.create_at = create_at;
+        this.create_by = create_by;
+        this.doctorserviceId = doctorserviceId;
+    }
+    
     public int getDoctor_id() {
         return doctor_id;
     }
@@ -126,6 +143,14 @@ public class doctor {
 
     public void setCreate_by(String create_by) {
         this.create_by = create_by;
+    }
+
+    public int getDoctorserviceId() {
+        return doctorserviceId;
+    }
+
+    public void setDoctorserviceId(int doctorserviceId) {
+        this.doctorserviceId = doctorserviceId;
     }
     
     

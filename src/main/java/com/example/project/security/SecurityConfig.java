@@ -44,7 +44,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                .requestMatchers("/service/add-service?id=","/signup/confirm","/error","/denied","/thankyou", "/reservationcontact/save", "/getSlotsByDoctor/**","/reservationcontact",
+                .requestMatchers("getTime/**","getDate","/getTimeByDoctorAndDate/**","/getDoctorByCategoryServiceId/**","/getServiceByCategoryServiceId/**","/service/add-service?id=","/signup/confirm","/error","/denied","/thankyou", "/reservationcontact/**", "/getSlotsByDoctor/**",
                         "/bookingappointment", "/getDoctorsByService/**", "/home", "/signup", "/saveUser",
                         "/forgot",
                         "/doctor", "/service/**","service-detail/**","/doctor-detail/**", "/blog", "/reset", "/logout")

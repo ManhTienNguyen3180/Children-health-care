@@ -17,7 +17,7 @@ public class CustomAccessDeniedHandler extends OncePerRequestFilter {
             jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain)
             throws jakarta.servlet.ServletException, IOException {
           
-        if (request.getRequestURI().equals("/reservationcontact") && request.getParameter("serviceId") == null) {
+        if (request.getRequestURI().equals("/reservationcontact") && request.getParameter("date") == null) {
             request.getRequestDispatcher("/denied").forward(request, response);
         } else {
             filterChain.doFilter(request, response);

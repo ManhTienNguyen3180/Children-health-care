@@ -249,6 +249,7 @@
                                                     class="uil uil-book-open align-text-bottom text-primary h5 mb-0 me-2"></i>
                                                 <h6 class="mb-0">Role</h6>
                                                 <p class="text-muted mb-0 ms-2" th:text="${user.role_id.role_name}"></p>
+                                                <p class="text-muted mb-0 ms-2" th:text="${user.role_id.role_name}"></p>
                                             </div>
 
                                             <div class="d-flex align-items-center mt-2">
@@ -288,7 +289,7 @@
                                                 <p class="text-muted mb-0 ms-2" th:text="${user.create_by}"></p>
                                             </div>
 
-                                            <form th:action="@{/admin/user-profile}" method="post"
+                                            <form th:action="@{user-profile}" method="post"
                                                 style="border: 1px solid;">
                                                 <div style="margin-left: 10px; margin-bottom: 10px;">
                                                     <p style="font-weight: bold; margin-top: 10px; margin-bottom: 0;">
