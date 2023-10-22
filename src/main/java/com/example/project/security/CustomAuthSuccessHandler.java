@@ -33,7 +33,7 @@ public class CustomAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         user user = userService.findUserByEmail(email);
         session.setAttribute("user", user);
         if (roles.contains("ROLE_ADMIN")) {
-            getRedirectStrategy().sendRedirect(request, response, "admin/doctors");
+            getRedirectStrategy().sendRedirect(request, response, "admin/dashboard");
 
         }
         else if(savedRequest != null && savedRequest.getRedirectUrl().equalsIgnoreCase("http://localhost:8080/abc?continue")){
