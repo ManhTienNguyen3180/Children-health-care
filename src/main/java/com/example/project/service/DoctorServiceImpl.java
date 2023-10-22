@@ -7,8 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +39,6 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Optional<doctor> findDoctorById(int id) {
-        // TODO Auto-generated method stub
         return (Optional<doctor>) repo.findById(id);
     }
 
@@ -84,17 +81,6 @@ public class DoctorServiceImpl implements DoctorService {
     @Modifying
     public void savedocservice(doctorservice doctorservice) {
         repo2.save(doctorservice);
-    }
-
-    @Override
-    public Page<doctor> findPaginatedDoctor(int pageNo, int pageSize, String sortField, String sortDirection, String keyword) {
-        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending()
-                : Sort.by(sortField).descending();
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-        if(keyword != null) {
-            return repo.search(keyword, pageable);
-        }
-        return repo.findAll(pageable);
     }
 
     @Override
@@ -145,9 +131,40 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public doctor findLatestDoctor() {
-        return repo.getLatestDoctor();
+    public doctor findDoctor(String position, String phone) {
+        return repo.findDoctor(position, phone);
     }
+
+    @Override
+    public Page<doctor> findPaginated(int pageNo, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.repo.findAll(pageable);
+    }
+
+    @Override
+    public Page<doctor> search(String key, int pageNo, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNo-1,pageSize);
+        return this.repo.search(key, pageable);
+     }
+
+    @Override
+    public Page<doctor> filterCategory(int id, int pageNo, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
+        return repo.filterCategory(id, pageable);
+    }
+
+    @Override
+    public Page<doctor> filterStatus(int id, int pageNo, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
+        return repo.filterStatus(id, pageable);
+    }
+
+    @Override
+    public doctor findDoctorPosition(String position) {
+        return repo.findDoctorPosition(position);
+    }
+
+    
 
 }
 

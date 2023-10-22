@@ -3,7 +3,6 @@ package com.example.project.Repository;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +18,7 @@ public interface DoctorRepo extends JpaRepository<doctor, Integer> {
     Optional<doctor> findDoctorByName(String doctor_name);
 
     @Query("SELECT p FROM doctor p WHERE CONCAT(p.doctor_name, p.position, p.phone) LIKE %?1%")
-    public Page<doctor> search(String keyword, Pageable pageable);
+    Page<doctor> search(String keyword, PageRequest pageable);
 
     @Query(value = "select d.doctor_id,d.doctor_name,d.position,d.gender,d.phone,d.image,\n" + //
             "d.description,d.dob,d.status,d.create_at,d.create_by from doctor d , doctorservice ds, service s\n" + //
@@ -43,4 +42,16 @@ public interface DoctorRepo extends JpaRepository<doctor, Integer> {
 
     @Query( value ="select * from doctor d order by d.doctor_id desc limit 1",nativeQuery = true)
     doctor getLatestDoctor();
+
+    @Query(value = "SELECT * FROM doctor  WHERE category_service_id = ?1", nativeQuery = true)
+    Page<doctor> filterCategory(int id, PageRequest pageable);
+
+    @Query(value = "SELECT * FROM doctor  WHERE status = ?1", nativeQuery = true)
+    Page<doctor> filterStatus(int id, PageRequest pageable);
+
+    @Query("SELECT p FROM doctor p WHERE p.position =?1 or p.phone = ?2 order by p.doctor_id asc limit 1")
+    doctor findDoctor(String position, String phone);
+
+    @Query("SELECT p FROM doctor p WHERE p.position like %?1% order by p.doctor_id asc limit 1")
+    doctor findDoctorPosition(String position);
 }

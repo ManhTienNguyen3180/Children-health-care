@@ -2,13 +2,7 @@ package com.example.project.security;
 
 import java.io.IOException;
 
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 public class CustomAccessDeniedHandler extends OncePerRequestFilter {
 

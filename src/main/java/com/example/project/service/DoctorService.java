@@ -19,8 +19,6 @@ public interface DoctorService {
 
     public void savedocservice(doctorservice doctorservice);
 
-    Page<doctor> findPaginatedDoctor(int pageNo, int pageSize, String sortField, String sortDirection, String keyword);
-
     void deleteDoctor(int id);
 
     void deleteDoctorService(int id);
@@ -45,5 +43,15 @@ public interface DoctorService {
 
     List<Object> getDocReview(int id);
 
-    public doctor findLatestDoctor();
+    public doctor findDoctor(String position, String phone);
+
+    Page<doctor> findPaginated(int pageNo, int pageSize);
+
+    Page<doctor> search(String key, int pageNo, int pageSize);
+
+    Page<doctor> filterCategory(int id, int pageNo, int i);
+
+    Page<doctor> filterStatus(int id, int pageNo, int i);
+
+    doctor findDoctorPosition(String position);
 }

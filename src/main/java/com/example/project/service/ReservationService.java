@@ -3,9 +3,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -17,7 +15,6 @@ import com.example.project.Repository.ReservationRepo;
 import com.example.project.dto.doctorserviceDTO;
 import com.example.project.dto.slotDTO;
 import com.example.project.entity.reservation;
-import com.example.project.entity.reservationdetail;
 import com.example.project.entity.service;
 
 import jakarta.mail.MessagingException;

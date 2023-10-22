@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.example.project.Repository.UserRepository;
 import com.example.project.entity.user;
 
-import jakarta.servlet.http.HttpSession;
+
 @Component
 public class CustomUserDetailsService implements UserDetailsService{
 
