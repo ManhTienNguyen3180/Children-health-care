@@ -1,7 +1,9 @@
 package com.example.project.controller.admin;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,49 +34,36 @@ public class AdminSchedule {
 
     @PostMapping("admin/schedule/save")
     public String saveDoctor(
-            @RequestParam("docdate") Date date,
             @RequestParam("doctor_id") int doctor_id,
             @RequestParam("starttime") String starttimeStr,
-            @RequestParam("endtime") String endtimeStr,
-            @RequestParam("max") int max,
-            Model model, ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
+            @RequestParam("endtime") String endtimeStr, @RequestParam("dayofweek") int dayofweek,
+            Model model, ModelAndView modelAndView, RedirectAttributes redirectAttributes) throws ParseException {
 
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-        java.sql.Time starttime = null;
-        java.sql.Time endtime = null;
-        Date now = new java.sql.Date(System.currentTimeMillis());
-        try {
-            java.util.Date starttimeUtil = format.parse(starttimeStr);
-            java.util.Date endtimeUtil = format.parse(endtimeStr);
-            starttime = new java.sql.Time(starttimeUtil.getTime());
-            endtime = new java.sql.Time(endtimeUtil.getTime());
-        } catch (Exception e) {
-            // Handle the exception
-        }
+        java.sql.Time starttime;
+        java.sql.Time endtime;
 
-        slot slot = new slot();
-        slot.setDoctor_id(doctor_id);
-        if(date.after(now)) {
-            slot.setDate(date);
-        } else {
-            redirectAttributes.addFlashAttribute("error", "Date must after now");
-            return "redirect:/admin/schedule";
-        }
-        
-        if(starttime.equals(endtime)) {
-            redirectAttributes.addFlashAttribute("error", "Start time cannot be the same as end time");
+        java.util.Date starttimeUtil = format.parse(starttimeStr);
+        java.util.Date endtimeUtil = format.parse(endtimeStr);
+        starttime = new java.sql.Time(starttimeUtil.getTime());
+        endtime = new java.sql.Time(endtimeUtil.getTime());
+
+        List<slot> slotList = ScheduleService.checkSlotByDoctorIdAndDayOfWeekAndTime(dayofweek, doctor_id, endtime,
+                starttime);
+        if (!slotList.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errormessage", "Doctor schedule already exists!");
             return "redirect:/admin/schedule";
         } else {
+            slot slot = new slot();
+            slot.setDoctor_id(doctor_id);
             slot.setStart_time(starttime);
             slot.setEnd_time(endtime);
+            slot.setDayof_week(dayofweek);
+            slot.setMax_appointments_per_slot(5);
+            ScheduleService.save(slot);
+            redirectAttributes.addFlashAttribute("successmessage", "Doctor schedule added successfully!");
+            return "redirect:/admin/schedule";
         }
-        
-        slot.setMax_appointments_per_slot(max);
 
-        redirectAttributes.addFlashAttribute("successmessage", "Doctor schedule added successfully!");
-
-        ScheduleService.save(slot);
-
-        return "redirect:/admin/schedule";
     }
 }

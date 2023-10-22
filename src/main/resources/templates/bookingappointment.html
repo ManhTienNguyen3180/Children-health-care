@@ -467,8 +467,8 @@
                 var categoryserviceId = $("#categoryserviceId").val();
                 if (categoryserviceId == 0) {
 
-                    // $("#date").val("").trigger("change");
-                    // $("#time").val("").trigger("change");
+                    $("#date").val("").trigger("change");
+                    $("#time").val("").trigger("change");
                     $("#doctorId").val("").trigger("change");
                     $("#serviceId").val("").trigger("change");
                     $("#date").append('<option value="">Select Date</option>');
@@ -635,7 +635,31 @@
             });
         });
     </script>
-
+    <script>
+        //check time is after current time -> disable button continue reservation 
+        $(document).ready(function () {
+            $("#time").change(function () {
+                var time = $("#time").val();
+                var date = $("#date").val();
+                var today = new Date();
+                var timeNow = today.getHours() + ":" + today.getMinutes();
+                if (date == today.toISOString().slice(0, 10)) {
+                    if (time < timeNow) {
+                        $("#btnContinue").prop('disabled', true);
+                        $("#messReser").text("Time is invalid");
+                    } else {
+                        $("#btnContinue").prop('disabled', false);
+                        $("#messReser").text("");
+                    }
+                } else {
+                    $("#btnContinue").prop('disabled', false);
+                    $("#messReser").text("");
+                }
+            });
+        });
+        
+        
+    </script>
 
 </body>
 

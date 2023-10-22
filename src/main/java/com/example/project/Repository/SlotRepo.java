@@ -1,5 +1,6 @@
 package com.example.project.Repository;
 
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public interface SlotRepo extends JpaRepository<slot, Integer>{
     Optional<slot> findSlotByDoctorId(int doctor_id);
 
     @Query("SELECT s FROM slot s WHERE doctor_id=?1 ")
-      List<slot> findByDoctorId(int doctorId);
+    List<slot> findByDoctorId(int doctorId);
 
 
     @Query(value = "select s.start_time,s.end_time from slot s where s.doctor_id = ?1 and s.dayof_week = ?2")
@@ -31,4 +32,7 @@ public interface SlotRepo extends JpaRepository<slot, Integer>{
 
     @Query(value = "select s.start_time,s.end_time from slot s where s.dayof_week = ?1", nativeQuery = true)
     List<Object[]> findTime(int dayOfWeek);
+
+    @Query("select s from slot s where s.dayof_week = ?1 and s.doctor_id = ?2 and not (?3 <= start_time OR ?4 >= end_time)")
+    List<slot> checkSlotByDoctorIdAndDayOfWeekAndTime(int dayOfWeek, int doctorId, Time endTime, Time startTime);
 }
