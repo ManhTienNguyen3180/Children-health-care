@@ -19,6 +19,13 @@ public class ServiceCategory {
     private String createBy;
     public ServiceCategory() {
     }
+    public ServiceCategory(String name, String note, int status, String createAt, String createBy) {
+        this.name = name;
+        this.note = note;
+        this.status = status;
+        this.createAt = createAt;
+        this.createBy = createBy;
+    }
     public ServiceCategory(int id, String name, String note, int status, String createAt, String createBy) {
         this.id = id;
         this.name = name;

@@ -68,7 +68,6 @@ public class BlogsServiceImpl implements BlogsService {
     public Page<Blog> filterCategory(int id, int pageNo, int pageSize) {
         PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
         return repo.filterCategory(id, pageable);
-
     }
 
     @Override
