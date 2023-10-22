@@ -486,11 +486,16 @@
                                                     <div class="card border-0 p-3 rounded shadow">
                                                         <ul class="list-unstyled mb-0" th:each="slot : ${slot}">
                                                             <li class="d-flex justify-content-between">
-                                                                <p class="text-muted mb-0" th:text="${slot.dayof_week}"><i
-                                                                        class="ri-time-fill text-primary align-middle h5 mb-0"></i>
-                                                                </p>
-                                                                <p class="text-primary mb-0"><span
-                                                                        class="text-dark">Time:</span>
+                                                                <div class="text-muted mb-0" th:switch="${slot.dayof_week}">
+                                                                    <h6 th:case="1">Thứ 2</h6>
+                                                                    <h6 th:case="2">Thứ 3</h6>
+                                                                    <h6 th:case="3">Thứ 4</h6>
+                                                                    <h6 th:case="4">Thứ 5</h6>
+                                                                    <h6 th:case="5">Thứ 6</h6>
+                                                                    <h6 th:case="6">Thứ 7</h6>
+                                                                    <h6 th:case="0">Chủ Nhật</h6>
+                                                                </div>
+                                                                
                                                                 <p th:text="${slot.start_time}"></p> -
                                                                 <p th:text="${slot.end_time}"></p>
                                                                 </p>
