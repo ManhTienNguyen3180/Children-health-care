@@ -210,137 +210,258 @@
                             </ul>
                         </nav>
                     </div>
+                    <form th:action="@{/admin/add-patientDetails}" method="post">
+                        <div class="row">
+                            <div class="col-lg-12 mt-4">
+                                <div class="card border-0 p-4 rounded shadow">
 
-                    <div class="row">
-                        <div class="col-lg-12 mt-4">
-                            <div class="card border-0 p-4 rounded shadow">
-                                <label style="font-weight: bold;">Add patient</label>
-                                <div class="row">
+                                    <div class="d-flex align-items-center mt-2">
 
-                                    <form th:action="@{/admin/add-patient}" method="post" enctype="multipart/form-data">
+                                        <h6 class="mb-0">Patient:</h6>
+
+                                        <p class="text-muted mb-0 ms-2" th:text="${patientInfo.patient_name}">Female</p>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+
+                                        <h6 class="mb-0">Doctor:</h6>
+
+                                        <select class="text-muted mb-0 ms-2" name="doctor">
+                                            <option th:each="doctor: ${listd}" th:value="${doctor.doctor_id}"
+                                                th:text="${doctor.doctor_name}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+
+                                        <h6 class="mb-0">Date of Birth:</h6>
+
+                                        <p class="text-muted mb-0 ms-2"
+                                            th:text="${#dates.format(patientInfo.dob, 'yyyy-MM-dd')}">Female</p>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+
+                                        <h6 class="mb-0">Address:</h6>
+
+                                        <p class="text-muted mb-0 ms-2" th:text="${patientInfo.patient_address}">Female
+                                        </p>
+                                    </div>
+                                    <label style="font-weight: bold;">Input Information:</label>
+                                    <div class="row">
+
+
+                                        <input type="hidden" th:value="${param.id}" name="id">
+                                        <input type="datetime" th:value="${datetime}" name="datetime" hidden>
                                         <div class="row">
-                                            <div class="col-md-7">
+                                            <div class="col-md-6">
+
+
                                                 <div class="mb-3">
-                                                    <label class="form-label">Full name:</label>
-                                                    <input type="text" name="full_name" placeholder="Nguyen Van A"
-                                                        class="form-control"></input>
+                                                    <label class="form-label">Create at</label>
+                                                    <input type="text" th:value="*{date}" class="form-control"
+                                                        readonly></input>
                                                 </div>
+                                                <div class="d-flex align-items-center mt-2">
 
-                                                <label class="form-label">Address</label>
-                                                <div class="row">
-                                                    <input type="hidden" name="province" id="selectedProvince">
-                                                    <input type="hidden" name="district" id="selectedDistrict">
-                                                    <input type="hidden" name="ward" id="selectedWard">
-
-                                                    <div class="mb-3 row">
-                                                        <label for="province"
-                                                            class="form-label col-md-4">Province:</label>
-                                                        <div class="form-group col-md-4">
-                                                            <select name="" id="province" class="form-control"></select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3 row">
-                                                        <label for="district"
-                                                            class="form-label col-md-4">District:</label>
-                                                        <div class="form-group col-md-4">
-                                                            <select name="" id="district" class="form-control"></select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3 row">
-                                                        <label for="district" class="form-label col-md-4">Ward:</label>
-                                                        <div class="form-group col-md-4">
-                                                            <select name="" id="ward" class="form-control"></select>
+                                                    <div class="mb-3 col-md-12">
+                                                        <label class="form-label">Family Medical History</label>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12">
+                                                                <textarea name="fmhistory" type="textarea"
+                                                                    class="form-control"
+                                                                    style="height: 100px;"></textarea>
+                                                            </div>
                                                         </div>
                                                     </div>
 
-
+                                                </div>
+                                                <div class="d-flex align-items-center mt-2">
+                                                    <div class="mb-3" style="width: 50%;">
+                                                        <label class="form-label">Heartbeat:</label>
+                                                        <div class="mb-3 d-flex align-items-center">
+                                                            <input type="number" name="heartbeat" class="form-control"
+                                                                required min="0" max="220">
+                                                            <label class="pl-1" style="padding: 10px;">bpm</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3" style="width: 50%;">
+                                                        <label class="form-label">Body Temperature:</label>
+                                                        <div class="mb-3 d-flex align-items-center">
+                                                            <input type="number" name="bodytem" class="form-control"
+                                                                required min="0" max="46">
+                                                            <label class="pl-1" style="padding: 10px;">°C</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Weight:</label>
+                                                    <div class="mb-3 d-flex align-items-center">
+                                                        <input type="text" name="weight" class="form-control"
+                                                            style="width: 90%;"></input>
+                                                        <label class="pl-1" style="padding: 10px;">Kg</label>
+                                                    </div>
                                                 </div>
 
 
 
                                             </div><!--end col-->
-                                            <div class="col-md-5">
+                                            <div class="col-md-6">
 
                                                 <div class="mb-3">
-                                                    <label class="form-label">Date of birth</label>
+                                                    <label class="form-label">Time</label>
                                                     <div class="form-group row">
                                                         <div class="col-sm-10">
-                                                            <input name="dob" type="date" class="form-control">
+                                                            <input name="" type="time" th:value="${time}"
+                                                                class="form-control" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Gender:</label>
-                                                    <select name="gender" class="form-control">
-                                                        <option value="1">Female</option>
-                                                        <option value="0">Male</option>
-                                                    </select>
+                                                <div class="d-flex align-items-center mt-2">
+
+                                                    <div class="mb-3 col-md-12">
+                                                        <label class="form-label">Medical History</label>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12">
+                                                                <textarea name="mhistory" type="textarea"
+                                                                    class="form-control"
+                                                                    style="height: 100px;"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
+
+
+
                                                 <div class="mb-3">
                                                     <div class="row">
                                                         <div class="mb-3 col-md-7">
-                                                            <label class="form-label">Email:</label>
-                                                            <input type="text" name="Email" placeholder="abc@gmail"
-                                                                class="form-control">
+                                                            <label class="form-label">BMI:</label>
+                                                            <input type="text" placeholder="BMI" value=""
+                                                                style="background-color: gainsboro;"
+                                                                class="form-control" readonly>
                                                         </div>
                                                         <div class="mb-3 col-md-5">
-                                                            <label class="form-label">Phone:</label>
-                                                            <input type="text" name="phonenum" placeholder="+84"
+                                                            <label class="form-label">Blood:</label>
+                                                            <input type="text" name="blood" placeholder=""
                                                                 class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div><!--end col-->
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="d-grid">
-                                                    <p class="text-muted" style="margin-bottom: 0;">Upload your profile
-                                                        image
-                                                        here, Please click
-                                                        "Upload Image"
-                                                        Button.
-                                                    </p>
-
-                                                    <div style="margin-bottom: 10px; margin-top: 0;">
-                                                        <label class="btn-upload btn btn-primary mt-4 btn-sm"
-                                                            for="input-file">Upload
-                                                            Image</label>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Height:</label>
+                                                    <div class="mb-3 d-flex align-items-center">
+                                                        <input type="text" name="height" class="form-control"
+                                                            style="width: 90%;"></input>
+                                                        <label class="pl-1" style="padding: 10px;">Cm</label>
                                                     </div>
-                                                    <div class="preview-box text-center rounded shadow bg-light p-3">
-                                                        <img class="preview-content" th:src="${patients.image}"
-                                                            alt="Patient Image" width="230" height="auto">
-                                                        <input type="file" id="input-file" name="image" accept="image/*"
-                                                            onchange={handleChange()} hidden />
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Hemoglobin:</label>
+                                                    <div class="mb-3 d-flex align-items-center">
+                                                        <input type="text" name="hemoglobin" class="form-control"
+                                                            style="width: 90%;"></input>
+                                                        <label class="pl-1" style="padding: 10px;">g/dL</label>
                                                     </div>
-
                                                 </div>
                                             </div><!--end col-->
-                                            <div class="col-md-8 d-flex justify-content-end">
-                                                <input type="submit" value="Save" class="btn btn-soft-success m-1"
-                                                    style="height: 50px;">
+                                            <div class="col-md-6" style="border: 1px ;
+                                            width: 80%;
+                                            margin: 0 auto;
+                                            text-align: center;">
+                                                <div class="custom-div">
+                                                    <div class="d-flex align-items-center mt-2">
 
-                                                <a href="patientDashboard" class="btn btn-soft-danger m-1"
-                                                    style="height: 50px; padding-top: 13px;">Cancel</a>
+                                                        <div class="mb-3 col-md-6">
+                                                            <label class="form-label">Right Eyes</label>
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-12">
+                                                                    <input type="text" name="rightEye"
+                                                                        placeholder="10/10">
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-
+                                                        <div class="mb-3 col-md-6">
+                                                            <label class="form-label">Left Eyes</label>
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-12">
+                                                                    <input type="text" name="leftEye"
+                                                                        placeholder="10/10">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 col-md-12">
+                                                        <label class="form-label">IOP:</label>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="mb-3 d-flex align-items-center"
+                                                            style="padding-left: 150px;">
+                                                            <input type="text" name="iop" class="form-control"
+                                                                style="width: 80%; "></input>
+                                                            <label class="pl-1" style="padding: 10px;">mmHg</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-
+                                            <label style="font-weight: bold;">Note:</label>
+                                            <div class="mb-3 col-md-12">
+                                                <label class="form-label">Clinical diagnosis</label>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <textarea name="description" type="textarea"
+                                                            class="form-control" style="height: 100px;"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-12">
+                                                <label class="form-label">Eyes diagnosis</label>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <textarea name="eyesDescription" type="textarea"
+                                                            class="form-control" style="height: 100px;"
+                                                            placeholder="Nomal"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label">Left Eyes diagnosis</label>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <textarea name="leftDescription" type="textarea"
+                                                            class="form-control" style="height: 100px;"
+                                                            placeholder="Nomal"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label">Right Eyes diagnosis</label>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <textarea name="rightDescription" type="textarea"
+                                                            class="form-control" style="height: 100px;"
+                                                            placeholder="Nomal"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="submit" value="Save" class="btn btn-soft-success m-1">
                                         </div>
+
                                         <label th:text="${mess}" style="color: red;">
-                                    </form>
-
-                                </div>
-                            </div><!--end col-->
 
 
-                        </div><!--end row-->
-                    </div>
-                </div><!--end container-->
+                    </form>
+
+                </div>
+            </div><!--end col-->
 
 
-        </main>
-        <!--End page-content" -->
+    </div><!--end row-->
+    </div>
+    </div><!--end container-->
+
+
+    </main>
+    <!--End page-content" -->
     </div>
     <!-- page-wrapper -->
 

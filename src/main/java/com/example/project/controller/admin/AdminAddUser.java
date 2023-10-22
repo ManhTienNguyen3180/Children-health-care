@@ -10,24 +10,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.project.entity.role;
 import com.example.project.entity.user;
 
 import com.example.project.service.RoleService;
 import com.example.project.service.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("admin/add-user")
 public class AdminAddUser {
-  @GetMapping
-  public String page() {
-    return "admin/add-user";
-  }
-
   @Autowired
   private UserService userService;
 
   @Autowired
   private RoleService roleService;
+
+  @GetMapping
+  public String page(Model model) {
+    model.addAttribute("listrole", roleService.getRole());
+    return "admin/add-user";
+  }
 
   @PostMapping
   public String register(
@@ -38,9 +42,10 @@ public class AdminAddUser {
       @RequestParam("email") String email,
       @RequestParam("password") String password,
       @RequestParam("cpassword") String cpassword,
-      Model model) {
+      @RequestParam("role") String roleid,
+      Model model, HttpSession session) {
     // filter
-
+    model.addAttribute("listrole", roleService.getRole());
     // Define your regex patterns
     String emailPattern = "^[a-zA-Z0-9._%+-]+@gmail\\.com$";
     String phonePattern = "^0[1-9]\\d{7,8}$";
@@ -61,37 +66,42 @@ public class AdminAddUser {
             "Please enter a valid phone number starting with '0' and followed by 8 or 9 digits.");
       }
       return "/admin/add-user";
-    } 
-      user s = userService.findUserByUserN(username);
-      user a = userService.findUserByEmail(email);
-      if (s == null && a == null) {
-        user u = new user(username,
-            password,
-            fullname,
-            gender,
-            Integer.parseInt(phonenum),
-            email,
-            "https://th.bing.com/th/id/R.5097b0247a92d47178df598b82944f15?rik=GOBuYfESpwbvFA&pid=ImgRaw&r=0",
-            1,
-            roleService.findUserById(1),
-            "Admin", LocalDate.now());
-        userService.addNewUser2(u);
-        model.addAttribute("mess", "Add user successful");
-      } else {
+    }
+    user us = (user) session.getAttribute("user");
+    user s = userService.findUserByUserN(username);
+    user a = userService.findUserByEmail(email);
+    role roles = roleService.findRoleById(Integer.parseInt(roleid.trim()));
+    if (s == null && a == null) {
+      user u = new user();
+      u.setUsername(username);
+      u.setPassword(password);
+      u.setFull_name(fullname);
+      u.setGender(gender);
+      u.setPhone(Integer.parseInt(phonenum));
+      u.setEmail(email);
+      u.setImage("https://th.bing.com/th/id/R.5097b0247a92d47178df598b82944f15?rik=GOBuYfESpwbvFA&pid=ImgRaw&r=0");
+      u.setStatus(1);
+      u.setRole_id(roles);
+      u.setFull_name(roles.getRole_name());
+      u.setCreate_at(LocalDate.now());
+      u.setCreate_by(us.getFull_name());
+      u.setRolename(roles.getRole_name());
+      userService.addNewUser2(u);
+      model.addAttribute("mess", "Add user successful");
+    } else {
 
-        if (s != null) {
+      if (s != null) {
 
-          model.addAttribute("mUsername", "username already used");
-          model.addAttribute("Gender", gender);
-        }
-        if (a != null) {
-          model.addAttribute("mEmail", "email already used");
-          model.addAttribute("Gender", gender);
-        }
-
-        return "admin/add-user";
+        model.addAttribute("mUsername", "username already used");
+        model.addAttribute("Gender", gender);
       }
-    
+      if (a != null) {
+        model.addAttribute("mEmail", "email already used");
+        model.addAttribute("Gender", gender);
+      }
+
+      return "admin/add-user";
+    }
 
     return "/admin/add-user";
   }

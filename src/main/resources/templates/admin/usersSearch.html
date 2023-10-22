@@ -11,19 +11,21 @@
     <meta name="email" content="support@shreethemes.in" />
     <meta name="website" content="../../../dashboard" />
     <meta name="Version" content="v1.2.0" />
-    <!-- favicon -->
-    <link rel="shortcut icon" href="../images/favicon.ico.png">
-    <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!-- simplebar -->
-    <link href="../css/simplebar.css" rel="stylesheet" type="text/css" />
-    <!-- Icons -->
-    <link href="../css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
-    <link href="../css/remixicon.css" rel="stylesheet" type="text/css" />
-    <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
-    <!-- Css -->
-    <link href="../css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-    <script src="https://kit.fontawesome.com/8320fc5394.js" crossorigin="anonymous"></script>
+   <!-- favicon -->
+   <link rel="shortcut icon" th:href="@{/images/favicon.ico.png}">
+   <!-- Bootstrap -->
+   <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+   <!-- simplebar -->
+   <link th:href="@{/css/simplebar.css}" rel="stylesheet" type="text/css" />
+   <!-- Icons -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+       integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+       crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <link th:href="@{/css/materialdesignicons.min.css}" rel="stylesheet" type="text/css" />
+   <link th:href="@{/css/remixicon.css}" rel="stylesheet" type="text/css" />
+   <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
+   <!-- Css -->
+   <link th:href="@{/css/style.min.css}" rel="stylesheet" type="text/css" id="theme-opt" />
 </head>
 
 <body>
@@ -204,8 +206,8 @@
                                 name="order">Default</button>
                                 <button class="btn btn-soft-success m-1 btn-sm" value="role" name="order"
                                 th:hidden="${roleActive == -1}">Role</button>
-                            <button class="btn btn-soft-warning m-1 btn-sm" value="ROLE_USER" name="order"
-                                th:hidden="${roleActive != -1}">User</button>
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="ROLE_CUSTOMER" name="order"
+                                th:hidden="${roleActive != -1}">Customer</button>
                             <button class="btn btn-soft-warning m-1 btn-sm" value="ROLE_MANAGER" name="order"
                                 th:hidden="${roleActive != -1}">Manager</button>
                             <button class="btn btn-soft-warning m-1 btn-sm" value="ROLE_ADMIN" name="order"
@@ -259,7 +261,7 @@
                                     </thead>
                                     <tbody>
 
-                                        <tr th:each="users : ${listuser}">
+                                        <tr th:each="users : ${listuser}" th:if="${userSession.user_id!=users.user_id}">
                                             <th class="p-3" th:text="${users.user_id}">1</th>
                                             <td class="py-3">
                                                 <a href="#" class="text-dark">
