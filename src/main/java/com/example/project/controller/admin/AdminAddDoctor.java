@@ -189,9 +189,6 @@ public class AdminAddDoctor {
         }
       } else {
         reFill(redirectAttributes, doctor_name, position, phone, service_id, description, dob);
-        if (d.getDoctor_name().equalsIgnoreCase(doctor_name)) {
-          redirectAttributes.addFlashAttribute("namemessage", "Doctor name is exist!");
-        }
         if (d.getPosition().equalsIgnoreCase(position)) {
           redirectAttributes.addFlashAttribute("posmessage", "Position is exist!");
         }

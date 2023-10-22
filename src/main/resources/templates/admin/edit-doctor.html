@@ -300,7 +300,7 @@
                                                 <label class="form-label">Trạng thái</label>
                                                 <select class="form-control gender-name select2input" name="docstatus">
                                                     <div th:if="${doctor.status==1}">
-                                                        <option th:value="${doctor.status}" th:text="Hoạtđộng"></option>
+                                                        <option th:value="${doctor.status}">Hoạt động</option>
                                                         <option value="Blocked">Khóa</option>
                                                     </div> 
                                                     <div th:if="${doctor.status==0}">
