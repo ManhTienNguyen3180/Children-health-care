@@ -45,14 +45,15 @@ public class AdminDoctorProfile {
 
   // Delete doctor
   @RequestMapping("/admin/doctors/delete/{doctor_id}")
-  public String deleteDoctor(@PathVariable(name = "doctor_id") int id) {
+  public String deleteDoctor(@PathVariable(name = "doctor_id") int id, RedirectAttributes redirectAttributes) {
 
     slot s = ScheduleService.findSlotByDoctorID(id);
     if (s != null) {
       int slotid = s.getId();
       DoctorService.deleteSlot(slotid);
     }
-
+      
+    redirectAttributes.addFlashAttribute("successmessage", "Doctor deleted successfully!");
     DoctorService.deleteDoctor(id);
 
     return "redirect:/admin/doctors";
@@ -63,7 +64,7 @@ public class AdminDoctorProfile {
   public String profileDoctor(@PathVariable(name = "doctor_id") int id, Model model) {
     doctor doctor = DoctorService.findDoctorById(id).get();
     List<slot> slot = ScheduleService.getSlotsByDoctorId(id);
-    category_service service = ServiceCategoryService.findByID(doctor.getCategory_service_id()).get();
+    category_service service = ServiceCategoryService.findByID(doctor.getDoctorserviceId()).get();
     model.addAttribute("slot", slot);
     model.addAttribute("doctor", doctor);
     model.addAttribute("service", service);
@@ -143,7 +144,7 @@ public class AdminDoctorProfile {
     doctor.setCreate_at(new java.sql.Date(System.currentTimeMillis()));
     doctor.setCreate_by("admin");
 
-    doctor.setCategory_service_id(service_id);
+    doctor.setDoctorserviceId(service_id);
     DoctorService.save(doctor);
 
     redirectAttributes.addFlashAttribute("successmessage", "Doctor changed successfully!");

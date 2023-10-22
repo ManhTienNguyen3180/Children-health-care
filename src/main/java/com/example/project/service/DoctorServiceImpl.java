@@ -164,7 +164,10 @@ public class DoctorServiceImpl implements DoctorService {
         return repo.findDoctorPosition(position);
     }
 
-    
+    @Override
+    public List<doctor> getDoctorByDoctorServiceID(int id) {
+        return repo.getDoctorByDoctorServiceID(id);
+    }
 
 }
 

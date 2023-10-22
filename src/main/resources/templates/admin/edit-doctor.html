@@ -281,7 +281,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Khoa</label>
                                                 <select class="form-control department-name select2input" name="service_id">
-                                                    <option class="p-3" th:each="cateservice : ${cateservice}" th:if="${cateservice.id == doctor.category_service_id}" 
+                                                    <option class="p-3" th:each="cateservice : ${cateservice}" th:if="${cateservice.id == doctor.doctorserviceId}" 
                                                     th:text="${cateservice.name}" th:value="${cateservice.id}"></option>
                                                     <option th:each="cateservice : ${cateservice}" th:text="${cateservice.name}" th:value="${cateservice.id}" placeholder=""></option>
                                                 </select>
@@ -298,18 +298,19 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Trạng thái</label>
-                                                <select class="form-control gender-name select2input" name="docstatus" > 
+                                                <select class="form-control gender-name select2input" name="docstatus">
                                                     <div th:if="${doctor.status==1}">
-                                                        <option th:value="${doctor.status}" th:text="Hoạt động"></option>
+                                                        <option th:value="${doctor.status}" th:text="Hoạtđộng"></option>
                                                         <option value="Blocked">Khóa</option>
                                                     </div> 
                                                     <div th:if="${doctor.status==0}">
                                                         <option th:value="${doctor.status}" th:text="Khóa"></option>
-                                                        <option value="Active">Hoạt dộng</option>
+                                                        <option value="Active">Hoạt động</option>
                                                     </div>
+                                                    
                                                 </select>
                                             </div>
-                                        </div><!--end col-->
+                                        </div><!--end col-->                                       
                                         
       
                                         <div class="col-md-12">

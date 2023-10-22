@@ -54,4 +54,6 @@ public interface DoctorService {
     Page<doctor> filterStatus(int id, int pageNo, int i);
 
     doctor findDoctorPosition(String position);
+    
+    List<doctor> getDoctorByDoctorServiceID(int id);
 }

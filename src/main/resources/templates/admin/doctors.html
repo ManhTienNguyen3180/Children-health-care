@@ -285,7 +285,7 @@
                                             <td class="p-3">
                                                 <img th:src="${doctor.image}" style="height: 100px; width: 100px;">
                                             </td>
-                                            <td class="p-3" th:each="cateservice : ${serviceCategory}" th:if="${cateservice.id == doctor.category_service_id}" 
+                                            <td class="p-3" th:each="cateservice : ${serviceCategory}" th:if="${cateservice.id == doctor.doctorserviceId}" 
                                             th:text="${cateservice.name}">
                                             </td>
                                             <td class="p-3" th:text="${doctor.dob}"></td>                                            

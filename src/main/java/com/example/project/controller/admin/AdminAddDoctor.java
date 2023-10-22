@@ -126,7 +126,7 @@ public class AdminAddDoctor {
         doctor.setStatus(1);
         doctor.setCreate_at(new java.sql.Date(System.currentTimeMillis()));
         doctor.setCreate_by("admin");
-        doctor.setCategory_service_id(service_id);
+        doctor.setDoctorserviceId(service_id);
         DoctorService.save(doctor);
 
         redirectAttributes.addFlashAttribute("successmessage", "Doctor added successfully!");
@@ -179,7 +179,7 @@ public class AdminAddDoctor {
           doctor.setStatus(1);
           doctor.setCreate_at(new java.sql.Date(System.currentTimeMillis()));
           doctor.setCreate_by("admin");
-          doctor.setCategory_service_id(service_id);
+          doctor.setDoctorserviceId(service_id);
           DoctorService.save(doctor);
 
           redirectAttributes.addFlashAttribute("successmessage", "Doctor added successfully!");
