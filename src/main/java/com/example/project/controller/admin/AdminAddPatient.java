@@ -36,7 +36,7 @@ public class AdminAddPatient {
 
   @GetMapping
   public String page(Model model) {
-    model.addAttribute("patients", PatientService.findByPatientId(1).get());
+   
     return "admin/add-patient";
   }
 
