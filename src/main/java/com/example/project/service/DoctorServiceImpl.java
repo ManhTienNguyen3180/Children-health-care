@@ -169,6 +169,11 @@ public class DoctorServiceImpl implements DoctorService {
         return repo.getDoctorByDoctorServiceID(id);
     }
 
+    @Override
+    public String getCategoryNameByDoctorID(int id) {
+        return repo.getCategoryNameByDoctorID(id);
+    }
+
 }
 
     

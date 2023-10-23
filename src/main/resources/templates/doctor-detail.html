@@ -222,13 +222,13 @@
                                     <a href="#" class="text-primary" th:text="${doc.position}"></a> 
                                     
                                     <p class="text-muted mt-4" th:utext="${doc.description}"> </p>
-                                    <div>
+                                    <div style="display: flex;flex-direction: row;">
                                         <h6>Service in charge: </h6>
 
-                                        <ul class="list-unstyled mt-4" th:each="s : ${listSer}">
-                                            <li class="mt-1" th:text="${s[16]}"></li>
                                         
-                                        </ul>
+                                            <p th:text="${listCategory}" style="margin-left: 10px;"></p>
+                                        
+                                        
                                     </div>
                                     <h6 th:text="'Phone: '+${doc.phone}"></h6>
                                     
