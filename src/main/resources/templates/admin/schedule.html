@@ -103,7 +103,7 @@
                         </div>
                     </li>
 
-                    
+
 
                 </ul>
                 <!-- sidebar-menu  -->
@@ -360,50 +360,53 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label class="form-label">Date<a style="color: red;">*</a></label>
-                                                <input required name="docdate" id="email" type="Date"
-                                                    class="form-control" placeholder="Date :">
+                                                <label class="form-label">Day of week<a
+                                                        style="color: red;">*</a></label>
+                                                <select class="form-control department-name" id="dayofweek"
+                                                    name="dayofweek">
+                                                    <option value="">Select option</option>
+                                                    <option value="2">Monday</option>
+                                                    <option value="3">Tuesday</option>
+                                                    <option value="4">Wednesday</option>
+                                                    <option value="5">Thursday</option>
+                                                    <option value="6">Friday</option>
+                                                    <option value="7">Saturday</option>
+                                                    <option value="1">Sunday</option>
+
+                                                </select>
                                             </div>
-                                        </div><!--end col-->
+                                        </div>
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Time start:<a
                                                         style="color: red;">*</a></label>
-                                                <input required name="starttime" id="number" type="time"
+                                                <input required name="starttime" id="starttime" type="time"
                                                     class="form-control" placeholder="Start time:">
                                             </div>
-                                        </div><!--end col-->
+                                        </div><br>
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Time end:<a style="color: red;">*</a></label>
-                                                <input required name="endtime" id="number" type="time"
+                                                <input required name="endtime" id="endtime" type="time"
                                                     class="form-control" placeholder="End time:">
                                             </div>
                                         </div><!--end col-->
 
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label">Max Appointments Per Slot<a
-                                                        style="color: red;">*</a></label>
-                                                <input required name="max" id="email" type="number" class="form-control"
-                                                    placeholder="">
-                                            </div>
-                                        </div><!--end col-->
-
-
                                     </div><!--end row-->
 
-                                    <button type="submit" class="btn btn-primary">Add Slot</button>
+                                    <button id="submit" type="submit" class="btn btn-primary">Add Slot</button>
+                                    <p id="error" style="color: red;"></p>
+                                    <p style="color: red;" th:text="${errormessage}"></p>
                                 </form>
                             </div>
                         </div><!--end col-->
 
-                        <div class="col-lg-4 mt-4">
+                        <!-- <div class="col-lg-4 mt-4">
                             <div class="card rounded border-0 shadow">
                                 <div class="p-4 border-bottom">
-                                    <h5 class="mb-0">Doctors List</h5>
+                                    <h5 class="mb-0">Schedule List</h5>
                                 </div>
 
                                 <ul class="list-unstyled mb-0 p-4" data-simplebar style="height: 664px;">
@@ -412,62 +415,19 @@
                                             alt="">
 
                                         <div class="ms-md-3 mt-4 mt-sm-0">
-                                            <a href="#" class="text-dark h6">Dr. Calvin Carlo</a>
-                                            <p class="text-muted my-1">Cardiologist</p>
-                                            <p class="text-muted mb-0">3 Years Experienced</p>
+                                            <a href="#" class="text-dark h6">Monday</a>
+                                            <p class="text-muted my-1">8:00:00-9:00:00</p>
+                                            
                                         </div>
                                     </li>
 
-                                    <li class="d-md-flex align-items-center text-center text-md-start mt-4">
-                                        <img src=" images/doctors/02.jpg" class="avatar avatar-medium rounded-md shadow"
-                                            alt="">
-
-                                        <div class="ms-md-3 mt-4 mt-sm-0">
-                                            <a href="#" class="text-dark h6">Dr. Alex Smith</a>
-                                            <p class="text-muted my-1">Dentist</p>
-                                            <p class="text-muted mb-0">1 Years Experienced</p>
-                                        </div>
-                                    </li>
-
-                                    <li class="d-md-flex align-items-center text-center text-md-start mt-4">
-                                        <img src=" images/doctors/03.jpg" class="avatar avatar-medium rounded-md shadow"
-                                            alt="">
-
-                                        <div class="ms-md-3 mt-4 mt-sm-0">
-                                            <a href="#" class="text-dark h6">Dr. Cristina Luly</a>
-                                            <p class="text-muted my-1">Orthopedic</p>
-                                            <p class="text-muted mb-0">5 Years Experienced</p>
-                                        </div>
-                                    </li>
-
-                                    <li class="d-md-flex align-items-center text-center text-md-start mt-4">
-                                        <img src=" images/doctors/04.jpg" class="avatar avatar-medium rounded-md shadow"
-                                            alt="">
-
-                                        <div class="ms-md-3 mt-4 mt-sm-0">
-                                            <a href="#" class="text-dark h6">Dr. Dwayen Maria</a>
-                                            <p class="text-muted my-1">Gastrologist</p>
-                                            <p class="text-muted mb-0">2 Years Experienced</p>
-                                        </div>
-                                    </li>
-
-                                    <li class="d-md-flex align-items-center text-center text-md-start mt-4">
-                                        <img src=" images/doctors/05.jpg" class="avatar avatar-medium rounded-md shadow"
-                                            alt="">
-
-                                        <div class="ms-md-3 mt-4 mt-sm-0">
-                                            <a href="#" class="text-dark h6">Dr. Jenelia Focia</a>
-                                            <p class="text-muted my-1">Psychotherapist</p>
-                                            <p class="text-muted mb-0">3 Years Experienced</p>
-                                        </div>
-                                    </li>
-
+                                                                                                           
                                     <li class="mt-4">
                                         <a href="doctors.html" class="btn btn-primary">All Doctors</a>
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div><!--end row-->
                 </div>
             </div><!--end container-->
@@ -691,6 +651,44 @@
     <!-- Main Js -->
     <script src=" /js/app.js"></script>
 
+    <script>
+        //check start time is less than end time or not -> disable submit button 
+        $(document).ready(function () {
+            $('#endtime').change(function () {
+                var starttime = $('#starttime').val();
+                var endtime = $('#endtime').val();
+                var start = new Date("01/01/2007 " + starttime);
+                var end = new Date("01/01/2007 " + endtime);
+                var diff = (end - start) / (1000 * 60 * 60);
+                if (starttime >= endtime || diff < 1) {
+                    $('#submit').attr('disabled', true);
+                    $('#error').html('End time must be greater than start time 1 hour');
+                }
+                else {
+                    $('#submit').attr('disabled', false);
+                    $('#error').html('');
+                }
+            });
+        });       
+    </script>
+    <script>
+        //check null  -> disable submit button
+        $(document).ready(function () {
+            $('#submit').click(function () {
+                var starttime = $('#starttime').val();
+                var endtime = $('#endtime').val();
+                var dayofweek = $('#dayofweek').val();
+                if (starttime == "" || endtime == "" || dayofweek == "") {
+                    $('#submit').attr('disabled', true);
+                    $('#error').html('Please fill in all fields');
+                } else {
+                    $('#submit').attr('disabled', false);
+                    $('#error').html('');
+                }
+            });
+        });
+
+    </script>
 </body>
 
 </html>

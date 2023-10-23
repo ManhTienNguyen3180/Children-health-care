@@ -1,14 +1,11 @@
 package com.example.project.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 @Entity
 public class patient {
@@ -16,12 +13,15 @@ public class patient {
     private int patient_id;
     private int gender;
     private String image;
+    //healthy
+    //unhealthy
     private int status;
     private Date Dob;
     private String patient_name;
     private String description;
     private Date create_at;
     private String create_by;
+    //session.name
     private Integer user_id;
     private String patient_email;
     private String patient_phone;

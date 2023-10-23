@@ -19,6 +19,13 @@ public class slot {
     private int dayof_week;
     public slot() {
     }
+    
+    public slot(int doctor_id, Time start_time, Time end_time, int dayof_week) {
+        this.doctor_id = doctor_id;
+        this.start_time = start_time;
+        this.end_time = end_time;
+        this.dayof_week = dayof_week;
+    }
 
     public slot(int id, int doctor_id, Date date, Time start_time, Time end_time, int max_appointments_per_slot) {
         this.id = id;

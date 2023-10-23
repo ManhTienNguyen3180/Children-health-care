@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Doctris - Doctor Appointment Booking System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
+    <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
+    <meta name="author" content="Shreethemes" />
+    <meta name="email" content="support@shreethemes.in" />
+    <meta name="website" content="../../../dashboard" />
+    <meta name="Version" content="v1.2.0" />
+    <!-- favicon -->
+    <link rel="shortcut icon" href="../images/favicon.ico.png">
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- simplebar -->
+    <link href="../css/simplebar.css" rel="stylesheet" type="text/css" />
+    <!-- Select2 -->
+    <link href="../css/select2.min.css" rel="stylesheet" />
+    <!-- Date picker -->
+    <link rel="stylesheet" href="../css/flatpickr.min.css">
+    <!-- Icons -->
+    <link href="../css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../css/remixicon.css" rel="stylesheet" type="text/css" />
+    <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
+    <!-- Css -->
+    <link href="../css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+    <script src="https://kit.fontawesome.com/8320fc5394.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Loader -->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Loader -->
+
+    <div class="page-wrapper doctris-theme toggled">
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
+                <div class="sidebar-brand">
+                    <a th:href="@{/home}">
+                        <img th:src="@{/images/logo-dark.png}" height="24" class="logo-light-mode" alt="">
+                        <img th:src="@{/images/logo-light.png}" height="24" class="logo-dark-mode" alt="">
+                    </a>
+                </div>
+
+                <ul class="sidebar-menu pt-3">
+                    <li><a th:href="@{/admin/dashboard}"><i
+                                class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
+                    <li><a th:href="@{/admin/appointment}"><i
+                                class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a></li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="fa-solid fa-user fa-xs"
+                                style="margin-right: 5px;"></i>User</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a th:href="@{/admin/users}">All Users</a></li>
+                                <li><a th:href="@{/admin/add-user}">Add Users</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a th:href="@{/admin/doctors}">Doctors</a></li>
+                                <li><a th:href="@{/admin/add-doctor}">Add Doctor</a></li>
+                                <li><a th:href="@{/admin/schedule}">Schedule</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Patients</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a th:href="@{/admin/patients}">All Patients</a></li>
+                                <li><a th:href="@{/admin/patientDashboard}">Dashboard</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a class="" th:href="@{/blogsManagement}">Blogs</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Services</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a class="" th:href="@{/servicesManagement}">Services</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-columns me-2 d-inline-block"></i>Sliders</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a class="" th:href="@{/slidersManagement}">Sliders</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+
+
+                </ul>
+                <!-- sidebar-menu  -->
+            </div>
+            <!-- sidebar-content  -->
+            <ul class="sidebar-footer list-unstyled mb-0">
+                <li class="list-inline-item mb-0 ms-1">
+                    <a href="#" class="btn btn-icon btn-pills btn-soft-primary">
+                        <i class="uil uil-comment icons"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- sidebar-wrapper  -->
+
+        <!-- Start Page Content -->
+        <main class="page-content bg-light">
+            <div class="top-header">
+                <div class="header-bar d-flex justify-content-between border-bottom">
+                    <div class="d-flex align-items-center">
+                        <a href="#" class="logo-icon">
+                            <img src="../images/logo-icon.png" height="30" class="small" alt="">
+                            <span class="big">
+                                <img src="../images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                                <img src="../images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                            </span>
+                        </a>
+                        <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
+                            <i class="uil uil-bars"></i>
+                        </a>
+                        <div class="search-bar p-0 d-none d-lg-block ms-2">
+                            <div id="search" class="menu-search mb-0">
+                                <form role="search" method="get" id="searchform" class="searchform">
+                                    <div>
+                                        <input type="text" class="form-control border rounded-pill" name="s" id="s"
+                                            placeholder="Search Keywords...">
+                                        <input type="submit" id="searchsubmit" value="Search">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="list-unstyled mb-0">
+
+
+                        <li class="list-inline-item mb-0 ms-1">
+                            <div class="dropdown dropdown-primary">
+                                <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                        src="../images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle"
+                                        alt=""></button>
+                                <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
+                                    style="min-width: 200px;">
+                                    <a class="dropdown-item d-flex align-items-center text-dark"
+                                        href="https://shreethemes.in/doctris/layouts/admin/profile">
+                                        <img src="../images/doctors/01.jpg"
+                                            class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                        <div class="flex-1 ms-2">
+                                            <span class="d-block mb-1">Calvin Carlo</span>
+                                            <small class="text-muted">Orthopedic</small>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item text-dark" href="dashboard"><span
+                                            class="mb-0 d-inline-block me-1"><i
+                                                class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
+                                    <a class="dropdown-item text-dark" href="dr-profile"><span
+                                            class="mb-0 d-inline-block me-1"><i
+                                                class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                                    <div class="dropdown-divider border-top"></div>
+                                    <a class="dropdown-item text-dark" href="lock-screen"><span
+                                            class="mb-0 d-inline-block me-1"><i
+                                                class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="layout-specing">
+                    <div class="d-md-flex justify-content-between">
+                        <h5 class="mb-0">Patient Information</h5>
+
+                        <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
+                            <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
+                                <li class="breadcrumb-item"><a href="dashboard">Doctris</a></li>
+                                <li class="breadcrumb-item" aria-current="page"><i
+                                        class="fa-solid fa-caret-down fa-rotate-270"></i></li>
+
+                                <li class="breadcrumb-item active" aria-current="page">Patient information</li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <form th:action="@{/admin/add-patientDetails}" method="post">
+                        <div class="row">
+                            <div class="col-lg-12 mt-4">
+                                <div class="card border-0 p-4 rounded shadow">
+
+                                    <div class="d-flex align-items-center mt-2">
+
+                                        <h6 class="mb-0">Patient:</h6>
+
+                                        <p class="text-muted mb-0 ms-2" th:text="${patientInfo.patient_name}">Female</p>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+
+                                        <h6 class="mb-0">Doctor:</h6>
+
+                                        <select class="text-muted mb-0 ms-2" name="doctor">
+                                            <option th:each="doctor: ${listd}" th:value="${doctor.doctor_id}"
+                                                th:text="${doctor.doctor_name}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+
+                                        <h6 class="mb-0">Date of Birth:</h6>
+
+                                        <p class="text-muted mb-0 ms-2"
+                                            th:text="${#dates.format(patientInfo.dob, 'yyyy-MM-dd')}">Female</p>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+
+                                        <h6 class="mb-0">Address:</h6>
+
+                                        <p class="text-muted mb-0 ms-2" th:text="${patientInfo.patient_address}">Female
+                                        </p>
+                                    </div>
+                                    <label style="font-weight: bold;">Input Information:</label>
+                                    <div class="row">
+
+
+                                        <input type="hidden" th:value="${param.id}" name="id">
+                                        <input type="datetime" th:value="${datetime}" name="datetime" hidden>
+                                        <div class="row">
+                                            <div class="col-md-6">
+
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Create at</label>
+                                                    <input type="text" th:value="*{date}" class="form-control"
+                                                        readonly></input>
+                                                </div>
+                                                <div class="d-flex align-items-center mt-2">
+
+                                                    <div class="mb-3 col-md-12">
+                                                        <label class="form-label">Family Medical History</label>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12">
+                                                                <textarea name="fmhistory" type="textarea"
+                                                                    class="form-control"
+                                                                    style="height: 100px;"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="d-flex align-items-center mt-2">
+                                                    <div class="mb-3" style="width: 50%;">
+                                                        <label class="form-label">Heartbeat:</label>
+                                                        <div class="mb-3 d-flex align-items-center">
+                                                            <input type="number" name="heartbeat" class="form-control"
+                                                                required min="0" max="220">
+                                                            <label class="pl-1" style="padding: 10px;">bpm</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3" style="width: 50%;">
+                                                        <label class="form-label">Body Temperature:</label>
+                                                        <div class="mb-3 d-flex align-items-center">
+                                                            <input type="number" name="bodytem" class="form-control"
+                                                                required min="0" max="46">
+                                                            <label class="pl-1" style="padding: 10px;">°C</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Weight:</label>
+                                                    <div class="mb-3 d-flex align-items-center">
+                                                        <input type="text" name="weight" class="form-control"
+                                                            style="width: 90%;"></input>
+                                                        <label class="pl-1" style="padding: 10px;">Kg</label>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div><!--end col-->
+                                            <div class="col-md-6">
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Time</label>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-10">
+                                                            <input name="" type="time" th:value="${time}"
+                                                                class="form-control" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center mt-2">
+
+                                                    <div class="mb-3 col-md-12">
+                                                        <label class="form-label">Medical History</label>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12">
+                                                                <textarea name="mhistory" type="textarea"
+                                                                    class="form-control"
+                                                                    style="height: 100px;"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <div class="mb-3">
+                                                    <div class="row">
+                                                        <div class="mb-3 col-md-7">
+                                                            <label class="form-label">BMI:</label>
+                                                            <input type="text" placeholder="BMI" value=""
+                                                                style="background-color: gainsboro;"
+                                                                class="form-control" readonly>
+                                                        </div>
+                                                        <div class="mb-3 col-md-5">
+                                                            <label class="form-label">Blood:</label>
+                                                            <input type="text" name="blood" placeholder=""
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Height:</label>
+                                                    <div class="mb-3 d-flex align-items-center">
+                                                        <input type="text" name="height" class="form-control"
+                                                            style="width: 90%;"></input>
+                                                        <label class="pl-1" style="padding: 10px;">Cm</label>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Hemoglobin:</label>
+                                                    <div class="mb-3 d-flex align-items-center">
+                                                        <input type="text" name="hemoglobin" class="form-control"
+                                                            style="width: 90%;"></input>
+                                                        <label class="pl-1" style="padding: 10px;">g/dL</label>
+                                                    </div>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-md-6" style="border: 1px ;
+                                            width: 80%;
+                                            margin: 0 auto;
+                                            text-align: center;">
+                                                <div class="custom-div">
+                                                    <div class="d-flex align-items-center mt-2">
+
+                                                        <div class="mb-3 col-md-6">
+                                                            <label class="form-label">Right Eyes</label>
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-12">
+                                                                    <input type="text" name="rightEye"
+                                                                        placeholder="10/10">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3 col-md-6">
+                                                            <label class="form-label">Left Eyes</label>
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-12">
+                                                                    <input type="text" name="leftEye"
+                                                                        placeholder="10/10">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 col-md-12">
+                                                        <label class="form-label">IOP:</label>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="mb-3 d-flex align-items-center"
+                                                            style="padding-left: 150px;">
+                                                            <input type="text" name="iop" class="form-control"
+                                                                style="width: 80%; "></input>
+                                                            <label class="pl-1" style="padding: 10px;">mmHg</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label style="font-weight: bold;">Note:</label>
+                                            <div class="mb-3 col-md-12">
+                                                <label class="form-label">Clinical diagnosis</label>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <textarea name="description" type="textarea"
+                                                            class="form-control" style="height: 100px;"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-12">
+                                                <label class="form-label">Eyes diagnosis</label>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <textarea name="eyesDescription" type="textarea"
+                                                            class="form-control" style="height: 100px;"
+                                                            placeholder="Nomal"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label">Left Eyes diagnosis</label>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <textarea name="leftDescription" type="textarea"
+                                                            class="form-control" style="height: 100px;"
+                                                            placeholder="Nomal"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label">Right Eyes diagnosis</label>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <textarea name="rightDescription" type="textarea"
+                                                            class="form-control" style="height: 100px;"
+                                                            placeholder="Nomal"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="submit" value="Save" class="btn btn-soft-success m-1">
+                                        </div>
+
+                                        <label th:text="${mess}" style="color: red;">
+
+
+                    </form>
+
+                </div>
+            </div><!--end col-->
+
+
+    </div><!--end row-->
+    </div>
+    </div><!--end container-->
+
+
+    </main>
+    <!--End page-content" -->
+    </div>
+    <!-- page-wrapper -->
+
+
+
+    <!-- Offcanvas End -->
+
+    <!-- View Appintment End -->
+
+    <script>
+        const handleChange = () => {
+            const fileUploader = document.querySelector('#input-file');
+            const getFile = fileUploader.files;
+
+            if (getFile.length !== 0) {
+                const uploadedFile = getFile[0];
+                const reader = new FileReader();
+
+                reader.onload = () => {
+                    const previewContent = document.querySelector('.preview-content');
+                    previewContent.src = reader.result;
+                };
+
+                reader.readAsDataURL(uploadedFile);
+            }
+        };
+
+    </script>
+
+
+    <!-- javascript -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <!-- simplebar -->
+    <script src="../js/simplebar.min.js"></script>
+    <!-- Select2 -->
+    <script src="../js/select2.min.js"></script>
+    <script src="../js/select2.init.js"></script>
+    <!-- Datepicker -->
+    <script src="../js/flatpickr.min.js"></script>
+    <script src="../js/flatpickr.init.js"></script>
+    <!-- Icons -->
+    <script src="../js/feather.min.js"></script>
+    <!-- Main Js -->
+    <script src="../js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"
+        integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script th:src="@{/js/providers.js}"></script>
+</body>
+
+</html>

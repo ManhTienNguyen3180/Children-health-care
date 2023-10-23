@@ -49,7 +49,7 @@ public class RegisterController {
       @RequestParam(name = "email") String email,
       @RequestParam(name = "password") String password,
       Model model) {
-    user s = userService.findUserByEmail(email);
+    user s = userService.findUserByUserN(username);
     if (s == null) {
       s = userService.findUserByEmail(email);
       if (s == null) {
@@ -61,8 +61,9 @@ public class RegisterController {
             email,
             "https://th.bing.com/th/id/R.5097b0247a92d47178df598b82944f15?rik=GOBuYfESpwbvFA&pid=ImgRaw&r=0",
             0,
-            roleService.findUserById(1),
+            roleService.findRoleById(1),
             "user", LocalDate.now());
+            u.setRolename(roleService.findRoleById(1).getRole_name());
         userService.addNewUser(u);
 
       } else {

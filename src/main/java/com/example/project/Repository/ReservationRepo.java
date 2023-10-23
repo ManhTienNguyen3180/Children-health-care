@@ -5,12 +5,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.project.entity.reservation;
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface ReservationRepo extends JpaRepository<reservation, Integer> {
@@ -28,6 +25,9 @@ public interface ReservationRepo extends JpaRepository<reservation, Integer> {
 
     @Query("SELECT u FROM reservation u where patient_id=?1")
     List<reservation> findByPatient_id(int patient_id);
+
+    @Query("SELECT u FROM reservation u WHERE patient_id = ?1 AND date = ?2 ORDER BY date ASC")
+    List<reservation> findByPatientDate(int patient_id, String date);
 
     @Query("select r from reservation r where r.doctor_id = ?1 and r.date = ?2 and r.time = ?3")
     reservation findByDoctor_idAndDateAndTime(int doctor_id, Date date, String time);

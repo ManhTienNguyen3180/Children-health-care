@@ -16,6 +16,8 @@ import com.example.project.entity.user;
 import com.example.project.service.RoleService;
 import com.example.project.service.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("admin/usersSearch")
 public class AdminUsersSearch {
@@ -33,7 +35,10 @@ public class AdminUsersSearch {
   public String page(Model model,
       @RequestParam(name = "s", required = false) String r,
       @RequestParam(name = "pageNo", required = false) Integer pageno,
-      @RequestParam(name = "order", required = false) String order) {
+      @RequestParam(name = "order", required = false) String order,
+      HttpSession session) {
+    model.addAttribute("userSession", session.getAttribute("user"));
+
     // To define href in page
     model.addAttribute("searchName", r);
     if (pageno == null) {
@@ -45,7 +50,7 @@ public class AdminUsersSearch {
           !order.equalsIgnoreCase("gender") ||
           !order.equalsIgnoreCase("status")) {
         // filter role
-        if (order.equalsIgnoreCase("ROLE_USER") ||
+        if (order.equalsIgnoreCase("ROLE_CUSTOMER") ||
             order.equalsIgnoreCase("ROLE_MANAGER") ||
             order.equalsIgnoreCase("ROLE_ADMIN") ||
             order.equalsIgnoreCase("ROLE_DOCTOR")) {
@@ -80,8 +85,9 @@ public class AdminUsersSearch {
   @PostMapping
   public String Order(Model model, @RequestParam("s") String searchValue,
       @RequestParam(name = "pageNo", required = false) Integer pageno,
-      @RequestParam(name = "order", required = false) String order) {
-
+      @RequestParam(name = "order", required = false) String order,
+      HttpSession session) {
+    model.addAttribute("userSession", session.getAttribute("user"));
     // To define href in page
     model.addAttribute("searchName", searchValue);
     if (order.equalsIgnoreCase("role")) {
@@ -99,11 +105,11 @@ public class AdminUsersSearch {
       return findPaginated(searchValue, model, 1);
     }
 
-    return page(model, searchValue, pageno, order);
+    return page(model, searchValue, pageno, order, session);
   }
 
   public String findPaginated(String s, Model model, Integer pageno) {
-    int pagesize = 3;
+    int pagesize = 4;
 
     Page<user> page = userService.findUsersContainWithPaging(s, pageno, pagesize);
     List<user> listuser = page.getContent();
@@ -116,7 +122,7 @@ public class AdminUsersSearch {
 
   public String findUsersContainAndFilterRoleWithPaging(String s, role r, Integer pageno,
       Model model) {
-    int pagesize = 3;
+    int pagesize = 4;
 
     Page<user> page = userService.findUsersContainAndFilterRoleWithPaging(s, r, pageno, pagesize);
     List<user> listuser = page.getContent();
@@ -131,7 +137,7 @@ public class AdminUsersSearch {
 
   public String findUsersContainsAndFilterGenderWithPaging(String name, int r, Integer pageno,
       Model model) {
-    int pagesize = 3;
+    int pagesize = 4;
     String s = "Female";
     if (r == 0) {
       s = "male";
@@ -148,7 +154,7 @@ public class AdminUsersSearch {
 
   public String findUsersContainsAndFilterStatusWithPaging(String name, int r, Integer pageno,
       Model model) {
-    int pagesize = 3;
+    int pagesize = 4;
 
     Page<user> page = userService.findUsersContainsAndFilterStatusWithPaging(name, r, pageno, pagesize);
     List<user> listuser = page.getContent();

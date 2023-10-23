@@ -32,14 +32,17 @@
         <!-- Loader -->
         
         <!-- Navbar STart -->
-        <header id="topnav" class="defaultscroll sticky">
+        <header id="topnav" >
             <div class="container">
                 <!-- Logo container-->
-                <a class="logo" href="home">
-                    <img src="images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                    <img src="images/logo-light.png" height="24" class="logo-dark-mode" alt="">
-                </a>                
-                <!-- Logo End -->
+                <div>
+                    <a class="logo" href="home">
+                        
+                        <img style="display: block;margin-top: 25px;" src="/images/logo-dark.png" class="l-dark" height="24" alt="">
+                            
+                    </a>
+                </div>
+                <!-- End Logo container-->
                 
                 <!-- Start Mobile Toggle -->
                 <div class="menu-extras">
@@ -55,45 +58,75 @@
                         <!-- End mobile menu toggle-->
                     </div>
                 </div>
-                <!-- End Mobile Toggle -->
-
-                <!-- Start Dropdown -->
-                <ul  th:if="${#ctx.session.user != null}" class="dropdowns list-inline mb-0">
-
+                
+                <ul th:if="${session.user != NULL}" class="dropdowns list-inline mb-0">
+                    
+    
+                    <li class="list-inline-item mb-0 ms-1">
+                        <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                            <i class="uil uil-search"></i>
+                        </a>
+                    </li>
+    
                     <li class="list-inline-item mb-0 ms-1">
                         <div class="dropdown dropdown-primary">
-                            <a href="user-profile"><button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"  aria-haspopup="true" aria-expanded="false"><img th:src="${session.user.image}" src="${session.user.image}" class="avatar avatar-ex-small rounded-circle" alt=""></button></a>
-                            <a href="logout">Log out</a>
+                            <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                    th:src="${session.user.image}"  src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle"
+                                    alt=""></button>
+                            <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
+                                style="min-width: 200px;">
+                                <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html">
+                                    <img th:src="${session.user.image}" src="images/doctors/01.jpg"
+                                        class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                    <div class="flex-1 ms-2">
+                                        <span  th:text="${session.user.full_name}" class="d-block mb-1">Calvin Carlo</span>
+                                        <!-- <small  class="text-muted">Orthopedic</small> -->
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-dark" href="doctor-dashboard.html"><span
+                                        class="mb-0 d-inline-block me-1"><i
+                                            class="uil uil-dashboard align-middle h6"></i></span> My reservation</a>
+                                <a class="dropdown-item text-dark" href="/user-profile"><span
+                                        class="mb-0 d-inline-block me-1"><i
+                                            class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                                <div class="dropdown-divider border-top"></div>
+                                <a class="dropdown-item text-dark" th:href="@{/logout}" href="/logout"><span
+                                        class="mb-0 d-inline-block me-1"><i
+                                            class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                            </div>
                         </div>
-                        
                     </li>
                 </ul>
-                <ul  th:if="${#ctx.session.user == null}" class="dropdowns list-inline mb-0">
+                <ul  th:if="${session.user == NULL}" class="dropdowns list-inline mb-8">
 
                     <li class="list-inline-item mb-0">
-                        <a href="login" >
+                        <a href="/login" >
                             <div class="btn btn-primary">Login/signup</div>
                         </a>
                     </li>
                 </ul>
-                <ul  class="dropdowns list-inline mb-0">
+                <ul  class="dropdowns list-inline mb-8" >
                     <!-- <li class="list-inline-item mb-0">
                         <a href="" >
                             <div class="btn btn-primary">Book Appointment</div>
                         </a>
                     </li> -->
-                    <li class="list-inline-item mb-0">
-                        <a href="bookingappointment" >
+                    <li class="list-inline-item mb-0" >
+                        <a href="/bookingappointment" >
                             <div class="btn btn-primary">Book Appointment</div>
                         </a>
                     </li>
                     
                 </ul>
+                
+                
                 <!-- Start Dropdown -->
-        
+                
                 <div id="navigation">
                     <!-- Navigation Menu-->   
-                    <ul class="navigation-menu nav-left ">
+                    <ul class="navigation-menu nav-left">
                         <li class="has-submenu parent-menu-item">
                             <a href="/home">Home</a>
                             
@@ -112,20 +145,22 @@
                         <li class="has-submenu parent-parent-menu-item">
                             <a href="/blog">Blog</a>
                             
-                        </li>
+                        <!-- </li>
                         
+                            <li th:if="${u!=null && u.role==2}" class="has-submenu parent-parent-menu-item">
+                                <a href="#">Dashboard</a>
+                                
+                        </li> -->
+                                 
                         
-                        
-                        
-                        
-                    </ul><!--end navigation menu-->
-                </div><!--end navigation-->
+                    </ul>
+                </div>
             </div><!--end container-->
         </header><!--end header-->
         <!-- Navbar End -->
 
         <!-- Start Hero -->
-        <section class="bg-dashboard my-lg-5">
+        <section class="bg-dashboard my-lg-5" style="padding-top: 30px;">
             <div class="container mt-xl-5">
                 <div class="row">
                     <div class="col-12">
@@ -186,7 +221,7 @@
                                     <h5 class="mb-1" th:text="${doc.doctor_name}"></h5>
                                     <a href="#" class="text-primary" th:text="${doc.position}"></a> 
                                     
-                                    <p class="text-muted mt-4" th:text="${doc.description}"> </p>
+                                    <p class="text-muted mt-4" th:utext="${doc.description}"> </p>
                                     <div>
                                         <h6>Service in charge: </h6>
 

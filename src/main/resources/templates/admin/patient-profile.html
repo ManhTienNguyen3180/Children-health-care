@@ -109,7 +109,7 @@
                         </div>
                     </li>
 
-                    
+
 
                 </ul>
                 <!-- sidebar-menu  -->
@@ -149,6 +149,7 @@
                                         <input type="submit" id="searchsubmit" value="Search">
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
@@ -209,7 +210,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-lg-5 col-md-5 mt-4">
+                        <div class="col-lg-3 col-md-5 mt-4">
                             <div class="bg-white rounded shadow overflow-hidden">
                                 <div class="card border-0">
                                     <img src="../images/bg/bg-profile.jpg" class="img-fluid" alt="">
@@ -234,7 +235,7 @@
                                     <div class="d-flex align-items-center mt-2">
                                         <i class="uil uil-envelope align-text-bottom text-primary h5 mb-0 me-2"></i>
                                         <h6 class="mb-0">Birthday</h6>
-                                        <p class="text-muted mb-0 ms-2" th:text="${patient.dob}"></p>
+                                        <p class="text-muted mb-0 ms-2" th:text="${dob}"></p>
                                     </div>
 
                                     <div class="d-flex align-items-center mt-2">
@@ -248,11 +249,21 @@
                                         <h6 class="mb-0">Address</h6>
                                         <p class="text-muted mb-0 ms-2" th:text="${patient.patient_address}"></p>
                                     </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <i class="uil uil-italic align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                        <h6 class="mb-0">Body status</h6>
+                                        <p class="text-muted mb-0 ms-2" th:text="${PatientDetail.heal_description}"></p>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-2">
+                                        <i class="uil uil-italic align-text-bottom text-primary h5 mb-0 me-2"></i>
+                                        <h6 class="mb-0">Doctor</h6>
+                                        <p class="text-muted mb-0 ms-2" th:text="${doctorNew.doctor_name}"></p>
+                                    </div>
                                 </div>
                             </div>
                         </div><!--end col-->
 
-                        <div class="col-lg-7 col-md-7 mt-4">
+                        <div class="col-lg-9 col-md-7 mt-4">
                             <div class="card border-0 shadow overflow-hidden">
                                 <ul class="nav nav-pills nav-justified flex-column flex-sm-row rounded-0 shadow overflow-hidden bg-white mb-0"
                                     id="pills-tab" role="tablist">
@@ -271,7 +282,16 @@
                                             href="#pills-experience" role="tab" aria-controls="pills-experience"
                                             aria-selected="false">
                                             <div class="text-center pt-1 pb-1">
-                                                <h4 class="title fw-normal mb-0">Profile Settings</h4>
+                                                <h4 class="title fw-normal mb-0">Contact</h4>
+                                            </div>
+                                        </a><!--end nav link-->
+                                    </li><!--end nav item-->
+                                    <li class="nav-item">
+                                        <a class="nav-link rounded-0" id="experience-tab" data-bs-toggle="pill"
+                                            href="#pills-experience1" role="tab" aria-controls="pills-experience1"
+                                            aria-selected="false">
+                                            <div class="text-center pt-1 pb-1">
+                                                <h4 class="title fw-normal mb-0">Reservation</h4>
                                             </div>
                                         </a><!--end nav link-->
                                     </li><!--end nav item-->
@@ -280,24 +300,310 @@
                                 <div class="tab-content p-4" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-overview" role="tabpanel"
                                         aria-labelledby="overview-tab">
-                                        <h5 class="mb-0">Introduction:</h5>
 
-                                        <p class="text-muted mt-4 mb-0" th:text="${patient.description}"></p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Create at</label>
+                                                    <input type="text" th:value="*{date}" class="form-control"
+                                                        readonly></input>
+                                                </div>
+                                                <div class="d-flex align-items-center mt-2">
+
+                                                    <div class="mb-3 col-md-12">
+                                                        <label class="form-label">Family Medical History</label>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12">
+                                                                <textarea name="fmhistory" type="textarea"
+                                                                    class="form-control" style="height: 100px;"
+                                                                    th:text="${PatientDetail.Family_medical_history}"
+                                                                    readonly></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="d-flex align-items-center mt-2">
+                                                    <div class="mb-3" style="width: 50%;">
+                                                        <label class="form-label">Heartbeat:</label>
+                                                        <div class="mb-3 d-flex align-items-center">
+                                                            <input type="number" name="heartbeat" class="form-control"
+                                                                required min="0" max="220"
+                                                                th:value="${PatientDetail.heartbeat}" readonly>
+                                                            <label class="pl-1" style="padding: 10px;">bpm</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3" style="width: 50%;">
+                                                        <label class="form-label">Body Temperature:</label>
+                                                        <div class="mb-3 d-flex align-items-center">
+                                                            <input type="number" name="bodytem" class="form-control"
+                                                                required min="0" max="46"
+                                                                th:value="${PatientDetail.body_temperature}" readonly>
+                                                            <label class="pl-1" style="padding: 10px;">°C</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Weight:</label>
+                                                    <div class="mb-3 d-flex align-items-center">
+                                                        <input type="text" name="weight" class="form-control"
+                                                            style="width: 90%;" th:value="${PatientDetail.weight}"
+                                                            readonly></input>
+                                                        <label class="pl-1" style="padding: 10px;">Kg</label>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div><!--end col-->
+                                            <div class="col-md-6">
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Time</label>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-10">
+                                                            <input name="" type="time" th:value="${time}"
+                                                                class="form-control" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center mt-2">
+
+                                                    <div class="mb-3 col-md-12">
+                                                        <label class="form-label">Medical History</label>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12">
+                                                                <textarea name="mhistory" type="textarea"
+                                                                    class="form-control" style="height: 100px;"
+                                                                    th:text="${PatientDetail.medical_history}"
+                                                                    readonly></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <div class="mb-3">
+                                                    <div class="row">
+                                                        <div class="mb-3 col-md-7">
+                                                            <label class="form-label">BMI:</label>
+                                                            <input type="text" placeholder="BMI"
+                                                                style="background-color: gainsboro;"
+                                                                class="form-control" th:value="${PatientDetail.BMI}"
+                                                                readonly>
+                                                        </div>
+                                                        <div class="mb-3 col-md-5">
+                                                            <label class="form-label">Blood:</label>
+                                                            <input type="text" name="blood" placeholder=""
+                                                                class="form-control" th:value="${PatientDetail.blood}"
+                                                                readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Height:</label>
+                                                    <div class="mb-3 d-flex align-items-center">
+                                                        <input type="text" name="height" class="form-control"
+                                                            style="width: 90%;" th:value="${PatientDetail.height}"
+                                                            readonly></input>
+                                                        <label class="pl-1" style="padding: 10px;">Cm</label>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Hemoglobin:</label>
+                                                    <div class="mb-3 d-flex align-items-center">
+                                                        <input type="text" name="hemoglobin" class="form-control"
+                                                            style="width: 90%;" th:value="${PatientDetail.Hemoglobin}"
+                                                            readonly></input>
+                                                        <label class="pl-1" style="padding: 10px;">g/dL</label>
+                                                    </div>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-md-6" style="border: 1px ;
+                                            width: 80%;
+                                            margin: 0 auto;
+                                            text-align: center;">
+                                                <div class="custom-div">
+                                                    <div class="d-flex align-items-center mt-2">
+
+                                                        <div class="mb-3 col-md-6">
+                                                            <label class="form-label">Right Eyes</label>
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-12">
+                                                                    <input type="text" name="rightEye"
+                                                                        placeholder="10/10"
+                                                                        th:value="${PatientDetail.righteye}" readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3 col-md-6">
+                                                            <label class="form-label">Left Eyes</label>
+                                                            <div class="form-group row">
+                                                                <div class="col-sm-12">
+                                                                    <input type="text" name="leftEye"
+                                                                        placeholder="10/10"
+                                                                        th:value="${PatientDetail.lefteye}" readonly>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 col-md-12">
+                                                        <label class="form-label">IOP:</label>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="mb-3 d-flex align-items-center"
+                                                            style="padding-left: 150px;">
+                                                            <input type="text" name="iop" class="form-control"
+                                                                style="width: 80%; " th:value="${PatientDetail.IOP}"
+                                                                readonly></input>
+                                                            <label class="pl-1" style="padding: 10px;">mmHg</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label style="font-weight: bold;">Note:</label>
+                                            <div class="mb-3 col-md-12">
+                                                <label class="form-label">Clinical diagnosis</label>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <textarea name="description" type="textarea"
+                                                            class="form-control" style="height: 100px;"
+                                                            th:text="${PatientDetail.description}" readonly></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-12">
+                                                <label class="form-label">Eyes diagnosis</label>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <textarea name="eyesDescription" type="textarea"
+                                                            class="form-control" style="height: 100px;"
+                                                            placeholder="Nomal"
+                                                            th:text="${PatientDetail.eyes_description}"
+                                                            readonly></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label">Left Eyes diagnosis</label>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <textarea name="leftDescription" type="textarea"
+                                                            class="form-control" style="height: 100px;"
+                                                            th:text="${PatientDetail.lefteye_description}"
+                                                            readonly></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label class="form-label">Right Eyes diagnosis</label>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <textarea name="rightDescription" type="textarea"
+                                                            class="form-control" style="height: 100px;"
+                                                            th:text="${PatientDetail.righteye_description}"
+                                                            readonly></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="tab-pane fade" id="pills-experience" role="tabpanel"
+                                        aria-labelledby="experience-tab">
+                                        <h5 class="mb-0">Contact :</h5>
+
+
+                                        <form class="mt-4" th:action="@{patient-profile}" method="post">
+                                            <div class="row">
+                                                <div class="col-md-12">
+
+                                                </div><!--end col-->
+
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Email</label>
+                                                        <input name="email" id="email" type="email" class="form-control"
+                                                            placeholder="email :" th:value="${patient.patient_email}"
+                                                            readonly>
+                                                    </div>
+                                                </div><!--end col-->
+
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Phone no.</label>
+                                                        <input name="number" id="number" type="text"
+                                                            class="form-control" placeholder="Phone no. :"
+                                                            th:value="${patient.patient_phone}" readonly>
+                                                    </div>
+                                                </div><!--end col-->
+
+
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label"> Address: </label>
+                                                        <input name="address" type="text"
+                                                            class="flatpickr flatpickr-input form-control"
+                                                            id="checkin-date" placeholder="Address:"
+                                                            th:value="${patient.patient_address}" readonly>
+                                                    </div>
+                                                </div><!--end col-->
+
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label"> Status: </label>
+                                                        <select class="form-control gender-name select2input"
+                                                            name="status">
+                                                            <option value="1" th:selected="${patient.status==1}">
+                                                                Reservation ended
+                                                            </option>
+                                                            <option value="0" th:selected="${patient.status==0}">In
+                                                                Process
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div><!--end col-->
+
+                                                <input type="hidden" name="id" th:value="${param.id}">
+
+                                                <div class="mt-4 pt-2">
+
+                                                    <div class="mt-4">
+                                                        <input type="submit" value="Save Change"
+                                                            class="btn btn-warning"></input>
+                                                    </div><!--end col-->
+                                                </div>
+                                            </div>
+
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-experience1" role="tabpanel"
+                                        aria-labelledby="experience-tab">
+                                        <h5 class="mb-0">Reservation :</h5>
+
 
                                         <div class="row">
                                             <div class="col-lg-6 col-12 mt-4">
+
+                                               
                                                 <h5>Appointment List</h5>
 
                                                 <div class="d-flex justify-content-between align-items-center rounded p-3 shadow mt-3"
-                                                    th:each="reservation:${reservation}">
+                                                    th:each="resers :${reservation}">
                                                     <i class="fa-solid fa-stethoscope fa-2xl"></i>
                                                     <div class="flex-1 overflow-hidden ms-2">
-                                                        <h6 class="mb-0" th:text="${reservation.service_name}"></h6>
+                                                        <h6 class="mb-0" th:text="${resers.service_name}"></h6>
                                                         <p class="text-muted mb-0 text-truncate small"
-                                                            th:text="${reservation.doctor_name}">
+                                                            th:text="${resers.doctor_name}">
                                                         </p>
                                                     </div>
-                                                    <span class="mb-0" th:text="${reservation.date}"></span>
+                                                    <span class="mb-0" th:text="${resers.date}"></span>
                                                 </div>
 
 
@@ -325,106 +631,9 @@
 
                                             </div>
                                         </div>
-
-
-                                    </div>
-
-                                    <div class="tab-pane fade" id="pills-experience" role="tabpanel"
-                                        aria-labelledby="experience-tab">
-                                        <h5 class="mb-0">Personal Information :</h5>
-
-
-                                        <form class="mt-4" action="patient-profile" method="post">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Full Name</label>
-                                                        <input name="name" id="name" type="text" class="form-control"
-                                                            placeholder="Full Name :" th:value="${patient.patient_name}"
-                                                            readonly>
-                                                    </div>
-                                                </div><!--end col-->
-
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Your Email</label>
-                                                        <input name="email" id="email" type="email" class="form-control"
-                                                            placeholder="Your email :"
-                                                            th:value="${patient.patient_email}" readonly>
-                                                    </div>
-                                                </div><!--end col-->
-
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Phone no.</label>
-                                                        <input name="number" id="number" type="text"
-                                                            class="form-control" placeholder="Phone no. :"
-                                                            th:value="${patient.patient_phone}" readonly>
-                                                    </div>
-                                                </div><!--end col-->
-
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label"> Date of birth: </label>
-                                                        <input name="dob" type="date"
-                                                            class="flatpickr flatpickr-input form-control"
-                                                            id="checkin-date" th:value="${patient.dob}" readonly>
-                                                    </div>
-                                                </div><!--end col-->
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label"> Address: </label>
-                                                        <input name="dob" type="text"
-                                                            class="flatpickr flatpickr-input form-control"
-                                                            id="checkin-date" placeholder="Address:"
-                                                            th:value="${patient.patient_address}" readonly>
-                                                    </div>
-                                                </div><!--end col-->
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label"> Gender: </label>
-                                                        <select class="form-control gender-name select2input"
-                                                            name="gender">
-                                                            <option value="0" th:selected="${patient.gender==0}">Male
-                                                            </option>
-                                                            <option value="1" th:selected="${patient.gender==1}">Female
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div><!--end col-->
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label"> Status: </label>
-                                                        <select class="form-control gender-name select2input"
-                                                            name="status">
-                                                            <option value="1" th:selected="${patient.status==1}">Active
-                                                            </option>
-                                                            <option value="0" th:selected="${patient.status==0}">Blocked
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div><!--end col-->
-                                                <div class="col-md-12">
-                                                    <div class="mb-3">
-                                                        <label class="form-label"> Description </label>
-                                                        <textarea name="comments" id="comments" rows="4"
-                                                            class="form-control" placeholder="Description :"
-                                                            th:utext="${patient.description}"></textarea>
-
-                                                    </div>
-                                                </div><!--end col-->
-                                                <input type="hidden" name="id" th:value="${param.id}">
-
-                                                <div class="mt-4 pt-2">
-
-                                                    <div class="mt-4">
-                                                        <input type="submit" value="Save Change"
-                                                            class="btn btn-warning"></input>
-                                                    </div><!--end col-->
-                                                </div>
-                                            </div>
                                     </div>
                                 </div>
+
                             </div><!--end col-->
 
 
@@ -432,21 +641,7 @@
                     </div>
                 </div><!--end container-->
 
-                <!-- Footer Start -->
-                <footer class="bg-white shadow py-3">
-                    <div class="container-fluid">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <div class="text-sm-start text-center">
-                                    <p class="mb-0 text-muted">
-                                        <script>document.write(new Date().getFullYear())</script> © Doctris. Design with
-                                        <i class="mdi mdi-heart text-danger"></i> by <a href="../../../dashboard"
-                                            target="_blank" class="text-reset">Shreethemes</a>.
-                                    </p>
-                                </div>
-                            </div><!--end col-->
-                        </div><!--end row-->
-                    </div><!--end container-->
+
                 </footer><!--end footer-->
                 <!-- End -->
         </main>
@@ -456,18 +651,23 @@
 
 
 
-    <!-- Offcanvas End -->
-
 
 
     <!-- javascript -->
-    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <!-- simplebar -->
-    <script src="../js/simplebar.min.js"></script>
+    <script th:src="@{/js/simplebar.min.js}"></script>
     <!-- Icons -->
-    <script src="../js/feather.min.js"></script>
+    <script th:src="@{/js/feather.min.js}"></script>
     <!-- Main Js -->
-    <script src="../js/app.js"></script>
+    <script th:src="@{/js/app.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"
+        integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script th:src="@{/js/providers.js}"></script>
 
 </body>
 
