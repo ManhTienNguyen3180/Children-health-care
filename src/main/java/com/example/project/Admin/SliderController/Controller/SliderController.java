@@ -41,12 +41,13 @@ public class SliderController {
             @RequestParam("image") MultipartFile image) {
         String imageAddress = "";
         if (image.isEmpty()) {
-            imageAddress = "/images/service/default-service.jpg";
+            Slider slider = serviceS.findById(id);
+            imageAddress = slider.getImage();
         } else {
             try {
                 // We can save image in 'images' directory in roo
 
-                String uploadDir = "./src/main/resources/static/images/slider";
+                String uploadDir = "./healthcare/src/main/resources/static/images/slider";
                 java.nio.file.Path copyLocation = Paths
                         .get(uploadDir + java.io.File.separator + image.getOriginalFilename());
                 java.nio.file.Files.copy(image.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);

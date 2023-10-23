@@ -77,6 +77,16 @@
             modal.show();
         });
     </script>
+    <script th:if="${departmentDetail!=null}">
+        // Wait for the page to fully load before showing the modal
+        window.addEventListener('load', function () {
+            // Get a reference to the modal element
+            var modal = new bootstrap.Modal(document.getElementById('editprofile'));
+
+            // Show the modal
+            modal.show();
+        });
+    </script>
     <div class="page-wrapper doctris-theme toggled">
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
@@ -127,6 +137,14 @@
                         <div class="sidebar-submenu">
                             <ul>
                                 <li><a class="" th:href="@{/blogsManagement}">Blogs</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-clinic-medical me-2 d-inline-block"></i>Departments</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a class="" th:href="@{/departmentsManagement}">Departments</a></li>
                             </ul>
                         </div>
                     </li>
@@ -360,12 +378,12 @@
                                         <tr style="height: 50vh;" th:if="${totalService==0}">
                                             <td colspan="10" style="text-align: center;" class="bg-soft-dark"><span
                                                     style="font-size: xx-large; color: rgba(42, 54, 39, 0.575); font-weight: bold;">There
-                                                    is no service for your Search</span></td>
+                                                    is no department for your Search</span></td>
                                         </tr>
                                         <tr style="height: 100px; overflow-y: hidden; " th:each="listD:${departments}">
                                             <th class="p-3" th:text="${listD.id}"></th>
                                             <td class="py-3">
-                                                <a th:href="@{/servicesManagement/service-detail/{id}(id=${listD.id})}"
+                                                <a th:href="@{'/departmentsManagement/department-detail/'+${currentPage}+'/'+${listD.Id}}"
                                                     class="text-dark">
                                                     <div class="d-flex align-items-center fw-bold">
                                                         <span class="ms-2" th:text="${listD.name}"></span>
@@ -396,7 +414,7 @@
                                                         class="btn btn-icon btn-pills btn-soft-primary"><i
                                                             class="uil uil-eye-slash"></i></button>
                                                 </form>
-                                                <a th:href="@{/servicesManagement/service-detail/{id}(id=${listD.Id})}"
+                                                <a th:href="@{'/departmentsManagement/department-detail/'+${currentPage}+'/'+${listD.Id}}"
                                                     class="btn btn-icon btn-pills btn-soft-success"><i
                                                         class="uil uil-pen"></i></a>
                                             </td>
@@ -617,11 +635,73 @@
 
 
     <!-- Start Modal -->
-    <div class="modal fade" id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Profile Settings Start -->
+    <div th:if="${departmentDetail!=null}" class="modal fade position-fixed" id="editprofile" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header border-bottom p-3">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Service</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Department Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-3 pt-4">
+                    <div class="row align-items-center">
+                        <form th:action="@{/departmentsManagement/editDepartment}" class="mt-4" onsubmit="return validatePrice1()" method="post">
+                            <div class="row">
+                                <input type="text" style="display: none;" name="Id" th:value="${departmentDetail.id}">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Department Name</label>
+                                        <input name="name" id="name" type="text" class="form-control"
+                                            th:value="${departmentDetail.name}" placeholder=" :">
+                                    </div>
+                                </div><!--end col-->
+
+                                <div class="col-lg-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Description <span class="text-danger">*</span></label>
+                                        <textarea name="note" id="editor2" rows="4" class="form-control"
+                                            placeholder="Department description :" th:text="${departmentDetail.note}"> </textarea>
+                                        <script>
+                                            CKEDITOR.replace('editor2')
+                                            function validatePrice1() {
+                                                var editorContent = CKEDITOR.instances.editor2.getData().trim();
+                                                if (editorContent.length === 0) {
+                                                    var descriptionInvalid2 = document.getElementById("descriptionInvalid2");
+                                                    descriptionInvalid2.innerHTML = "Description can not be blank.";
+                                                    descriptionInvalid2.className = "alert alert-danger";
+                                                    descriptionInvalid2.role = "alert";
+                                                    // Display error message
+                                                    return false; // Prevent form submission
+                                                }
+                                                return true;
+
+                                            }
+                                        </script>
+                                    </div>
+                                    <div id="descriptionInvalid2"></div>
+                                </div><!--end col-->
+                            </div><!--end row-->
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="submit" id="submit" name="send" class="btn btn-primary"
+                                        value="Save changes">
+                                </div><!--end col-->
+                            </div><!--end row-->
+                        </form><!--end form-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Profile Settings End -->
+    <div class="modal fade position-fixed " id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-bottom p-3">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Department</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -639,16 +719,18 @@
                                                 <label class="form-label">Department Name <span
                                                         class="text-danger">*</span></label>
                                                 <input required name="name" id="name" type="text" class="form-control"
-                                                    placeholder="Service Name :">
+                                                    placeholder="Department Name :">
                                             </div>
                                         </div><!--end col-->
-                                        <div th:if="${addFail!=null}" class="alert alert-danger" role="alert">Department is exist</div>
+                                        <div th:if="${addFail!=null}" class="alert alert-danger" role="alert">
+                                            Department
+                                            is exist</div>
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Description <span
                                                         class="text-danger">*</span></label>
                                                 <textarea name="description" id="editor1" rows="4" class="form-control"
-                                                    placeholder="Service description :"></textarea>
+                                                    placeholder="Department description :"></textarea>
                                                 <script>
                                                     CKEDITOR.replace('editor1')
                                                     function validatePrice() {
@@ -669,7 +751,7 @@
                                         </div><!--end col-->
 
                                         <div class="col-lg-12 text-end">
-                                            <button type="submit" class="btn btn-primary">Add Service</button>
+                                            <button type="submit" class="btn btn-primary">Add Department</button>
                                         </div><!--end col-->
                                     </div>
                     </form>
@@ -677,6 +759,7 @@
             </div><!--end col-->
         </div><!--end row-->
     </div>
+
     <!-- End modal -->
     <!-- javascript -->
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
