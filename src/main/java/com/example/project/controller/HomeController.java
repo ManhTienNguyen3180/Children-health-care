@@ -64,6 +64,7 @@ public class HomeController {
         model.addAttribute("blogNew", BlogService.getBlogsNew());
         return "home";
     }
+    
     @GetMapping("/logout")
     public String logout(Authentication authentication, HttpSession session) {
         if (authentication != null) {
@@ -72,6 +73,7 @@ public class HomeController {
         }
         return "redirect:/home";
     }
+
     @GetMapping("/denied")
     public String denied() {
         return "denied";

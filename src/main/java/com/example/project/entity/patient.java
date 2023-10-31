@@ -3,6 +3,7 @@ package com.example.project.entity;
 import java.util.Date;
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -16,6 +17,7 @@ public class patient {
     //healthy
     //unhealthy
     private int status;
+    
     private Date Dob;
     private String patient_name;
     private String description;

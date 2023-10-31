@@ -381,7 +381,7 @@
                                                     </div>
                                                 </a>
                                             </td>
-                                            <td class="p-3" th:text="${listS.price}+' $'"></td>
+                                            <td class="p-3" th:text="${#numbers.formatDecimal(listS.price, 0, 'COMMA', 0, 'POINT') + 'đ'}"></td>
                                             <td class="p-3" >
                                                 <div th:utext="${listS.description}" style="height: 100px; overflow-y: auto; margin: 0px; box-sizing:border-box; padding: 0px;"></div>
                                             </td>

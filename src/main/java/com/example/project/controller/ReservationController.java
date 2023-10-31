@@ -67,7 +67,7 @@ public class ReservationController {
 
         return "bookingappointment";
     }
-
+    
     @GetMapping("/getServiceByCategoryServiceId/{categoryId}")
     @ResponseBody
     public List<service> chooseService(@PathVariable(value = "categoryId") int categoryId) {
@@ -234,10 +234,11 @@ public class ReservationController {
         // save reservation
         reservation.setPatient_id(patient_id);
         reservation.setPatient_name(patient_name);
+        reservation.setDescription(patient_note);
         reservation.setDoctor_id(doctor_id);
         reservation.setDoctor_name(doctor_name);
         reservation.setDate(java.sql.Date.valueOf(date));
-        reservation.setStatus(1);
+        reservation.setStatus(0);
         reservation.setCreate_at(new java.sql.Date(System.currentTimeMillis()));
         reservation.setCreate_by("admin");
         reservation.setTime(time);
