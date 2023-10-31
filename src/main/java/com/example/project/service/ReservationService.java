@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import com.example.project.Repository.SlotRepo;
 import com.example.project.dto.doctorserviceDTO;
 import com.example.project.dto.slotDTO;
 import com.example.project.entity.reservation;
+import com.example.project.entity.reservationdetail;
 import com.example.project.entity.service;
 
 import jakarta.mail.MessagingException;
@@ -155,5 +158,34 @@ public class ReservationService {
 
     public List<reservation> findByPatientDate(int patient_id, String date) {
         return repository.findByPatientDate(patient_id, date);
+    }
+
+    public reservation findReservationByID(int reservation_id) {
+        return repository.findById(reservation_id).get();
+    }
+
+    public List<reservation> findReservationsByUserID(int user_id) {
+        return repository.findReservationByUserId(user_id);
+    }
+
+    public List<reservationdetail> findAllReserDetail() {
+        return detailRepo.findAll();
+    }
+
+    public List<reservationdetail> findReserDetailByReserID(int reservation_id) {
+        return detailRepo.findByReservation_id(reservation_id);
+    }
+
+    public void deleteReservationDetail(int id) {
+        detailRepo.deleteById(id);
+    }
+
+    public void deleteReservation(int id) {
+        repository.deleteById(id);
+    }
+
+    public Page<reservation> findPaginated(int id, int pageNo, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.repository.findPageReservationByUserId(id, pageable);
     }
 }

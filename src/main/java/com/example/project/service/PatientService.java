@@ -145,4 +145,13 @@ public class PatientService {
       throw new IllegalStateException("Patient with the same ID already exists.");
     }
   }
+
+  public void deletePatient(int id) {
+    patientRepo.deleteById(id);
+  }
+
+  public void savePantient(int gender, String name, String email, String phone, int id) {
+    patientRepo.savePatientChange(gender, name, email, phone, id);
+  }
+  
 }

@@ -3,6 +3,8 @@ package com.example.project.Repository;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -31,4 +33,10 @@ public interface ReservationRepo extends JpaRepository<reservation, Integer> {
 
     @Query("select r from reservation r where r.doctor_id = ?1 and r.date = ?2 and r.time = ?3")
     reservation findByDoctor_idAndDateAndTime(int doctor_id, Date date, String time);
+
+    @Query("select r from reservation r join patient p on r.patient_id = p.patient_id where p.user_id = ?1 order by r.reservation_id desc")
+    List<reservation> findReservationByUserId(int user_id);
+
+    @Query("select r from reservation r join patient p on r.patient_id = p.patient_id where p.user_id = ?1")
+    Page<reservation> findPageReservationByUserId(int user_id, PageRequest pageable);
 }

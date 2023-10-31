@@ -6,24 +6,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.TimeZone;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.project.Admin.ServiceCategoryController.Model.ServiceCategory;
 import com.example.project.Repository.ReservationDetailRepo;
-import com.example.project.dto.doctorserviceDTO;
 import com.example.project.dto.slotDTO;
 import com.example.project.entity.doctor;
-import com.example.project.entity.doctorservice;
 import com.example.project.entity.patient;
 import com.example.project.entity.reservation;
 import com.example.project.entity.reservationdetail;
@@ -186,7 +182,7 @@ public class ReservationController {
         List<service> services = (List<service>) session.getAttribute("selectedServices");
         if (services == null) {
             service_ids = 0;
-        }else{
+        } else {
             service_ids = 1;
         }
         doctor doctor = (doctor) session.getAttribute("selectedDoctors");
@@ -237,7 +233,7 @@ public class ReservationController {
         reservation.setDoctor_id(doctor_id);
         reservation.setDoctor_name(doctor_name);
         reservation.setDate(java.sql.Date.valueOf(date));
-        reservation.setStatus(1);
+        reservation.setStatus(0);
         reservation.setCreate_at(new java.sql.Date(System.currentTimeMillis()));
         reservation.setCreate_by("admin");
         reservation.setTime(time);
@@ -272,14 +268,14 @@ public class ReservationController {
             session.removeAttribute("selectedDate");
 
             return "redirect:/thankyou";
-        }else{
+        } else {
             ReservationService.save(reservation);
             session.removeAttribute("selectedServices");
             session.removeAttribute("selectedDoctors");
             session.removeAttribute("selectedDate");
             return "redirect:/thankyou";
         }
-        
+
     }
 
     public int getDayOfWeek(String dateStr) {
@@ -319,4 +315,133 @@ public class ReservationController {
     public String thankyou() {
         return "thankyou";
     }
+
+    @GetMapping("myreservation")
+    public String listAll(Model model, HttpSession session) {
+        return findPaginatedReservation(1, model, session);
+    }
+
+    @GetMapping("/myreservation/page/{pageNo}")
+    public String findPaginatedReservation(@PathVariable int pageNo, Model model, HttpSession session) {
+
+        int pageSize = 3;
+
+        user u = (user) session.getAttribute("user");
+
+        model.addAttribute("detail", ReservationService.findAllReserDetail());
+        Page<reservation> page = ReservationService.findPaginated(u.getUser_id(), pageNo, pageSize);
+        List<reservation> listB = page.getContent();
+
+        model.addAttribute("reservation", listB);
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+
+        return "myreservation";
+    }
+
+    @GetMapping("/cusreservationdetail/{reservation_id}")
+    public String cusReserDetail(@PathVariable int reservation_id, Model model, HttpSession session) {
+        reservation reservations = ReservationService.findReservationByID(reservation_id);
+        patient p = PatientService.findByPatientId(reservations.getPatient_id()).get();
+        doctor d = DoctorService.findById(reservations.getDoctor_id());
+        model.addAttribute("reservation", reservations);
+        model.addAttribute("detail", ReservationService.findReserDetailByReserID(reservation_id));
+        model.addAttribute("patient", p);
+        model.addAttribute("doctor", d);
+
+        model.addAttribute("listSelected", session.getAttribute("selectedService"));
+        model.addAttribute("listService", ServiceService.fechServicesList());
+        model.addAttribute("listDoctor", DoctorService.fetchDoctorList());
+        model.addAttribute("listCategoryService", serviceCategoryService.fetchServiceCategoryList());
+        return "cusreservationdetail";
+    }
+
+    // @GetMapping("/rebooking")
+    // public String reBooking(@RequestParam(value = "serviceId", required = false)
+    // List<Integer> service_id,
+    // @RequestParam(value = "doctorId", required = false) Integer doctorId,
+    // @RequestParam("date") String date,
+    // @RequestParam("time") String time,
+    // RedirectAttributes redirAttr, HttpSession session, Model model) {
+
+    // if (doctorId == null) {
+    // doctorId = 0;
+    // }
+    // reservation r = ReservationService.findByDoctor_idAndDateAndTime(doctorId,
+    // java.sql.Date.valueOf(date), time);
+    // if (r != null) {
+    // redirAttr.addFlashAttribute("messageReser", "This time slot is not
+    // available");
+    // return "redirect:/cusreservationdetail";
+    // } else {
+    // if (service_id != null) {
+    // Optional<doctor> optionalDoctor = DoctorService.findDoctorById(doctorId);
+    // doctor doctor = optionalDoctor.get();
+    // double totalPrice = 0.0;
+    // List<service> services = ServiceService.findListByServiceId(service_id);
+    // for (service service : services) {
+    // // Cập nhật tổng số tiền bằng cách thêm giá của mỗi dịch vụ
+    // totalPrice += service.getPrice();
+    // }
+    // model.addAttribute("doctor", doctor);
+    // model.addAttribute("service",
+    // ServiceService.findListByServiceId(service_id));
+    // model.addAttribute("date", date);
+    // model.addAttribute("time", time);
+    // model.addAttribute("totalPrice", totalPrice);
+    // session.setAttribute("selectedDate", date);
+    // session.setAttribute("selectedServices",
+    // ServiceService.findListByServiceId(service_id));
+    // session.setAttribute("selectedDoctors", doctor);
+    // session.setAttribute("selectedTime", time);
+    // } else {
+    // model.addAttribute("doctor", null);
+    // model.addAttribute("date", date);
+    // model.addAttribute("time", time);
+    // session.setAttribute("selectedDate", date);
+    // session.setAttribute("selectedTime", time);
+    // session.setAttribute("selectedServices", null);
+    // session.setAttribute("selectedDoctors", null);
+    // }
+    // }
+
+    // return "cusreservationdetail";
+    // }
+
+    @RequestMapping("/cusreservationdetail/{reservation_id}/delete")
+    public String deleteReser(@PathVariable(value = "reservation_id") int reservation_id, Model model) {
+        reservation reservation = ReservationService.findReservationByID(reservation_id);
+        List<reservationdetail> reservationdetail = detailRepo.findByReservation_id(reservation_id);
+        for (reservationdetail rds : reservationdetail) {
+            ReservationService.deleteReservationDetail(rds.getDetailID());
+        }
+
+        patient patient = PatientService.findByPatientId(reservation.getPatient_id()).get();
+        PatientService.deletePatient(patient.getPatient_id());
+
+        ReservationService.deleteReservation(reservation_id);
+        return "redirect:/myreservation";
+    }
+
+    @RequestMapping("/cusreservationdetail/{reservation_id}/update")
+    public String updatePatient(@PathVariable(value = "reservation_id") int reservation_id, Model model,
+            RedirectAttributes redirectAttributes,
+            @RequestParam("pantientname") String panname,
+            @RequestParam("pantientgender") String gender,
+            @RequestParam("pantientemail") String email,
+            @RequestParam("patientphone") String phone) {
+        reservation reservation = ReservationService.findReservationByID(reservation_id);
+        patient patient = PatientService.findByPatientId(reservation.getPatient_id()).get();
+        int gen;
+        if (gender.equals("Male")) {
+            gen = 1;
+        } else {
+            gen = 0;
+        }
+        redirectAttributes.addFlashAttribute("mess", "Update successfully!");
+        PatientService.savePantient(gen, panname, email, phone, patient.getPatient_id());
+
+        return "redirect:/cusreservationdetail/" + reservation_id;
+    }
+
 }
