@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.project.entity.service;
+import com.example.project.service.FeedbackService;
 import com.example.project.service.ServiceCategoryService;
 import com.example.project.service.ServiceService;
 
@@ -27,7 +28,8 @@ public class ServiceController {
     // public String service(){
     //     return "service";
     // }
-
+        @Autowired 
+    private FeedbackService FeedbackService;
     @Autowired 
     private ServiceService ServiceService;
 
@@ -63,6 +65,7 @@ public class ServiceController {
     public String viewServiceDetail(@PathVariable int id, Model model) {
         service service = ServiceService.findServiceById(id).orElse(null);
         int cate = service.getCategory_id();
+        model.addAttribute("listRv", FeedbackService.getFeedbackByS(id));
         model.addAttribute("listCategory", serviceCategoryService.fetchServiceCategoryList());
         model.addAttribute("cateName", ServiceService.getServiceCategoryName(id));
         model.addAttribute("docs", ServiceService.getDocByService(cate));
