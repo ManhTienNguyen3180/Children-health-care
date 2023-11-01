@@ -2,6 +2,7 @@ package com.example.project.controller;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.project.entity.feedbackreservation;
+import com.example.project.entity.patient;
 import com.example.project.entity.reservation;
 import com.example.project.service.FeedbackService;
+import com.example.project.service.PatientService;
 import com.example.project.service.ReservationService;
 
 @Controller
@@ -24,11 +27,16 @@ public class FeedbackController {
   private ReservationService reservationService;
   @Autowired
   private FeedbackService feedbackService;
+  @Autowired
+  private PatientService patientService;
 
   @GetMapping
-  public String registerpage(Model model) {
-    reservation re = reservationService.findReservation(69, 60);
+  public String registerpage(Model model, @RequestParam("id") String id,
+      @RequestParam("reservationid") String reservationid) {
+
+    reservation re = reservationService.findReservation(Integer.parseInt(id), Integer.parseInt(reservationid));
     model.addAttribute("reDetail", re);
+    model.addAttribute("rs", reservationid);
     return "form";
   }
 
@@ -43,10 +51,12 @@ public class FeedbackController {
       @RequestParam("doctorknowledge") String doctorknowledge,
       @RequestParam("schedule") String schedule,
       @RequestParam("comment") String comment,
+
+      @RequestParam("reservationid") String reservationid,
       @RequestParam(value = "schedule[other]", required = false) String other) {
 
     feedbackreservation f = new feedbackreservation();
-    f.setReservation_id(60);
+    f.setReservation_id(Integer.parseInt(reservationid));
     f.setRating(Integer.parseInt(star));
     f.setComment(comment);
     f.setDate(Date.valueOf(LocalDate.now()));
@@ -61,7 +71,7 @@ public class FeedbackController {
       f.setSchedule_create(schedule);
     }
     feedbackService.addNewFeedback(f);
-   
-    return registerpage(model);
+
+    return "redirect:/myreservation";
   }
 }

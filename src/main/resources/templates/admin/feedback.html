@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Doctris - Doctor Appointment Booking System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
+    <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
+    <meta name="author" content="Shreethemes" />
+    <meta name="email" content="support@shreethemes.in" />
+    <meta name="website" content="../../../dashboard" />
+    <meta name="Version" content="v1.2.0" />
+    <!-- favicon -->
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico.png}">
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <!-- simplebar -->
+    <link th:href="@{/css/simplebar.css}" rel="stylesheet" type="text/css" />
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link th:href="@{/css/materialdesignicons.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/remixicon.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{https://unicons.iconscout.com/release/v3.0.6/css/line.css}" rel="stylesheet">
+    <!-- Css -->
+    <link th:href="@{/css/style.min.css}" rel="stylesheet" type="text/css" id="theme-opt" />
+    <script src="https://kit.fontawesome.com/8320fc5394.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Loader -->
+    
+    <!-- Loader -->
+
+    <div class="page-wrapper doctris-theme toggled">
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
+                <div class="sidebar-brand">
+                    <a th:href="@{/home}">
+                        <img th:src="@{/images/logo-dark.png}" height="24" class="logo-light-mode" alt="">
+                        <img th:src="@{/images/logo-light.png}" height="24" class="logo-dark-mode" alt="">
+                    </a>
+                </div>
+
+                <ul class="sidebar-menu pt-3">
+                    <li><a th:href="@{/admin/dashboard}"><i
+                                class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
+                    <li><a th:href="@{/admin/appointment}"><i
+                                class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a></li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="fa-solid fa-user fa-xs"
+                                style="margin-right: 5px;"></i>User</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a th:href="@{/admin/users}">All Users</a></li>
+                                <li><a th:href="@{/admin/add-user}">Add Users</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a th:href="@{/admin/doctors}">Doctors</a></li>
+                                <li><a th:href="@{/admin/add-doctor}">Add Doctor</a></li>
+                                <li><a th:href="@{/admin/schedule}">Schedule</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Patients</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a th:href="@{/admin/patients}">All Patients</a></li>
+                                <li><a th:href="@{/admin/patientDashboard}">Dashboard</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a class="" th:href="@{/blogsManagement}">Blogs</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Services</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a class="" th:href="@{/servicesManagement}">Services</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-columns me-2 d-inline-block"></i>Sliders</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a class="" th:href="@{/slidersManagement}">Sliders</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-feedback me-2 d-inline-block"></i></i>Feedback</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a class="" th:href="@{/admin/feedback}">Feedback</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+
+
+                </ul>
+                <!-- sidebar-menu  -->
+            </div>
+            <!-- sidebar-content  -->
+            <ul class="sidebar-footer list-unstyled mb-0">
+                <li class="list-inline-item mb-0 ms-1">
+                    <a href="#" class="btn btn-icon btn-pills btn-soft-primary">
+                        <i class="uil uil-comment icons"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- sidebar-wrapper  -->
+
+        <!-- Start Page Content -->
+        <main class="page-content bg-light">
+            <div class="top-header">
+                <div class="header-bar d-flex justify-content-between border-bottom">
+                    <div class="d-flex align-items-center">
+                        <a href="#" class="logo-icon">
+                            <img src="../images/logo-icon.png" height="30" class="small" alt="">
+                            <span class="big">
+                                <img src="../images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                                <img src="../images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                            </span>
+                        </a>
+                        <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
+                            <i class="uil uil-bars"></i>
+                        </a>
+                        <div class="search-bar p-0 d-none d-lg-block ms-2">
+                            <div id="search" class="menu-search mb-0">
+                                <form th:action="@{patientsSearch}" role="search" method="get" id="searchform"
+                                    class="searchform">
+                                    <div>
+                                        <input type="text" class="form-control border rounded-pill" name="s" id="s"
+                                            placeholder="Search Keywords..." th:value="${param.s}">
+                                        <input type="submit" value="Search">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="list-unstyled mb-0">
+
+
+                        <li class="list-inline-item mb-0 ms-1">
+                            <div class="dropdown dropdown-primary">
+                                <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                        src="../images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle"
+                                        alt=""></button>
+                                <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
+                                    style="min-width: 200px;">
+                                    <a class="dropdown-item d-flex align-items-center text-dark"
+                                        href="https://shreethemes.in/doctris/layouts/admin/profile">
+                                        <img src="../images/doctors/01.jpg"
+                                            class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                        <div class="flex-1 ms-2">
+                                            <span class="d-block mb-1">Calvin Carlo</span>
+                                            <small class="text-muted">Orthopedic</small>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item text-dark" href="dashboard"><span
+                                            class="mb-0 d-inline-block me-1"><i
+                                                class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
+                                    <a class="dropdown-item text-dark" href="dr-profile"><span
+                                            class="mb-0 d-inline-block me-1"><i
+                                                class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                                    <div class="dropdown-divider border-top"></div>
+                                    <a class="dropdown-item text-dark" href="lock-screen"><span
+                                            class="mb-0 d-inline-block me-1"><i
+                                                class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <div class="layout-specing">
+                    <div class="d-md-flex justify-content-between">
+                        <div>
+                        <h5 class="mb-0">Feedback List</h5>
+                        <span style="font-size: larger;width: 50px;">Filter: </span>
+                            <!-- Example single danger button -->
+                            <div class="btn-group" >
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false"  >
+                                    Ratings
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" th:href="@{/admin/feedback}">--All Rating--</a>
+                                    </li>
+                                    <li><a th:each="cat : ${listRate}" th:value="${cat}" th:text="${cat}"
+                                            class="dropdown-item"
+                                            th:href="@{'/admin/feedback/filter/'+${cat}}"></a></li>
+                                </ul>
+                                
+                            </div>
+                        </div>
+
+                        <!-- <form th:action="@{/admin/patients}" method="post">
+                            <button type="submit" class="btn btn-soft-success m-1 btn-sm" value="default"
+                                name="order">Default</button>
+                            <button class="btn btn-soft-success m-1 btn-sm" value="gender" name="order"
+                                th:hidden="${genderActive == -1}">Gender</button>
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="female" name="order"
+                                th:hidden="${genderActive != -1}">Female</button>
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="male" name="order"
+                                th:hidden="${genderActive != -1}">Male</button>
+                            <button class="btn btn-soft-success m-1 btn-sm" value="status" name="order"
+                                th:hidden="${statusActive == -1}">Status</button>
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="1" name="order"
+                                th:hidden="${statusActive != -1}">Reservation ended</button>
+                            <button class="btn btn-soft-warning m-1 btn-sm" value="0" name="order"
+                                th:hidden="${statusActive != -1}">In process</button>
+                        </form> -->
+                        <!-- <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
+                            <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
+                                <li class="breadcrumb-item"><a href="dashboard">Doctris</a></li>
+                                <li class="breadcrumb-item" aria-current="page"><i
+                                        class="fa-solid fa-caret-down fa-rotate-270"></i></li>
+                                <li class="breadcrumb-item active" aria-current="page">Patients</li>
+                            </ul>
+                            <form th:action="@{/admin/add-patient}">
+                                <input type="submit" value="Add Patient"
+                                    class="btn btn-soft-primary m-1 btn-sm"></input>
+                            </form>
+                        </nav> -->
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 mt-4">
+                            <div class="table-responsive shadow rounded">
+                                <table class="table table-center bg-white mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-bottom p-3" style="min-width: 50px;">Id</th>
+                                            <th class="border-bottom p-3" style="min-width: 180px;">Patient Name</th>
+                                            <th class="border-bottom p-3">Department</th>
+                                            <th class="border-bottom p-3">Date </th>
+                                            <th class="border-bottom p-3">Rating</th>
+                                            <th class="border-bottom p-3">Doctor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                        <tr th:each="fb : ${listAll}">
+                                            <th class="p-3" th:text="${fb[0]}"></th>
+                                            <td class="py-3" th:text="${fb[2]}"></td>
+                                        
+                                            <th class="p-3" th:text="${fb[4]}"></th>
+                                            <td class="p-3" th:text="${#dates.format(fb[6], 'yyyy-MM-dd')}"></td>
+                                            <td>
+                                                <ul class="cours-star">
+                                                    <th:block th:each="item : ${#numbers.sequence(1,fb[7])}">
+                                                        <img th:src="@{/images/star.png}" alt="My Image" style="height: 15px;" />
+                                                    </th:block>
+                                                    <th:block th:if="${fb[7] != 5}" th:each="i : ${#numbers.sequence(1,5 - fb[7])}">
+                                                        <img th:src="@{/images/starh.png}" alt="My Image" style="height: 15px;" />
+                                                    </th:block>
+                                                </ul>
+                                            </td>
+                                            <td class="py-3" th:text="${fb[8]}"></td>
+                                            
+                                            <!-- <td class="p-3" th:text="Female" th:if="${patients.gender == 1}"></td>
+                                            <td class="p-3" th:text="Male" th:if="${patients.gender == 0}"></td>
+                                            <td class="p-3" th:text="${patients.patient_email}"></td>
+                                            <td class="p-3" th:text="${patients.patient_phone}"></td>
+
+                                            <td class="p-3" th:text="${patients.create_by}"></td>
+                                            <td class="p-3" th:if="${patients.status==1}"><span
+                                                    class="badge bg-soft-success">Reservation ended</span></td>
+                                            <td class="p-3" th:if="${patients.status==0}"><span
+                                                    class="badge bg-soft-warning">In
+                                                    Process</span></td>
+                                            <td class="text-end p-3">
+                                                <a th:href="@{'/admin/patient-profile?id=' + ${patients.patient_id}}"
+                                                    class="btn btn-icon btn-pills btn-soft-primary"><i
+                                                        class="uil uil-eye"></i></a>
+                                                <a th:href="@{'/admin/add-patientDetails?id=' + ${patients.patient_id}}"
+                                                    class="btn btn-icon btn-pills btn-soft-success"><i
+                                                        class="uil uil-pen"></i></a>
+                                                <a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i
+                                                        class="uil uil-trash"></i></a>
+                                            </td> -->
+                                            <td class="text-end p-3">
+                                                <a th:href="@{/admin/feedback-detail/{id}(id=${fb[0]})}"
+                                                    class="btn btn-icon btn-pills btn-soft-primary"><i
+                                                        class="uil uil-eye"></i></a>
+                                                
+                                                
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div><!--end row-->
+
+                    <div class="row text-center">
+                        <!-- PAGINATION START -->
+                        <div class="col-12 mt-4">
+                            <div class="d-md-flex align-items-center text-center justify-content-between">
+                                <!-- <span class="text-muted me-3">Total Service : <span th:text="${totalService}"></span>
+                                </span> -->
+
+                                <!-- <ul th:if="${catId!=null&&totalPages>1}"
+                                    class="pagination justify-content-end mb-0 list-unstyled">
+                                    <li class="page-item">
+                                        <a th:if="${currentPage >1}"
+                                            th:href="@{'/servicesManagement/filterCategory/' +${catId}+'/'+ ${currentPage - 1} }"
+                                            class="page-link" href="" aria-label="Prev">Prev</a>
+                                        <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                                    </li>
+                                    <span th:each="i:${#numbers.sequence(1,totalPages)}">
+                                        <li class="page-item"><a th:if="${currentPage != i}"
+                                                th:href="@{'/servicesManagement/filterCategory/' +${catId}+'/'+${i}}"
+                                                class="page-link" href="">[[${i}]]</a>
+                                        </li>
+                                        <li th:unless="${currentPage != i}" class="page-item active"><a
+                                                class="page-link" href="">[[${i}]]</a></li>
+                                    </span>
+                                    <li class="page-item">
+                                        <a th:if="${currentPage < totalPages}"
+                                            th:href="@{'/servicesManagement/filterCategory/' +${catId}+'/'+ ${currentPage + 1}}"
+                                            class="page-link" href="" aria-label="Next">Next</a>
+                                        <span class="page-link pe-none"
+                                            th:unless="${currentPage < totalPages}">Next</span>
+                                    </li>
+                                </ul> -->
+
+                                <ul 
+                                    class="pagination justify-content-end mb-0 list-unstyled">
+                                    <li class="page-item">
+                                        <a th:if="${currentPage >1}"
+                                            th:href="@{'/admin/feedback/page/' + ${currentPage - 1} }"
+                                            class="page-link" href="" aria-label="Prev">Prev</a>
+                                        <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                                    </li>
+                                    <span th:each="i:${#numbers.sequence(1,totalPages)}">
+                                        <li class="page-item"><a th:if="${currentPage != i}"
+                                                th:href="@{'/admin/feedback/page/'+${i}}" class="page-link"
+                                                href="">[[${i}]]</a>
+                                        </li>
+                                        <li th:unless="${currentPage != i}" class="page-item active"><a
+                                                class="page-link" href="">[[${i}]]</a></li>
+                                    </span>
+                                    <li class="page-item">
+                                        <a th:if="${currentPage < totalPages}"
+                                            th:href="@{'/admin/feedback/page/' + ${currentPage + 1}}"
+                                            class="page-link" href="" aria-label="Next">Next</a>
+                                        <span class="page-link pe-none"
+                                            th:unless="${currentPage < totalPages}">Next</span>
+                                    </li>
+                                </ul><!--end pagination-->
+                                
+                                <!-- <ul th:if="${sortField==null&&status==null&&catId==null&&searchText!=null&&totalPages>1}"
+                                    class="pagination justify-content-end mb-0 list-unstyled">
+                                    <li class="page-item">
+                                        <a th:if="${currentPage >1}"
+                                            th:href="@{'/servicesManagement/page/' + ${currentPage - 1}+'/'+ ${searchText} }"
+                                            class="page-link" href="" aria-label="Prev">Prev</a>
+                                        <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                                    </li>
+                                    <span th:each="i:${#numbers.sequence(1,totalPages)}">
+                                        <li class="page-item"><a th:if="${currentPage != i}"
+                                                th:href="@{'/servicesManagement/page/'+${i}+'/'+ ${searchText}}"
+                                                class="page-link" href="">[[${i}]]</a>
+                                        </li>
+                                        <li th:unless="${currentPage != i}" class="page-item active"><a
+                                                class="page-link" href="">[[${i}]]</a></li>
+                                    </span>
+                                    <li class="page-item">
+                                        <a th:if="${currentPage < totalPages}"
+                                            th:href="@{'/servicesManagement/page/' + ${currentPage + 1}+'/'+ ${searchText}}"
+                                            class="page-link" href="" aria-label="Next">Next</a>
+                                        <span class="page-link pe-none"
+                                            th:unless="${currentPage < totalPages}">Next</span>
+                                    </li>
+                                </ul>
+                                <ul th:if="${status!=null&&totalPages>1}"
+                                    class="pagination justify-content-end mb-0 list-unstyled">
+                                    <li class="page-item">
+                                        <a th:if="${currentPage >1}"
+                                            th:href="@{'/servicesManagement/filterStatus/'+${status}+'/' +${currentPage - 1}}"
+                                            class="page-link" href="" aria-label="Prev">Prev</a>
+                                        <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                                    </li>
+                                    <span th:each="i:${#numbers.sequence(1,totalPages)}">
+                                        <li class="page-item"><a th:if="${currentPage != i}"
+                                                th:href="@{'/servicesManagement/filterStatus/'+${status}+'/' +${i}}"
+                                                class="page-link" href="">[[${i}]]</a>
+                                        </li>
+                                        <li th:unless="${currentPage != i}" class="page-item active"><a
+                                                class="page-link" href="">[[${i}]]</a></li>
+                                    </span>
+                                    <li class="page-item">
+                                        <a th:if="${currentPage < totalPages}"
+                                            th:href="@{'/servicesManagement/filterStatus/'+${status}+'/' + ${currentPage + 1}}"
+                                            class="page-link" href="" aria-label="Next">Next</a>
+                                        <span class="page-link pe-none"
+                                            th:unless="${currentPage < totalPages}">Next</span>
+                                    </li>
+                                </ul>
+                                <ul th:if="${sortField!=null&&totalPages>1}"
+                                    class="pagination justify-content-end mb-0 list-unstyled">
+                                    <li class="page-item">
+                                        <a th:if="${currentPage >1}"
+                                            th:href="@{'/servicesManagement/sort/'+${currentPage - 1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+                                            class="page-link" href="" aria-label="Prev">Prev</a>
+                                        <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                                    </li>
+                                    <span th:each="i:${#numbers.sequence(1,totalPages)}">
+                                        <li class="page-item"><a th:if="${currentPage != i}"
+                                                th:href="@{'/servicesManagement/sort/'+${i}}+'?sortField='+${sortField}+'&sortDir='+${sortDir} "
+                                                class="page-link" href="">[[${i}]]</a>
+                                        </li>
+                                        <li th:unless="${currentPage != i}" class="page-item active"><a
+                                                class="page-link" href="">[[${i}]]</a></li>
+                                    </span>
+                                    <li class="page-item">
+                                        <a th:if="${currentPage < totalPages}"
+                                            th:href="@{'/servicesManagement/sort/'+${currentPage + 1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+                                            class="page-link" href="" aria-label="Next">Next</a>
+                                        <span class="page-link pe-none"
+                                            th:unless="${currentPage < totalPages}">Next</span>
+                                    </li>
+                                </ul> -->
+                            </div>
+                        </div><!--end col-->
+                        <!-- PAGINATION END -->
+                    </div><!--end row-->
+                    <!-- PAGINATION END -->
+                </div><!--end row-->
+            </div>
+    </div><!--end container-->
+
+    
+    <!-- End -->
+    </main>
+    <!--End page-content" -->
+    </div>
+    <!-- page-wrapper -->
+
+    <!-- Offcanvas Start -->
+
+
+    <!-- Modal start -->
+
+    <div id="viewprofile" class="modal fade show">
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+                <h6>Patient Profile</h6>
+                <div id="patientInfo">
+                    <p>Name: <span id="patientName"></span></p>
+                    <p>Age: <span id="patientAge"></span></p>
+                    <p>Gender: <span id="patientGender"></span></p>
+                    <p>Email: <span id="patientEmail"></span></p>
+                    <p>Phone: <span id="patientPhone"></span></p>
+                    <p>Address: <span id="patientAddress"></span></p>
+                    <p>Created by: <span id="patientCreatedBy"></span></p>
+                    <p>Status: <span id="patientStatus"></span></p>
+                </div>
+                <button onclick="closeProfileModal()">Close</button>
+            </div>
+        </div>
+    </div>
+    <!-- Profile End -->
+    <!-- Modal end -->
+    <script>
+        function showProfileModal(name, age, gender, email, phone, address, createdBy, status) {
+            var modal = document.getElementById('viewprofile');
+
+            // Fill in the patient details in the modal
+            document.getElementById('patientName').innerText = name;
+            document.getElementById('patientAge').innerText = age;
+
+            // Set gender based on the value (0 for Male, 1 for Female)
+            document.getElementById('patientGender').innerText = (gender === 0) ? 'Male' : 'Female';
+
+            document.getElementById('patientEmail').innerText = email;
+            document.getElementById('patientPhone').innerText = phone;
+            document.getElementById('patientAddress').innerText = address;
+            document.getElementById('patientCreatedBy').innerText = createdBy;
+
+            // Set status based on the value (0 for Blocked, 1 for Active)
+            document.getElementById('patientStatus').innerText = (status === 0) ? 'Blocked' : 'Active';
+
+            // Show the modal
+            modal.style.display = 'block';
+        }
+
+        // Thêm một hàm closeProfileModal() tương tự như trước
+        function closeProfileModal() {
+            var modal = document.getElementById('viewprofile');
+            modal.style.display = 'none';
+        }
+
+    </script>
+
+
+    <!-- javascript -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <!-- simplebar -->
+    <script src="../js/simplebar.min.js"></script>
+    <!-- Icons -->
+    <script src="../js/feather.min.js"></script>
+    <!-- Main Js -->
+    <script src="../js/app.js"></script>
+
+</body>
+
+</html>

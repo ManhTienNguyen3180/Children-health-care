@@ -1,5 +1,7 @@
 package com.example.project.Admin.ServiceCategoryController.Controller;
 
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Calendar;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.project.Admin.ServiceCategoryController.Model.ServiceCategory;
 import com.example.project.Admin.ServiceCategoryController.Service.ServiceCategoryService;
@@ -152,6 +155,7 @@ public class ServiceCategoryController {
         model.addAttribute("totalService", page.getTotalElements());
         return "admin/departments";
     }
+
     @PostMapping("/departmentsManagement/changeStatus")
     public String changeStatus(@RequestParam("Id") int id,
             @RequestParam("pageNo") int pageNo, Model model) {
@@ -164,4 +168,33 @@ public class ServiceCategoryController {
         model.addAttribute("message", "Change status of department " + id + " successfully!");
         return findPaginated(pageNo, model);
     }
+
+    @GetMapping("/departmentsManagement/department-detail/{currentPage}/{id}")
+    public String getServiceDetail(Model model, @PathVariable("currentPage") int pageNo, @PathVariable("id") int id) {
+        ServiceCategory s = service.findById(id);
+
+        model.addAttribute("departmentDetail", s);
+        return findPaginated(pageNo, model);
+    }
+
+    @PostMapping("/departmentsManagement/editDepartment")
+    public String editService(Model model,
+            @RequestParam("Id") int id,
+            @RequestParam("name") String name,
+            @RequestParam("note") String description) {
+
+        ServiceCategory s = service.findById(id);
+        s.setName(name);
+        s.setNote(description);
+        service.save(s);
+        return "redirect:/departmentsManagement/editSuccess/" + id;
+    }
+
+    @GetMapping("/departmentsManagement/editSuccess/{id}")
+    public String editSuccess(Model model, @PathVariable("id") int id) {
+
+        model.addAttribute("message", "Department " + id + " is up to date!");
+        return findPaginated(1, model);
+    }
+
 }

@@ -1,442 +1,458 @@
-
 <!DOCTYPE html>
-    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-    <head>
-        <meta charset="utf-8" />
-        <title>Doctris - Doctor Appointment Booking System</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
-        <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
-        <meta name="author" content="Shreethemes" />
-        <meta name="email" content="support@shreethemes.in" />
-        <meta name="website" content="https://shreethemes.in" />
-        <meta name="Version" content="v1.2.0" />
-        <!-- favicon -->
-        <link rel="shortcut icon" href="images/favicon.ico.png">
-        <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <!-- SLIDER -->
-        <link rel="stylesheet" href="css/tiny-slider.css"/>
-        <!-- Select2 -->
-        <link href="css/select2.min.css" rel="stylesheet" />
-        <!-- Date picker -->
-        <link rel="stylesheet" href="css/flatpickr.min.css">
-        <link href="css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
-        <!-- Icons -->
-        <link href="css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
-        <link href="css/remixicon.css" rel="stylesheet" type="text/css" />
-        <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
-        <!-- Css -->
-        <link href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+<head>
+    <meta charset="utf-8" />
+    <title>Doctris - Doctor Appointment Booking System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
+    <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
+    <meta name="author" content="Shreethemes" />
+    <meta name="email" content="support@shreethemes.in" />
+    <meta name="website" content="https://shreethemes.in" />
+    <meta name="Version" content="v1.2.0" />
+    <!-- favicon -->
+    <link th:href="@{images/favicon.ico.png}" rel="shortcut icon" href="images/favicon.ico.png">
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <style>
-            .carousel-inner>.item>img,
-            .carousel-inner>.item>a>img {
-                width: 100%;
-                margin: auto;
-                object-fit: cover;
-                height: 575px;
-                
-                
-            }
-            .title-slider{
-                position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
-                            color: white;
-                            padding: 10px;
-                            font-size: larger;
-            }
-            .title.text-dark{
-                font-family: "Inter",sans-serif;
-                font-weight: 500;
-                font-size: larger;
-            }
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+    <!-- SLIDER -->
+    <link rel="stylesheet" th:href="@{/css/tiny-slider.css}" href="css/tiny-slider.css" />
+    <!-- Select2 -->
+    <link href="css/select2.min.css" th:href="@{/css/select2.min.css}" rel="stylesheet" />
+    <!-- Date picker -->
+    <link rel="stylesheet" href="css/flatpickr.min.css">
+    <link href="css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
+    <!-- Icons -->
+    <link th:href="@{/css/materialdesignicons.min.css}" href="css/materialdesignicons.min.css" rel="stylesheet"
+        type="text/css" />
+    <link th:href="@{/css/remixicon.css}" href="css/remixicon.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{https://unicons.iconscout.com/release/v3.0.6/css/line.css}"
+        href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
+    <!-- Css -->
+    <link th:href="@{/css/style.min.css}" href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
 
-            .limited-text {
-            overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 25px;
-    -webkit-line-clamp: 4;
-    height: 100px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .carousel-inner>.item>img,
+        .carousel-inner>.item>a>img {
+            width: 100%;
+            margin: auto;
+            object-fit: cover;
+            height: 575px;
+
+
         }
-        </style>
-    </head>
 
-    <body>
-        
-        
-        <!-- Navbar STart -->
-        <header id="topnav" class="defaultscroll sticky">
-            <div class="container">
-                <!-- Logo container-->
-                <div>
-                    <a class="logo" href="home">
-                        <span class="logo-light-mode">
-                            <img src="images/logo-dark.png" class="l-dark" height="24" alt="">
-                            <img src="images/logo-light.png" class="l-light" height="24" alt="">
-                        </span>
-                        <img src="images/logo-light.png" height="24" class="logo-dark-mode" alt="">
-                    </a>
-                </div>
-                <!-- End Logo container-->
-                
-                <!-- Start Mobile Toggle -->
-                <div class="menu-extras">
-                    <div class="menu-item">
-                        <!-- Mobile menu toggle-->
-                        <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
-                            <div class="lines">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                        </a>
-                        <!-- End mobile menu toggle-->
-                    </div>
-                </div>
-                
-                <ul th:if="${session.user != NULL}" class="dropdowns list-inline mb-0">
-                    
-    
-                    <li class="list-inline-item mb-0 ms-1">
-                        <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
-                            <i class="uil uil-search"></i>
-                        </a>
-                    </li>
-    
-                    <li class="list-inline-item mb-0 ms-1">
-                        <div class="dropdown dropdown-primary">
-                            <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                    th:src="${session.user.image}"     src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle"
-                                    alt=""></button>
-                            <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
-                                style="min-width: 200px;">
-                                <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html">
-                                    <img th:src="${session.user.image}" src="images/doctors/01.jpg"
-                                        class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                    <div class="flex-1 ms-2">
-                                        <span  th:text="${session.user.full_name}" class="d-block mb-1">Calvin Carlo</span>
-                                        <!-- <small  class="text-muted">Orthopedic</small> -->
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-dark" href="doctor-dashboard.html"><span
-                                        class="mb-0 d-inline-block me-1"><i
-                                            class="uil uil-dashboard align-middle h6"></i></span> My reservation</a>
-                                <a class="dropdown-item text-dark" href="user-profile"><span
-                                        class="mb-0 d-inline-block me-1"><i
-                                            class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
-                                <div class="dropdown-divider border-top"></div>
-                                <a class="dropdown-item text-dark" th:href="@{/logout}" href="logout"><span
-                                        class="mb-0 d-inline-block me-1"><i
-                                            class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
-                            </div>
+        .title-slider {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            padding: 10px;
+            font-size: larger;
+        }
+
+        .title.text-dark {
+            font-family: "Inter", sans-serif;
+            font-weight: 500;
+            font-size: larger;
+        }
+
+        .limited-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 25px;
+            -webkit-line-clamp: 4;
+            height: 100px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- Navbar STart -->
+    <header id="topnav" class="defaultscroll sticky">
+        <div class="container">
+            <!-- Logo container-->
+            <div>
+                <a class="logo" href="home">
+                    <span class="logo-light-mode">
+                        <img src="images/logo-dark.png" class="l-dark" height="24" alt="">
+                        <img src="images/logo-light.png" class="l-light" height="24" alt="">
+                    </span>
+                    <img src="images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                </a>
+            </div>
+            <!-- End Logo container-->
+
+            <!-- Start Mobile Toggle -->
+            <div class="menu-extras">
+                <div class="menu-item">
+                    <!-- Mobile menu toggle-->
+                    <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+                        <div class="lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
                         </div>
-                    </li>
-                </ul>
-                <ul  th:if="${session.user == NULL}" class="dropdowns list-inline mb-8">
+                    </a>
+                    <!-- End mobile menu toggle-->
+                </div>
+            </div>
 
-                    <li class="list-inline-item mb-0">
-                        <a href="login" >
-                            <div class="btn btn-primary">Login/signup</div>
-                        </a>
-                    </li>
-                </ul>
-                <ul  class="dropdowns list-inline mb-8" >
-                    <!-- <li class="list-inline-item mb-0">
+            <ul th:if="${session.user != NULL}" class="dropdowns list-inline mb-0">
+
+
+                <li class="list-inline-item mb-0 ms-1">
+                    <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                        <i class="uil uil-search"></i>
+                    </a>
+                </li>
+
+                <li class="list-inline-item mb-0 ms-1">
+                    <div class="dropdown dropdown-primary">
+                        <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                th:src="${session.user.image}" src="images/doctors/01.jpg"
+                                class="avatar avatar-ex-small rounded-circle" alt=""></button>
+                        <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
+                            style="min-width: 200px;">
+                            <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html">
+                                <img th:src="${session.user.image}" src="images/doctors/01.jpg"
+                                    class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                <div class="flex-1 ms-2">
+                                    <span th:text="${session.user.full_name}" class="d-block mb-1">Calvin Carlo</span>
+                                    <!-- <small  class="text-muted">Orthopedic</small> -->
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-dark" href="doctor-dashboard.html"><span
+                                    class="mb-0 d-inline-block me-1"><i
+                                        class="uil uil-dashboard align-middle h6"></i></span> My reservation</a>
+                            <a class="dropdown-item text-dark" href="user-profile"><span
+                                    class="mb-0 d-inline-block me-1"><i
+                                        class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                            <div class="dropdown-divider border-top"></div>
+                            <a class="dropdown-item text-dark" th:href="@{/logout}" href="logout"><span
+                                    class="mb-0 d-inline-block me-1"><i
+                                        class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul th:if="${session.user == NULL}" class="dropdowns list-inline mb-8">
+
+                <li class="list-inline-item mb-0">
+                    <a href="login">
+                        <div class="btn btn-primary">Login/signup</div>
+                    </a>
+                </li>
+            </ul>
+            <ul class="dropdowns list-inline mb-8">
+                <!-- <li class="list-inline-item mb-0">
                         <a href="" >
                             <div class="btn btn-primary">Book Appointment</div>
                         </a>
                     </li> -->
-                    <li class="list-inline-item mb-0" >
-                        <a href="bookingappointment" >
-                            <div class="btn btn-primary">Book Appointment</div>
-                        </a>
+                <li class="list-inline-item mb-0">
+                    <a href="bookingappointment">
+                        <div class="btn btn-primary">Book Appointment</div>
+                    </a>
+                </li>
+
+            </ul>
+
+
+            <!-- Start Dropdown -->
+
+            <div id="navigation">
+                <!-- Navigation Menu-->
+                <ul class="navigation-menu nav-left nav-light">
+                    <li class="has-submenu parent-menu-item">
+                        <a href="home">Home</a>
+
                     </li>
-                    
-                </ul>
-                
-                
-                <!-- Start Dropdown -->
-                
-                <div id="navigation">
-                    <!-- Navigation Menu-->   
-                    <ul class="navigation-menu nav-left nav-light">
-                        <li class="has-submenu parent-menu-item">
-                            <a href="home">Home</a>
-                            
-                        </li>
 
-                        <li class="has-submenu parent-parent-menu-item">
-                            <a href="/doctor">Doctors</a>
-                            
-                        </li>
+                    <li class="has-submenu parent-parent-menu-item">
+                        <a href="/doctor">Doctors</a>
 
-                        <li class="has-submenu parent-parent-menu-item">
-                            <a href="/service">Services</a>
-                            
-                        </li>
+                    </li>
 
-                        <li class="has-submenu parent-parent-menu-item">
-                            <a href="/blog">Blog</a>
-                            
+                    <li class="has-submenu parent-parent-menu-item">
+                        <a href="/service">Services</a>
+
+                    </li>
+
+                    <li class="has-submenu parent-parent-menu-item">
+                        <a href="/blog">Blog</a>
+
                         <!-- </li>
                         
                             <li th:if="${u!=null && u.role==2}" class="has-submenu parent-parent-menu-item">
                                 <a href="#">Dashboard</a>
                                 
                         </li> -->
-                                 
-                        
-                    </ul>
-                </div>
-            </div><!--end container-->
-        </header><!--end header-->
-        <!-- Navbar End -->
 
-        
-        
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            
-          
-            <!-- Wrapper for slides -->
-            
-            <div class="carousel-inner" role="listbox">
-            
-                <div class="item active ">
-                    <a href="/blog">
-                    <div class="bg-overlay bg-overlay-dark"></div>   
-                        <img src="images/bg/02.jpg" alt="Chania">
-                        <div class="title-slider" >
-                            <h3>Visit Our Blogs</h3>
-                        </div>
-                    </a>
-                </div>
-              
-              <div class="item">
-                <a href="/doctor">
-                    <div class="bg-overlay bg-overlay-dark"></div>   
-                        <img src="images/bg/01.jpg" alt="Chania">
-                        <div class="title-slider" >
-                            <h3>See Our Best Doctors</h3>
-                        </div>
-                    </a>
-                
-              </div>
-          
-              <div class="item">
-                <a href="/service">
-                    <div class="bg-overlay bg-overlay-dark"></div>   
-                        <img src="images/bg/03.jpg" alt="Chania">
-                        <div class="title-slider" >
-                            <h3>Try Our Best Services</h3>
-                        </div>
-                    </a>
-                
-              </div>
-          
-              
+
+                </ul>
             </div>
-          
-            <!-- Left and right controls -->
-            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
-        
-        <!-- Start -->
-        <section class="section py-5 bg-light">
+        </div><!--end container-->
+    </header><!--end header-->
+    <!-- Navbar End -->
+
+
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+
+
+        <!-- Wrapper for slides -->
+
+        <div class="carousel-inner" role="listbox">
+
+            <div class="item active ">
+                <a href="/blog">
+                    <div class="bg-overlay bg-overlay-dark"></div>
+                    <img src="images/bg/02.jpg" alt="Chania">
+                    <div class="title-slider">
+                        <h3>Visit Our Blogs</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div class="item">
+                <a href="/doctor">
+                    <div class="bg-overlay bg-overlay-dark"></div>
+                    <img src="images/bg/01.jpg" alt="Chania">
+                    <div class="title-slider">
+                        <h3>See Our Best Doctors</h3>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="item">
+                <a href="/service">
+                    <div class="bg-overlay bg-overlay-dark"></div>
+                    <img src="images/bg/03.jpg" alt="Chania">
+                    <div class="title-slider">
+                        <h3>Try Our Best Services</h3>
+                    </div>
+                </a>
+
+            </div>
+
+
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <!-- Start -->
+    <section class="section py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="d-flex">
+                        <i class="uil uil-briefcase h1 mb-0 text-primary"></i>
+                        <div class="ms-3 ms-lg-4">
+                            <h5>Our Mission</h5>
+                            <p class="text-muted mb-0">The most well-known dummy text is the 'Lorem Ipsum' originated in
+                                the 16th century.</p>
+                        </div>
+                    </div>
+                </div><!--end col-->
+
+                <div class="col-md-4 mt-4 pt-2 mt-sm-0 pt-sm-0">
+                    <div class="d-flex">
+                        <i class="uil uil-airplay h1 mb-0 text-primary"></i>
+                        <div class="ms-3 ms-lg-4">
+                            <h5>Our Vision</h5>
+                            <p class="text-muted mb-0">The most well-known dummy text is the 'Lorem Ipsum' originated in
+                                the 16th century.</p>
+                        </div>
+                    </div>
+                </div><!--end col-->
+
+                <div class="col-md-4 mt-4 pt-2 mt-sm-0 pt-sm-0">
+                    <div class="d-flex">
+                        <i class="uil uil-flip-v h1 mb-0 text-primary"></i>
+                        <div class="ms-3 ms-lg-4">
+                            <h5>Who We Are ?</h5>
+                            <p class="text-muted mb-0">The most well-known dummy text is the 'Lorem Ipsum' originated in
+                                the 16th century.</p>
+                        </div>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </section><!--end section-->
+    <!-- End -->
+
+    <!-- Start -->
+    <section class="section bg-white pb-0">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 col-md-6">
+                    <div class="position-relative">
+                        <img src="images/about/about-2.png" class="img-fluid" alt="">
+
+                    </div>
+                </div><!--end col-->
+
+                <div class="col-lg-7 col-md-6 mt-4 pt-2 mt-sm-0 pt-sm-0">
+                    <div class="section-title ms-lg-5">
+                        <span class="badge badge-pill badge-soft-primary">Blogs Doctris</span>
+                        <h4 class="title mt-3 mb-4">BLOGS AND NEWS </h4>
+                        <p class="para-desc text-muted">Great doctor if you need your family member to get effective
+                            immediate assistance, emergency treatment or a simple consultation.</p>
+                        <p class="para-desc text-muted">The most well-known dummy text is the 'Lorem Ipsum', which is
+                            said to have originated in the 16th century. Lorem Ipsum is composed in a pseudo-Latin
+                            language which more or less corresponds to 'proper' Latin. It contains a series of real
+                            Latin words.</p>
+                        <div class="mt-4">
+                            <a href="/blog" class="btn btn-soft-primary">Read More</a>
+                        </div>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+
+        <section class="section">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="d-flex">
-                            <i class="uil uil-briefcase h1 mb-0 text-primary"></i>
-                            <div class="ms-3 ms-lg-4">
-                                <h5>Our Mission</h5>
-                                <p class="text-muted mb-0">The most well-known dummy text is the 'Lorem Ipsum' originated in the 16th century.</p>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-md-4 mt-4 pt-2 mt-sm-0 pt-sm-0">
-                        <div class="d-flex">
-                            <i class="uil uil-airplay h1 mb-0 text-primary"></i>
-                            <div class="ms-3 ms-lg-4">
-                                <h5>Our Vision</h5>
-                                <p class="text-muted mb-0">The most well-known dummy text is the 'Lorem Ipsum' originated in the 16th century.</p>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                    
-                    <div class="col-md-4 mt-4 pt-2 mt-sm-0 pt-sm-0">
-                        <div class="d-flex">
-                            <i class="uil uil-flip-v h1 mb-0 text-primary"></i>
-                            <div class="ms-3 ms-lg-4">
-                                <h5>Who We Are ?</h5>
-                                <p class="text-muted mb-0">The most well-known dummy text is the 'Lorem Ipsum' originated in the 16th century.</p>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-        </section><!--end section-->
-        <!-- End -->
-
-        <!-- Start -->
-        <section class="section bg-white pb-0">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-5 col-md-6">
-                        <div class="position-relative">
-                            <img src="images/about/about-2.png" class="img-fluid" alt="">
-                            
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-lg-7 col-md-6 mt-4 pt-2 mt-sm-0 pt-sm-0">
-                        <div class="section-title ms-lg-5">
-                            <span class="badge badge-pill badge-soft-primary">Blogs Doctris</span>
-                            <h4 class="title mt-3 mb-4">BLOGS AND NEWS </h4>
-                            <p class="para-desc text-muted">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
-                            <p class="para-desc text-muted">The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century. Lorem Ipsum is composed in a pseudo-Latin language which more or less corresponds to 'proper' Latin. It contains a series of real Latin words.</p>
-                            <div class="mt-4">
-                                <a href="/blog" class="btn btn-soft-primary">Read More</a>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-
-            <section class="section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2 " th:each="blog : ${blogNew}">
-                            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden" >
-                                <a th:href="@{/blog-detail/{id}(id=${blog.blogId})}" class="link">
-                                <img th:src="${blog.image}" class="img-fluid" alt="" style="height: 250px; object-fit: cover;">
+                    <div class="col-lg-4 col-md-6 col-12 mb-4 pb-2 " th:each="blog : ${blogNew}">
+                        <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
+                            <a th:href="@{/blog-detail/{id}(id=${blog.blogId})}" class="link">
+                                <img th:src="${blog.image}" class="img-fluid" alt=""
+                                    style="height: 250px; object-fit: cover;">
                             </a>
-                                <div class="card-body p-4" >
-                                    <ul class="list-unstyled mb-2">
-                                        <li class="list-inline-item text-muted small me-3" th:text="${blog.date}"></li>
-                                        <li class="list-inline-item text-muted small"><i class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
-                                    </ul>
-                                    <a th:href="@{/blog-detail/{id}(id=${blog.blogId})}" class="text-dark title h5" th:text="${blog.title}" ></a>
-                                    <br><br><li class="list-inline-item text-muted small me-3 limited-text" th:text="${blog.description}"></li>
-                                    <div class="post-meta d-flex justify-content-between mt-3">
-                                        
-                                        <a th:href="@{/blog-detail/{id}(id=${blog.blogId})}" class="link">Read More </a>
-                                    </div>
+                            <div class="card-body p-4">
+                                <ul class="list-unstyled mb-2">
+                                    <li class="list-inline-item text-muted small me-3" th:text="${blog.date}"></li>
+                                    <li class="list-inline-item text-muted small"><i
+                                            class="uil uil-clock text-dark h6 me-1"></i>5 min read</li>
+                                </ul>
+                                <a th:href="@{/blog-detail/{id}(id=${blog.blogId})}" class="text-dark title h5"
+                                    th:text="${blog.title}"></a>
+                                <br><br>
+                                <li class="list-inline-item text-muted small me-3 limited-text"
+                                    th:text="${blog.description}"></li>
+                                <div class="post-meta d-flex justify-content-between mt-3">
+
+                                    <a th:href="@{/blog-detail/{id}(id=${blog.blogId})}" class="link">Read More </a>
                                 </div>
                             </div>
-                        </div><!--end col-->
-    
-                        
-                    </div><!--end row-->
-    
-                    
-                </div><!--end container-->
-            </section><!--end section-->
-
-            <div class="container mt-100 mt-60">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <div class="section-title mb-4 pb-2 text-center">
-                            <span class="badge badge-pill badge-soft-primary mb-3">Departments</span>
-                            <h4 class="title mb-4">Our Medical Services</h4>
-                            <p class="text-muted mx-auto para-desc mb-0">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
                         </div>
                     </div><!--end col-->
+
+
                 </div><!--end row-->
 
-                <div class="row">
-                    <div class="col-xl-3 col-md-4 col-12 mt-5" th:each="service,iterStat : ${service}" th:if="${iterStat.index &lt; 6}">
-                        <div class="card features feature-primary bg-transparent border-0">
-                            <!-- <div class="icon text-center rounded-md">
+
+            </div><!--end container-->
+        </section><!--end section-->
+
+        <div class="container mt-100 mt-60">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="section-title mb-4 pb-2 text-center">
+                        <span class="badge badge-pill badge-soft-primary mb-3">Departments</span>
+                        <h4 class="title mb-4">Our Medical Services</h4>
+                        <p class="text-muted mx-auto para-desc mb-0">Great doctor if you need your family member to get
+                            effective immediate assistance, emergency treatment or a simple consultation.</p>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+
+            <div class="row">
+                <div class="col-xl-3 col-md-4 col-12 mt-5" th:each="service,iterStat : ${service}"
+                    th:if="${iterStat.index &lt; 6}">
+                    <div class="card features feature-primary bg-transparent border-0">
+                        <!-- <div class="icon text-center rounded-md">
                                 <i class="ri-eye-fill h3 mb-0"></i>
                             </div> -->
-                            <div class="card-body p-0 mt-3">
-                                <a th:href="@{/service-detail/{id}(id=${service.service_id})}" class="title text-dark h4" th:text="${service.service_name}"></a>
-                                <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely to fill a space.</p>
-                                <a th:href="@{/service-detail/{id}(id=${service.service_id})}" class="link">Read More </a>
-                            </div>
+                        <div class="card-body p-0 mt-3">
+                            <a th:href="@{/service-detail/{id}(id=${service.service_id})}" class="title text-dark h4"
+                                th:text="${service.service_name}"></a>
+                            <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely
+                                to fill a space.</p>
+                            <a th:href="@{/service-detail/{id}(id=${service.service_id})}" class="link">Read More </a>
                         </div>
-                    </div><!--end col-->
+                    </div>
+                </div><!--end col-->
 
-                    
-                   
 
-                    
-                </div><!--end row-->
-            </div><!--end container-->
-            
-            <!-- Cta Start -->
-            <div class="container-fluid mt-100 mt-60">
-                <div class="py-5 rounded" style="background: url('images/bg/05.jpg') center left;">
-                    <div class="container">
-                        <div class="row">
-                            <div class="offset-lg-8 offset-md-6 col-lg-4 col-md-6">
-                                <div class="cta-review bg-primary shadow-md mb-lg-4 rounded p-4 py-5">
-                                    <div class="client-review-slider">
+
+
+
+            </div><!--end row-->
+        </div><!--end container-->
+
+        <!-- Cta Start -->
+        <div class="container-fluid mt-100 mt-60">
+
+            <div class="py-5 rounded" style="background: url('images/bg/05.jpg') center left;">
+
+
+
+                <div class="container">
+
+                    <div class="row">
+                        <div class="offset-lg-8 offset-md-6 col-lg-4 col-md-6">
+                            <div class="cta-review bg-primary shadow-md mb-lg-4 rounded p-4 py-5">
+                                <div class="client-review-slider">
+                                    <div th:each="rv:${rv}">
+                                        <h4>Feedback</h4>
                                         <div class="tiny-slide">
-                                            <p class="text-white-50 fst-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century. "</p>
+
+
+                                            <div class="d-inline-flex align-items-center">
+                                                <img th:src="${rv[4]}"
+                                                    class="img-fluid avatar avatar-small rounded-circle mx-auto shadow"
+                                                    alt="">
+                                                <h4 class="text-light title-dark fw-normal ms-3" th:text="${rv[3]}">
+                                                    <small class="text-white-50 d-block">Patient</small></h4>
+                                            </div>
+                                            <h5 class="text-white-50 fst-italic" th:text="${rv[0]}"></h5>
+                                            <ul class="cours-star">
+                                                <th:block th:each="item : ${#numbers.sequence(1,rv[2])}">
+                                                    <img th:src="@{/images/star.png}" alt="My Image"
+                                                        style="height: 15px;" />
+                                                </th:block>
+                                                <th:block th:if="${rv[2] != 5}"
+                                                    th:each="i : ${#numbers.sequence(1,5 - rv[2])}">
+                                                    <img th:src="@{/images/starh.png}" alt="My Image"
+                                                        style="height: 15px;" />
+                                                </th:block>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- <div class="tiny-slide">
+                                            <p class="text-white-50 fst-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. One may speculate that over the course of time certain letters were added or deleted at various positions within the text. "</p>
                                             
                                             <div class="d-inline-flex align-items-center">
-                                                <img src="images/client-img/01.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow" alt="">
-                                                <h6 class="text-light title-dark fw-normal ms-3">Thomas Israel <small class="text-white-50 d-block">C.E.O</small></h6>
+                                                <img src="images/client-img/06.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow" alt="">
+                                                <h6 class="text-light title-dark fw-normal ms-3">Jill Webb <small class="text-white-50 d-block">Designer</small></h6>
                                             </div>
-                                        </div><!--end customer testi-->
-                                        
-                                        <div class="tiny-slide">
-                                            <p class="text-white-50 fst-italic">" The advantage of its Latin origin and the relative meaninglessness of Lorum Ipsum is that the text does not attract attention to itself or distract the viewer's attention from the layout. "</p>
-                                            
-                                            <div class="d-inline-flex align-items-center">
-                                                <img src="images/client-img/02.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow" alt="">
-                                                <h6 class="text-light title-dark fw-normal ms-3">Carl Oliver <small class="text-white-50 d-block">P.A</small></h6>
-                                            </div>
-                                        </div><!--end customer testi-->
-                                        
-                                        <div class="tiny-slide">
-                                            <p class="text-white-50 fst-italic">" There is now an abundance of readable dummy texts. These are usually used when a text is required purely to fill a space. These alternatives to the classic Lorem Ipsum texts are often amusing and tell short, funny or nonsensical stories. "</p>
-                                            
-                                            <div class="d-inline-flex align-items-center">
-                                                <img src="images/client-img/03.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow" alt="">
-                                                <h6 class="text-light title-dark fw-normal ms-3">Barbara McIntosh <small class="text-white-50 d-block">M.D</small></h6>
-                                            </div>
-                                        </div><!--end customer testi-->
-                                        
-                                        <div class="tiny-slide">
-                                            <p class="text-white-50 fst-italic">" According to most sources, Lorum Ipsum can be traced back to a text composed by Cicero in 45 BC. Allegedly, a Latin scholar established the origin of the text by compiling all the instances of the unusual word 'consectetur' he could find "</p>
-                                            
-                                            <div class="d-inline-flex align-items-center">
-                                                <img src="images/client-img/04.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow" alt="">
-                                                <h6 class="text-light title-dark fw-normal ms-3">Christa Smith <small class="text-white-50 d-block">Manager</small></h6>
-                                            </div>
-                                        </div><!--end customer testi-->
-                                        
-                                        <div class="tiny-slide">
-                                            <p class="text-white-50 fst-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century. "</p>
-                                            
-                                            <div class="d-inline-flex align-items-center">
-                                                <img src="images/client-img/05.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow" alt="">
-                                                <h6 class="text-light title-dark fw-normal ms-3">Dean Tolle <small class="text-white-50 d-block">Developer</small></h6>
-                                            </div>
-                                        </div><!--end customer testi-->
-                                        
+                                        </div>
                                         <div class="tiny-slide">
                                             <p class="text-white-50 fst-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. One may speculate that over the course of time certain letters were added or deleted at various positions within the text. "</p>
                                             
@@ -444,249 +460,280 @@
                                                 <img src="images/client-img/06.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow" alt="">
                                                 <h6 class="text-light title-dark fw-normal ms-3">Jill Webb <small class="text-white-50 d-block">Designer</small></h6>
                                             </div>
-                                        </div><!--end customer testi-->
-                                    </div><!--end carousel-->
-                                </div>
-                            </div><!--end col-->
-                        </div><!--end row-->
-                    </div><!--end container-->
-                </div>
-            </div><!--end container-->
-        </section>
-        <!-- End -->
+                                        </div> -->
 
-        <section class="pt-md-0 cta-section bg-white">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-6">
-                        <div class="row mt-4">
-                            <div class="col-lg-3 col-md-4 col-6 text-center py-4">
-                                <img src="images/client-img/amazon.png" class="avatar avatar-client" alt="">
-                            </div><!--end col-->
-        
-                            <div class="col-lg-3 col-md-4 col-6 text-center py-4">
-                                <img src="images/client-img/google.png" class="avatar avatar-client" alt="">
-                            </div><!--end col-->
-                            
-                            <div class="col-lg-3 col-md-4 col-6 text-center py-4">
-                                <img src="images/client-img/lenovo.png" class="avatar avatar-client" alt="">
-                            </div><!--end col-->
-                            
-                            <div class="col-lg-3 col-md-4 col-6 text-center py-4">
-                                <img src="images/client-img/paypal.png" class="avatar avatar-client" alt="">
-                            </div><!--end col-->
-                            
-                            <div class="col-lg-3 col-md-4 col-6 text-center py-4">
-                                <img src="images/client-img/shopify.png" class="avatar avatar-client" alt="">
-                            </div><!--end col-->
-                            
-                            <div class="col-lg-3 col-md-4 col-6 text-center py-4">
-                                <img src="images/client-img/spotify.png" class="avatar avatar-client" alt="">
-                            </div><!--end col-->
-                        </div><!--end row-->
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-        </section><!--end section-->
-        <!-- End -->
-            
-        <!-- Start -->
-        <section class="section bg-white">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <div class="section-title text-center mb-4 pb-2">
-                            <h4 class="title mb-4">Doctors</h4>
-                            <p class="text-muted mx-auto para-desc mb-0">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
+                                </div><!--end carousel-->
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end container-->
+            </div>
+        </div><!--end container-->
+    </section>
+    <!-- End -->
 
-                <div class="row align-items-center">
-                    <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2" th:each="doctor,iterStat : ${doctor}" th:if="${iterStat.index &lt; 4}">
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img th:src="${doctor.image}" class="img-fluid" alt="">
-                                <!-- <ul class="list-unstyled team-social mb-0">
+    <section class="pt-md-0 cta-section bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-6">
+                    <div class="row mt-4">
+                        <div class="col-lg-3 col-md-4 col-6 text-center py-4">
+                            <img src="images/client-img/amazon.png" class="avatar avatar-client" alt="">
+                        </div><!--end col-->
+
+                        <div class="col-lg-3 col-md-4 col-6 text-center py-4">
+                            <img src="images/client-img/google.png" class="avatar avatar-client" alt="">
+                        </div><!--end col-->
+
+                        <div class="col-lg-3 col-md-4 col-6 text-center py-4">
+                            <img src="images/client-img/lenovo.png" class="avatar avatar-client" alt="">
+                        </div><!--end col-->
+
+                        <div class="col-lg-3 col-md-4 col-6 text-center py-4">
+                            <img src="images/client-img/paypal.png" class="avatar avatar-client" alt="">
+                        </div><!--end col-->
+
+                        <div class="col-lg-3 col-md-4 col-6 text-center py-4">
+                            <img src="images/client-img/shopify.png" class="avatar avatar-client" alt="">
+                        </div><!--end col-->
+
+                        <div class="col-lg-3 col-md-4 col-6 text-center py-4">
+                            <img src="images/client-img/spotify.png" class="avatar avatar-client" alt="">
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </section><!--end section-->
+    <!-- End -->
+
+    <!-- Start -->
+    <section class="section bg-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="section-title text-center mb-4 pb-2">
+                        <h4 class="title mb-4">Doctors</h4>
+                        <p class="text-muted mx-auto para-desc mb-0">Great doctor if you need your family member to get
+                            effective immediate assistance, emergency treatment or a simple consultation.</p>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+
+            <div class="row align-items-center">
+                <div class="col-xl-3 col-lg-3 col-md-6 mt-4 pt-2" th:each="doctor,iterStat : ${doctor}"
+                    th:if="${iterStat.index &lt; 4}">
+                    <div class="card team border-0 rounded shadow overflow-hidden">
+                        <div class="team-img position-relative">
+                            <img th:src="${doctor.image}" class="img-fluid" alt="">
+                            <!-- <ul class="list-unstyled team-social mb-0">
                                     <li><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
                                     <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
                                     <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="github" class="icons"></i></a></li>
                                     <li class="mt-2"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="twitter" class="icons"></i></a></li>
                                 </ul> -->
+                        </div>
+                        <div class="card-body content text-center">
+                            <a th:href="@{/doctor-detail/{id}(id=${doctor.doctor_id})}"
+                                class="title text-dark h5 d-block mb-0" th:text="${doctor.doctor_name}"></a>
+                            <small class="text-muted speciality" th:text="${doctor.position}"></small>
+                        </div>
+                    </div>
+                </div><!--end col-->
+
+
+
+
+
+
+            </div><!--end row-->
+        </div><!--end container-->
+
+        <div class="container mt-100 mt-60">
+            <div class="row align-items-lg-end">
+                <div class="col-md-6">
+                    <div class="me-xl-3">
+                        <div class="section-title mb-4 pb-2">
+                            <i class="uil uil-notes text-primary h2"></i>
+                            <h4 class="title mb-4">Book Your Appointment</h4>
+                            <p class="text-muted para-desc mb-0">Great doctor if you need your family member to get
+                                effective immediate assistance, emergency treatment or a simple consultation.</p>
+                        </div>
+
+                        <div
+                            class="features feature-bg-primary d-flex bg-white p-4 rounded-md shadow position-relative overflow-hidden">
+                            <i class="uil uil-stethoscope-alt icons h2 mb-0 text-primary"></i>
+                            <div class="ms-3">
+                                <h5 class="titles">Success Of Treatment</h5>
+                                <p class="text-muted para mb-0">The most well-known dummy text is the 'Lorem Ipsum',
+                                    which is said to have originated in the 16th century.</p>
                             </div>
-                            <div class="card-body content text-center">
-                                <a th:href="@{/doctor-detail/{id}(id=${doctor.doctor_id})}" class="title text-dark h5 d-block mb-0" th:text="${doctor.doctor_name}" ></a>
-                                <small class="text-muted speciality" th:text="${doctor.position}"></small>
+                            <div class="big-icon">
+                                <i class="uil uil-stethoscope-alt"></i>
                             </div>
                         </div>
-                    </div><!--end col-->
-                    
-                    
-                    
-                    
-                    
-                    
-                </div><!--end row-->
-            </div><!--end container-->
 
-            <div class="container mt-100 mt-60">
-                <div class="row align-items-lg-end">
-                    <div class="col-md-6">
-                        <div class="me-xl-3">
-                            <div class="section-title mb-4 pb-2">
-                                <i class="uil uil-notes text-primary h2"></i>
-                                <h4 class="title mb-4">Book Your Appointment</h4>
-                                <p class="text-muted para-desc mb-0">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
+                        <div
+                            class="features feature-bg-primary d-flex bg-white p-4 rounded-md shadow position-relative overflow-hidden mt-4">
+                            <i class="uil uil-microscope icons h2 mb-0 text-primary"></i>
+                            <div class="ms-3">
+                                <h5 class="titles">Modern Technology</h5>
+                                <p class="text-muted para mb-0">The most well-known dummy text is the 'Lorem Ipsum',
+                                    which is said to have originated in the 16th century.</p>
                             </div>
-    
-                            <div class="features feature-bg-primary d-flex bg-white p-4 rounded-md shadow position-relative overflow-hidden">
-                                <i class="uil uil-stethoscope-alt icons h2 mb-0 text-primary"></i>
-                                <div class="ms-3">
-                                    <h5 class="titles">Success Of Treatment</h5>
-                                    <p class="text-muted para mb-0">The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century.</p>
-                                </div>
-                                <div class="big-icon">
-                                    <i class="uil uil-stethoscope-alt"></i>
-                                </div>
-                            </div>
-    
-                            <div class="features feature-bg-primary d-flex bg-white p-4 rounded-md shadow position-relative overflow-hidden mt-4">
-                                <i class="uil uil-microscope icons h2 mb-0 text-primary"></i>
-                                <div class="ms-3">
-                                    <h5 class="titles">Modern Technology</h5>
-                                    <p class="text-muted para mb-0">The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century.</p>
-                                </div>
-                                <div class="big-icon">
-                                    <i class="uil uil-microscope"></i>
-                                </div>
-                            </div>
-    
-                            <div class="features feature-bg-primary d-flex bg-white p-4 rounded-md shadow position-relative overflow-hidden mt-4">
-                                <i class="uil uil-user-md icons h2 mb-0 text-primary"></i>
-                                <div class="ms-3">
-                                    <h5 class="titles">Certified Doctors</h5>
-                                    <p class="text-muted para mb-0">The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century.</p>
-                                </div>
-                                <div class="big-icon">
-                                    <i class="uil uil-user-md"></i>
-                                </div>
+                            <div class="big-icon">
+                                <i class="uil uil-microscope"></i>
                             </div>
                         </div>
-                    </div><!--end col-->
 
-                    
-                </div><!--end row-->
-            </div><!--end container-->
-        </section><!--end section-->
-        <!-- End -->
+                        <div
+                            class="features feature-bg-primary d-flex bg-white p-4 rounded-md shadow position-relative overflow-hidden mt-4">
+                            <i class="uil uil-user-md icons h2 mb-0 text-primary"></i>
+                            <div class="ms-3">
+                                <h5 class="titles">Certified Doctors</h5>
+                                <p class="text-muted para mb-0">The most well-known dummy text is the 'Lorem Ipsum',
+                                    which is said to have originated in the 16th century.</p>
+                            </div>
+                            <div class="big-icon">
+                                <i class="uil uil-user-md"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--end col-->
 
-        <!-- Start -->
-        <footer class="bg-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-5 col-lg-4 mb-0 mb-md-4 pb-0 pb-md-2">
-                        <a href="#" class="logo-footer">
-                            <img src="images/logo-light.png" height="22" alt="">
-                        </a>
-                        <p class="mt-4 me-xl-5">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
-                    </div><!--end col-->
 
-                    <div class="col-xl-7 col-lg-8 col-md-12">
-                        <div class="row">
-                            <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                                <h5 class="text-light title-dark footer-head">Company</h5>
-                                <ul class="list-unstyled footer-list mt-4">
-                                    <li><a href="aboutus.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> About us</a></li>
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Services</a></li>
-                                    <li><a href="doctor-team-two.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Team</a></li>
-                                    <li><a href="blog-detail.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Project</a></li>
-                                    <li><a href="blogs.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Blog</a></li>
-                                    <li><a href="login.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Login</a></li>
-                                </ul>
-                            </div><!--end col-->
-                            
-                            <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                                <h5 class="text-light title-dark footer-head">Departments</h5>
-                                <ul class="list-unstyled footer-list mt-4">
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Eye Care</a></li>
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Psychotherapy</a></li>
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Dental Care</a></li>
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Orthopedic</a></li>
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Cardiology</a></li>
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Gynecology</a></li>
-                                    <li><a href="departments.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Neurology</a></li>
-                                </ul>
-                            </div><!--end col-->
-                            
-                            <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
-                                <h5 class="text-light title-dark footer-head">Contact us</h5>
-                                <ul class="list-unstyled footer-list mt-4">
-                                    <li class="d-flex align-items-center">
-                                        <i data-feather="mail" class="fea icon-sm text-foot align-middle"></i>
-                                        <a href="mailto:contact@example.com" class="text-foot ms-2">contact@example.com</a>
-                                    </li>
+            </div><!--end row-->
+        </div><!--end container-->
+    </section><!--end section-->
+    <!-- End -->
 
-                                    <li class="d-flex align-items-center">
-                                        <i data-feather="phone" class="fea icon-sm text-foot align-middle"></i>
-                                        <a href="tel:+152534-468-854" class="text-foot ms-2">+152 534-468-854</a>
-                                    </li>
+    <!-- Start -->
+    <footer class="bg-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-4 mb-0 mb-md-4 pb-0 pb-md-2">
+                    <a href="#" class="logo-footer">
+                        <img src="images/logo-light.png" height="22" alt="">
+                    </a>
+                    <p class="mt-4 me-xl-5">Great doctor if you need your family member to get effective immediate
+                        assistance, emergency treatment or a simple consultation.</p>
+                </div><!--end col-->
 
-                                    <li class="d-flex align-items-center">
-                                        <i data-feather="map-pin" class="fea icon-sm text-foot align-middle"></i>
-                                        <a href="javascript:void(0)" class="video-play-icon text-foot ms-2">View on Google map</a>
-                                    </li>
-                                </ul>
+                <div class="col-xl-7 col-lg-8 col-md-12">
+                    <div class="row">
+                        <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                            <h5 class="text-light title-dark footer-head">Company</h5>
+                            <ul class="list-unstyled footer-list mt-4">
+                                <li><a href="aboutus.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i>
+                                        About us</a></li>
+                                <li><a href="departments.html" class="text-foot"><i
+                                            class="mdi mdi-chevron-right me-1"></i> Services</a></li>
+                                <li><a href="doctor-team-two.html" class="text-foot"><i
+                                            class="mdi mdi-chevron-right me-1"></i> Team</a></li>
+                                <li><a href="blog-detail.html" class="text-foot"><i
+                                            class="mdi mdi-chevron-right me-1"></i> Project</a></li>
+                                <li><a href="blogs.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i>
+                                        Blog</a></li>
+                                <li><a href="login.html" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i>
+                                        Login</a></li>
+                            </ul>
+                        </div><!--end col-->
 
-                                <ul class="list-unstyled social-icon footer-social mb-0 mt-4">
-                                    <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="facebook" class="fea icon-sm fea-social"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="twitter" class="fea icon-sm fea-social"></i></a></li>
-                                    <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="linkedin" class="fea icon-sm fea-social"></i></a></li>
-                                </ul><!--end icon-->
-                            </div><!--end col-->
-                        </div><!--end row-->
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
+                        <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                            <h5 class="text-light title-dark footer-head">Departments</h5>
+                            <ul class="list-unstyled footer-list mt-4">
+                                <li><a href="departments.html" class="text-foot"><i
+                                            class="mdi mdi-chevron-right me-1"></i> Eye Care</a></li>
+                                <li><a href="departments.html" class="text-foot"><i
+                                            class="mdi mdi-chevron-right me-1"></i> Psychotherapy</a></li>
+                                <li><a href="departments.html" class="text-foot"><i
+                                            class="mdi mdi-chevron-right me-1"></i> Dental Care</a></li>
+                                <li><a href="departments.html" class="text-foot"><i
+                                            class="mdi mdi-chevron-right me-1"></i> Orthopedic</a></li>
+                                <li><a href="departments.html" class="text-foot"><i
+                                            class="mdi mdi-chevron-right me-1"></i> Cardiology</a></li>
+                                <li><a href="departments.html" class="text-foot"><i
+                                            class="mdi mdi-chevron-right me-1"></i> Gynecology</a></li>
+                                <li><a href="departments.html" class="text-foot"><i
+                                            class="mdi mdi-chevron-right me-1"></i> Neurology</a></li>
+                            </ul>
+                        </div><!--end col-->
 
-            
-        </footer><!--end footer-->
-        <!-- End -->
+                        <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                            <h5 class="text-light title-dark footer-head">Contact us</h5>
+                            <ul class="list-unstyled footer-list mt-4">
+                                <li class="d-flex align-items-center">
+                                    <i data-feather="mail" class="fea icon-sm text-foot align-middle"></i>
+                                    <a href="mailto:contact@example.com" class="text-foot ms-2">contact@example.com</a>
+                                </li>
 
-        <!-- Back to top -->
-        <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
-        
-        
-        <!-- javascript -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <!-- SLIDER -->
-        <script src="js/tiny-slider.js"></script>
-        <script src="js/tiny-slider-init.js"></script>
-        <script src="js/easy_background.js"></script>
-        <!-- Select2 -->
-        <script src="js/select2.min.js"></script>
-        <script src="js/select2.init.js"></script>
-        <!-- Datepicker -->
-        <script src="js/flatpickr.min.js"></script>
-        <script src="js/flatpickr.init.js"></script>
-        <!-- Datepicker -->
-        <script src="js/jquery.timepicker.min.js"></script> 
-        <script src="js/timepicker.init.js"></script> 
-        <!-- Icons -->
-        <script src="js/feather.min.js"></script>
-        <!-- Main Js -->
-        <script src="js/app.js"></script>
-        <script>
-            easy_background("#home",
-                {
-                    slide: ["images/bg/02.jpg", "images/bg/03.jpg", "images/bg/01.jpg"],
-                    delay: [3000, 3000, 3000]
-                }
-            );
+                                <li class="d-flex align-items-center">
+                                    <i data-feather="phone" class="fea icon-sm text-foot align-middle"></i>
+                                    <a href="tel:+152534-468-854" class="text-foot ms-2">+152 534-468-854</a>
+                                </li>
 
-            
-        </script>
-    </body>
+                                <li class="d-flex align-items-center">
+                                    <i data-feather="map-pin" class="fea icon-sm text-foot align-middle"></i>
+                                    <a href="javascript:void(0)" class="video-play-icon text-foot ms-2">View on Google
+                                        map</a>
+                                </li>
+                            </ul>
+
+                            <ul class="list-unstyled social-icon footer-social mb-0 mt-4">
+                                <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="facebook"
+                                            class="fea icon-sm fea-social"></i></a></li>
+                                <li class="list-inline-item"><a href="#" class="rounded-pill"><i
+                                            data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
+                                <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="twitter"
+                                            class="fea icon-sm fea-social"></i></a></li>
+                                <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="linkedin"
+                                            class="fea icon-sm fea-social"></i></a></li>
+                            </ul><!--end icon-->
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+
+
+    </footer><!--end footer-->
+    <!-- End -->
+
+    <!-- Back to top -->
+    <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i
+            data-feather="arrow-up" class="icons"></i></a>
+
+
+    <!-- javascript -->
+    <script th:src="@{/js/jquery.min.js}" src="js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}" src="js/bootstrap.bundle.min.js"></script>
+    <!-- SLIDER -->
+    <script th:src="@{/js/tiny-slider.js}" src="js/tiny-slider.js"></script>
+    <script th:src="@{/js/tiny-slider-init.js}" src="js/tiny-slider-init.js"></script>
+    <script th:src="@{/js/easy_background.js}" src="js/easy_background.js"></script>
+    <!-- Select2 -->
+    <script th:src="@{/js/select2.min.js}" src="js/select2.min.js"></script>
+    <script th:src="@{/js/select2.init.js}" src="js/select2.init.js"></script>
+    <!-- Datepicker -->
+    <script th:src="@{/js/flatpickr.min.js}" src="js/flatpickr.min.js"></script>
+    <script th:src="@{/s/flatpickr.init.js}" src="js/flatpickr.init.js"></script>
+    <!-- Datepicker -->
+    <script th:src="@{/js/jquery.timepicker.min.js}" src="js/jquery.timepicker.min.js"></script>
+    <script th:src="@{/js/timepicker.init.js}" src="js/timepicker.init.js"></script>
+    <!-- Icons -->
+    <script th:src="@{/js/feather.min.js}" src="js/feather.min.js"></script>
+    <!-- Main Js -->
+    <script th:src="@{/js/app.js}" src="js/app.js"></script>
+    <script>
+        easy_background("#home",
+            {
+                slide: ["images/bg/02.jpg", "images/bg/03.jpg", "images/bg/01.jpg"],
+                delay: [3000, 3000, 3000]
+            }
+        );
+
+
+    </script>
+</body>
 
 </html>
