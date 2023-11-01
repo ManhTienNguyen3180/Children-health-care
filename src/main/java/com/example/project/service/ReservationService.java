@@ -3,6 +3,7 @@ package com.example.project.service;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -62,7 +63,8 @@ public class ReservationService {
         }
         return listofdoctorDTO;
     }
-    public List<slotDTO> getDoctorSlot(int doctorid){
+
+    public List<slotDTO> getDoctorSlot(int doctorid) {
         List<Object[]> listofslot = repository.findDoctorSlot(doctorid);
         List<slotDTO> listofslotDTO = new ArrayList<>();
         for (Object[] obj : listofslot) {
@@ -74,10 +76,10 @@ public class ReservationService {
         return listofslotDTO;
     }
 
-    public List<slotDTO> getDate(){
+    public List<slotDTO> getDate() {
         List<Object[]> listofslot = slotRepo.findDayOfWeek();
         List<slotDTO> listofslotDTO = new ArrayList<>();
-        for(Object[] obj : listofslot) {
+        for (Object[] obj : listofslot) {
             slotDTO slotDTO = new slotDTO();
             slotDTO.setDayof_week(Integer.parseInt(String.valueOf(obj[0])));
             listofslotDTO.add(slotDTO);
@@ -85,10 +87,10 @@ public class ReservationService {
         return listofslotDTO;
     }
 
-    public List<slotDTO> getTime(int dayofweek){
+    public List<slotDTO> getTime(int dayofweek) {
         List<Object[]> listofslot = slotRepo.findTime(dayofweek);
         List<slotDTO> listofslotDTO = new ArrayList<>();
-        for(Object[] obj : listofslot) {
+        for (Object[] obj : listofslot) {
             slotDTO slotDTO = new slotDTO();
             slotDTO.setStart_time(String.valueOf(obj[0]));
             slotDTO.setEnd_time(String.valueOf(obj[1]));
@@ -97,10 +99,10 @@ public class ReservationService {
         return listofslotDTO;
     }
 
-    public List<slotDTO> getTimeSlotDTOs(int doctorid, int dayofweek){
+    public List<slotDTO> getTimeSlotDTOs(int doctorid, int dayofweek) {
         List<Object[]> listofslot = slotRepo.findSlotByDoctorIdAndDayOfWeek(doctorid, dayofweek);
         List<slotDTO> listofslotDTO = new ArrayList<>();
-        for(Object[] obj : listofslot) {
+        for (Object[] obj : listofslot) {
             slotDTO slotDTO = new slotDTO();
             slotDTO.setStart_time(String.valueOf(obj[0]));
             slotDTO.setEnd_time(String.valueOf(obj[1]));
@@ -108,9 +110,11 @@ public class ReservationService {
         }
         return listofslotDTO;
     }
+
     public reservation findByDoctor_idAndDateAndTime(int doctor_id, Date date, String time) {
         return repository.findByDoctor_idAndDateAndTime(doctor_id, date, time);
     }
+
     public int getLastReservationId() {
         return repository.getLastReservationId();
     }
@@ -147,6 +151,14 @@ public class ReservationService {
         String emailContent = templateEngine.process("appointment-confirmation", context);
         helper.setText(emailContent, true);
         emailSender.send(message);
+    }
+
+    public reservation findReservation(int patientId, int reservation) {
+        Optional<reservation> s = repository.findByPatient(patientId, reservation);
+        if (s.isPresent()) {
+            return s.get();
+        }
+        return null;
     }
 
     public List<reservation> listReservationByPatientId(int patientId) {

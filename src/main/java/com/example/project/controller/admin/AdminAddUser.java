@@ -84,7 +84,8 @@ public class AdminAddUser {
       u.setRole_id(roles);
       u.setFull_name(roles.getRole_name());
       u.setCreate_at(LocalDate.now());
-      u.setCreate_by(us.getFull_name());
+      // u.setCreate_by(us.getFull_name());
+      u.setCreate_by("Admin");
       u.setRolename(roles.getRole_name());
       userService.addNewUser2(u);
       model.addAttribute("mess", "Add user successful");
