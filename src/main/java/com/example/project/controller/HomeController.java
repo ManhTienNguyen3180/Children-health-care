@@ -19,11 +19,13 @@ import jakarta.servlet.http.HttpSession;
 import com.example.project.entity.user;
 import com.example.project.service.BlogService;
 import com.example.project.service.DoctorService;
+import com.example.project.service.FeedbackService;
 import com.example.project.service.ServiceService;
 
 @Controller
 public class HomeController {
-
+    @Autowired 
+    private FeedbackService FeedbackService;
     @Autowired
     private DoctorService DoctorService;
     @Autowired
@@ -58,6 +60,7 @@ public class HomeController {
     @GetMapping("/home")
     public String home(Model model,HttpSession session){
         user u = (user)session.getAttribute("user");
+        model.addAttribute("rv", FeedbackService.getFeedbackHome(5));
         model.addAttribute("u", u);
         model.addAttribute("doctor", DoctorService.fetchDoctorList());
         model.addAttribute("service", ServiceService.fechServicesList());

@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.project.entity.doctor;
 import com.example.project.service.DoctorService;
+import com.example.project.service.FeedbackService;
 import com.example.project.service.ServiceCategoryService;
 
 @Controller
 public class DoctorController {
     
+    @Autowired 
+    private FeedbackService FeedbackService;
+
     @Autowired 
     private DoctorService DoctorService;
 
@@ -42,7 +46,8 @@ public class DoctorController {
     
     @GetMapping("/doctor-detail/{id}")
     public String viewDoctorDetail(@PathVariable int id, Model model) {
-        model.addAttribute("listRv", DoctorService.getDocReview(id));
+        
+        model.addAttribute("listRv", FeedbackService.getFeedbackByDoc(id));
         model.addAttribute("listSlot", DoctorService.getSlotByDoc(id));
         model.addAttribute("listSer", DoctorService.getSerByDoc(id));
         model.addAttribute("doc", DoctorService.findDoctorById(id).orElse(null));

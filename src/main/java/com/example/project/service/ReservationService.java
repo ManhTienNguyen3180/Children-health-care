@@ -224,4 +224,33 @@ public class ReservationService {
     public void editReservationDoc(int docid, String docname,int id) {
         detailRepo.editReservationDoc(docid, docname,id);
     }
+
+    public reservation findReservationByID(int reservation_id) {
+        return repository.findById(reservation_id).get();
+    }
+
+    public List<reservation> findReservationsByUserID(int user_id) {
+        return repository.findReservationByUserId(user_id);
+    }
+
+    public List<reservationdetail> findAllReserDetail() {
+        return detailRepo.findAll();
+    }
+
+    public List<reservationdetail> findReserDetailByReserID(int reservation_id) {
+        return detailRepo.findByReservation_id(reservation_id);
+    }
+
+    public void deleteReservationDetail(int id) {
+        detailRepo.deleteById(id);
+    }
+
+    public void deleteReservation(int id) {
+        repository.deleteById(id);
+    }
+
+    public Page<reservation> findPaginated(int id, int pageNo, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
+        return this.repository.findPageReservationByUserId(id, pageable);
+    }
 }

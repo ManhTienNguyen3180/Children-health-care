@@ -41,4 +41,10 @@ public interface ReservationRepo extends JpaRepository<reservation, Integer> {
     Page<Object[]> getListReservation(PageRequest pageable);
 
     
+
+    @Query("select r from reservation r join patient p on r.patient_id = p.patient_id where p.user_id = ?1 order by r.reservation_id desc")
+    List<reservation> findReservationByUserId(int user_id);
+
+    @Query("select r from reservation r join patient p on r.patient_id = p.patient_id where p.user_id = ?1")
+    Page<reservation> findPageReservationByUserId(int user_id, PageRequest pageable);
 }

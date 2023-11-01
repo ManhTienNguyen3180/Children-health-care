@@ -13,22 +13,23 @@
         <meta name="website" content="https://shreethemes.in" />
         <meta name="Version" content="v1.2.0" />
         <!-- favicon -->
-        <link rel="shortcut icon" href="images/favicon.ico.png">
+        <link th:href="@{images/favicon.ico.png}" rel="shortcut icon" href="images/favicon.ico.png">
+        
         <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link th:href="@{/css/bootstrap.min.css}"  rel="stylesheet" type="text/css" />
         <!-- SLIDER -->
-        <link rel="stylesheet" href="css/tiny-slider.css"/>
+        <link rel="stylesheet" th:href="@{/css/tiny-slider.css}" href="css/tiny-slider.css"/>
         <!-- Select2 -->
-        <link href="css/select2.min.css" rel="stylesheet" />
+        <link href="css/select2.min.css" th:href="@{/css/select2.min.css}" rel="stylesheet" />
         <!-- Date picker -->
         <link rel="stylesheet" href="css/flatpickr.min.css">
         <link href="css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
         <!-- Icons -->
-        <link href="css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
-        <link href="css/remixicon.css" rel="stylesheet" type="text/css" />
-        <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
+        <link th:href="@{/css/materialdesignicons.min.css}" href="css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+        <link th:href="@{/css/remixicon.css}" href="css/remixicon.css" rel="stylesheet" type="text/css" />
+        <link th:href="@{https://unicons.iconscout.com/release/v3.0.6/css/line.css}" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- Css -->
-        <link href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <link th:href="@{/css/style.min.css}" href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -129,7 +130,7 @@
                                         <!-- <small  class="text-muted">Orthopedic</small> -->
                                     </div>
                                 </a>
-                                <a class="dropdown-item text-dark" href="doctor-dashboard.html"><span
+                                <a class="dropdown-item text-dark" href="/myreservation"><span
                                         class="mb-0 d-inline-block me-1"><i
                                             class="uil uil-dashboard align-middle h6"></i></span> My reservation</a>
                                 <a class="dropdown-item text-dark" href="user-profile"><span
@@ -386,57 +387,47 @@
             
             <!-- Cta Start -->
             <div class="container-fluid mt-100 mt-60">
+                
                 <div class="py-5 rounded" style="background: url('images/bg/05.jpg') center left;">
+                    
+                        
+                    
                     <div class="container">
+                        
                         <div class="row">
                             <div class="offset-lg-8 offset-md-6 col-lg-4 col-md-6">
                                 <div class="cta-review bg-primary shadow-md mb-lg-4 rounded p-4 py-5">
-                                    <div class="client-review-slider">
-                                        <div class="tiny-slide">
-                                            <p class="text-white-50 fst-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century. "</p>
+                                    <div class="client-review-slider" >
+                                        <div th:each="rv:${rv}">
+                                            <h4>Feedback</h4>
+                                            <div class="tiny-slide">
+                                                
+                                                
+                                                <div class="d-inline-flex align-items-center">
+                                                    <img th:src="${rv[4]}" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow" alt="">
+                                                    <h4 class="text-light title-dark fw-normal ms-3" th:text="${rv[3]}"> <small class="text-white-50 d-block">Patient</small></h4>
+                                                </div>
+                                                <h5 class="text-white-50 fst-italic" th:text="${rv[0]}"></h5>
+                                                <ul class="cours-star">
+                                                    <th:block th:each="item : ${#numbers.sequence(1,rv[2])}">
+                                                        <img th:src="@{/images/star.png}" alt="My Image" style="height: 15px;" />
+                                                    </th:block>
+                                                    <th:block th:if="${rv[2] != 5}" th:each="i : ${#numbers.sequence(1,5 - rv[2])}">
+                                                        <img th:src="@{/images/starh.png}" alt="My Image" style="height: 15px;" />
+                                                    </th:block>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <!-- <div class="tiny-slide">
+                                            <p class="text-white-50 fst-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. One may speculate that over the course of time certain letters were added or deleted at various positions within the text. "</p>
                                             
                                             <div class="d-inline-flex align-items-center">
-                                                <img src="images/client-img/01.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow" alt="">
-                                                <h6 class="text-light title-dark fw-normal ms-3">Thomas Israel <small class="text-white-50 d-block">C.E.O</small></h6>
+                                                <img src="images/client-img/06.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow" alt="">
+                                                <h6 class="text-light title-dark fw-normal ms-3">Jill Webb <small class="text-white-50 d-block">Designer</small></h6>
                                             </div>
-                                        </div><!--end customer testi-->
-                                        
-                                        <div class="tiny-slide">
-                                            <p class="text-white-50 fst-italic">" The advantage of its Latin origin and the relative meaninglessness of Lorum Ipsum is that the text does not attract attention to itself or distract the viewer's attention from the layout. "</p>
-                                            
-                                            <div class="d-inline-flex align-items-center">
-                                                <img src="images/client-img/02.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow" alt="">
-                                                <h6 class="text-light title-dark fw-normal ms-3">Carl Oliver <small class="text-white-50 d-block">P.A</small></h6>
-                                            </div>
-                                        </div><!--end customer testi-->
-                                        
-                                        <div class="tiny-slide">
-                                            <p class="text-white-50 fst-italic">" There is now an abundance of readable dummy texts. These are usually used when a text is required purely to fill a space. These alternatives to the classic Lorem Ipsum texts are often amusing and tell short, funny or nonsensical stories. "</p>
-                                            
-                                            <div class="d-inline-flex align-items-center">
-                                                <img src="images/client-img/03.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow" alt="">
-                                                <h6 class="text-light title-dark fw-normal ms-3">Barbara McIntosh <small class="text-white-50 d-block">M.D</small></h6>
-                                            </div>
-                                        </div><!--end customer testi-->
-                                        
-                                        <div class="tiny-slide">
-                                            <p class="text-white-50 fst-italic">" According to most sources, Lorum Ipsum can be traced back to a text composed by Cicero in 45 BC. Allegedly, a Latin scholar established the origin of the text by compiling all the instances of the unusual word 'consectetur' he could find "</p>
-                                            
-                                            <div class="d-inline-flex align-items-center">
-                                                <img src="images/client-img/04.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow" alt="">
-                                                <h6 class="text-light title-dark fw-normal ms-3">Christa Smith <small class="text-white-50 d-block">Manager</small></h6>
-                                            </div>
-                                        </div><!--end customer testi-->
-                                        
-                                        <div class="tiny-slide">
-                                            <p class="text-white-50 fst-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century. "</p>
-                                            
-                                            <div class="d-inline-flex align-items-center">
-                                                <img src="images/client-img/05.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow" alt="">
-                                                <h6 class="text-light title-dark fw-normal ms-3">Dean Tolle <small class="text-white-50 d-block">Developer</small></h6>
-                                            </div>
-                                        </div><!--end customer testi-->
-                                        
+                                        </div>
                                         <div class="tiny-slide">
                                             <p class="text-white-50 fst-italic">" It seems that only fragments of the original text remain in the Lorem Ipsum texts used today. One may speculate that over the course of time certain letters were added or deleted at various positions within the text. "</p>
                                             
@@ -444,7 +435,8 @@
                                                 <img src="images/client-img/06.jpg" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow" alt="">
                                                 <h6 class="text-light title-dark fw-normal ms-3">Jill Webb <small class="text-white-50 d-block">Designer</small></h6>
                                             </div>
-                                        </div><!--end customer testi-->
+                                        </div> -->
+
                                     </div><!--end carousel-->
                                 </div>
                             </div><!--end col-->
@@ -658,25 +650,25 @@
         
         
         <!-- javascript -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <script th:src="@{/js/jquery.min.js}" src="js/jquery.min.js"></script>
+        <script th:src="@{/js/bootstrap.bundle.min.js}" src="js/bootstrap.bundle.min.js"></script>
         <!-- SLIDER -->
-        <script src="js/tiny-slider.js"></script>
-        <script src="js/tiny-slider-init.js"></script>
-        <script src="js/easy_background.js"></script>
+        <script th:src="@{/js/tiny-slider.js}" src="js/tiny-slider.js"></script>
+        <script th:src="@{/js/tiny-slider-init.js}" src="js/tiny-slider-init.js"></script>
+        <script th:src="@{/js/easy_background.js}" src="js/easy_background.js"></script>
         <!-- Select2 -->
-        <script src="js/select2.min.js"></script>
-        <script src="js/select2.init.js"></script>
+        <script th:src="@{/js/select2.min.js}" src="js/select2.min.js"></script>
+        <script th:src="@{/js/select2.init.js}" src="js/select2.init.js"></script>
         <!-- Datepicker -->
-        <script src="js/flatpickr.min.js"></script>
-        <script src="js/flatpickr.init.js"></script>
+        <script th:src="@{/js/flatpickr.min.js}" src="js/flatpickr.min.js"></script>
+        <script th:src="@{/s/flatpickr.init.js}" src="js/flatpickr.init.js"></script>
         <!-- Datepicker -->
-        <script src="js/jquery.timepicker.min.js"></script> 
-        <script src="js/timepicker.init.js"></script> 
+        <script th:src="@{/js/jquery.timepicker.min.js}" src="js/jquery.timepicker.min.js"></script> 
+        <script th:src="@{/js/timepicker.init.js}" src="js/timepicker.init.js"></script> 
         <!-- Icons -->
-        <script src="js/feather.min.js"></script>
+        <script th:src="@{/js/feather.min.js}" src="js/feather.min.js"></script>
         <!-- Main Js -->
-        <script src="js/app.js"></script>
+        <script th:src="@{/js/app.js}" src="js/app.js"></script>
         <script>
             easy_background("#home",
                 {

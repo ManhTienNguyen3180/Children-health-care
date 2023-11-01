@@ -58,4 +58,7 @@ public interface DoctorRepo extends JpaRepository<doctor, Integer> {
         
     @Query(value = "select c.name from doctor d , category_service c where d.doctor_id = c.id and d.doctor_id=?1", nativeQuery = true)
     String getCategoryNameByDoctorID(int id);
+       
+    @Query("SELECT d FROM doctor d where d.doctor_id = ?1")
+    public doctor getDoctorByDocID(int doctor_id);
 }

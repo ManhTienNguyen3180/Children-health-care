@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-public interface ReservationDetailRepo extends JpaRepository<reservationdetail, Integer> {
+public interface ReservationDetailRepo extends JpaRepository<reservationdetail, Integer>{
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO reservationdetail (reservation_id, service_id, service_name, price,create_at,create_by,doctor_id,doctor_name) VALUES (?1, ?2, ?3, ?4, ?5, ?6,?7,?8)", nativeQuery = true)
@@ -32,4 +32,7 @@ public interface ReservationDetailRepo extends JpaRepository<reservationdetail, 
     @Query(value = "UPDATE reservation SET doctor_name = ?2,doctor_id=?1 WHERE reservation_id = ?3", nativeQuery = true)
     void editReservationDoc(int docid, String docname,int id);
 
+
+    @Query("select rd from reservationdetail rd where rd.reservation_id = ?1")
+    List<reservationdetail> findByReservation_id(int reservation_id);
 }

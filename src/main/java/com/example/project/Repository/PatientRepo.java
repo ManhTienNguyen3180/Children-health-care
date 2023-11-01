@@ -6,10 +6,13 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.project.entity.patient;
+
+import jakarta.transaction.Transactional;
 
 @Repository
 public interface PatientRepo extends JpaRepository<patient, Integer> {
@@ -43,5 +46,8 @@ public interface PatientRepo extends JpaRepository<patient, Integer> {
   @Query("SELECT u FROM patient u where patient_email=?1")
   Optional<patient> findbyEmail(String patient_email);
 
-  
+  @Modifying
+  @Transactional
+  @Query(value = "UPDATE patient SET `gender` = ?1, `patient_name` = ?2, `patient_email` = ?3, `patient_phone` = ?4 WHERE patient_id = ?5", nativeQuery = true)
+  void savePatientChange(int gender, String name, String email, String phone, int id);
 }
