@@ -51,8 +51,8 @@ public interface ReservationRepo extends JpaRepository<reservation, Integer> {
     List<reservation> findReservationByUserId(int user_id);
 
     @Query("select r from reservation r join patient p on r.patient_id = p.patient_id where p.user_id = ?1")
-
     Page<reservation> findPageReservationByUserId(int user_id, PageRequest pageable);
+    
     @Query(value = "SELECT COALESCE(COUNT(r.reservation_id), 0) AS number_of_reservations " +
             "FROM (SELECT 1 AS month UNION ALL SELECT 2 UNION ALL SELECT 3 " +
             "UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 " +
@@ -63,5 +63,5 @@ public interface ReservationRepo extends JpaRepository<reservation, Integer> {
             "GROUP BY months.month " +
             "ORDER BY months.month",
             nativeQuery = true)
-    List<Object[]> getMonthlyReservationCounts(@Param("year") int year);
+    List<Integer> getMonthlyReservationCounts(@Param("year") int year);
 }

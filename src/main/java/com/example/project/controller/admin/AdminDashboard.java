@@ -49,25 +49,27 @@ public class AdminDashboard {
 
         model.addAttribute("minYear", year - 10);
         model.addAttribute("maxYear", year + 10);
-        List<Object[]> monthlyReservationData;
+        List<Integer> monthlyReservationData;
         if (select == null) {
-            //monthlyReservationData = resSer.countReservationsByMonth(year);
+            monthlyReservationData = resSer.countReservationsByMonth(year);
+            System.out.println(monthlyReservationData.size());
             model.addAttribute("selectedYear", year);
         } else {
-            //monthlyReservationData = resSer.countReservationsByMonth(select);
+            monthlyReservationData = resSer.countReservationsByMonth(select);
+            System.out.println(monthlyReservationData.size());
             model.addAttribute("selectedYear", select);
         }
 
         // Pass the data to the Thymeleaf template
-        //model.addAttribute("monthlyReservationData", monthlyReservationData);
-
+        model.addAttribute("monthlyReservationData", monthlyReservationData);
+        
         model.addAttribute("depNum", serCatSer.findAll().size());
 
 
 
         model.addAttribute("numDoctors", docSer.findPaginated(1, 1).getTotalElements());
         model.addAttribute("numPatient", parSer.getPatient().size());
-        //model.addAttribute("numAppointment", resSer.findAll().size());
+        model.addAttribute("numAppointment", resSer.findAll().size());
         model.addAttribute("listDepartment", serSer.findAll());
         return "admin/index";
     }
