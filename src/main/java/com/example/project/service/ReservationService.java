@@ -264,4 +264,10 @@ public class ReservationService {
         PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
         return this.repository.findPageReservationByUserId(id, pageable);
     }
+    public List<Object[]> countReservationsByMonth(int year){
+        return repository.getMonthlyReservationCounts(year);
+    }
+    public List<reservation> findAll(){
+        return repository.findAll();
+    }
 }

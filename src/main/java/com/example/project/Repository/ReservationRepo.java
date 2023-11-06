@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.project.entity.reservation;
@@ -50,5 +51,17 @@ public interface ReservationRepo extends JpaRepository<reservation, Integer> {
     List<reservation> findReservationByUserId(int user_id);
 
     @Query("select r from reservation r join patient p on r.patient_id = p.patient_id where p.user_id = ?1")
+
     Page<reservation> findPageReservationByUserId(int user_id, PageRequest pageable);
+    @Query(value = "SELECT COALESCE(COUNT(r.reservation_id), 0) AS number_of_reservations " +
+            "FROM (SELECT 1 AS month UNION ALL SELECT 2 UNION ALL SELECT 3 " +
+            "UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 " +
+            "UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 " +
+            "UNION ALL SELECT 10 UNION ALL SELECT 11 UNION ALL SELECT 12) AS months " +
+            "LEFT JOIN childrencare_system.reservation AS r " +
+            "ON months.month = EXTRACT(MONTH FROM r.date) AND EXTRACT(YEAR FROM r.date) = :year " +
+            "GROUP BY months.month " +
+            "ORDER BY months.month",
+            nativeQuery = true)
+    List<Object[]> getMonthlyReservationCounts(@Param("year") int year);
 }
