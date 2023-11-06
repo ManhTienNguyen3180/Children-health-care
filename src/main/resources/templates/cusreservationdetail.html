@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Doctris - Doctor Appointment Booking System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
+    <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
+    <meta name="author" content="Shreethemes" />
+    <meta name="email" content="support@shreethemes.in" />
+    <meta name="website" content="https://shreethemes.in" />
+    <meta name="Version" content="v1.2.0" />
+    <!-- favicon -->
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico.png}" href="images/favicon.ico.png">
+    <!-- Bootstrap -->
+    <link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Select2 -->
+    <link th:href="@{/css/select2.min.css}" href="css/select2.min.css" rel="stylesheet" />
+    <!-- Date picker -->
+    <link rel="stylesheet" th:href="@{/css/flatpickr.min.css}" href="css/flatpickr.min.css">
+    <link th:href="@{/css/jquery.timepicker.min.css}" href="css/jquery.timepicker.min.css" rel="stylesheet"
+        type="text/css" />
+    <!-- Icons -->
+    <link th:href="@{/css/materialdesignicons.min.css}" href="css/materialdesignicons.min.css" rel="stylesheet"
+        type="text/css" />
+    <link th:href="@{/css/remixicon.css}" href="css/remixicon.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{https://unicons.iconscout.com/release/v3.0.6/css/line.css}"
+        href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
+    <!-- Css -->
+    <link th:href="@{/css/style.min.css}" href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+
+</head>
+
+<body>
+
+    <!-- Navbar STart -->
+    <header id="topnav" class="defaultscroll sticky">
+        <div class="container">
+            <!-- Logo container-->
+            <a class="logo" href="index.html">
+                <img src="images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                <img src="images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+            </a>
+            <!-- Logo End -->
+
+            <!-- Start Mobile Toggle -->
+            <div class="menu-extras">
+                <div class="menu-item">
+                    <!-- Mobile menu toggle-->
+                    <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+                        <div class="lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </a>
+                    <!-- End mobile menu toggle-->
+                </div>
+            </div>
+            <!-- End Mobile Toggle -->
+
+            <!-- Start Dropdown -->
+
+            <ul class="dropdowns list-inline mb-0">
+                <li class="list-inline-item mb-0">
+                    <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                        aria-controls="offcanvasRight">
+                        <div class="btn btn-icon btn-pills btn-primary"><i data-feather="settings"
+                                class="fea icon-sm"></i></div>
+                    </a>
+                </li>
+
+                <li class="list-inline-item mb-0 ms-1">
+                    <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                        <i class="uil uil-search"></i>
+                    </a>
+                </li>
+
+                <li class="list-inline-item mb-0 ms-1">
+                    <div class="dropdown dropdown-primary">
+                        <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                th:src="${session.user.image}" src="images/doctors/01.jpg"
+                                class="avatar avatar-ex-small rounded-circle" alt=""></button>
+                        <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
+                            style="min-width: 200px;">
+                            <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html">
+                                <img th:src="${session.user.image}" src="images/doctors/01.jpg"
+                                    class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                <div class="flex-1 ms-2">
+                                    <span th:text="${session.user.full_name}" class="d-block mb-1">Calvin Carlo</span>
+                                    <!-- <small  class="text-muted">Orthopedic</small> -->
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-dark" href="doctor-dashboard.html"><span
+                                    class="mb-0 d-inline-block me-1"><i
+                                        class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
+                            <a class="dropdown-item text-dark" href="doctor-profile-setting.html"><span
+                                    class="mb-0 d-inline-block me-1"><i
+                                        class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                            <div class="dropdown-divider border-top"></div>
+                            <a class="dropdown-item text-dark" href="logout"><span class="mb-0 d-inline-block me-1"><i
+                                        class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+
+            <div id="navigation">
+                <!-- Navigation Menu-->
+                <ul class="navigation-menu nav-left ">
+                    <li class="has-submenu parent-menu-item">
+                        <a href="/home">Home</a>
+
+                    </li>
+
+                    <li class="has-submenu parent-parent-menu-item">
+                        <a href="/doctor">Doctors</a>
+
+                    </li>
+
+                    <li class="has-submenu parent-parent-menu-item">
+                        <a href="/service">Services</a>
+
+                    </li>
+
+                    <li class="has-submenu parent-parent-menu-item">
+                        <a href="/blog">Blog</a>
+
+                    </li>
+
+                </ul><!--end navigation menu-->
+            </div><!--end navigation-->
+        </div><!--end container-->
+    </header><!--end header-->
+    <!-- Navbar End -->
+
+    <!-- Start -->
+    <section class="bg-hero">
+        <div class="container">
+            <div class="row mt-lg-5">
+                <div class="col-md-6 col-lg-4">
+                    <div class="rounded shadow overflow-hidden sticky-bar">
+                        <div class="card border-0">
+                            <img src="/images/bg/bg-profile.jpg" class="img-fluid" alt="">
+                        </div>
+
+                        <div
+                            class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                            <img th:src="${session.user.image}" class="rounded-circle shadow-md avatar avatar-md-md"
+                                alt="">
+                            <h5 class="mt-3 mb-1" th:text="${session.user.full_name}"></h5>
+                        </div>
+
+                        <ul class="list-unstyled sidebar-nav mb-0">
+
+                            <li class="navbar-item"><a href="doctor-profile.html" class="navbar-link"> Profile</a></li>
+                            <li class="navbar-item"><a href="doctor-profile-setting.html" class="navbar-link"> Profile
+                                    Settings</a></li>
+                            <li class="navbar-item"><a href="/myreservation" class="navbar-link"> My Reservation</a></li>
+                        </ul>
+                    </div>
+                </div><!--end col-->
+
+                <div class="col-lg-8 col-md-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                    <div class="card border-0 shadow overflow-hidden">
+                        <ul class="nav nav-pills nav-justified flex-column flex-sm-row rounded-0 shadow overflow-hidden bg-light mb-0"
+                            id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link rounded-0 active" id="overview-tab" data-bs-toggle="pill"
+                                    href="#pills-overview" role="tab" aria-controls="pills-overview"
+                                    aria-selected="false">
+                                    <div class="text-center pt-1 pb-1">
+                                        <h4 class="title fw-normal mb-0">Reservation Detail</h4>
+                                    </div>
+                                </a><!--end nav link-->
+                            </li><!--end nav item-->
+
+                        </ul>
+
+                        <div class="tab-content p-4" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-overview" role="tabpanel"
+                                aria-labelledby="overview-tab">
+                                
+                                <div class="row">
+                                    <p th:if="${mess}" th:text="${mess}" style="color: green;"></p>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">ID</label>
+                                            <input readonly id="name" type="text" class="form-control" placeholder=""
+                                                th:value="${reservation.reservation_id}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Reserved date</label>
+                                            <input readonly id="name" type="text" class="form-control" placeholder=""
+                                                th:value="${reservation.date}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Reserved time</label>
+                                            <input readonly id="name" type="text" class="form-control" placeholder=""
+                                                th:value="${reservation.time}">
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Time to checkup</label>
+                                            <input id="name" type="text" class="form-control" placeholder=""
+                                                th:value="${reservation.actual_date}">
+                                        </div>
+
+                                    </div> -->
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Total cost</label>
+                                            <input readonly id="name" type="text" class="form-control" placeholder=""
+                                                th:value="${#numbers.formatDecimal(reservation.total_cost, 0, 'COMMA', 0, 'POINT') + 'đ'}">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Status</label>
+                                            <div th:switch="${reservation.status}">
+                                                <input readonly class="form-control" th:case="0" th:value="On-going">
+                                                <input readonly class="form-control" th:case="1" th:value="Approved">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <h5>Services</h5>
+                                    <div class="row" th:each="detail : ${detail}">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Service Name</label>
+                                                <div name="sername" id="name" type="text" class="form-control"
+                                                    th:text="${detail.service_name}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Price</label>
+                                                <div name="serprice" id="name" type="text" class="form-control"
+                                                    th:text="${#numbers.formatDecimal(detail.price, 0, 'COMMA', 0, 'POINT') + 'đ'}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div th:if="${reservation.status==1}" style="text-align: right;">
+                                            
+                                              <a  th:href="@{/feedback?id=}+${patient.patient_id}+'&reservationid='+${reservation.reservation_id}" class="btn btn-primary" >Feedback</a>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                    <div th:if="${reservation.status==0}" style="text-align: right;">
+
+                                        <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#view-invoice">Re-resesrve</a>
+                                    </div>
+
+
+                                    <h5>Undertaking doctor</h5>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Doctor Name</label>
+                                            <input readonly name="docname" id="name" type="text" class="form-control"
+                                                placeholder="" th:value="${doctor.doctor_name}">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Gender</label>
+                                            <div th:switch="${doctor.gender}">
+                                                <input readonly class="form-control" th:case="1" th:value="Male">
+                                                <input readonly class="form-control" th:case="0" th:value="Female">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Phone</label>
+                                            <input readonly name="docphone" id="name" type="text" class="form-control"
+                                                placeholder="" th:value="${doctor.phone}">
+                                        </div>
+                                    </div>
+
+                                    <h5>Patient contact</h5>
+                                    <form th:action="@{'/cusreservationdetail/' + ${reservation.reservation_id} + '/update'}" method="post">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Patient Name</label>
+                                                    <input name="pantientname" id="name" type="text" class="form-control"
+                                                        placeholder="" th:value="${patient.patient_name}">
+                                                </div>
+        
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Gender</label>
+                                                    <select class="form-control gender-name select2input" name="pantientgender">
+                                                        <div th:if="${patient.gender==1}">
+                                                            <option th:value="Male" th:text="Male"></option>
+                                                            <option value="Female">Female</option>
+                                                        </div> 
+                                                        <div th:if="${doctor.gender==0}">
+                                                            <option th:value="Female" th:text="Female"></option>
+                                                            <option value="Male">Male</option>
+                                                        </div>
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Email</label>
+                                                    <input required name="pantientemail" id="name" type="text"
+                                                        class="form-control" placeholder="" th:value="${patient.patient_email}">
+                                                </div>
+        
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Phone</label>
+                                                    <input required name="patientphone" id="name" type="text"
+                                                        class="form-control" placeholder="" th:value="${patient.patient_phone}">
+                                                </div>
+                                            </div>
+        
+                                            <div th:if="${reservation.status==0}" style="text-align: right;">
+                                                <button type="submit" class="btn btn-primary">Update</button>
+                                            </div>
+                                        </div>
+                                        
+                                    </form>
+
+                                    <br>
+
+                                    <div th:if="${reservation.status==0}" style="text-align: left;">
+                                        <a th:href="@{'/cusreservationdetail/' + ${reservation.reservation_id} + '/delete'}"
+                                            type="button" class="btn btn-danger">Cancel Reservation</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end row-->
+        </div><!--end container-->
+    </section><!--end section-->
+    <!-- End -->
+
+    <!-- Start -->
+    <footer class="bg-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-4 mb-0 mb-md-4 pb-0 pb-md-2">
+                    <a href="#" class="logo-footer">
+                        <img src="/images/logo-light.png" height="22" alt="">
+                    </a>
+                    <p class="mt-4 me-xl-5">Great doctor if you need your family member to get effective immediate
+                        assistance, emergency treatment or a simple consultation.</p>
+                </div><!--end col-->
+
+                <div class="col-xl-7 col-lg-8 col-md-12">
+                    <div class="row">
+                        <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                            <h5 class="text-light title-dark footer-head">Company</h5>
+                            <ul class="list-unstyled footer-list mt-4">
+                                <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> About
+                                        us</a></li>
+                                <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i>
+                                        Services</a></li>
+                                <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Team</a>
+                                </li>
+                                <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Project</a>
+                                </li>
+                                <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Blog</a>
+                                </li>
+                                <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Login</a>
+                                </li>
+                            </ul>
+                        </div><!--end col-->
+
+                        <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                            <h5 class="text-light title-dark footer-head">Departments</h5>
+                            <ul class="list-unstyled footer-list mt-4">
+                                <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Eye
+                                        Care</a></li>
+                                <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i>
+                                        Psychotherapy</a></li>
+                                <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Dental
+                                        Care</a></li>
+                                <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i>
+                                        Orthopedic</a></li>
+                                <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i>
+                                        Cardiology</a></li>
+                                <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i>
+                                        Gynecology</a></li>
+                                <li><a href="#" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i>
+                                        Neurology</a></li>
+                            </ul>
+                        </div><!--end col-->
+
+                        <div class="col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                            <h5 class="text-light title-dark footer-head">Contact us</h5>
+                            <ul class="list-unstyled footer-list mt-4">
+                                <li class="d-flex align-items-center">
+                                    <i data-feather="mail" class="fea icon-sm text-foot align-middle"></i>
+                                    <a href="mailto:contact@example.com" class="text-foot ms-2">contact@example.com</a>
+                                </li>
+
+                                <li class="d-flex align-items-center">
+                                    <i data-feather="phone" class="fea icon-sm text-foot align-middle"></i>
+                                    <a href="tel:+152534-468-854" class="text-foot ms-2">+152 534-468-854</a>
+                                </li>
+
+                                <li class="d-flex align-items-center">
+                                    <i data-feather="map-pin" class="fea icon-sm text-foot align-middle"></i>
+                                    <a href="javascript:void(0)" class="video-play-icon text-foot ms-2">View on Google
+                                        map</a>
+                                </li>
+                            </ul>
+
+                            <ul class="list-unstyled social-icon footer-social mb-0 mt-4">
+                                <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="facebook"
+                                            class="fea icon-sm fea-social"></i></a></li>
+                                <li class="list-inline-item"><a href="#" class="rounded-pill"><i
+                                            data-feather="instagram" class="fea icon-sm fea-social"></i></a></li>
+                                <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="twitter"
+                                            class="fea icon-sm fea-social"></i></a></li>
+                                <li class="list-inline-item"><a href="#" class="rounded-pill"><i data-feather="linkedin"
+                                            class="fea icon-sm fea-social"></i></a></li>
+                            </ul><!--end icon-->
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+
+        <div class="container mt-5">
+            <div class="pt-4 footer-bar">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="text-sm-start text-center">
+                            <p class="mb-0">
+                                <script>document.write(new Date().getFullYear())</script> © Doctris. Design with <i
+                                    class="mdi mdi-heart text-danger"></i> by <a href="../../../index.html"
+                                    target="_blank" class="text-reset">Shreethemes</a>.
+                            </p>
+                        </div>
+                    </div><!--end col-->
+
+                    <div class="col-sm-6 mt-4 mt-sm-0">
+                        <ul class="list-unstyled footer-list text-sm-end text-center mb-0">
+                            <li class="list-inline-item"><a href="terms.html" class="text-foot me-2">Terms</a></li>
+                            <li class="list-inline-item"><a href="privacy.html" class="text-foot me-2">Privacy</a></li>
+                            <li class="list-inline-item"><a href="aboutus.html" class="text-foot me-2">About</a></li>
+                            <li class="list-inline-item"><a href="contact.html" class="text-foot me-2">Contact</a></li>
+                        </ul>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+        </div><!--end container-->
+    </footer><!--end footer-->
+    <!-- End -->
+
+    <!-- Back to top -->
+    <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i
+            data-feather="arrow-up" class="icons"></i></a>
+    <!-- Back to top -->
+
+    <!-- View Invoice Start -->
+    <div class="modal fade" id="view-invoice" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-bottom p-3">
+                    <h5 class="modal-title" id="exampleModalLabel">Re-reserve</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12">
+                            <div class="card border-0 shadow rounded overflow-hidden">
+                                <div class="tab-content p-4" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="pills-clinic" role="tabpanel"
+                                        aria-labelledby="online-booking">
+                                        <form action="" th:action="@{/rebooking}" method="get" name="view-invoice">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Department</label>
+                                                        <select class="form-control department-name select2input"
+                                                            id="categoryserviceId" name="categoryserviceId">
+                                                            <option value="">Select Service</option>
+                                                            <option value="0">Chưa xác định chuyên khoa</option>
+                                                            <option th:each="service:${listCategoryService}"
+                                                                th:text="${service.name}" th:value="${service.id}">
+                                                            </option>
+
+                                                        </select>
+
+                                                        <div class="text-danger" id="errorCategory"></div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-6" id="serviceIds">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Service</label>
+
+                                                        <select multiple
+                                                            class="form-control department-name select2input"
+                                                            id="serviceId" name="serviceId">
+
+                                                        </select>
+                                                        <div class="text-danger" id="errorService"></div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-6" id="doctorIds">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Doctor</label>
+                                                        <select class="form-control department-name " id="doctorId"
+                                                            name="doctorId">
+
+                                                        </select>
+
+                                                        <div class="text-danger" id="errorDoctor"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Date</label>
+
+                                                        <select class="form-control department-name " id="date"
+                                                            name="date">
+                                                        </select>
+                                                        <div class="text-danger" id="errorDate"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Time</label>
+                                                        <select class="form-control department-name" id="time"
+                                                            name="time">
+
+                                                        </select>
+                                                        <div class="text-danger" id="errorTime"></div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div id="messReser" th:text="${messageReser}"
+                                                    style="color: red; margin-bottom: 10px;"></div>
+                                                <div class="col-lg-12">
+                                                    <div class="d-grid">
+                                                        <button type="submit" id="btnContinue"
+                                                            class="btn btn-primary">Save</button>
+                                                    </div>
+
+                                                </div><!--end col-->
+                                            </div><!--end row-->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end container-->
+
+            </div>
+        </div>
+    </div>
+    <!-- View Invoice End -->
+
+    <!-- javascript -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <!-- Select2 -->
+    <script src="/js/select2.min.js"></script>
+    <script src="/js/select2.init.js"></script>
+    <!-- Datepicker -->
+    <script src="/js/flatpickr.min.js"></script>
+    <script src="/js/flatpickr.init.js"></script>
+    <!-- Datepicker -->
+    <script src="/js/jquery.timepicker.min.js"></script>
+    <script src="/js/timepicker.init.js"></script>
+    <!-- Icons -->
+    <script src="/js/feather.min.js"></script>
+    <!-- Main Js -->
+    <script src="/js/app.js"></script>
+
+</body>
+
+</html>

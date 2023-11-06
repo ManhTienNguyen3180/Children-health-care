@@ -3,6 +3,7 @@ package com.example.project.controller.admin;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -36,7 +37,7 @@ public class AdminAddPatient {
 
   @GetMapping
   public String page(Model model) {
-   
+
     return "admin/add-patient";
   }
 
@@ -52,7 +53,34 @@ public class AdminAddPatient {
       @RequestParam("Email") String Email,
       @RequestParam("phonenum") String phonenum,
       HttpSession session) {
+    String emailPattern = "^[a-zA-Z0-9._%+-]+@gmail\\.com$";
+    String phonePattern = "^0[1-9]\\d{7,8}$";
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date datem = null;
+    Date currentDate = Date.from(Instant.now());
+    try {
+      datem = dateFormat.parse(dob);
 
+    } catch (java.text.ParseException e) {
+      e.printStackTrace();
+      // Handle the exception here, e.g., log an error or take appropriate action
+    }
+    if (!Email.matches(emailPattern)
+        || !phonenum.matches(phonePattern) || datem.after(currentDate)) {
+
+      if (!Email.matches(emailPattern)) {
+        model.addAttribute("Emess", "Please enter a gmail email. Exp:abc@gmail.com");
+      }
+      if (!phonenum.matches(phonePattern)) {
+        model.addAttribute("Pmess",
+            "Please enter a valid phone number starting with '0' and followed by 8 or 9 digits.");
+      }
+      if (datem.after(currentDate)) {
+        model.addAttribute("Dobmess",
+            "The date of birth cannot exceed the present");
+      }
+      return page(model);
+    }
     String imageAddress = "";
     if (image.isEmpty()) {
       imageAddress = "/images/blog/default-blog.png";
@@ -71,15 +99,6 @@ public class AdminAddPatient {
 
     }
     try {
-      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-      Date datem = null;
-
-      try {
-        datem = dateFormat.parse(dob);
-      } catch (java.text.ParseException e) {
-        e.printStackTrace();
-        // Handle the exception here, e.g., log an error or take appropriate action
-      }
 
       LocalDate localDate = LocalDate.now();
       // Convert LocalDate to Date
@@ -94,6 +113,11 @@ public class AdminAddPatient {
         return page(model);
       }
 
+      if (PatientService.findByPatientEmail(Email) != null) {
+        model.addAttribute("mess",
+            "Email already used");
+        return page(model);
+      }
       p.setCreate_by(u.getFull_name());
       p.setGender(Integer.parseInt(gender));
       p.setImage(imageAddress);
@@ -104,7 +128,7 @@ public class AdminAddPatient {
       p.setPatient_phone(phonenum);
       p.setPatient_address(province + ", " + district + ", " + ward);
       PatientService.addPatient(p);
-      patient pwithId = PatientService.findByPatientEmail(p.getPatient_email());
+      patient pwithId = PatientService.findByPatientEmail(Email);
       contact c = new contact();
       if (contactService.findByPatientId(pwithId) != null) {
         model.addAttribute("mess", "Patient already has address");
@@ -118,19 +142,12 @@ public class AdminAddPatient {
       }
 
       model.addAttribute("mess", "Add success");
-      return "redirect:/admin/add-patientDetails?id="+pwithId.getPatient_id(); // Fixed the URL
+      return "redirect:/admin/add-patientDetails?id=" + pwithId.getPatient_id(); // Fixed the URL
     } catch (Exception e) {
       // TODO: handle exception
       model.addAttribute("mess", "Add fail");
     }
     return page(model);
   }
-
-  @RequestMapping(path = "/add-patientDetails", method = RequestMethod.GET)
-  public String pageAfteradd(Model model) {
-      model.addAttribute("patients", PatientService.findByPatientId(1).get());
-      return "admin/add-patientDetails";
-  }
-  
 
 }

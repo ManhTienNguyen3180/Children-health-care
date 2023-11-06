@@ -40,7 +40,7 @@ public interface DoctorRepo extends JpaRepository<doctor, Integer> {
     @Query( value ="select * from doctor d order by d.doctor_id desc limit 1",nativeQuery = true)
     doctor getLatestDoctor();
 
-    @Query(value = "SELECT * FROM doctor  WHERE doctorserviceId = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM doctor  WHERE doctorservice_id = ?1", nativeQuery = true)
     Page<doctor> filterCategory(int id, PageRequest pageable);
 
     @Query(value = "SELECT * FROM doctor  WHERE status = ?1", nativeQuery = true)
@@ -56,4 +56,6 @@ public interface DoctorRepo extends JpaRepository<doctor, Integer> {
     @Query("SELECT d FROM doctor d where d.doctorserviceId=?1")
     public List<doctor> getDoctorByDoctorServiceID(int id); 
        
+    @Query("SELECT d FROM doctor d where d.doctor_id = ?1")
+    public doctor getDoctorByDocID(int doctor_id);
 }

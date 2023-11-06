@@ -12,34 +12,26 @@
     <meta name="website" content="../../../dashboard" />
     <meta name="Version" content="v1.2.0" />
     <!-- favicon -->
-    <link rel="shortcut icon" href="../images/favicon.ico.png">
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico.png}">
     <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
     <!-- simplebar -->
-    <link href="../css/simplebar.css" rel="stylesheet" type="text/css" />
-    <!-- Select2 -->
-    <link href="../css/select2.min.css" rel="stylesheet" />
-    <!-- Date picker -->
-    <link rel="stylesheet" href="../css/flatpickr.min.css">
+    <link th:href="@{/css/simplebar.css}" rel="stylesheet" type="text/css" />
     <!-- Icons -->
-    <link href="../css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
-    <link href="../css/remixicon.css" rel="stylesheet" type="text/css" />
-    <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link th:href="@{/css/materialdesignicons.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/remixicon.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{https://unicons.iconscout.com/release/v3.0.6/css/line.css}" rel="stylesheet">
     <!-- Css -->
-    <link href="../css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+    <link th:href="@{/css/style.min.css}" rel="stylesheet" type="text/css" id="theme-opt" />
     <script src="https://kit.fontawesome.com/8320fc5394.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <!-- Loader -->
-    <div id="preloader">
-        <div id="status">
-            <div class="spinner">
-                <div class="double-bounce1"></div>
-                <div class="double-bounce2"></div>
-            </div>
-        </div>
-    </div>
+    
     <!-- Loader -->
 
     <div class="page-wrapper doctris-theme toggled">
@@ -113,6 +105,14 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-feedback me-2 d-inline-block"></i></i>Feedback</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a class="" th:href="@{/admin/feedback}">Feedback</a></li>
+                            </ul>
+                        </div>
+                    </li>
 
 
 
@@ -147,11 +147,12 @@
                         </a>
                         <div class="search-bar p-0 d-none d-lg-block ms-2">
                             <div id="search" class="menu-search mb-0">
-                                <form role="search" method="get" id="searchform" class="searchform">
+                                <form th:action="@{patientsSearch}" role="search" method="get" id="searchform"
+                                    class="searchform">
                                     <div>
                                         <input type="text" class="form-control border rounded-pill" name="s" id="s"
-                                            placeholder="Search Keywords...">
-                                        <input type="submit" id="searchsubmit" value="Search">
+                                            placeholder="Search Keywords..." th:value="${param.s}">
+                                        <input type="submit" value="Search">
                                     </div>
                                 </form>
                             </div>
@@ -165,27 +166,27 @@
                             <div class="dropdown dropdown-primary">
                                 <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                        th:src="@{${session.user.image}}" class="avatar avatar-ex-small rounded-circle"
+                                        src="../images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle"
                                         alt=""></button>
                                 <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                     style="min-width: 200px;">
                                     <a class="dropdown-item d-flex align-items-center text-dark"
-                                        th:href="@{/user-profile}">
-                                        <img th:src="@{${session.user.image}}"
+                                        href="https://shreethemes.in/doctris/layouts/admin/profile">
+                                        <img src="../images/doctors/01.jpg"
                                             class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                         <div class="flex-1 ms-2">
-                                            <span class="d-block mb-1" th:text="@{${session.user.full_name}}"></span>
-
+                                            <span class="d-block mb-1">Calvin Carlo</span>
+                                            <small class="text-muted">Orthopedic</small>
                                         </div>
                                     </a>
                                     <a class="dropdown-item text-dark" href="dashboard"><span
                                             class="mb-0 d-inline-block me-1"><i
                                                 class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
-                                    <a class="dropdown-item text-dark" th:href="@{/user-profile}"><span
+                                    <a class="dropdown-item text-dark" href="dr-profile"><span
                                             class="mb-0 d-inline-block me-1"><i
                                                 class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
                                     <div class="dropdown-divider border-top"></div>
-                                    <a class="dropdown-item text-dark" th:href="@{/logout}"><span
+                                    <a class="dropdown-item text-dark" href="lock-screen"><span
                                             class="mb-0 d-inline-block me-1"><i
                                                 class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                                 </div>
@@ -198,101 +199,132 @@
             <div class="container-fluid">
                 <div class="layout-specing">
                     <div class="d-md-flex justify-content-between">
-                        <h5 class="mb-0">Patient Dashboard</h5>
-
-                        <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
-                            <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
-                                <li class="breadcrumb-item"><a href="dashboard">Doctris</a></li>
-                                <li class="breadcrumb-item" aria-current="page"><i
-                                        class="fa-solid fa-caret-down fa-rotate-270"></i></li>
-
-                                <li class="breadcrumb-item active" aria-current="page">Patient Dashboard</li>
-                            </ul>
-                        </nav>
+                        <h5 class="mb-0">Feedback Detail</h5>
+                        
+                        
                     </div>
-
                     <div class="row">
-                        <div class="col-lg-12 mt-4">
-                            <div class="card border-0 p-4 rounded shadow">
-
-                                <div class="row">
-
-
-
-                                    <div class="col-md-5">
-                                        <div class="mb-3" style="text-align: center;">
-                                            <label class="form-label">Add patient information</label>
-                                            <form th:action="@{/admin/add-patient}">
-                                                <input type="submit" value="Add Patient"
-                                                    class="btn btn-soft-primary m-1 btn-sm"></input>
-                                            </form>
+                        <div class="col-lg-8 col-lg-7 mt-4">
+                            <div class="card rounded shadow border-0 overflow-hidden d-grid">
+                                <div class="p-4 row" style="display: flex;flex-direction: row;width: 1000px;" >
+                                    <div style="width: 400px;">
+                                        <h5>Reservation Information</h5>
+                                        <p th:text="'Patient: '+${d[9]}"></p>
+                                        <p th:text="'Department: '+${d[1]}"></p>
+                                        
+                                    
+                                        
+                                        <h6 >Services:</h6><div th:each="s:${s}">
+                                            <p th:text="${s[0]}"></p>
                                         </div>
-                                    </div><!--end col-->
-                                    <div class="col-md-7" style="border-left: 1px solid;">
-                                        <form th:action="@{patientDashboard}" method="post">
-                                            <div class="mb-3" style="text-align: center;">
-                                                <label class="form-label">Search Patient</label>
-                                                <div class="form-group row">
-                                                    <label for="email" class="col-sm-2 col-form-label"
-                                                        th:text="Email"></label>
-                                                    <div class="col-sm-10">
-                                                        <input name="email" id="email" type="text" class="form-control"
-                                                            placeholder="Input email">
-                                                    </div>
-                                                </div>
-
-
-
-                                                <div class="form-group row" style="margin-top: 10px;">
-                                                    <label for="full_name" class="col-sm-2 col-form-label"
-                                                        th:utext="Full_name"></label>
-                                                    <div class="col-sm-10">
-                                                        <input name="namep" id="full_name" type="text"
-                                                            class="form-control" placeholder="Input full name">
-                                                    </div>
-                                                </div> <button type="submit"
-                                                    class="btn btn-soft-danger m-1">Search</button>
-                                        </form>
-
+                                        
+                                        <div style="display: flex;flex-direction: row;">
+                                            <br>
+                                            <h5 style="margin-right: 10px;">Ratings:</h5>
+                                        
+                                        
+                                            <ul class="cours-star">
+                                                <th:block th:each="item : ${#numbers.sequence(1,d[4])}">
+                                                    <img th:src="@{/images/star.png}" alt="My Image" style="height: 15px;" />
+                                                </th:block>
+                                                <th:block th:if="${d[4] != 5}" th:each="i : ${#numbers.sequence(1,5 - d[4])}">
+                                                    <img th:src="@{/images/starh.png}" alt="My Image" style="height: 15px;" />
+                                                </th:block>
+                                            </ul>
+                                        </div>
+                                        <h5>Comment: </h5><p th:utext="${d[5]}"></p>
+                                        <h6 th:text="'Date: '+${#dates.format(d[6], 'yyyy-MM-dd')}"></h6>
                                     </div>
-
-                                </div><!--end col-->
-
-
+                                    <div style="width: 400px;">
+                                        <br>
+                                        <p th:text="'Doctor: '+${d[2]}"></p>
+                                        <p th:text="'Date: '+${#dates.format(d[3], 'yyyy-MM-dd')}"></p>
+                                        <p th:text="'Time: '+${d[8]}"></p>
+                                        <p th:text="'Total cost: '+${#numbers.formatDecimal(d[7], 0, 'COMMA', 0, 'POINT') + 'đ'}"></p>
+                                        
+                                    </div>
+                                </div>
                             </div>
-                        </div><!--end col-->
+                        </div>
+                    </div>
+                    
 
+                    
+                        
+                    
+                </div><!--end row-->
+            </div>
+    </div><!--end container-->
 
-                    </div><!--end row-->
-                </div>
-            </div><!--end container-->
-
-
-        </main>
-        <!--End page-content" -->
+    
+    <!-- End -->
+    </main>
+    <!--End page-content" -->
     </div>
     <!-- page-wrapper -->
 
+    <!-- Offcanvas Start -->
 
 
-    <!-- Offcanvas End -->
+    <!-- Modal start -->
 
-    <!-- View Appintment End -->
+    <div id="viewprofile" class="modal fade show">
+        <div class="modal-dialog modal-dialog-centered">
 
+            <div class="modal-content">
+                <h6>Patient Profile</h6>
+                <div id="patientInfo">
+                    <p>Name: <span id="patientName"></span></p>
+                    <p>Age: <span id="patientAge"></span></p>
+                    <p>Gender: <span id="patientGender"></span></p>
+                    <p>Email: <span id="patientEmail"></span></p>
+                    <p>Phone: <span id="patientPhone"></span></p>
+                    <p>Address: <span id="patientAddress"></span></p>
+                    <p>Created by: <span id="patientCreatedBy"></span></p>
+                    <p>Status: <span id="patientStatus"></span></p>
+                </div>
+                <button onclick="closeProfileModal()">Close</button>
+            </div>
+        </div>
+    </div>
+    <!-- Profile End -->
+    <!-- Modal end -->
+    <script>
+        function showProfileModal(name, age, gender, email, phone, address, createdBy, status) {
+            var modal = document.getElementById('viewprofile');
 
+            // Fill in the patient details in the modal
+            document.getElementById('patientName').innerText = name;
+            document.getElementById('patientAge').innerText = age;
+
+            // Set gender based on the value (0 for Male, 1 for Female)
+            document.getElementById('patientGender').innerText = (gender === 0) ? 'Male' : 'Female';
+
+            document.getElementById('patientEmail').innerText = email;
+            document.getElementById('patientPhone').innerText = phone;
+            document.getElementById('patientAddress').innerText = address;
+            document.getElementById('patientCreatedBy').innerText = createdBy;
+
+            // Set status based on the value (0 for Blocked, 1 for Active)
+            document.getElementById('patientStatus').innerText = (status === 0) ? 'Blocked' : 'Active';
+
+            // Show the modal
+            modal.style.display = 'block';
+        }
+
+        // Thêm một hàm closeProfileModal() tương tự như trước
+        function closeProfileModal() {
+            var modal = document.getElementById('viewprofile');
+            modal.style.display = 'none';
+        }
+
+    </script>
 
 
     <!-- javascript -->
-    <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <!-- simplebar -->
     <script src="../js/simplebar.min.js"></script>
-    <!-- Select2 -->
-    <script src="../js/select2.min.js"></script>
-    <script src="../js/select2.init.js"></script>
-    <!-- Datepicker -->
-    <script src="../js/flatpickr.min.js"></script>
-    <script src="../js/flatpickr.init.js"></script>
     <!-- Icons -->
     <script src="../js/feather.min.js"></script>
     <!-- Main Js -->

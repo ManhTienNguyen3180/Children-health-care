@@ -12,30 +12,26 @@
     <meta name="website" content="../../../dashboard" />
     <meta name="Version" content="v1.2.0" />
     <!-- favicon -->
-    <link rel="shortcut icon" href="../images/favicon.ico.png">
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico.png}">
     <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
     <!-- simplebar -->
-    <link href="../css/simplebar.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/simplebar.css}" rel="stylesheet" type="text/css" />
     <!-- Icons -->
-    <link href="../css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
-    <link href="../css/remixicon.css" rel="stylesheet" type="text/css" />
-    <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link th:href="@{/css/materialdesignicons.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/remixicon.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{https://unicons.iconscout.com/release/v3.0.6/css/line.css}" rel="stylesheet">
     <!-- Css -->
-    <link href="../css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+    <link th:href="@{/css/style.min.css}" rel="stylesheet" type="text/css" id="theme-opt" />
     <script src="https://kit.fontawesome.com/8320fc5394.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <!-- Loader -->
-    <div id="preloader">
-        <div id="status">
-            <div class="spinner">
-                <div class="double-bounce1"></div>
-                <div class="double-bounce2"></div>
-            </div>
-        </div>
-    </div>
+    
     <!-- Loader -->
 
     <div class="page-wrapper doctris-theme toggled">
@@ -109,6 +105,14 @@
                             </ul>
                         </div>
                     </li>
+                    <li class="sidebar-dropdown">
+                        <a href="javascript:void(0)"><i class="uil uil-feedback me-2 d-inline-block"></i></i>Feedback</a>
+                        <div class="sidebar-submenu">
+                            <ul>
+                                <li><a class="" th:href="@{/admin/feedback}">Feedback</a></li>
+                            </ul>
+                        </div>
+                    </li>
 
 
 
@@ -158,31 +162,31 @@
                     <ul class="list-unstyled mb-0">
 
 
-                      <li class="list-inline-item mb-0 ms-1">
+                        <li class="list-inline-item mb-0 ms-1">
                             <div class="dropdown dropdown-primary">
                                 <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                        th:src="@{${session.user.image}}" class="avatar avatar-ex-small rounded-circle"
+                                        src="../images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle"
                                         alt=""></button>
                                 <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                     style="min-width: 200px;">
                                     <a class="dropdown-item d-flex align-items-center text-dark"
-                                        th:href="@{/user-profile}">
-                                        <img th:src="@{${session.user.image}}"
+                                        href="https://shreethemes.in/doctris/layouts/admin/profile">
+                                        <img src="../images/doctors/01.jpg"
                                             class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                         <div class="flex-1 ms-2">
-                                            <span class="d-block mb-1" th:text="@{${session.user.full_name}}"></span>
-
+                                            <span class="d-block mb-1">Calvin Carlo</span>
+                                            <small class="text-muted">Orthopedic</small>
                                         </div>
                                     </a>
                                     <a class="dropdown-item text-dark" href="dashboard"><span
                                             class="mb-0 d-inline-block me-1"><i
                                                 class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
-                                    <a class="dropdown-item text-dark" th:href="@{/user-profile}"><span
+                                    <a class="dropdown-item text-dark" href="dr-profile"><span
                                             class="mb-0 d-inline-block me-1"><i
                                                 class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
                                     <div class="dropdown-divider border-top"></div>
-                                    <a class="dropdown-item text-dark" th:href="@{/logout}"><span
+                                    <a class="dropdown-item text-dark" href="lock-screen"><span
                                             class="mb-0 d-inline-block me-1"><i
                                                 class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                                 </div>
@@ -195,9 +199,27 @@
             <div class="container-fluid">
                 <div class="layout-specing">
                     <div class="d-md-flex justify-content-between">
-                        <h5 class="mb-0">Patients List</h5>
+                        <div>
+                        <h5 class="mb-0">Feedback List</h5>
+                        <span style="font-size: larger;width: 50px;">Filter: </span>
+                            <!-- Example single danger button -->
+                            <div class="btn-group" >
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false"  >
+                                    Ratings
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" th:href="@{/admin/feedback}">--All Rating--</a>
+                                    </li>
+                                    <li><a th:each="cat : ${listRate}" th:value="${cat}" th:text="${cat}"
+                                            class="dropdown-item"
+                                            th:href="@{'/admin/feedback/filter/'+${cat}}"></a></li>
+                                </ul>
+                                
+                            </div>
+                        </div>
 
-                        <form th:action="@{/admin/patients}" method="post">
+                        <!-- <form th:action="@{/admin/patients}" method="post">
                             <button type="submit" class="btn btn-soft-success m-1 btn-sm" value="default"
                                 name="order">Default</button>
                             <button class="btn btn-soft-success m-1 btn-sm" value="gender" name="order"
@@ -212,8 +234,8 @@
                                 th:hidden="${statusActive != -1}">Reservation ended</button>
                             <button class="btn btn-soft-warning m-1 btn-sm" value="0" name="order"
                                 th:hidden="${statusActive != -1}">In process</button>
-                        </form>
-                        <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
+                        </form> -->
+                        <!-- <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                             <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                                 <li class="breadcrumb-item"><a href="dashboard">Doctris</a></li>
                                 <li class="breadcrumb-item" aria-current="page"><i
@@ -224,7 +246,7 @@
                                 <input type="submit" value="Add Patient"
                                     class="btn btn-soft-primary m-1 btn-sm"></input>
                             </form>
-                        </nav>
+                        </nav> -->
                     </div>
 
                     <div class="row">
@@ -234,33 +256,35 @@
                                     <thead>
                                         <tr>
                                             <th class="border-bottom p-3" style="min-width: 50px;">Id</th>
-                                            <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
-                                            <th class="border-bottom p-3">Date of Birth</th>
-                                            <th class="border-bottom p-3">Gender</th>
-                                            <th class="border-bottom p-3">Email</th>
-                                            <th class="border-bottom p-3">Phone</th>
-
-                                            <th class="border-bottom p-3">Create by</th>
-                                            <th class="border-bottom p-3">Status</th>
+                                            <th class="border-bottom p-3" style="min-width: 180px;">Patient Name</th>
+                                            <th class="border-bottom p-3">Department</th>
+                                            <th class="border-bottom p-3">Date </th>
+                                            <th class="border-bottom p-3">Rating</th>
+                                            <th class="border-bottom p-3">Doctor</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
 
-                                        <tr th:each="patients : ${listPatients}">
-                                            <th class="p-3" th:text="${patients.patient_id}"></th>
-                                            <td class="py-3">
-                                                <a href="#" class="text-dark">
-                                                    <div class="d-flex align-items-center">
-                                                        <img th:src="${patients.image}"
-                                                            class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                        <span class="ms-2" th:text="${patients.patient_name}"></span>
-                                                    </div>
-                                                </a>
+                                        <tr th:each="fb : ${listAll}">
+                                            <th class="p-3" th:text="${fb[0]}"></th>
+                                            <td class="py-3" th:text="${fb[2]}"></td>
+                                        
+                                            <th class="p-3" th:text="${fb[4]}"></th>
+                                            <td class="p-3" th:text="${#dates.format(fb[6], 'yyyy-MM-dd')}"></td>
+                                            <td>
+                                                <ul class="cours-star">
+                                                    <th:block th:each="item : ${#numbers.sequence(1,fb[7])}">
+                                                        <img th:src="@{/images/star.png}" alt="My Image" style="height: 15px;" />
+                                                    </th:block>
+                                                    <th:block th:if="${fb[7] != 5}" th:each="i : ${#numbers.sequence(1,5 - fb[7])}">
+                                                        <img th:src="@{/images/starh.png}" alt="My Image" style="height: 15px;" />
+                                                    </th:block>
+                                                </ul>
                                             </td>
-                                            <td class="p-3" th:text="${#dates.format(patients.Dob, 'yyyy-MM-dd')}"></td>
-
-                                            <td class="p-3" th:text="Female" th:if="${patients.gender == 1}"></td>
+                                            <td class="py-3" th:text="${fb[8]}"></td>
+                                            
+                                            <!-- <td class="p-3" th:text="Female" th:if="${patients.gender == 1}"></td>
                                             <td class="p-3" th:text="Male" th:if="${patients.gender == 0}"></td>
                                             <td class="p-3" th:text="${patients.patient_email}"></td>
                                             <td class="p-3" th:text="${patients.patient_phone}"></td>
@@ -280,6 +304,13 @@
                                                         class="uil uil-pen"></i></a>
                                                 <a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i
                                                         class="uil uil-trash"></i></a>
+                                            </td> -->
+                                            <td class="text-end p-3">
+                                                <a th:href="@{/admin/feedback-detail/{id}(id=${fb[0]})}"
+                                                    class="btn btn-icon btn-pills btn-soft-primary"><i
+                                                        class="uil uil-eye"></i></a>
+                                                
+                                                
                                             </td>
 
                                         </tr>
@@ -291,40 +322,137 @@
 
                     <div class="row text-center">
                         <!-- PAGINATION START -->
-                        <div class="col-12 mt-4" th:if="${totalPage > 1}">
+                        <div class="col-12 mt-4">
                             <div class="d-md-flex align-items-center text-center justify-content-between">
-                                <span class="text-muted me-3">Showing 1 - 10 out of 50</span>
-                                <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
-                                    <li class="page-item"><a class="page-link" th:if="${currentPage!=1}"
-                                            th:href="@{'patients?pageNo=1'+'&'+${orders}}"
-                                            aria-label="Previous">First</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" th:if="${currentPage!=1}"
-                                            th:href="@{'patients?pageNo='+${currentPage-1}+'&'+${orders}}"
-                                            aria-label="Previous">Prev</a>
-                                    </li>
-                                    <!-- <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a>
-                                    </li> -->
-                                    <li class="page-item" th:each="i: ${#numbers.sequence(1,totalPage)}">
-                                        <a class="page-link" th:if="${currentPage !=i}"
-                                            th:href="@{'patients?pageNo='+${i}+'&'+${orders}}">[[${i}]]</a>
-                                    </li>
+                                <!-- <span class="text-muted me-3">Total Service : <span th:text="${totalService}"></span>
+                                </span> -->
 
+                                <!-- <ul th:if="${catId!=null&&totalPages>1}"
+                                    class="pagination justify-content-end mb-0 list-unstyled">
                                     <li class="page-item">
-                                        <a class="page-link" th:if="${totalPage > currentPage}"
-                                            th:href="@{'patients?pageNo='+${currentPage+1}+'&'+${orders}}"
-                                            aria-label="Next">Next</a>
+                                        <a th:if="${currentPage >1}"
+                                            th:href="@{'/servicesManagement/filterCategory/' +${catId}+'/'+ ${currentPage - 1} }"
+                                            class="page-link" href="" aria-label="Prev">Prev</a>
+                                        <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
                                     </li>
+                                    <span th:each="i:${#numbers.sequence(1,totalPages)}">
+                                        <li class="page-item"><a th:if="${currentPage != i}"
+                                                th:href="@{'/servicesManagement/filterCategory/' +${catId}+'/'+${i}}"
+                                                class="page-link" href="">[[${i}]]</a>
+                                        </li>
+                                        <li th:unless="${currentPage != i}" class="page-item active"><a
+                                                class="page-link" href="">[[${i}]]</a></li>
+                                    </span>
                                     <li class="page-item">
-                                        <a class="page-link" th:if="${totalPage > currentPage}"
-                                            th:href="@{'patients?pageNo='+${totalPage}+'&'+${orders}}"
-                                            aria-label="Next">Last</a>
+                                        <a th:if="${currentPage < totalPages}"
+                                            th:href="@{'/servicesManagement/filterCategory/' +${catId}+'/'+ ${currentPage + 1}}"
+                                            class="page-link" href="" aria-label="Next">Next</a>
+                                        <span class="page-link pe-none"
+                                            th:unless="${currentPage < totalPages}">Next</span>
+                                    </li>
+                                </ul> -->
+
+                                <ul 
+                                    class="pagination justify-content-end mb-0 list-unstyled">
+                                    <li class="page-item">
+                                        <a th:if="${currentPage >1}"
+                                            th:href="@{'/admin/feedback/page/' + ${currentPage - 1} }"
+                                            class="page-link" href="" aria-label="Prev">Prev</a>
+                                        <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                                    </li>
+                                    <span th:each="i:${#numbers.sequence(1,totalPages)}">
+                                        <li class="page-item"><a th:if="${currentPage != i}"
+                                                th:href="@{'/admin/feedback/page/'+${i}}" class="page-link"
+                                                href="">[[${i}]]</a>
+                                        </li>
+                                        <li th:unless="${currentPage != i}" class="page-item active"><a
+                                                class="page-link" href="">[[${i}]]</a></li>
+                                    </span>
+                                    <li class="page-item">
+                                        <a th:if="${currentPage < totalPages}"
+                                            th:href="@{'/admin/feedback/page/' + ${currentPage + 1}}"
+                                            class="page-link" href="" aria-label="Next">Next</a>
+                                        <span class="page-link pe-none"
+                                            th:unless="${currentPage < totalPages}">Next</span>
+                                    </li>
+                                </ul><!--end pagination-->
+                                
+                                <!-- <ul th:if="${sortField==null&&status==null&&catId==null&&searchText!=null&&totalPages>1}"
+                                    class="pagination justify-content-end mb-0 list-unstyled">
+                                    <li class="page-item">
+                                        <a th:if="${currentPage >1}"
+                                            th:href="@{'/servicesManagement/page/' + ${currentPage - 1}+'/'+ ${searchText} }"
+                                            class="page-link" href="" aria-label="Prev">Prev</a>
+                                        <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                                    </li>
+                                    <span th:each="i:${#numbers.sequence(1,totalPages)}">
+                                        <li class="page-item"><a th:if="${currentPage != i}"
+                                                th:href="@{'/servicesManagement/page/'+${i}+'/'+ ${searchText}}"
+                                                class="page-link" href="">[[${i}]]</a>
+                                        </li>
+                                        <li th:unless="${currentPage != i}" class="page-item active"><a
+                                                class="page-link" href="">[[${i}]]</a></li>
+                                    </span>
+                                    <li class="page-item">
+                                        <a th:if="${currentPage < totalPages}"
+                                            th:href="@{'/servicesManagement/page/' + ${currentPage + 1}+'/'+ ${searchText}}"
+                                            class="page-link" href="" aria-label="Next">Next</a>
+                                        <span class="page-link pe-none"
+                                            th:unless="${currentPage < totalPages}">Next</span>
                                     </li>
                                 </ul>
-
+                                <ul th:if="${status!=null&&totalPages>1}"
+                                    class="pagination justify-content-end mb-0 list-unstyled">
+                                    <li class="page-item">
+                                        <a th:if="${currentPage >1}"
+                                            th:href="@{'/servicesManagement/filterStatus/'+${status}+'/' +${currentPage - 1}}"
+                                            class="page-link" href="" aria-label="Prev">Prev</a>
+                                        <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                                    </li>
+                                    <span th:each="i:${#numbers.sequence(1,totalPages)}">
+                                        <li class="page-item"><a th:if="${currentPage != i}"
+                                                th:href="@{'/servicesManagement/filterStatus/'+${status}+'/' +${i}}"
+                                                class="page-link" href="">[[${i}]]</a>
+                                        </li>
+                                        <li th:unless="${currentPage != i}" class="page-item active"><a
+                                                class="page-link" href="">[[${i}]]</a></li>
+                                    </span>
+                                    <li class="page-item">
+                                        <a th:if="${currentPage < totalPages}"
+                                            th:href="@{'/servicesManagement/filterStatus/'+${status}+'/' + ${currentPage + 1}}"
+                                            class="page-link" href="" aria-label="Next">Next</a>
+                                        <span class="page-link pe-none"
+                                            th:unless="${currentPage < totalPages}">Next</span>
+                                    </li>
+                                </ul>
+                                <ul th:if="${sortField!=null&&totalPages>1}"
+                                    class="pagination justify-content-end mb-0 list-unstyled">
+                                    <li class="page-item">
+                                        <a th:if="${currentPage >1}"
+                                            th:href="@{'/servicesManagement/sort/'+${currentPage - 1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+                                            class="page-link" href="" aria-label="Prev">Prev</a>
+                                        <span class="page-link pe-none" th:unless="${currentPage >1}">Prev</span>
+                                    </li>
+                                    <span th:each="i:${#numbers.sequence(1,totalPages)}">
+                                        <li class="page-item"><a th:if="${currentPage != i}"
+                                                th:href="@{'/servicesManagement/sort/'+${i}}+'?sortField='+${sortField}+'&sortDir='+${sortDir} "
+                                                class="page-link" href="">[[${i}]]</a>
+                                        </li>
+                                        <li th:unless="${currentPage != i}" class="page-item active"><a
+                                                class="page-link" href="">[[${i}]]</a></li>
+                                    </span>
+                                    <li class="page-item">
+                                        <a th:if="${currentPage < totalPages}"
+                                            th:href="@{'/servicesManagement/sort/'+${currentPage + 1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}"
+                                            class="page-link" href="" aria-label="Next">Next</a>
+                                        <span class="page-link pe-none"
+                                            th:unless="${currentPage < totalPages}">Next</span>
+                                    </li>
+                                </ul> -->
                             </div>
                         </div><!--end col-->
-                    </div><!--end col-->
+                        <!-- PAGINATION END -->
+                    </div><!--end row-->
                     <!-- PAGINATION END -->
                 </div><!--end row-->
             </div>

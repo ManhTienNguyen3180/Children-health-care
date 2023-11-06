@@ -109,7 +109,14 @@ public class PatientService {
       return null;
     }
   }
-
+public List<patient> findByUserId(int user_id) {
+    List<patient> p = patientRepo.findByUser_id(user_id);
+    if (!p.isEmpty()) {
+      return p;
+    } else {
+      return null;
+    }
+  }
   public void save(patient patient) {
     patientRepo.save(patient);
   }
@@ -145,4 +152,13 @@ public class PatientService {
       throw new IllegalStateException("Patient with the same ID already exists.");
     }
   }
+
+  public void deletePatient(int id) {
+    patientRepo.deleteById(id);
+  }
+
+  public void savePantient(int gender, String name, String email, String phone, int id) {
+    patientRepo.savePatientChange(gender, name, email, phone, id);
+  }
+  
 }
