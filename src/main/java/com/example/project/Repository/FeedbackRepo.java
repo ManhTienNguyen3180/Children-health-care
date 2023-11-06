@@ -1,6 +1,7 @@
 package com.example.project.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,7 +13,7 @@ import com.example.project.entity.feedbackreservation;
 
 @Repository
 public interface FeedbackRepo extends JpaRepository<feedbackreservation, Integer> {
-        @Query(value = "select f.id, r.reservation_id,r.patient_name,d.service_name,c.name,r.date,f.date,f.rating,r.doctor_name\n"
+        @Query(value = "select f.id, r.reservation_id,r.patient_name,d.service_name,c.name,r.date,f.feedback_date,f.rating,r.doctor_name\n"
                         + //
                         "from reservation r , feedbackreservation f ,reservationdetail d, category_service c,service s\n"
                         + //
@@ -32,7 +33,7 @@ public interface FeedbackRepo extends JpaRepository<feedbackreservation, Integer
                         "and d.service_id=s.service_id", nativeQuery = true)
         Page<Object[]> paginated(PageRequest pageable);
 
-        @Query(value = "select distinct f.id,c.name,r.doctor_name,r.date,f.rating,f.comment,f.date,r.total_cost,r.time,r.patient_name\n"
+        @Query(value = "select distinct f.id,c.name,r.doctor_name,r.date,f.rating,f.comment,f.feedback_date,r.total_cost,r.time,r.patient_name\n"
                         + //
                         "from reservation r , feedbackreservation f ,reservationdetail d, category_service c,service s\n"
                         + //
@@ -49,7 +50,7 @@ public interface FeedbackRepo extends JpaRepository<feedbackreservation, Integer
                         "and f.id=?1", nativeQuery = true)
         List<Object[]> getService(int id);
 
-        @Query(value = "select f.comment,f.date,f.rating,u.username,u.image\n" + //
+        @Query(value = "select f.comment,f.feedback_date,f.rating,u.username,u.image\n" + //
                         "from reservation r , feedbackreservation f , patient p, user u\n" + //
                         "where r.reservation_id = f.reservation_id \n" + //
                         "and r.patient_id=p.patient_id\n" + //
@@ -57,7 +58,7 @@ public interface FeedbackRepo extends JpaRepository<feedbackreservation, Integer
                         "and r.doctor_id=?1", nativeQuery = true)
         List<Object[]> getFeedbackbyDoc(int id);
 
-        @Query(value = "select f.comment,f.date,f.rating,u.username,u.image\n" + //
+        @Query(value = "select f.comment,f.feedback_date,f.rating,u.username,u.image\n" + //
                         "from reservation r , feedbackreservation f , patient p, user u\n" + //
                         "where r.reservation_id = f.reservation_id \n" + //
                         "and r.patient_id=p.patient_id\n" + //
@@ -77,7 +78,7 @@ public interface FeedbackRepo extends JpaRepository<feedbackreservation, Integer
         @Query(value = "select distinct rating from feedbackreservation f", nativeQuery = true)
         List<Integer> Rating();
 
-        @Query(value = "select f.comment,f.date,f.rating,u.username,u.image,r.doctor_name\n" + //
+        @Query(value = "select f.comment,f.feedback_date,f.rating,u.username,u.image,r.doctor_name\n" + //
                         "from reservation r , feedbackreservation f ,reservationdetail d, service s,patient p, user u\n" + //
                         "where r.reservation_id = f.reservation_id \n" + //
                         "and d.reservation_id=r.reservation_id\n" + //
@@ -86,4 +87,6 @@ public interface FeedbackRepo extends JpaRepository<feedbackreservation, Integer
                         "and p.user_id=u.user_id\n" + //
                         "and s.service_id=?1", nativeQuery = true)
         List<Object[]> getFeedbackByService(int s);
+        @Query("SELECT u FROM feedbackreservation u where reservation_id=?1")
+        Optional<feedbackreservation> findByReserId(int id);
 }

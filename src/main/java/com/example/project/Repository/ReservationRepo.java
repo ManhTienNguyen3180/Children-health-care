@@ -2,6 +2,7 @@ package com.example.project.Repository;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +25,9 @@ public interface ReservationRepo extends JpaRepository<reservation, Integer> {
 
     @Query(value = "select count(reservation_id) from reservation r where r.doctor_id = ?1 and r.date = ?2", nativeQuery = true)
     int countByReservationId(int doctorid, Date date);
+
+    @Query("SELECT u FROM reservation u where patient_id=?1 ")
+    Optional<reservation> findByPatient(int patient_id, int reservation_id);
 
     @Query("SELECT u FROM reservation u where patient_id=?1")
     List<reservation> findByPatient_id(int patient_id);

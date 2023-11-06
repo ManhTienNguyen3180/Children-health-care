@@ -44,95 +44,7 @@
 
     <div class="page-wrapper doctris-theme toggled">
         <nav id="sidebar" class="sidebar-wrapper">
-            <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
-                <div class="sidebar-brand">
-                    <a th:href="@{/home}">
-                        <img th:src="@{/images/logo-dark.png}" height="24" class="logo-light-mode" alt="">
-                        <img th:src="@{/images/logo-light.png}" height="24" class="logo-dark-mode" alt="">
-                    </a>
-                </div>
-
-                <ul class="sidebar-menu pt-3">
-                    <li><a th:href="@{/admin/dashboard}"><i
-                                class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
-                    <li><a th:href="@{/admin/appointment}"><i
-                                class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a></li>
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="fa-solid fa-user fa-xs"
-                                style="margin-right: 5px;"></i>User</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a th:href="@{/admin/users}">All Users</a></li>
-                                <li><a th:href="@{/admin/add-user}">Add Users</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a th:href="@{/admin/doctors}">Doctors</a></li>
-                                <li><a th:href="@{/admin/add-doctor}">Add Doctor</a></li>
-                                <li><a th:href="@{/admin/schedule}">Schedule</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Patients</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a th:href="@{/admin/patients}">All Patients</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a class="" th:href="@{/blogsManagement}">Blogs</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Services</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a class="" th:href="@{/servicesManagement}">Services</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-columns me-2 d-inline-block"></i>Sliders</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a class="" th:href="@{/slidersManagement}">Sliders</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-feedback me-2 d-inline-block"></i></i>Feedback</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a class="" th:href="@{/admin/feedback}">Feedback</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    
-
-                </ul>
-                <!-- sidebar-menu  -->
-            </div>
-            <!-- sidebar-content  -->
-            <ul class="sidebar-footer list-unstyled mb-0">
-                <li class="list-inline-item mb-0 ms-1">
-                    <a href="#" class="btn btn-icon btn-pills btn-soft-primary">
-                        <i class="uil uil-comment icons"></i>
-                    </a>
-                </li>
-            </ul>
+            <div lang="en" th:include="admin/sidebar :: sidebar"></div>
         </nav>
         <!-- sidebar-wrapper  -->
 
@@ -167,31 +79,31 @@
                     <ul class="list-unstyled mb-0">
                         
 
-                        <li class="list-inline-item mb-0 ms-1">
+                    <li class="list-inline-item mb-0 ms-1">
                             <div class="dropdown dropdown-primary">
                                 <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                        src="../images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle"
+                                        th:src="@{${session.user.image}}" class="avatar avatar-ex-small rounded-circle"
                                         alt=""></button>
                                 <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                     style="min-width: 200px;">
                                     <a class="dropdown-item d-flex align-items-center text-dark"
-                                        href="https://shreethemes.in/doctris/layouts/admin/profile">
-                                        <img src="../images/doctors/01.jpg"
+                                        th:href="@{/user-profile}">
+                                        <img th:src="@{${session.user.image}}"
                                             class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                         <div class="flex-1 ms-2">
-                                            <span class="d-block mb-1">Calvin Carlo</span>
-                                            <small class="text-muted">Orthopedic</small>
+                                            <span class="d-block mb-1" th:text="@{${session.user.full_name}}"></span>
+
                                         </div>
                                     </a>
                                     <a class="dropdown-item text-dark" href="dashboard"><span
                                             class="mb-0 d-inline-block me-1"><i
                                                 class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
-                                    <a class="dropdown-item text-dark" href="dr-profile"><span
+                                    <a class="dropdown-item text-dark" th:href="@{/user-profile}"><span
                                             class="mb-0 d-inline-block me-1"><i
                                                 class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
                                     <div class="dropdown-divider border-top"></div>
-                                    <a class="dropdown-item text-dark" href="lock-screen"><span
+                                    <a class="dropdown-item text-dark" th:href="@{/logout}"><span
                                             class="mb-0 d-inline-block me-1"><i
                                                 class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                                 </div>

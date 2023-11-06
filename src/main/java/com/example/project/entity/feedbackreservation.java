@@ -2,6 +2,7 @@ package com.example.project.entity;
 
 import java.sql.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,8 +19,14 @@ public class feedbackreservation {
     private int reservation_id;
     private int rating;
     private String comment;
+    @Column(name = "FeedbackDate")
     private Date date;
-    
+    private String Doctor_Knowledge;
+    private String Nurse_Patience;
+    private String Nurse_Knowledge;
+    private String Waiting_Time;
+    private String Hygiene;
+    private String schedule_create;
     public feedbackreservation() {
     }
     public feedbackreservation(int id, int reservation_id, int rating, String comment, Date date) {
@@ -28,6 +35,39 @@ public class feedbackreservation {
         this.rating = rating;
         this.comment = comment;
         this.date = date;
+    }
+    
+    
+   
+    public String getDoctor_Knowledge() {
+        return Doctor_Knowledge;
+    }
+    public void setDoctor_Knowledge(String doctor_Knowledge) {
+        Doctor_Knowledge = doctor_Knowledge;
+    }
+    public String getNurse_Patience() {
+        return Nurse_Patience;
+    }
+    public void setNurse_Patience(String nurse_Patience) {
+        Nurse_Patience = nurse_Patience;
+    }
+    public String getNurse_Knowledge() {
+        return Nurse_Knowledge;
+    }
+    public void setNurse_Knowledge(String nurse_Knowledge) {
+        Nurse_Knowledge = nurse_Knowledge;
+    }
+    public String getWaiting_Time() {
+        return Waiting_Time;
+    }
+    public void setWaiting_Time(String waiting_Time) {
+        Waiting_Time = waiting_Time;
+    }
+    public String getHygiene() {
+        return Hygiene;
+    }
+    public void setHygiene(String hygiene) {
+        Hygiene = hygiene;
     }
     public int getId() {
         return id;
@@ -58,6 +98,12 @@ public class feedbackreservation {
     }
     public void setDate(Date date) {
         this.date = date;
+    }
+    public String getSchedule_create() {
+        return schedule_create;
+    }
+    public void setSchedule_create(String schedule_create) {
+        this.schedule_create = schedule_create;
     }
 
     

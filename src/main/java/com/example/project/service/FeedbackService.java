@@ -55,5 +55,12 @@ public class FeedbackService {
     public List<Object[]> getFeedbackByS(int id){
         return repo.getFeedbackByService(id);
     }
+    public void addNewFeedback(feedbackreservation f) {
+        if (repo.findByReserId(f.getReservation_id()).isPresent()) {
 
+        } else {
+            repo.save(f);
+        }
+    }
+    
 }

@@ -261,7 +261,8 @@
                                             </div>
                                         </div>
                                         <div th:if="${reservation.status==2}" style="text-align: right;">
-                                            <button class="btn btn-primary">Feedback</button>
+                                            
+                                              <a  th:href="@{/feedback?id=}+${patient.patient_id}+'&reservationid='+${reservation.reservation_id}" class="btn btn-primary" >Feedback</a>
                                         </div>
                                         <hr>
                                     </div>

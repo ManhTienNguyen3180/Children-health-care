@@ -330,7 +330,7 @@ public class ReservationController {
         int pageSize = 3;
 
         user u = (user) session.getAttribute("user");
-
+     
         model.addAttribute("detail", ReservationService.findAllReserDetail());
         Page<reservation> page = ReservationService.findPaginated(u.getUser_id(), pageNo, pageSize);
         List<reservation> listB = page.getContent();

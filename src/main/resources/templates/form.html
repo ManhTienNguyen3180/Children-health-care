@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Doctris - Doctor Appointment Booking System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
+  <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
+  <meta name="author" content="Shreethemes" />
+  <meta name="email" content="support@shreethemes.in" />
+  <meta name="website" content="https://shreethemes.in" />
+  <meta name="Version" content="v1.2.0" />
+  <!-- favicon -->
+  <link rel="shortcut icon" href="images/favicon.ico.png">
+  <!-- Bootstrap -->
+  <link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <!-- Icons -->
+  <link th:href="@{/css/materialdesignicons.min.css}" href="css/materialdesignicons.min.css" rel="stylesheet"
+    type="text/css" />
+  <link th:href="@{/css/remixicon.css}" href="css/remixicon.css" rel="stylesheet" type="text/css" />
+  <link th:href="@{/https://unicons.iconscout.com/release/v3.0.6/css/line.css}"
+    href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
+  <!-- Css -->
+  <link th:href="@{/css/style.min.css}" href="css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+</head>
+
+<body>
+
+  <!-- Navbar STart -->
+  <header id="topnav" class="defaultscroll sticky">
+    <div class="container">
+      <!-- Logo container-->
+      <div>
+        <a class="logo" href="home">
+
+          <img src="images/logo-dark.png" height="24" alt="">
+
+
+
+        </a>
+      </div>
+      <!-- End Logo container-->
+
+      <!-- Start Mobile Toggle -->
+      <div class="menu-extras">
+        <div class="menu-item">
+          <!-- Mobile menu toggle-->
+          <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+            <div class="lines">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </a>
+          <!-- End mobile menu toggle-->
+        </div>
+      </div>
+      <!-- End Mobile Toggle -->
+
+      <!-- Start Dropdown -->
+      <!-- <ul  th:if="${session.user != NULL}" class="dropdowns list-inline mb-0">
+
+                    <li class="list-inline-item mb-0 ms-1">
+                        <div class="dropdown dropdown-primary" >
+                            <a href="user-profile"><button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img  th:src="${session.user.image}" src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button></a>
+                            <a th:href="@{/logout}" href="logout">Log out</a>
+                        </div>
+                        
+                    </li>
+                </ul> -->
+      <ul th:if="${session.user != NULL}" class="dropdowns list-inline mb-0">
+        <!-- <li class="list-inline-item mb-0">
+                        <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                            aria-controls="offcanvasRight">
+                            <div class="btn btn-icon btn-pills btn-primary"><i data-feather="settings"
+                                    class="fea icon-sm"></i></div>
+                        </a>
+                    </li> -->
+
+        <!-- <li class="list-inline-item mb-0 ms-1">
+                    <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                        <i class="uil uil-search"></i>
+                    </a>
+                </li> -->
+
+        <li class="list-inline-item mb-0 ms-1">
+          <div class="dropdown dropdown-primary">
+            <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false"><img th:src="${session.user.image}" src="images/doctors/01.jpg"
+                class="avatar avatar-ex-small rounded-circle" alt=""></button>
+            <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
+              style="min-width: 200px;">
+              <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html">
+                <img th:src="${session.user.image}" src="images/doctors/01.jpg"
+                  class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                <div class="flex-1 ms-2">
+                  <span th:text="${session.user.full_name}" class="d-block mb-1">Calvin Carlo</span>
+                  <!-- <small  class="text-muted">Orthopedic</small> -->
+                </div>
+              </a>
+              <a class="dropdown-item text-dark" href="doctor-dashboard.html"><span class="mb-0 d-inline-block me-1"><i
+                    class="uil uil-dashboard align-middle h6"></i></span> My reservation</a>
+              <a class="dropdown-item text-dark" href="user-profile"><span class="mb-0 d-inline-block me-1"><i
+                    class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+              <div class="dropdown-divider border-top"></div>
+              <a class="dropdown-item text-dark" th:href="@{/logout}" href="logout"><span
+                  class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span>
+                Logout</a>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <ul th:if="${session.user == NULL}" class="dropdowns list-inline mb-8">
+
+        <li class="list-inline-item mb-0">
+          <a href="login">
+            <div class="btn btn-primary">Login/signup</div>
+          </a>
+        </li>
+      </ul>
+      <ul class="dropdowns list-inline mb-8">
+        <!-- <li class="list-inline-item mb-0">
+                        <a href="" >
+                            <div class="btn btn-primary">Book Appointment</div>
+                        </a>
+                    </li> -->
+        <li class="list-inline-item mb-0">
+          <a href="bookingappointment">
+            <div class="btn btn-primary">Book Appointment</div>
+          </a>
+        </li>
+
+      </ul>
+
+
+      <!-- Start Dropdown -->
+
+      <div id="navigation">
+        <!-- Navigation Menu-->
+        <ul class="navigation-menu nav-left">
+          <li class="has-submenu parent-menu-item">
+            <a href="home">Home</a>
+
+          </li>
+
+          <li class="has-submenu parent-parent-menu-item">
+            <a href="/doctor">Doctors</a>
+
+          </li>
+
+          <li class="has-submenu parent-parent-menu-item">
+            <a href="/service">Services</a>
+
+          </li>
+
+          <li class="has-submenu parent-parent-menu-item">
+            <a href="/blog">Blog</a>
+
+          </li>
+
+        </ul>
+      </div>
+    </div><!--end container-->
+  </header><!--end header-->
+  <!-- Navbar End -->
+
+  <!-- Hero Start -->
+
+  <div class="position-relative">
+    <div class="shape overflow-hidden text-white">
+      <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+      </svg>
+    </div>
+  </div>
+  <!-- Hero End -->
+  <script src="https://cdn01.jotfor.ms/static/prototype.forms.js?3.3.46950" type="text/javascript"></script>
+  <script src="https://cdn02.jotfor.ms/static/jotform.forms.js?3.3.46950" type="text/javascript"></script>
+  <script src="https://cdn03.jotfor.ms/js/payments/validategateways.js?v=3.3.46950" type="text/javascript"></script>
+  <script src="https://cdn01.jotfor.ms/s/umd/fb149589918/for-widgets-server.js?v=3.3.46950"
+    type="text/javascript"></script>
+  </script>
+  <script type="text/javascript">	JotForm.newDefaultTheme = false;
+    JotForm.extendsNewTheme = true;
+    JotForm.singleProduct = false;
+    JotForm.newPaymentUIForNewCreatedForms = false;
+    JotForm.texts = { "confirmEmail": "E-mail does not match", "pleaseWait": "Please wait...", "validateEmail": "You need to validate this e-mail", "confirmClearForm": "Are you sure you want to clear the form", "lessThan": "Your score should be less than or equal to", "incompleteFields": "There are incomplete required fields. Please complete them.", "required": "This field is required.", "requireOne": "At least one field required.", "requireEveryRow": "Every row is required.", "requireEveryCell": "Every cell is required.", "email": "Enter a valid e-mail address", "alphabetic": "This field can only contain letters", "numeric": "This field can only contain numeric values", "alphanumeric": "This field can only contain letters and numbers.", "cyrillic": "This field can only contain cyrillic characters", "url": "This field can only contain a valid URL", "currency": "This field can only contain currency values.", "fillMask": "Field value must fill mask.", "uploadExtensions": "You can only upload following files:", "noUploadExtensions": "File has no extension file type (e.g. .txt, .png, .jpeg)", "uploadFilesize": "File size cannot be bigger than:", "uploadFilesizemin": "File size cannot be smaller than:", "gradingScoreError": "Score total should only be less than or equal to", "inputCarretErrorA": "Input should not be less than the minimum value:", "inputCarretErrorB": "Input should not be greater than the maximum value:", "maxDigitsError": "The maximum digits allowed is", "minCharactersError": "The number of characters should not be less than the minimum value:", "maxCharactersError": "The number of characters should not be more than the maximum value:", "freeEmailError": "Free email accounts are not allowed", "minSelectionsError": "The minimum required number of selections is ", "maxSelectionsError": "The maximum number of selections allowed is ", "pastDatesDisallowed": "Date must not be in the past.", "dateLimited": "This date is unavailable.", "dateInvalid": "This date is not valid. The date format is {format}", "dateInvalidSeparate": "This date is not valid. Enter a valid {element}.", "ageVerificationError": "You must be older than {minAge} years old to submit this form.", "multipleFileUploads_typeError": "{file} has invalid extension. Only {extensions} are allowed.", "multipleFileUploads_sizeError": "{file} is too large, maximum file size is {sizeLimit}.", "multipleFileUploads_minSizeError": "{file} is too small, minimum file size is {minSizeLimit}.", "multipleFileUploads_emptyError": "{file} is empty, please select files again without it.", "multipleFileUploads_uploadFailed": "File upload failed, please remove it and upload the file again.", "multipleFileUploads_onLeave": "The files are being uploaded, if you leave now the upload will be cancelled.", "multipleFileUploads_fileLimitError": "Only {fileLimit} file uploads allowed.", "dragAndDropFilesHere_infoMessage": "Drag and drop files here", "chooseAFile_infoMessage": "Choose a file", "maxFileSize_infoMessage": "Max. file size", "generalError": "There are errors on the form. Please fix them before continuing.", "generalPageError": "There are errors on this page. Please fix them before continuing.", "wordLimitError": "Too many words. The limit is", "wordMinLimitError": "Too few words.  The minimum is", "characterLimitError": "Too many Characters.  The limit is", "characterMinLimitError": "Too few characters. The minimum is", "ccInvalidNumber": "Credit Card Number is invalid.", "ccInvalidCVC": "CVC number is invalid.", "ccInvalidExpireDate": "Expire date is invalid.", "ccInvalidExpireMonth": "Expiration month is invalid.", "ccInvalidExpireYear": "Expiration year is invalid.", "ccMissingDetails": "Please fill up the credit card details.", "ccMissingProduct": "Please select at least one product.", "ccMissingDonation": "Please enter numeric values for donation amount.", "disallowDecimals": "Please enter a whole number.", "restrictedDomain": "This domain is not allowed", "ccDonationMinLimitError": "Minimum amount is {minAmount} {currency}", "requiredLegend": "All fields marked with * are required and must be filled.", "geoPermissionTitle": "Permission Denied", "geoPermissionDesc": "Check your browser's privacy settings.", "geoNotAvailableTitle": "Position Unavailable", "geoNotAvailableDesc": "Location provider not available. Please enter the address manually.", "geoTimeoutTitle": "Timeout", "geoTimeoutDesc": "Please check your internet connection and try again.", "appointmentSelected": "You’ve selected {time} on {date}", "noSlotsAvailable": "No slots available", "slotUnavailable": "{time} on {date} has been selected is unavailable. Please select another slot.", "multipleError": "There are {count} errors on this page. Please correct them before moving on.", "oneError": "There is {count} error on this page. Please correct it before moving on.", "doneMessage": "Well done! All errors are fixed.", "doneButton": "Done", "reviewSubmitText": "Review and Submit", "nextButtonText": "Next", "prevButtonText": "Previous", "seeErrorsButton": "See Errors", "notEnoughStock": "Not enough stock for the current selection", "notEnoughStock_remainedItems": "Not enough stock for the current selection ({count} items left)", "soldOut": "Sold Out", "justSoldOut": "Just Sold Out", "selectionSoldOut": "Selection Sold Out", "subProductItemsLeft": "({count} items left)", "startButtonText": "START", "submitButtonText": "Submit", "submissionLimit": "Sorry! Only one entry is allowed. Multiple submissions are disabled for this form.", "reviewBackText": "Back to Form", "seeAllText": "See All", "progressMiddleText": "of", "fieldError": "field has an error.", "error": "Error" };
+    JotForm.newPaymentUI = true;
+    JotForm.submitError = "jumpToFirstError";
+    window.addEventListener('DOMContentLoaded', function () { window.brandingFooter.init({ "formID": 233023878891465, "campaign": "powered_by_jotform_le", "isCardForm": false, "isLegacyForm": true }) }); JotForm.isFullSource = true;
+
+    JotForm.init(function () {
+      /*INIT-START*/
+
+      $('input_13').rating({
+        stars: '5',
+        inputClassName: 'form-textbox',
+        imagePath: 'https://cdn.jotfor.ms/images/stars_v2.png',
+        cleanFirst: true, value: ''
+      });
+      $('input_13').setAttribute('role', 'radiogroup');
+      $('input_13').setAttribute('aria-labelledby', 'label_13');
+
+      Array.from($('input_13').children).map(function (e, i) {
+        e.setAttribute('tabindex', 0);
+        if (i < 5) { e.setAttribute('aria-label', (i + 1) + ' out of 5'); }
+        e.setAttribute('role', 'radio');
+        e.setAttribute('aria-describedby', 'label_13');
+        e.classList.add('form-star-rating-star', 'Stars');
+        e.onkeypress = function (k) { if (k.keyCode == 13 || k.keyCode == 32) e.click() }
+      });
+      if (window.JotForm && JotForm.accessible) $('input_6').setAttribute('tabindex', 0);
+      /*INIT-END*/
+    });
+
+    setTimeout(function () {
+      JotForm.paymentExtrasOnTheFly([null, { "name": "patientFeedback", "qid": "1", "text": "Patient Feedback ", "type": "control_head" }, { "name": "submit", "qid": "2", "text": "Submit", "type": "control_button" }, null, { "description": "", "name": "overallSatisfaction", "qid": "4", "text": "Overall satisfaction", "type": "control_matrix" }, null, { "description": "", "name": "howCan", "qid": "6", "subLabel": "", "text": "How can we improve our service?", "type": "control_textarea" }, null, null, null, null, null, null, { "description": "", "name": "pleaseRate", "qid": "13", "subLabel": "", "text": "Please rate the entire process of visiting us?", "type": "control_rating" }, null, null, { "name": "typeA16", "qid": "16", "text": "ProgressBar", "type": "control_widget" }, null, null, null, null, { "description": "", "name": "pleaseVerify", "qid": "21", "text": "Please verify that you are human", "type": "control_captcha" }, null, null, null, null, null, null, { "description": "", "name": "howDid", "qid": "28", "text": "How did you schedule?", "type": "control_radio" }]);
+    }, 20); 
+  </script>
+  <link type="text/css" rel="stylesheet" href="https://cdn01.jotfor.ms/themes/CSS/form-common.css?v=0bebe1b
+    " />
+  <style type="text/css">
+    @media print {
+      .form-section {
+        display: inline !important
+      }
+
+      .form-pagebreak {
+        display: none !important
+      }
+
+      .form-section-closed {
+        height: auto !important
+      }
+
+      .page-section {
+        position: initial !important
+      }
+    }
+  </style>
+  <link id="custom-font" type="text/css" rel="stylesheet" href="//cdn.jotfor.ms/fonts/?family=Inter" />
+  <link type="text/css" rel="stylesheet" href="https://cdn02.jotfor.ms/themes/CSS/defaultV2.css?v=0bebe1b
+    " />
+  <link type="text/css" rel="stylesheet"
+    href="https://cdn03.jotfor.ms/themes/CSS/64012b8864323209265bec99.css?v=3.3.46950&themeRevisionID=64102f3636353508d014b131" />
+  <link type="text/css" rel="stylesheet"
+    href="https://cdn01.jotfor.ms/css/styles/payment/payment_styles.css?3.3.46950" />
+  <link type="text/css" rel="stylesheet"
+    href="https://cdn02.jotfor.ms/css/styles/payment/payment_feature.css?3.3.46950" />
+  <link type="text/css" rel="stylesheet" href="https://cdn03.jotfor.ms/stylebuilder/donationBox.css?v=3.3.46950">
+  <style type="text/css" id="form-designer-style">
+    /* Injected CSS Code */
+
+    /* Begining of advanced designer */
+    /*PREFERENCES STYLE*/
+    /*  1 - Preferences style */
+    /*  1 - FONT FAMILY */
+    .form-all {
+      font-family: "Inter", sans-serif;
+    }
+
+    /* 2 - FORM WIDTH */
+    .form-all {
+      max-width: 752px;
+    }
+
+    /* 5 - FONT SIZE */
+    .form-all {
+      font-size: 16px;
+    }
+
+    /* 5 - input bg color */
+    .form-textbox,
+    .form-textarea,
+    .form-radio-other-input,
+    .form-checkbox-other-input,
+    .form-captcha input,
+    .form-spinner input {
+      background-color: #ffffff;
+    }
+
+    /* 10 - LINE SPACING */
+    .form-line {
+      margin-top: 12px;
+      margin-bottom: 12px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .supernova .form-all,
+    .form-all {
+      background-color: #ffffff;
+    }
+
+    .supernova {
+      background-color: #b2777f;
+    }
+
+    .supernova body {
+      background-color: transparent;
+    }
+
+    .form-all,
+    .form-label-top,
+    .form-label-left,
+    .form-label-right,
+    .form-html,
+    .form-checkbox-item label,
+    .form-radio-item label,
+    span.FITB .qb-checkbox-label,
+    span.FITB .qb-radiobox-label,
+    span.FITB .form-radio label,
+    span.FITB .form-checkbox label,
+    [data-blotid][data-type=checkbox] [data-labelid],
+    [data-blotid][data-type=radiobox] [data-labelid],
+    span.FITB-inptCont[data-type=checkbox] label,
+    span.FITB-inptCont[data-type=radiobox] label,
+    .form-sub-label {
+      color: #0d016a;
+    }
+
+    .form-all {
+      margin: 72px auto;
+    }
+
+    .form-all:before {
+      content: none;
+    }
+
+    /*PREFERENCES STYLE*/
+    /* 17 - INPUT WIDTHS */
+    /*  20 - FORM PADDING */
+    ul.form-section {
+      padding: 0px 38px;
+    }
+
+    .form-textbox,
+    .form-textarea,
+    li[data-type=control_fileupload] .qq-upload-button,
+    .signature-wrapper {
+      border-color: #0d016a;
+      color: #2c3345;
+    }
+
+    .form-textarea:hover,
+    .form-textbox:hover,
+    li[data-type=control_fileupload] .qq-upload-button:hover,
+    .signature-wrapper:hover {
+      border-color: rgba(13, 1, 106, 0.5);
+      box-shadow: 0 0 0 2px rgba(13, 1, 106, 0.25);
+    }
+
+    .form-textarea:focus,
+    .form-textbox:focus,
+    li[data-type=control_fileupload] .qq-upload-button:focus,
+    .signature-wrapper:focus {
+      border-color: #0d016a;
+      box-shadow: 0 0 0 3px rgba(13, 1, 106, 0.25);
+    }
+
+    /* Heights */
+    /* 11 - LINE PADDING */
+    /* LABEL STYLE */
+    /* 12 - ROUNDED INPUTS */
+    .form-radio-item,
+    .form-checkbox-item {
+      padding-bottom: 0px;
+    }
+
+    .form-radio-item:last-child,
+    .form-checkbox-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .form-single-column .form-checkbox-item,
+    .form-single-column .form-radio-item {
+      width: 100%;
+    }
+
+    .form-checkbox-item .editor-container div,
+    .form-radio-item .editor-container div {
+      position: relative;
+    }
+
+    .form-checkbox-item .editor-container div:before,
+    .form-radio-item .editor-container div:before {
+      display: inline-block;
+      vertical-align: middle;
+      left: 0;
+      width: 20px;
+      height: 20px;
+    }
+
+    .form-checkbox-item input,
+    .form-radio-item input {
+      margin-top: 2px;
+    }
+
+    .form-checkbox:checked+label:before,
+    .form-checkbox:checked+span:before {
+      background-color: #0d016a;
+      border-color: #0d016a;
+    }
+
+    .form-radio:checked+label:before,
+    .form-radio:checked+span:before {
+      border-color: #0d016a;
+    }
+
+    .form-radio:checked+label:after,
+    .form-radio:checked+span:after {
+      background-color: #0d016a;
+    }
+
+    .form-checkbox:hover+label:before,
+    .form-checkbox:hover+span:before,
+    .form-radio:hover+label:before,
+    .form-radio:hover+span:before {
+      border-color: rgba(13, 1, 106, 0.5);
+      box-shadow: 0 0 0 2px rgba(13, 1, 106, 0.25);
+    }
+
+    .form-checkbox:focus+label:before,
+    .form-checkbox:focus+span:before,
+    .form-radio:focus+label:before,
+    .form-radio:focus+span:before {
+      border-color: #0d016a;
+      box-shadow: 0 0 0 3px rgba(13, 1, 106, 0.25);
+    }
+
+    .submit-button {
+      font-size: 16px;
+      font-weight: normal;
+      font-family: inherit;
+    }
+
+    .submit-button {
+      min-width: 180px;
+    }
+
+    .form-all .form-pagebreak-back,
+    .form-all .form-pagebreak-next {
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+      font-weight: normal;
+    }
+
+    .form-all .form-pagebreak-back,
+    .form-all .form-pagebreak-next {
+      min-width: 128px;
+    }
+
+    li[data-type="control_image"] div {
+      text-align: left;
+    }
+
+    li[data-type="control_image"] img {
+      border: none;
+      border-width: 0px !important;
+      border-style: solid !important;
+      border-color: false !important;
+    }
+
+    .supernova {
+      height: 100%;
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+      background-position: center top;
+      background-attachment: fixed;
+      background-size: auto;
+      background-size: cover;
+    }
+
+    .supernova {
+      background-image: none;
+      background-image: url("https://www.jotform.com/uploads/beril/form_files/galaxy-bg-image.6405a140a1b097.18087512.png");
+    }
+
+    #stage {
+      background-image: none;
+      background-image: url("https://www.jotform.com/uploads/beril/form_files/galaxy-bg-image.6405a140a1b097.18087512.png");
+    }
+
+    /* | */
+    .form-all {
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+      background-position: center top;
+    }
+
+    .form-header-group {
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+      background-position: center top;
+    }
+
+    .header-large h1.form-header {
+      font-size: 2em;
+    }
+
+    .header-large h2.form-header {
+      font-size: 1.5em;
+    }
+
+    .header-large h3.form-header {
+      font-size: 1.17em;
+    }
+
+    .header-large h1+.form-subHeader {
+      font-size: 1em;
+    }
+
+    .header-large h2+.form-subHeader {
+      font-size: .875em;
+    }
+
+    .header-large h3+.form-subHeader {
+      font-size: .75em;
+    }
+
+    .header-default h1.form-header {
+      font-size: 2em;
+    }
+
+    .header-default h2.form-header {
+      font-size: 1.5em;
+    }
+
+    .header-default h3.form-header {
+      font-size: 1.17em;
+    }
+
+    .header-default h1+.form-subHeader {
+      font-size: 1em;
+    }
+
+    .header-default h2+.form-subHeader {
+      font-size: .875em;
+    }
+
+    .header-default h3+.form-subHeader {
+      font-size: .75em;
+    }
+
+    .header-small h1.form-header {
+      font-size: 2em;
+    }
+
+    .header-small h2.form-header {
+      font-size: 1.5em;
+    }
+
+    .header-small h3.form-header {
+      font-size: 1.17em;
+    }
+
+    .header-small h1+.form-subHeader {
+      font-size: 1em;
+    }
+
+    .header-small h2+.form-subHeader {
+      font-size: .875em;
+    }
+
+    .header-small h3+.form-subHeader {
+      font-size: .75em;
+    }
+
+    .form-header-group {
+      text-align: left;
+    }
+
+    .form-header-group {
+      font-family: "false", sans-serif;
+    }
+
+    div.form-header-group.header-large,
+    div.form-header-group.hasImage {
+      margin: 0px -38px;
+    }
+
+    div.form-header-group.header-large,
+    div.form-header-group.hasImage {
+      padding: 40px 52px;
+    }
+
+    .form-header-group .form-header,
+    .form-header-group .form-subHeader {
+      color: #0d016a;
+    }
+
+    .form-line-error {
+      background-color: #ffffff;
+    }
+
+    .form-line-error input:not(#coupon-input),
+    .form-line-error textarea,
+    .form-line-error .form-validation-error {
+      -webkit-transition-property: none;
+      -moz-transition-property: none;
+      -ms-transition-property: none;
+      -o-transition-property: none;
+      transition-property: none;
+      -webkit-transition-duration: 0.3s;
+      -moz-transition-duration: 0.3s;
+      -ms-transition-duration: 0.3s;
+      -o-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-timing-function: ease;
+      -moz-transition-timing-function: ease;
+      -ms-transition-timing-function: ease;
+      -o-transition-timing-function: ease;
+      transition-timing-function: ease;
+      border: 1px solid #fff4f4;
+      box-shadow: 0 0 3px #fff4f4;
+    }
+
+    .form-line-error .form-error-message {
+      position: absolute;
+      top: 0px;
+      bottom: auto;
+      right: 0;
+      float: left;
+      background-color: #f23a3c;
+      border-radius: 0;
+    }
+
+    .form-line-error .form-error-message img,
+    .form-line-error .form-error-message .form-error-arrow {
+      display: none;
+    }
+
+    .form-line-error {
+      -webkit-transition-property: none;
+      -moz-transition-property: none;
+      -ms-transition-property: none;
+      -o-transition-property: none;
+      transition-property: none;
+      -webkit-transition-duration: 0.3s;
+      -moz-transition-duration: 0.3s;
+      -ms-transition-duration: 0.3s;
+      -o-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-timing-function: ease;
+      -moz-transition-timing-function: ease;
+      -ms-transition-timing-function: ease;
+      -o-transition-timing-function: ease;
+      transition-timing-function: ease;
+      background-color: #fff4f4;
+    }
+
+    .form-header-group .form-header,
+    .form-header-group .form-subHeader {
+      color: #0d016a;
+    }
+
+    .form-line-active {
+      background-color: #edebff;
+    }
+
+    /* 29 - FORM COLUMNS */
+
+    /*__INSPECT_SEPERATOR__*/
+
+    /* Injected CSS Code */
+  </style>
+  <div class="row">
+    <div class="mb-3 col-md-7">
+      <form class="jotform-form" th:action="@{/feedback}" method="post" name="form_233023878891465" id="233023878891465"
+        accept-charset="utf-8" autocomplete="on"><input type="hidden" name="formID" value="233023878891465" /><input
+          type="hidden" id="JWTContainer" value="" /><input type="hidden" id="cardinalOrderNumber" value="" /><input
+          type="hidden" id="jsExecutionTracker" name="jsExecutionTracker" value="start-1698692174501" /><input
+          type="hidden" id="submitSource" name="submitSource" value="unknown" />
+        <div role="main" class="form-all">
+          <ul class="form-section page-section">
+            <li id="cid_1" class="form-input-wide" data-type="control_head">
+              <div class="form-header-group  header-large">
+                <div class="header-text httal htvam">
+                  <h1 id="header_1" class="form-header" data-component="header">Patient Feedback </h1>
+                  <div id="subHeader_1" class="form-subHeader">Please take a few moments to complete this form</div>
+                </div>
+              </div>
+            </li>
+            <li class="form-line" data-type="control_widget" id="id_16">
+              <div id="cid_16" class="form-input-wide" data-layout="full">
+                <div style="width:100%;text-align:Left" data-component="widget-directEmbed">
+                  <div class="direct-embed-widgets progress-bar-widget widget-static" data-type="direct-embed"
+                    style="width:1px;min-height:1px">
+                    <div class="direct-embed-16">
+                      <script type="text/javascript">
+                        var progressBarqid = "16";
+                        var onlyCountReq = "No";
+                        var fixedProgressBar = "No";
+                        var deleteLabelProgressBar = "";
+                        var fieldsProgressBar = "Fields Completed";
+                        var submitProgressBar = "Please Submit the Form";
+                        var requiredProgressBar = "Required Fields Complete";
+                        var barColor = "#336CFF";
+                        var theme = "Island Blue";
+                      </script>
+                      <link href="//widgets.jotform.io/progressBar/min/styles.min.css" rel="stylesheet"
+                        media="screen" />
+                      <script src="//widgets.jotform.io/progressBar/min/scripts.min.js"></script>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="form-line jf-required" data-type="control_radio" id="id_28"><label
+                class="form-label form-label-top form-label-auto" id="label_28" for="input_28" aria-hidden="false"> How
+                did
+                you schedule?<span class="form-required">*</span> </label>
+              <div id="cid_28" class="form-input-wide jf-required" data-layout="full">
+                <div class="form-single-column" role="group" aria-labelledby="label_28" data-component="radio">
+                  <span class="form-radio-item" style="clear:left">
+                    <span class="dragger-item"></span>
+                    <input type="radio" aria-describedby="label_28" class="form-radio validate[required]"
+                      id="input_28_0" name="schedule" checked="" value="Online" required="" />
+                    <label id="label_input_28_0" for="input_28_0">Online</label>
+                  </span>
+                  <span class="form-radio-item" style="clear:left"><span class="dragger-item"></span>
+                    <input type="radio" aria-describedby="label_28" class="form-radio validate[required]"
+                      id="input_28_1" name="schedule" value="Offline" required="" />
+                    <label id="label_input_28_1" for="input_28_1">Offline</label>
+                  </span>
+                  <span class="form-radio-item formRadioOther" style="clear:left">
+                    <input type="radio" class="form-radio-other form-radio validate[required]" name="schedule"
+                      id="other_28" value="other" tabindex="0" aria-label="Other" />
+                    <label id="label_other_28" style="text-indent:0" for="other_28">Other</label>
+                    <span id="other_28_input" class="other-input-container" style="display:none">
+                      <input type="text" class="form-radio-other-input form-textbox" name="schedule[other]"
+                        data-otherhint="Other" size="15" id="input_28"
+                        data-placeholder="Please type another option here"
+                        placeholder="Please type another option here" />
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </li>
+            <li class="form-line jf-required" data-type="control_matrix" id="id_4"><label
+                class="form-label form-label-top form-label-auto" id="label_4" for="input_4" aria-hidden="false">
+                Overall
+                satisfaction<span class="form-required">*</span> </label>
+              <div id="cid_4" class="form-input-wide jf-required" data-layout="full">
+                <table summary="" aria-labelledby="label_4" cellPadding="4" cellSpacing="0" class="form-matrix-table"
+                  data-component="matrix">
+                  <tr class="form-matrix-tr form-matrix-header-tr">
+                    <th class="form-matrix-th" style="border:none"> </th>
+                    <th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_0"><label
+                        id="label_4_col_0">Very satisfied</label></th>
+                    <th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_1"><label
+                        id="label_4_col_1">Satisfied</label></th>
+                    <th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_2"><label
+                        id="label_4_col_2">Neutral</label></th>
+                    <th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_3"><label
+                        id="label_4_col_3">Unsatisfied</label></th>
+                    <th scope="col" class="form-matrix-headers form-matrix-column-headers form-matrix-column_4"><label
+                        id="label_4_col_4">Very unsatisfied</label></th>
+                  </tr>
+                  <tr class="form-matrix-tr form-matrix-value-tr" aria-labelledby="label_4 label_4_row_0">
+                    <th scope="row" class="form-matrix-headers form-matrix-row-headers"><label id="label_4_row_0">Doctor
+                        Knowledge</label></th>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_0_0"
+                        class="form-radio validate[required, requireEveryRow]" name="doctorknowledge"
+                        value="Very satisfied" aria-labelledby="label_4_col_0 label_4_row_0"
+                        aria-label="Cells Radio Button" /><label for="input_4_0_0"
+                        class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label></td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_0_1"
+                        class="form-radio validate[required, requireEveryRow]" name="doctorknowledge" value="Satisfied"
+                        aria-labelledby="label_4_col_1 label_4_row_0" aria-label="Cells Radio Button" /><label
+                        for="input_4_0_1" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_0_2"
+                        class="form-radio validate[required, requireEveryRow]" name="doctorknowledge" value="Neutral"
+                        aria-labelledby="label_4_col_2 label_4_row_0" aria-label="Cells Radio Button" /><label
+                        for="input_4_0_2" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_0_3"
+                        class="form-radio validate[required, requireEveryRow]" name="doctorknowledge"
+                        value="Unsatisfied" aria-labelledby="label_4_col_3 label_4_row_0"
+                        aria-label="Cells Radio Button" /><label for="input_4_0_3"
+                        class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label></td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_0_4"
+                        class="form-radio validate[required, requireEveryRow]" name="doctorknowledge"
+                        value="Very unsatisfied" aria-labelledby="label_4_col_4 label_4_row_0"
+                        aria-label="Cells Radio Button" /><label for="input_4_0_4"
+                        class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label></td>
+                  </tr>
+                  <tr class="form-matrix-tr form-matrix-value-tr" aria-labelledby="label_4 label_4_row_1">
+                    <th scope="row" class="form-matrix-headers form-matrix-row-headers"><label id="label_4_row_1">Doctor
+                        Kindness</label></th>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_1_0"
+                        class="form-radio validate[required, requireEveryRow]" name="doctorkind" value="Very satisfied"
+                        aria-labelledby="label_4_col_0 label_4_row_1" aria-label="Cells Radio Button" /><label
+                        for="input_4_1_0" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_1_1"
+                        class="form-radio validate[required, requireEveryRow]" name="doctorkind" value="Satisfied"
+                        aria-labelledby="label_4_col_1 label_4_row_1" aria-label="Cells Radio Button" /><label
+                        for="input_4_1_1" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_1_2"
+                        class="form-radio validate[required, requireEveryRow]" name="doctorkind" value="Neutral"
+                        aria-labelledby="label_4_col_2 label_4_row_1" aria-label="Cells Radio Button" /><label
+                        for="input_4_1_2" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_1_3"
+                        class="form-radio validate[required, requireEveryRow]" name="doctorkind" value="Unsatisfied"
+                        aria-labelledby="label_4_col_3 label_4_row_1" aria-label="Cells Radio Button" /><label
+                        for="input_4_1_3" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_1_4"
+                        class="form-radio validate[required, requireEveryRow]" name="doctorkind"
+                        value="Very unsatisfied" aria-labelledby="label_4_col_4 label_4_row_1"
+                        aria-label="Cells Radio Button" /><label for="input_4_1_4"
+                        class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label></td>
+                  </tr>
+                  <tr class="form-matrix-tr form-matrix-value-tr" aria-labelledby="label_4 label_4_row_2">
+                    <th scope="row" class="form-matrix-headers form-matrix-row-headers"><label id="label_4_row_2">Nurse
+                        Patience</label></th>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_2_0"
+                        class="form-radio validate[required, requireEveryRow]" name="nursepatience"
+                        value="Very satisfied" aria-labelledby="label_4_col_0 label_4_row_2"
+                        aria-label="Cells Radio Button" /><label for="input_4_2_0"
+                        class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label></td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_2_1"
+                        class="form-radio validate[required, requireEveryRow]" name="nursepatience" value="Satisfied"
+                        aria-labelledby="label_4_col_1 label_4_row_2" aria-label="Cells Radio Button" /><label
+                        for="input_4_2_1" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_2_2"
+                        class="form-radio validate[required, requireEveryRow]" name="nursepatience" value="Neutral"
+                        aria-labelledby="label_4_col_2 label_4_row_2" aria-label="Cells Radio Button" /><label
+                        for="input_4_2_2" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_2_3"
+                        class="form-radio validate[required, requireEveryRow]" name="nursepatience" value="Unsatisfied"
+                        aria-labelledby="label_4_col_3 label_4_row_2" aria-label="Cells Radio Button" /><label
+                        for="input_4_2_3" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_2_4"
+                        class="form-radio validate[required, requireEveryRow]" name="nursepatience"
+                        value="Very unsatisfied" aria-labelledby="label_4_col_4 label_4_row_2"
+                        aria-label="Cells Radio Button" /><label for="input_4_2_4"
+                        class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label></td>
+                  </tr>
+                  <tr class="form-matrix-tr form-matrix-value-tr" aria-labelledby="label_4 label_4_row_3">
+                    <th scope="row" class="form-matrix-headers form-matrix-row-headers"><label id="label_4_row_3">Nurse
+                        Knowledge</label></th>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_3_0"
+                        class="form-radio validate[required, requireEveryRow]" name="nurseknowledge"
+                        value="Very satisfied" aria-labelledby="label_4_col_0 label_4_row_3"
+                        aria-label="Cells Radio Button" /><label for="input_4_3_0"
+                        class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label></td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_3_1"
+                        class="form-radio validate[required, requireEveryRow]" name="nurseknowledge" value="Satisfied"
+                        aria-labelledby="label_4_col_1 label_4_row_3" aria-label="Cells Radio Button" /><label
+                        for="input_4_3_1" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_3_2"
+                        class="form-radio validate[required, requireEveryRow]" name="nurseknowledge" value="Neutral"
+                        aria-labelledby="label_4_col_2 label_4_row_3" aria-label="Cells Radio Button" /><label
+                        for="input_4_3_2" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_3_3"
+                        class="form-radio validate[required, requireEveryRow]" name="nurseknowledge" value="Unsatisfied"
+                        aria-labelledby="label_4_col_3 label_4_row_3" aria-label="Cells Radio Button" /><label
+                        for="input_4_3_3" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_3_4"
+                        class="form-radio validate[required, requireEveryRow]" name="nurseknowledge"
+                        value="Very unsatisfied" aria-labelledby="label_4_col_4 label_4_row_3"
+                        aria-label="Cells Radio Button" /><label for="input_4_3_4"
+                        class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label></td>
+                  </tr>
+                  <tr class="form-matrix-tr form-matrix-value-tr" aria-labelledby="label_4 label_4_row_4">
+                    <th scope="row" class="form-matrix-headers form-matrix-row-headers"><label
+                        id="label_4_row_4">Waiting
+                        Time</label></th>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_4_0"
+                        class="form-radio validate[required, requireEveryRow]" name="waiting" value="Very satisfied"
+                        aria-labelledby="label_4_col_0 label_4_row_4" aria-label="Cells Radio Button" /><label
+                        for="input_4_4_0" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_4_1"
+                        class="form-radio validate[required, requireEveryRow]" name="waiting" value="Satisfied"
+                        aria-labelledby="label_4_col_1 label_4_row_4" aria-label="Cells Radio Button" /><label
+                        for="input_4_4_1" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_4_2"
+                        class="form-radio validate[required, requireEveryRow]" name="waiting" value="Neutral"
+                        aria-labelledby="label_4_col_2 label_4_row_4" aria-label="Cells Radio Button" /><label
+                        for="input_4_4_2" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_4_3"
+                        class="form-radio validate[required, requireEveryRow]" name="waiting" value="Unsatisfied"
+                        aria-labelledby="label_4_col_3 label_4_row_4" aria-label="Cells Radio Button" /><label
+                        for="input_4_4_3" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_4_4"
+                        class="form-radio validate[required, requireEveryRow]" name="waiting" value="Very unsatisfied"
+                        aria-labelledby="label_4_col_4 label_4_row_4" aria-label="Cells Radio Button" /><label
+                        for="input_4_4_4" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                  </tr>
+                  <tr class="form-matrix-tr form-matrix-value-tr" aria-labelledby="label_4 label_4_row_5">
+                    <th scope="row" class="form-matrix-headers form-matrix-row-headers"><label
+                        id="label_4_row_5">Hygiene</label></th>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_5_0"
+                        class="form-radio validate[required, requireEveryRow]" name="hygiene" value="Very satisfied"
+                        aria-labelledby="label_4_col_0 label_4_row_5" aria-label="Cells Radio Button" /><label
+                        for="input_4_5_0" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_5_1"
+                        class="form-radio validate[required, requireEveryRow]" name="hygiene" value="Satisfied"
+                        aria-labelledby="label_4_col_1 label_4_row_5" aria-label="Cells Radio Button" /><label
+                        for="input_4_5_1" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_5_2"
+                        class="form-radio validate[required, requireEveryRow]" name="hygiene" value="Neutral"
+                        aria-labelledby="label_4_col_2 label_4_row_5" aria-label="Cells Radio Button" /><label
+                        for="input_4_5_2" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_5_3"
+                        class="form-radio validate[required, requireEveryRow]" name="hygiene" value="Unsatisfied"
+                        aria-labelledby="label_4_col_3 label_4_row_5" aria-label="Cells Radio Button" /><label
+                        for="input_4_5_3" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                    <td class="form-matrix-values"><input type="radio" id="input_4_5_4"
+                        class="form-radio validate[required, requireEveryRow]" name="hygiene" value="Very unsatisfied"
+                        aria-labelledby="label_4_col_4 label_4_row_5" aria-label="Cells Radio Button" /><label
+                        for="input_4_5_4" class="matrix-choice-label matrix-radio-label" aria-hidden="true"></label>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </li>
+            <li class="form-line" data-type="control_rating" id="id_13"><label
+                class="form-label form-label-top form-label-auto" id="label_13" for="input_13" aria-hidden="false">
+                Please
+                rate the entire process of visiting us? </label>
+              <div id="cid_13" class="form-input-wide" data-layout="full">
+                <div id="input_13" name="rate" data-component="rating" data-version="v2"><select name="rate">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select></div>
+              </div>
+            </li>
+            <li class="form-line" data-type="control_textarea" id="id_6"><label
+                class="form-label form-label-top form-label-auto" id="label_6" for="input_6" aria-hidden="false"> How
+                can we
+                improve our service? </label>
+              <div id="cid_6" class="form-input-wide" data-layout="full"> <textarea id="input_6" class="form-textarea"
+                  name="comment" style="width:648px;height:163px" data-component="textarea"
+                  aria-labelledby="label_6"></textarea> </div>
+            </li>
+            <li class="form-line jf-required" data-type="control_captcha" id="id_21"><label
+                class="form-label form-label-top form-label-auto" id="label_21" for="input_21" aria-hidden="false">
+                Please
+                verify that you are human<span class="form-required">*</span> </label>
+              <div id="cid_21" class="form-input-wide jf-required" data-layout="full">
+                <section data-wrapper-react="true">
+                  <div id="hcaptcha_input_21" class="h-captcha" data-siteKey="772f4a50-7161-425e-8cd5-4d7e361ab765"
+                    data-callback="hcaptchaCallbackinput_21" data-expired-callback="hcaptchaExpiredCallbackinput_21">
+                  </div>
+                  <input type="hidden" id="input_21" class="hidden validate[required]" name="hcaptcha_visible"
+                    required="" />
+                  <script type="text/javascript" src="https://hcaptcha.com/1/api.js"></script>
+                  <script type="text/javascript">
+                    var hcaptchaCallbackinput_21 = function (token) {
+                      var hiddenInput = $("input_21");
+                      hiddenInput.setValue(1);
+                      if (hiddenInput.validateInput) {
+                        hiddenInput.validateInput();
+                      }
+                    }
+
+                    var hcaptchaExpiredCallbackinput_21 = function () {
+                      var hiddenInput = $("input_21");
+                      hiddenInput.writeAttribute("value", false);
+                      if (hiddenInput.validateInput) {
+                        hiddenInput.validateInput();
+                      }
+                    }
+                  </script>
+                </section>
+              </div>
+            </li>
+            <li class="form-line" data-type="control_button" id="id_2">
+              <div id="cid_2" class="form-input-wide" data-layout="full">
+                <div data-align="auto" class="form-buttons-wrapper form-buttons-auto   jsTest-button-wrapperField">
+                  <button id="input_2" type="submit"
+                    class="form-submit-button form-submit-button-gradient-24 submit-button jf-form-buttons jsTest-submitField"
+                    >Submit</button>
+                </div>
+              </div>
+            </li>
+            <li style="display:none">Should be Empty: <input type="text" name="website" value="" /></li>
+          </ul>
+        </div>
+        <script>
+          JotForm.showJotFormPowered = "new_footer";
+        </script>
+        <script>
+          JotForm.poweredByText = "Powered by Jotform";
+        </script><input type="hidden" class="simple_spc" id="simple_spc" name="simple_spc" value="233023878891465" />
+        <script type="text/javascript">
+          var all_spc = document.querySelectorAll("form[id='233023878891465'] .si" + "mple" + "_spc");
+          for (var i = 0; i < all_spc.length; i++) {
+            all_spc[i].value = "233023878891465-233023878891465";
+          }
+        </script>
+        
+        <input type="hidden" th:value="${rs}" name="reservationid">
+      </form>
+    </div>
+
+
+    <div class="mb-3 col-md-4 d-flex  justify-content-center ">
+      <div class="card component-wrapper border-0 rounded shadow " style="position: fixed; margin-top: 8%; ">
+        <div class="p-4 border-bottom">
+          <h5 class="mb-0">Reservation</h5>
+        </div>
+        <div class="p-4">
+          <!--end form-->
+
+          <div class="row">
+            <div class="mb-3 col-md-3">
+              <label class="form-label">Date:</label>
+            </div>
+            <div class="mb-3 col-md-9">
+              <label class="form-label" th:text="${reDetail.date}">08:00:00 - 09:30:00</label>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-3">
+              <label class="form-label">Time:</label>
+            </div>
+            <div class="mb-3 col-md-9">
+              <label class="form-label" th:text="${reDetail.time}">08:00:00 - 09:30:00</label>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-3">
+              <label class="form-label">Patient:</label>
+            </div>
+            <div class="mb-3 col-md-9">
+              <label class="form-label" th:text="${reDetail.patient_name}">Nguyen huu Quoc</label>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-3">
+              <label class="form-label">Doctor:</label>
+            </div>
+            <div class="mb-3 col-md-9">
+              <label class="form-label" th:text="${reDetail.doctor_name}">Nguyen huu Quoc</label>
+            </div>
+            
+          </div>
+        </div>
+      </div><label th:text=${mess}></label>
+    </div>
+
+  </div>
+  <script type="text/javascript">JotForm.ownerView = true;</script>
+  <script src="https://cdn.jotfor.ms//js/vendor/smoothscroll.min.js?v=3.3.46950"></script>
+  <script type="text/javascript">JotForm.isNewSACL = true;</script>
+  <!-- End -->
+
+  <!-- Back to top -->
+  <!-- <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i
+            data-feather="arrow-up" class="icons"></i></a> -->
+  <!-- Back to top -->
+
+  <!-- Offcanvas Start -->
+
+  <!-- Offcanvas End -->
+
+  <!-- Offcanvas Start -->
+
+  <!-- Offcanvas End -->
+
+  <!-- javascript -->
+  <script th:src="@{/js/bootstrap.bundle.min.js}" src="js/bootstrap.bundle.min.js"></script>
+  <!-- Icons -->
+  <script th:src="@{/js/feather.min.js}" src="js/feather.min.js"></script>
+  <!-- Main Js -->
+  <script th:src="@{/js/app.js}" src="js/app.js"></script>
+</body>
+
+</html>

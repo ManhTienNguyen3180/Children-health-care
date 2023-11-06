@@ -43,6 +43,9 @@ public interface PatientRepo extends JpaRepository<patient, Integer> {
   @Query("SELECT u FROM patient u where patient_id=?1")
   Optional<patient> findByPatient_id(int patient_id);
 
+  @Query("SELECT u FROM patient u where user_id=?1")
+  List<patient> findByUser_id(int patient_id);
+
   @Query("SELECT u FROM patient u where patient_email=?1")
   Optional<patient> findbyEmail(String patient_email);
 

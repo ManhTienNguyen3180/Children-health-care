@@ -38,7 +38,7 @@ public class HomeController {
 
     // @GetMapping("/")
     // public String home1() {
-    //     return "home";
+    // return "home";
     // }
 
     @GetMapping("/user-profile")
@@ -54,12 +54,26 @@ public class HomeController {
             model.addAttribute("user", user);
             session.setAttribute("user", user);
         }
-        
+
     }
 
     @GetMapping("/home")
-    public String home(Model model,HttpSession session){
-        user u = (user)session.getAttribute("user");
+    public String home(Authentication authentication, Model model, HttpSession session) {
+        user u = (user) session.getAttribute("user");
+        try {
+            if (u.getStatus() == 0) {
+               
+                if (authentication != null) {
+                    authentication.setAuthenticated(false);
+                    session.removeAttribute("user");
+                     model.addAttribute("mess", "User not Active");
+                    return "/login";
+                }
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
         model.addAttribute("rv", FeedbackService.getFeedbackHome(5));
         model.addAttribute("u", u);
         model.addAttribute("doctor", DoctorService.fetchDoctorList());
@@ -68,12 +82,14 @@ public class HomeController {
         return "home";
     }
     
+
     @GetMapping("/logout")
     public String logout(Authentication authentication, HttpSession session) {
         if (authentication != null) {
             authentication.setAuthenticated(false);
-            session.removeAttribute("user");   
+            session.removeAttribute("user");
         }
+
         return "redirect:/home";
     }
 
@@ -82,7 +98,8 @@ public class HomeController {
         return "denied";
     }
 
-    //generate postmapping to save image into folder and save image path into database
+    // generate postmapping to save image into folder and save image path into
+    // database
     @PostMapping("/upload")
     public String saveFile(@RequestParam("file") MultipartFile file, HttpSession session) {
         // We can save image in 'images' directory in roo
@@ -92,11 +109,11 @@ public class HomeController {
             java.nio.file.Path copyLocation = Paths
                     .get(uploadDir + java.io.File.separator + file.getOriginalFilename());
             java.nio.file.Files.copy(file.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
-            
+
             // if (user.getImage() != null) {
-            //     java.io.File oldFile = new java.io.File(
-            //             uploadDir + java.io.File.separator + getImageName(user.getImage()));
-            //     oldFile.delete();
+            // java.io.File oldFile = new java.io.File(
+            // uploadDir + java.io.File.separator + getImageName(user.getImage()));
+            // oldFile.delete();
             // }
             user user = (user) session.getAttribute("user");
             user.setImage("images" + "/" + file.getOriginalFilename());
@@ -104,7 +121,7 @@ public class HomeController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            
+
         }
 
         return "redirect:/user-profile";

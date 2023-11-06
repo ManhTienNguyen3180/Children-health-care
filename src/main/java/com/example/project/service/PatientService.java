@@ -109,7 +109,14 @@ public class PatientService {
       return null;
     }
   }
-
+public List<patient> findByUserId(int user_id) {
+    List<patient> p = patientRepo.findByUser_id(user_id);
+    if (!p.isEmpty()) {
+      return p;
+    } else {
+      return null;
+    }
+  }
   public void save(patient patient) {
     patientRepo.save(patient);
   }
