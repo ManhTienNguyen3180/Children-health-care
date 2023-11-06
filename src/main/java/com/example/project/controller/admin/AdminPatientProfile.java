@@ -1,6 +1,5 @@
 package com.example.project.controller.admin;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,14 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.project.entity.details_Patient;
 import com.example.project.entity.doctor;
-import com.example.project.entity.doctorservice;
 import com.example.project.entity.patient;
 import com.example.project.entity.reservation;
 import com.example.project.service.DoctorServiceImpl;
 import com.example.project.service.PatientService;
 import com.example.project.service.ReservationService;
-
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("admin/patient-profile")

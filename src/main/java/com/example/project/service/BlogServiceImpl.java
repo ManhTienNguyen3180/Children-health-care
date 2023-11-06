@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.project.Admin.BlogController.Model.Blog;
+import com.example.project.Admin.BlogController.Service.BlogsServiceImpl;
 import com.example.project.Repository.BlogRepo;
 
 @Service
@@ -123,6 +124,5 @@ public class BlogServiceImpl implements BlogService {
         return repo.findBlogAndCategory();
     }
 
-    
 
 }
