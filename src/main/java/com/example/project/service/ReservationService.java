@@ -156,4 +156,12 @@ public class ReservationService {
     public List<reservation> findByPatientDate(int patient_id, String date) {
         return repository.findByPatientDate(patient_id, date);
     }
+    public List<reservation> findAll() {
+        return repository.findAll();
+    }
+
+    public List<Object[]>countReservationsByMonth(int year){
+        return repository.countReservationsByMonth(year);
+    } 
+
 }
