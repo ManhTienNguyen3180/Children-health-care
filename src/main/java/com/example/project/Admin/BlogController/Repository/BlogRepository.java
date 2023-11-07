@@ -31,9 +31,9 @@ public interface BlogRepository extends JpaRepository<Blog, Integer> {
                         @Param("update") String update);
 
         // Get search list
-        @Query(value = "SELECT * FROM blog  WHERE title LIKE %?1%"
+        @Query(value = "SELECT * FROM blog  WHERE (title LIKE %?1%"
                         + " OR description LIKE %?1%"
-                        + " OR author LIKE %?1%", nativeQuery = true)
+                        + " OR author LIKE %?1%) and status=1", nativeQuery = true)
         Page<Blog> search(@Param("searchText") String keyword, PageRequest pageable);
 
         @Modifying

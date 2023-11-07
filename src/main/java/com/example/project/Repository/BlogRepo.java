@@ -49,7 +49,10 @@ public interface BlogRepo extends JpaRepository<Blog, Integer>{
 
 
     //phan trang blog list(public)
-    @Query(value = "SELECT * FROM blog b WHERE b.category_blog_id = ?1",nativeQuery = true)
+        @Query(value = "SELECT * FROM blog b WHERE b.status=1",nativeQuery = true)
+    Page<Blog> findAllPagi(PageRequest pageable);
+
+    @Query(value = "SELECT * FROM blog b WHERE b.category_blog_id = ?1 and b.status=1",nativeQuery = true)
     Page<Blog> findByCategory_blog_id(int category_blog_id,PageRequest pageable);
 
     @Query( value ="select b.blog_id,b.category_blog_id,b.title,b.date,\n" + //
