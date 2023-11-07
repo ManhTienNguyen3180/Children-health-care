@@ -24,6 +24,7 @@ import com.example.project.entity.doctor;
 import com.example.project.entity.reservation;
 import com.example.project.service.DoctorService;
 import com.example.project.service.ReservationService;
+import com.example.project.service.ServiceCategoryService;
 
 import jakarta.websocket.server.PathParam;
 
@@ -68,9 +69,10 @@ public class AdminAppointment {
 
   @RequestMapping(value = "/admin/appointment/edit/save", method = RequestMethod.POST)
   public String edit(@PathParam("id") int id, @PathParam("status") int status,
-      @PathParam("statusedit") int statusedit,@PathParam("doctoredit") Integer doctoredit,
-      @PathParam("datechoose") String datechoose,@PathParam("timechoose") String timechoose , Model model, RedirectAttributes redirectAttributes) {
-    
+      @PathParam("statusedit") int statusedit, @PathParam("doctoredit") Integer doctoredit,
+      @PathParam("datechoose") String datechoose, @PathParam("timechoose") String timechoose, Model model,
+      RedirectAttributes redirectAttributes) {
+
     if (status == 0 && ((statusedit != 1 || statusedit != 4))) {
       if (statusedit == 1 || statusedit == 4) {
         ReservationService.editReservation(id, statusedit);
@@ -78,15 +80,16 @@ public class AdminAppointment {
       }
       redirectAttributes.addFlashAttribute("error", "*Lịch hẹn phải được chấp nhận hoặc từ chối trước khi chỉnh sửa");
       return "redirect:/admin/appointment/edit/" + id;
-    }else if(status == 4){
+    } else if (status == 4) {
       redirectAttributes.addFlashAttribute("error", "*Lịch hẹn đã bị hủy không thể chỉnh sửa");
       return "redirect:/admin/appointment/edit/" + id;
-    }else if(status == 2){
+    } else if (status == 2) {
       redirectAttributes.addFlashAttribute("error", "*Lịch hẹn đã được hoàn thành không thể chỉnh sửa");
       return "redirect:/admin/appointment/edit/" + id;
-    }else if(doctoredit != null){
-      reservation reservation = ReservationService.findByDoctor_idAndDateAndTimeAndDay(doctoredit, java.sql.Date.valueOf(datechoose), timechoose, getDayOfWeek(datechoose));
-      if(reservation != null){
+    } else if (doctoredit != null) {
+      reservation reservation = ReservationService.findByDoctor_idAndDateAndTimeAndDay(doctoredit,
+          java.sql.Date.valueOf(datechoose), timechoose, getDayOfWeek(datechoose));
+      if (reservation != null) {
         redirectAttributes.addFlashAttribute("error", "*Bác sĩ đã có lịch hẹn vào thời gian này");
         return "redirect:/admin/appointment/edit/" + id;
       }
@@ -107,7 +110,7 @@ public class AdminAppointment {
 
   @GetMapping("/admin/appointment/page/{pageNo}")
   public String list(@PathVariable int pageNo, Model model) {
-    int pageSize = 3;
+    int pageSize = 7;
     PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
     Page<Object[]> page = (Page<Object[]>) repository.getListReservation(pageable);
     model.addAttribute("listReservation", ReservationService.findPaginated(pageNo, pageSize));
@@ -115,36 +118,57 @@ public class AdminAppointment {
     model.addAttribute("totalPages", page.getTotalPages());
     return "admin/appointment";
   }
+
   public int getDayOfWeek(String dateStr) {
-        try {
-            // Định dạng của chuỗi ngày
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    try {
+      // Định dạng của chuỗi ngày
+      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-            java.util.Date date = dateFormat.parse(dateStr);
+      java.util.Date date = dateFormat.parse(dateStr);
 
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+      Calendar calendar = Calendar.getInstance();
+      calendar.setTime(date);
+      int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
-            if (dayOfWeek == Calendar.SUNDAY) {
-                return 1;
-            } else if (dayOfWeek == Calendar.MONDAY) {
-                return 2;
-            } else if (dayOfWeek == Calendar.TUESDAY) {
-                return 3;
-            } else if (dayOfWeek == Calendar.WEDNESDAY) {
-                return 4;
-            } else if (dayOfWeek == Calendar.THURSDAY) {
-                return 5;
-            } else if (dayOfWeek == Calendar.FRIDAY) {
-                return 6;
-            } else {
-                return 7;
-            }
-        } catch (ParseException e) {
-            // Xử lý lỗi khi định dạng ngày không hợp lệ
-            e.printStackTrace();
-            return -1; // Trả về một giá trị ngày không hợp lệ nếu có lỗi
-        }
+      if (dayOfWeek == Calendar.SUNDAY) {
+        return 1;
+      } else if (dayOfWeek == Calendar.MONDAY) {
+        return 2;
+      } else if (dayOfWeek == Calendar.TUESDAY) {
+        return 3;
+      } else if (dayOfWeek == Calendar.WEDNESDAY) {
+        return 4;
+      } else if (dayOfWeek == Calendar.THURSDAY) {
+        return 5;
+      } else if (dayOfWeek == Calendar.FRIDAY) {
+        return 6;
+      } else {
+        return 7;
+      }
+    } catch (ParseException e) {
+      // Xử lý lỗi khi định dạng ngày không hợp lệ
+      e.printStackTrace();
+      return -1; // Trả về một giá trị ngày không hợp lệ nếu có lỗi
     }
+  }
+
+  @GetMapping("/admin/appointment/filterStatus/{id}")
+  public String filterStatus(Model model, @PathVariable("id") int id) {
+    return filterStatusAndPaginated(model, id, 1);
+  }
+
+  @GetMapping("/admin/appointment/filterStatus/{id}/{pageNo}")
+  public String filterStatusAndPaginated(Model model, @PathVariable("id") int id,
+      @PathVariable(value = "pageNo") int pageNo) {
+    int pageSize = 7;
+    PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
+    Page<Object[]> page = (Page<Object[]>) repository.getListReservationByStatus(id, pageable);
+
+    model.addAttribute("status", id);
+
+    model.addAttribute("listReservation", ReservationService.findPaginatedFilter(id, pageNo, pageSize));
+    model.addAttribute("currentPage", pageNo);
+    model.addAttribute("totalPages", page.getTotalPages());
+    return "admin/appointment";
+  }
 }

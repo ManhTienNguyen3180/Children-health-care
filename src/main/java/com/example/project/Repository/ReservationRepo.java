@@ -36,15 +36,17 @@ public interface ReservationRepo extends JpaRepository<reservation, Integer> {
     @Query("SELECT u FROM reservation u WHERE patient_id = ?1 AND date = ?2 ORDER BY date ASC")
     List<reservation> findByPatientDate(int patient_id, String date);
 
-    @Query("select r from reservation r where r.doctor_id = ?1 and r.date = ?2 and r.time = ?3")
+    @Query("select r from reservation r where r.doctor_id = ?1 and r.date = ?2 and r.time = ?3 and r.status not in (2,4)")
     reservation findByDoctor_idAndDateAndTime(int doctor_id, Date date, String time);
 
     @Query("select r from reservation r  join slot s on r.doctor_id = s.doctor_id where r.doctor_id = ?1 and r.date = ?2 and r.time = ?3 and s.dayof_week = ?4 and r.status not in (2,4)")
     reservation findByDoctor_idAndDateAndTimeAndDay(int doctor_id, Date date, String time,int dayof_week);
 
-    @Query(value = "select r.reservation_id,r.patient_name,p.patient_email,p.dob,p.gender,r.date,r.time,r.doctor_name,r.status from reservation r left join patient p on r.patient_id = p.patient_id", nativeQuery = true)
+    @Query(value = "select r.reservation_id,r.patient_name,p.patient_email,p.dob,p.gender,r.date,r.time,r.doctor_name,r.status from reservation r left join patient p on r.patient_id = p.patient_id order by r.status", nativeQuery = true)
     Page<Object[]> getListReservation(PageRequest pageable);
 
+    @Query(value = "select r.reservation_id,r.patient_name,p.patient_email,p.dob,p.gender,r.date,r.time,r.doctor_name,r.status from reservation r left join patient p on r.patient_id = p.patient_id where r.status = ?1", nativeQuery = true)
+    Page<Object[]> getListReservationByStatus(int status, PageRequest pageable);
     
 
     @Query("select r from reservation r join patient p on r.patient_id = p.patient_id where p.user_id = ?1 order by r.reservation_id desc")
