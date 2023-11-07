@@ -87,6 +87,7 @@ public interface FeedbackRepo extends JpaRepository<feedbackreservation, Integer
                         "and p.user_id=u.user_id\n" + //
                         "and s.service_id=?1", nativeQuery = true)
         List<Object[]> getFeedbackByService(int s);
+        
         @Query("SELECT u FROM feedbackreservation u where reservation_id=?1")
         Optional<feedbackreservation> findByReserId(int id);
 }

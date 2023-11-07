@@ -3,7 +3,6 @@ package com.example.project.entity;
 import java.util.Date;
 import java.time.LocalDate;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 

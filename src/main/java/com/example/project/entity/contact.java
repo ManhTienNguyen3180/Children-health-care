@@ -1,7 +1,6 @@
 package com.example.project.entity;
 
 import jakarta.persistence.*;
-import com.example.project.entity.patient;
 
 @Entity
 public class contact {
