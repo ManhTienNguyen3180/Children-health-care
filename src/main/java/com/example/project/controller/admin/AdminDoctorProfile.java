@@ -22,6 +22,7 @@ import com.example.project.entity.category_service;
 import com.example.project.entity.doctor;
 import com.example.project.entity.slot;
 import com.example.project.service.DoctorService;
+import com.example.project.service.FeedbackService;
 import com.example.project.service.ScheduleService;
 import com.example.project.service.ServiceCategoryService;
 
@@ -30,7 +31,8 @@ import jakarta.websocket.server.PathParam;
 
 @Controller
 public class AdminDoctorProfile {
-
+@Autowired 
+    private FeedbackService FeedbackService;
   @Autowired
   private DoctorService DoctorService;
   @Autowired
@@ -65,6 +67,7 @@ public class AdminDoctorProfile {
     doctor doctor = DoctorService.findDoctorById(id).get();
     List<slot> slot = ScheduleService.getSlotsByDoctorId(id);
     category_service service = ServiceCategoryService.findByID(doctor.getDoctorserviceId()).get();
+    model.addAttribute("listRv", FeedbackService.getFeedbackByDoc(id));
     model.addAttribute("slot", slot);
     model.addAttribute("doctor", doctor);
     model.addAttribute("service", service);

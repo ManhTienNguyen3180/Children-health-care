@@ -26,7 +26,7 @@ public class ServiceService {
     //phan trang
     public Page<service> findPaginated(int page, int size){
         PageRequest pageable = PageRequest.of(page-1,size);
-        return repo.findAll(pageable);
+        return repo.getAllPagi(pageable);
     }
 
     public Page<service> getServiceByKey(String key,int page,int size){

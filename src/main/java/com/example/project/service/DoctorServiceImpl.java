@@ -43,7 +43,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public Page<doctor> getAllDoc(int page, int size) {
         PageRequest pageable = PageRequest.of(page - 1, size);
-        return repo.findAll(pageable);
+        return repo.getAllPagi(pageable);
     }
 
     @Override

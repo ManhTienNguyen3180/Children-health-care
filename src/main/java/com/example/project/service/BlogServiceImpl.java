@@ -82,7 +82,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Page<Blog> findPaginated(int pageNo, int pageSize) {
         PageRequest pageable = PageRequest.of(pageNo-1,pageSize);
-        return this.repo.findAll(pageable);
+        return this.repo.findAllPagi(pageable);
     }
 
     @Override

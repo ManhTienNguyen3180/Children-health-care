@@ -23,7 +23,7 @@ public interface FeedbackRepo extends JpaRepository<feedbackreservation, Integer
                         "and d.service_id=s.service_id", nativeQuery = true)
         List<Object[]> getAll();
 
-        @Query(value = "select distinct f.id, r.reservation_id,r.patient_name,r.description,c.name,r.date,f.date,f.rating,r.doctor_name\n"
+        @Query(value = "select distinct f.id, r.reservation_id,r.patient_name,r.description,c.name,r.date,f.feedback_date,f.rating,r.doctor_name\n"
                         + //
                         "from reservation r , feedbackreservation f ,reservationdetail d, category_service c,service s\n"
                         + //
@@ -87,6 +87,7 @@ public interface FeedbackRepo extends JpaRepository<feedbackreservation, Integer
                         "and p.user_id=u.user_id\n" + //
                         "and s.service_id=?1", nativeQuery = true)
         List<Object[]> getFeedbackByService(int s);
+        
         @Query("SELECT u FROM feedbackreservation u where reservation_id=?1")
         Optional<feedbackreservation> findByReserId(int id);
 }
