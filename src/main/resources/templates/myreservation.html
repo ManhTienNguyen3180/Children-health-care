@@ -204,9 +204,10 @@
                                                     th:text="${detail.service_name}"></li>
                                             </td>
                                             <td class="p-3" th:text="${r.total_cost}"></td>
-                                            <td class="p-3" th:switch="${r.status}">
-                                                <p th:case="1">Done</p>
-                                                <p th:case="0">On-going</p>
+                                            <td class="p-3" >
+                                                <p th:if="${r.status==1}">Chap Nhan</p>
+                                                <p th:if="${r.status==0}">Cho xac nhan</p>
+                                                <p th:if="${r.status==2}">Đã Khám</p>
                                             </td>
                                             <td class="text-end p-3">
                                                 <a th:href="@{'/cusreservationdetail/'+${r.reservation_id}}"

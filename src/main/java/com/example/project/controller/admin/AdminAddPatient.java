@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,7 +23,6 @@ import com.example.project.entity.user;
 import com.example.project.service.ContactService;
 import com.example.project.service.PatientService;
 
-import jakarta.mail.internet.ParseException;
 import jakarta.servlet.http.HttpSession;
 
 @Controller

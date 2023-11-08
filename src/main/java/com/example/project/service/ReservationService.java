@@ -18,7 +18,9 @@ import com.example.project.Repository.ReservationDetailRepo;
 import com.example.project.Repository.ReservationRepo;
 import com.example.project.Repository.SlotRepo;
 import com.example.project.dto.doctorserviceDTO;
+import com.example.project.dto.reservationDTO;
 import com.example.project.dto.slotDTO;
+import com.example.project.entity.doctor;
 import com.example.project.entity.reservation;
 import com.example.project.entity.reservationdetail;
 import com.example.project.entity.service;
@@ -45,6 +47,9 @@ public class ReservationService {
     public void save(reservation reservation) {
         repository.save(reservation);
     }
+    
+    
+
 
     public List<doctorserviceDTO> getDoctorService(List<Integer> serviceid) {
         List<Object[]> listofdoctor = repository.findDoctorService(serviceid);
@@ -117,7 +122,9 @@ public class ReservationService {
     public reservation findByDoctor_idAndDateAndTime(int doctor_id, Date date, String time) {
         return repository.findByDoctor_idAndDateAndTime(doctor_id, date, time);
     }
-
+    public reservation findByDoctor_idAndDateAndTimeAndDay(int doctor_id, Date date, String time,int dayof_week) {
+        return repository.findByDoctor_idAndDateAndTimeAndDay(doctor_id, date, time,dayof_week);
+    }
     public int getLastReservationId() {
         return repository.getLastReservationId();
     }
@@ -172,6 +179,85 @@ public class ReservationService {
         return repository.findByPatientDate(patient_id, date);
     }
 
+    public List<reservationDTO> findPaginated(int pageNo, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
+        Page<Object[]> page =  repository.getListReservation(pageable);
+        List<Object[]> listB = page.getContent();
+        List<reservationDTO> listBDTO = new ArrayList<>();
+        for (Object[] b : listB) {
+            reservationDTO reservationDTO = new reservationDTO();
+            reservationDTO.setReservation_id(Integer.parseInt(String.valueOf(b[0])));
+            reservationDTO.setPatient_name(String.valueOf(b[1]));
+            reservationDTO.setPatient_email(String.valueOf(b[2]));
+            
+            reservationDTO.setGender(Integer.parseInt(String.valueOf(b[4])));
+            reservationDTO.setDate(Date.valueOf(String.valueOf(b[5])));
+            reservationDTO.setTime(String.valueOf(b[6]));
+            reservationDTO.setDoctor_name(String.valueOf(b[7]));
+            reservationDTO.setStatus(Integer.parseInt(String.valueOf(b[8])));
+            listBDTO.add(reservationDTO);
+
+        }
+        return listBDTO;
+    }
+
+    public List<reservationDTO> findPaginatedFilter(int status,int pageNo, int pageSize) {
+        PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
+        Page<Object[]> page =  repository.getListReservationByStatus(status, pageable);
+        List<Object[]> listB = page.getContent();
+        List<reservationDTO> listBDTO = new ArrayList<>();
+        for (Object[] b : listB) {
+            reservationDTO reservationDTO = new reservationDTO();
+            reservationDTO.setReservation_id(Integer.parseInt(String.valueOf(b[0])));
+            reservationDTO.setPatient_name(String.valueOf(b[1]));
+            reservationDTO.setPatient_email(String.valueOf(b[2]));
+            
+            reservationDTO.setGender(Integer.parseInt(String.valueOf(b[4])));
+            reservationDTO.setDate(Date.valueOf(String.valueOf(b[5])));
+            reservationDTO.setTime(String.valueOf(b[6]));
+            reservationDTO.setDoctor_name(String.valueOf(b[7]));
+            reservationDTO.setStatus(Integer.parseInt(String.valueOf(b[8])));
+            listBDTO.add(reservationDTO);
+
+        }
+        return listBDTO;
+    }
+
+    public reservationDTO getReservationDTODetail(int reservation_id) {
+        List<Object[]> listofreservation = detailRepo.getReservationDetail(reservation_id);
+        reservationDTO reservationDTO = new reservationDTO();
+        for (Object[] obj : listofreservation) {
+            reservationDTO.setReservation_id(Integer.parseInt(String.valueOf(obj[0])));
+            reservationDTO.setPatient_name(String.valueOf(obj[1]));
+            reservationDTO.setPatient_email(String.valueOf(obj[2]));
+           
+            reservationDTO.setGender(Integer.parseInt(String.valueOf(obj[4])));
+            reservationDTO.setDate(Date.valueOf(String.valueOf(obj[5])));
+            reservationDTO.setTime(String.valueOf(obj[6]));
+            reservationDTO.setDoctor_name(String.valueOf(obj[7]));
+            reservationDTO.setStatus(Integer.parseInt(String.valueOf(obj[8])));
+            reservationDTO.setPatient_phone(Integer.parseInt(String.valueOf(obj[9])));
+            reservationDTO.setPatient_address(String.valueOf(obj[10]));
+            reservationDTO.setNote(String.valueOf(obj[11]));
+        }
+        return reservationDTO;
+    }
+
+    public List<reservationdetail> getReservationdetail(int reservation_id) {
+
+        return  detailRepo.getlistDetail(reservation_id);
+    }
+
+
+
+
+    public void editReservation(int id, int statusedit) {
+        detailRepo.editReservation(id, statusedit);
+    }
+    public void editReservationDoc(int docid, String docname,int id) {
+        detailRepo.editReservationDoc(docid, docname,id);
+    }
+
     public reservation findReservationByID(int reservation_id) {
         return repository.findById(reservation_id).get();
     }
@@ -199,5 +285,11 @@ public class ReservationService {
     public Page<reservation> findPaginated(int id, int pageNo, int pageSize) {
         PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
         return this.repository.findPageReservationByUserId(id, pageable);
+    }
+    public List<Integer> countReservationsByMonth(int year){
+        return repository.getMonthlyReservationCounts(year);
+    }
+    public List<reservation> findAll(){
+        return repository.findAll();
     }
 }

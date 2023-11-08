@@ -233,8 +233,9 @@
                                         <div class="mb-3">
                                             <label class="form-label">Status</label>
                                             <div th:switch="${reservation.status}">
-                                                <input readonly class="form-control" th:case="0" th:value="On-going">
-                                                <input readonly class="form-control" th:case="1" th:value="Approved">
+                                                <input readonly class="form-control" th:case="0" value="Chờ xác nhận">
+                                                <input readonly class="form-control" th:case="1" value="Chấp Nhận">
+                                                <input readonly class="form-control" th:case="2" value="Đã Khám">
                                             </div>
                                         </div>
 
@@ -259,17 +260,20 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div th:if="${reservation.status==1}" style="text-align: right;">
-                                            
-                                              <a  th:href="@{/feedback?id=}+${patient.patient_id}+'&reservationid='+${reservation.reservation_id}" class="btn btn-primary" >Feedback</a>
-                                        </div>
+                                        
+                                        
                                         <hr>
                                     </div>
-                                    <div th:if="${reservation.status==0}" style="text-align: right;">
+                                    <div th:if="!${feedback}">
+                                        <div th:if="${reservation.status==2}" style="text-align: right;">                        
+                                            <a  th:href="@{/feedback?id=}+${patient.patient_id}+'&reservationid='+${reservation.reservation_id}" class="btn btn-primary" >Feedback</a>
+                                      </div>
+                                    </div>
+                                    <!-- <div th:if="${reservation.status==0}" style="text-align: right;">
 
                                         <a href="#" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#view-invoice">Re-resesrve</a>
-                                    </div>
+                                    </div> -->
 
 
                                     <h5>Undertaking doctor</h5>
@@ -296,11 +300,11 @@
                                         <div class="mb-3">
                                             <label class="form-label">Phone</label>
                                             <input readonly name="docphone" id="name" type="text" class="form-control"
-                                                placeholder="" th:value="${doctor.phone}">
+                                                placeholder="" th:value="${'0'+doctor.phone}">
                                         </div>
                                     </div>
 
-                                    <h5>Patient contact</h5>
+                                    <h5>Patient </h5>
                                     <form th:action="@{'/cusreservationdetail/' + ${reservation.reservation_id} + '/update'}" method="post">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -319,7 +323,7 @@
                                                             <option th:value="Male" th:text="Male"></option>
                                                             <option value="Female">Female</option>
                                                         </div> 
-                                                        <div th:if="${doctor.gender==0}">
+                                                        <div th:if="${patient.gender==0}">
                                                             <option th:value="Female" th:text="Female"></option>
                                                             <option value="Male">Male</option>
                                                         </div>

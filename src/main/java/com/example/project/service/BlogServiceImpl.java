@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.project.Admin.BlogController.Model.Blog;
+import com.example.project.Admin.BlogController.Service.BlogsServiceImpl;
 import com.example.project.Repository.BlogRepo;
 
 @Service
@@ -81,7 +82,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Page<Blog> findPaginated(int pageNo, int pageSize) {
         PageRequest pageable = PageRequest.of(pageNo-1,pageSize);
-        return this.repo.findAll(pageable);
+        return this.repo.findAllPagi(pageable);
     }
 
     @Override
@@ -123,6 +124,5 @@ public class BlogServiceImpl implements BlogService {
         return repo.findBlogAndCategory();
     }
 
-    
 
 }

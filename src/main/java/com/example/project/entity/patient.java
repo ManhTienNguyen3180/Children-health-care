@@ -16,6 +16,7 @@ public class patient {
     //healthy
     //unhealthy
     private int status;
+    
     private Date Dob;
     private String patient_name;
     private String description;

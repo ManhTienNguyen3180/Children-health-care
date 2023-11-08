@@ -51,6 +51,7 @@ public class DoctorController {
         model.addAttribute("listSlot", DoctorService.getSlotByDoc(id));
         model.addAttribute("listSer", DoctorService.getSerByDoc(id));
         model.addAttribute("doc", DoctorService.findDoctorById(id).orElse(null));
+        model.addAttribute("listCategory", DoctorService.getCategoryNameByDoctorID(id));
         return "doctor-detail";
     }
 

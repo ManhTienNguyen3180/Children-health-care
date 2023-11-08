@@ -16,7 +16,7 @@ public class ServiceCategoryService {
     ServiceCategoryRepo ServiceCategoryRepo;
 
     public List<category_service>  fetchServiceCategoryList() {
-        return (List<category_service>) ServiceCategoryRepo.findAll();
+        return (List<category_service>) ServiceCategoryRepo.findAllCategoryService();
     }
     
     public Optional<category_service> findByID(int id) {

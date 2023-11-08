@@ -20,12 +20,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.project.Repository.ReservationDetailRepo;
 import com.example.project.dto.slotDTO;
 import com.example.project.entity.doctor;
+import com.example.project.entity.feedbackreservation;
 import com.example.project.entity.patient;
 import com.example.project.entity.reservation;
 import com.example.project.entity.reservationdetail;
 import com.example.project.entity.service;
 import com.example.project.entity.user;
 import com.example.project.service.DoctorService;
+import com.example.project.service.FeedbackService;
 import com.example.project.service.PatientService;
 import com.example.project.service.ReservationService;
 import com.example.project.service.ScheduleService;
@@ -53,6 +55,8 @@ public class ReservationController {
     ServiceCategoryService serviceCategoryService;
     @Autowired
     ScheduleService scheduleService;
+    @Autowired
+    FeedbackService FeedbackService;
 
     @GetMapping("bookingappointment")
     public String getData(Model model, HttpSession session) {
@@ -63,7 +67,7 @@ public class ReservationController {
 
         return "bookingappointment";
     }
-
+    
     @GetMapping("/getServiceByCategoryServiceId/{categoryId}")
     @ResponseBody
     public List<service> chooseService(@PathVariable(value = "categoryId") int categoryId) {
@@ -206,6 +210,7 @@ public class ReservationController {
             patient.setPatient_phone(patient_phone);
             patient.setPatient_address(patient_address);
             patient.setDescription(patient_note);
+            patient.setDob(new java.sql.Date(System.currentTimeMillis()));
             patient.setStatus(1);
             patient.setCreate_by("admin");
             patient.setCreate_at(new java.sql.Date(System.currentTimeMillis()));
@@ -218,6 +223,7 @@ public class ReservationController {
             patient.setPatient_phone(patient_phone);
             patient.setPatient_address(patient_address);
             patient.setDescription(patient_note);
+            patient.setDob(new java.sql.Date(System.currentTimeMillis()));
             patient.setStatus(1);
             patient.setCreate_by("admin");
             patient.setCreate_at(new java.sql.Date(System.currentTimeMillis()));
@@ -230,6 +236,7 @@ public class ReservationController {
         // save reservation
         reservation.setPatient_id(patient_id);
         reservation.setPatient_name(patient_name);
+        reservation.setDescription(patient_note);
         reservation.setDoctor_id(doctor_id);
         reservation.setDoctor_name(doctor_name);
         reservation.setDate(java.sql.Date.valueOf(date));
@@ -344,15 +351,17 @@ public class ReservationController {
         reservation reservations = ReservationService.findReservationByID(reservation_id);
         patient p = PatientService.findByPatientId(reservations.getPatient_id()).get();
         doctor d = DoctorService.findById(reservations.getDoctor_id());
+        Optional<feedbackreservation> f = FeedbackService.getFeedbackByReserId(reservation_id);
+        if(f != null) {
+            feedbackreservation feedback = f.get();
+            model.addAttribute("feedback", feedback);
+        }
+
         model.addAttribute("reservation", reservations);
         model.addAttribute("detail", ReservationService.findReserDetailByReserID(reservation_id));
         model.addAttribute("patient", p);
         model.addAttribute("doctor", d);
-
-        model.addAttribute("listSelected", session.getAttribute("selectedService"));
-        model.addAttribute("listService", ServiceService.fechServicesList());
-        model.addAttribute("listDoctor", DoctorService.fetchDoctorList());
-        model.addAttribute("listCategoryService", serviceCategoryService.fetchServiceCategoryList());
+        
         return "cusreservationdetail";
     }
 
@@ -417,8 +426,10 @@ public class ReservationController {
         }
 
         patient patient = PatientService.findByPatientId(reservation.getPatient_id()).get();
-        PatientService.deletePatient(patient.getPatient_id());
-
+        if(patient != null) {
+            PatientService.deletePatient(patient.getPatient_id());
+        }
+        
         ReservationService.deleteReservation(reservation_id);
         return "redirect:/myreservation";
     }

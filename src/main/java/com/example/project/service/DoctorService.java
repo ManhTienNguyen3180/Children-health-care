@@ -56,4 +56,6 @@ public interface DoctorService {
     doctor findDoctorPosition(String position);
     
     List<doctor> getDoctorByDoctorServiceID(int id);
+    
+    String getCategoryNameByDoctorID(int id);
 }

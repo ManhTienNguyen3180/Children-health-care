@@ -3,7 +3,6 @@ package com.example.project.service;
 import java.util.List;
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,7 +14,6 @@ import com.example.project.Repository.DoctorServiceRepo;
 import com.example.project.Repository.SlotRepo;
 import com.example.project.entity.doctor;
 import com.example.project.entity.doctorservice;
-
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
@@ -44,13 +42,13 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Page<doctor> getAllDoc(int page, int size) {
-        PageRequest pageable = PageRequest.of(page-1,size);
-        return repo.findAll( pageable);
+        PageRequest pageable = PageRequest.of(page - 1, size);
+        return repo.getAllPagi(pageable);
     }
 
     @Override
     public Page<doctor> getDocByService(int id, int page, int size) {
-        PageRequest pageable = PageRequest.of(page-1,size);
+        PageRequest pageable = PageRequest.of(page - 1, size);
         return repo.getDocByService(id, pageable);
     }
 
@@ -68,8 +66,6 @@ public class DoctorServiceImpl implements DoctorService {
     public List<Object> getDocReview(int id) {
         return repo.getDocReview(id);
     }
-
-    
 
     @Override
     public void save(doctor doctor) {
@@ -143,9 +139,9 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Page<doctor> search(String key, int pageNo, int pageSize) {
-        PageRequest pageable = PageRequest.of(pageNo-1,pageSize);
+        PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
         return this.repo.search(key, pageable);
-     }
+    }
 
     @Override
     public Page<doctor> filterCategory(int id, int pageNo, int pageSize) {
@@ -169,10 +165,9 @@ public class DoctorServiceImpl implements DoctorService {
         return repo.getDoctorByDoctorServiceID(id);
     }
 
+    @Override
+    public String getCategoryNameByDoctorID(int id) {
+        return repo.getCategoryNameByDoctorID(id);
+    }
+
 }
-
-    
-
-    
-
-

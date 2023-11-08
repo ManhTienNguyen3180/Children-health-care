@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.project.entity.reservation;
@@ -35,12 +36,34 @@ public interface ReservationRepo extends JpaRepository<reservation, Integer> {
     @Query("SELECT u FROM reservation u WHERE patient_id = ?1 AND date = ?2 ORDER BY date ASC")
     List<reservation> findByPatientDate(int patient_id, String date);
 
-    @Query("select r from reservation r where r.doctor_id = ?1 and r.date = ?2 and r.time = ?3")
+    @Query("select r from reservation r where r.doctor_id = ?1 and r.date = ?2 and r.time = ?3 and r.status not in (2,4)")
     reservation findByDoctor_idAndDateAndTime(int doctor_id, Date date, String time);
+
+    @Query("select r from reservation r  join slot s on r.doctor_id = s.doctor_id where r.doctor_id = ?1 and r.date = ?2 and r.time = ?3 and s.dayof_week = ?4 and r.status not in (2,4)")
+    reservation findByDoctor_idAndDateAndTimeAndDay(int doctor_id, Date date, String time,int dayof_week);
+
+    @Query(value = "select r.reservation_id,r.patient_name,p.patient_email,p.dob,p.gender,r.date,r.time,r.doctor_name,r.status from reservation r left join patient p on r.patient_id = p.patient_id order by r.status", nativeQuery = true)
+    Page<Object[]> getListReservation(PageRequest pageable);
+
+    @Query(value = "select r.reservation_id,r.patient_name,p.patient_email,p.dob,p.gender,r.date,r.time,r.doctor_name,r.status from reservation r left join patient p on r.patient_id = p.patient_id where r.status = ?1", nativeQuery = true)
+    Page<Object[]> getListReservationByStatus(int status, PageRequest pageable);
+    
 
     @Query("select r from reservation r join patient p on r.patient_id = p.patient_id where p.user_id = ?1 order by r.reservation_id desc")
     List<reservation> findReservationByUserId(int user_id);
 
     @Query("select r from reservation r join patient p on r.patient_id = p.patient_id where p.user_id = ?1")
     Page<reservation> findPageReservationByUserId(int user_id, PageRequest pageable);
+    
+    @Query(value = "SELECT COALESCE(COUNT(r.reservation_id), 0) AS number_of_reservations " +
+            "FROM (SELECT 1 AS month UNION ALL SELECT 2 UNION ALL SELECT 3 " +
+            "UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 " +
+            "UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 " +
+            "UNION ALL SELECT 10 UNION ALL SELECT 11 UNION ALL SELECT 12) AS months " +
+            "LEFT JOIN childrencare_system.reservation AS r " +
+            "ON months.month = EXTRACT(MONTH FROM r.date) AND EXTRACT(YEAR FROM r.date) = :year " +
+            "GROUP BY months.month " +
+            "ORDER BY months.month",
+            nativeQuery = true)
+    List<Integer> getMonthlyReservationCounts(@Param("year") int year);
 }

@@ -81,6 +81,7 @@ public class HomeController {
         model.addAttribute("blogNew", BlogService.getBlogsNew());
         return "home";
     }
+    
 
     @GetMapping("/logout")
     public String logout(Authentication authentication, HttpSession session) {

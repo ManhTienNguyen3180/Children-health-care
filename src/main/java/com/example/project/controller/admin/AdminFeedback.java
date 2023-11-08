@@ -60,7 +60,7 @@ public class AdminFeedback {
 
     @GetMapping("/admin/feedback/filter/{id}")
     public String filterCategory(Model model, @PathVariable("id") int id) {
-        
+        model.addAttribute("listRate", FeedbackService.ratings());
         return filterCategoryAndPaginated(model, id, 1);
     }
 
