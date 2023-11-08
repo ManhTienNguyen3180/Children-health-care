@@ -96,7 +96,7 @@ public class AdminAddPatient {
       }
 
     }
-    try {
+    // try {
 
       LocalDate localDate = LocalDate.now();
       // Convert LocalDate to Date
@@ -106,9 +106,6 @@ public class AdminAddPatient {
       p.setDob(date);
       if (datem != null) {
         p.setCreate_at(datem);
-      } else {
-        model.addAttribute("mess", "Cant pasrse dob");
-        return page(model);
       }
 
       if (PatientService.findByPatientEmail(Email) != null) {
@@ -141,11 +138,11 @@ public class AdminAddPatient {
 
       model.addAttribute("mess", "Add success");
       return "redirect:/admin/add-patientDetails?id=" + pwithId.getPatient_id(); // Fixed the URL
-    } catch (Exception e) {
-      // TODO: handle exception
-      model.addAttribute("mess", "Add fail");
-    }
-    return page(model);
+    // } catch (Exception e) {
+    //   // TODO: handle exception
+    //   model.addAttribute("mess", "Add fail");
+    // }
+    // return page(model);
   }
 
 }

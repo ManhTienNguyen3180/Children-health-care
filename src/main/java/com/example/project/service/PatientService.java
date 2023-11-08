@@ -64,7 +64,7 @@ public class PatientService {
 
   public void addPatient(patient p) {
 
-    if (findByPatientId(p.getPatient_id()) == null) {
+    if (!findByPatientId(p.getPatient_id()).isPresent()) {
       // If the patient with the given ID doesn't exist, save the new patient
       save(p);
     } else {
