@@ -103,13 +103,10 @@ public class PatientService {
 
   public Optional<patient> findByPatientId(int patientId) {
     Optional<patient> p = patientRepo.findByPatient_id(patientId);
-    if (p.isPresent()) {
-      return p;
-    } else {
-      return null;
-    }
+    return p;
   }
-public List<patient> findByUserId(int user_id) {
+
+  public List<patient> findByUserId(int user_id) {
     List<patient> p = patientRepo.findByUser_id(user_id);
     if (!p.isEmpty()) {
       return p;
@@ -117,6 +114,7 @@ public List<patient> findByUserId(int user_id) {
       return null;
     }
   }
+
   public void save(patient patient) {
     patientRepo.save(patient);
   }
@@ -127,29 +125,46 @@ public List<patient> findByUserId(int user_id) {
   }
   // Detail patient
 
-  public Optional<details_Patient> findByPatientDetailId(int patientid) {
-    if (patientDetailRepo.findPatientDetailById(patientid).isPresent()) {
-      return patientDetailRepo.findPatientDetailById(patientid);
+  public Optional<details_Patient> findByPatientDetailId(int patientDetailid) {
+    if (patientDetailRepo.findPatientDetailById(patientDetailid).isPresent()) {
+      return patientDetailRepo.findPatientDetailById(patientDetailid);
     }
     return null;
   }
 
-  public Optional<details_Patient> findByPatientIdDetail(patient patientid) {
-    if (patientDetailRepo.findByPatientId(patientid).isPresent()) {
-      return patientDetailRepo.findByPatientId(patientid);
-    }
-    return null;
+  public Optional<details_Patient> findByPatientIdDetail(patient patientId) {
+    return patientDetailRepo.findByPatientId(patientId);
+
   }
 
   public void addPatient(details_Patient p) {
+    Optional<details_Patient> existingPatient = findByPatientIdDetail(p.getPatient());
+    if (existingPatient.isPresent()) {
+      details_Patient patientToUpdate = existingPatient.get();
+      // Set the new details for the patient
+      patientToUpdate.setFamily_medical_history(p.getFamily_medical_history());
+      patientToUpdate.setMedical_history(p.getMedical_history());
+      patientToUpdate.setCreate_at(p.getCreate_at());
+      patientToUpdate.setHeartbeat(p.getHeartbeat());
+      patientToUpdate.setBody_temperature(p.getBody_temperature());
+      patientToUpdate.setBlood(p.getBlood());
+      patientToUpdate.setHeight(p.getHeight());
+      patientToUpdate.setWeight(p.getWeight());
+      patientToUpdate.setBMI(p.getBMI());
+      patientToUpdate.setHemoglobin(p.getHemoglobin());
+      patientToUpdate.setLefteye(p.getLefteye());
+      patientToUpdate.setRighteye(p.getRighteye());
+      patientToUpdate.setIOP(p.getIOP());
+      patientToUpdate.setDescription(p.getDescription());
+      patientToUpdate.setHeal_description(p.getHeal_description());
+      patientToUpdate.setEyes_description(p.getEyes_description());
+      patientToUpdate.setLefteye_description(p.getLefteye_description());
+      patientToUpdate.setRighteye_description(p.getRighteye_description());
+      p.setDoctor_id(p.getDoctor_id());
+      // Update other properties as needed
 
-    if (findByPatientDetailId(p.getDetailsPatientId()) == null) {
-      // If the patient with the given ID doesn't exist, save the new patient
-      patientDetailRepo.save(p);
     } else {
-      // If the patient with the given ID already exists, you can choose to handle it
-      // differently, such as throwing an exception or logging a message
-      throw new IllegalStateException("Patient with the same ID already exists.");
+           patientDetailRepo.save(p);
     }
   }
 
@@ -160,5 +175,5 @@ public List<patient> findByUserId(int user_id) {
   public void savePantient(int gender, String name, String email, String phone, int id) {
     patientRepo.savePatientChange(gender, name, email, phone, id);
   }
-  
+
 }

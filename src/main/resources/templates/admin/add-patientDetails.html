@@ -161,7 +161,7 @@
                     <ul class="list-unstyled mb-0">
 
 
-                    <li class="list-inline-item mb-0 ms-1">
+                        <li class="list-inline-item mb-0 ms-1">
                             <div class="dropdown dropdown-primary">
                                 <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
@@ -266,8 +266,12 @@
                                                         <div class="form-group row">
                                                             <div class="col-sm-12">
                                                                 <textarea name="fmhistory" type="textarea"
-                                                                    class="form-control"
-                                                                    style="height: 100px;"></textarea>
+                                                                    class="form-control" style="height: 100px;"
+                                                                    th:if="${detailpatient!=null}"
+                                                                    th:text="${detailpatient.Family_medical_history}"></textarea>
+                                                                <textarea name="fmhistory" type="textarea"
+                                                                    class="form-control" style="height: 100px;"
+                                                                    th:if="${detailpatient==null}"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -278,7 +282,12 @@
                                                         <label class="form-label">Heartbeat:</label>
                                                         <div class="mb-3 d-flex align-items-center">
                                                             <input type="number" name="heartbeat" class="form-control"
-                                                                required min="0" max="220">
+                                                                required min="0" max="220"
+                                                                th:if="${detailpatient!=null}"
+                                                                th:value="${detailpatient.heartbeat}">
+                                                            <input type="number" name="heartbeat" class="form-control"
+                                                                required min="0" max="220"
+                                                                th:if="${detailpatient==null}">
                                                             <label class="pl-1" style="padding: 10px;">bpm</label>
                                                         </div>
                                                     </div>
@@ -286,7 +295,11 @@
                                                         <label class="form-label">Body Temperature:</label>
                                                         <div class="mb-3 d-flex align-items-center">
                                                             <input type="number" name="bodytem" class="form-control"
-                                                                required min="0" max="46">
+                                                                required min="0" max="46" th:if="${detailpatient!=null}"
+                                                                th:value="${detailpatient.body_temperature}">
+                                                            <input type="number" name="bodytem" class="form-control"
+                                                                required min="0" max="46"
+                                                                th:if="${detailpatient==null}">
                                                             <label class="pl-1" style="padding: 10px;">°C</label>
                                                         </div>
                                                     </div>
@@ -294,8 +307,11 @@
                                                 <div class="mb-3">
                                                     <label class="form-label">Weight:</label>
                                                     <div class="mb-3 d-flex align-items-center">
-                                                        <input type="text" name="weight" class="form-control"
+                                                        <input type="text" name="weight" th:if="${detailpatient!=null}"
+                                                            th:value="${detailpatient.weight}" class="form-control"
                                                             style="width: 90%;"></input>
+                                                        <input type="text" name="weight" th:if="${detailpatient==null}"
+                                                            class="form-control" style="width: 90%;"></input>
                                                         <label class="pl-1" style="padding: 10px;">Kg</label>
                                                     </div>
                                                 </div>
@@ -321,8 +337,12 @@
                                                         <div class="form-group row">
                                                             <div class="col-sm-12">
                                                                 <textarea name="mhistory" type="textarea"
-                                                                    class="form-control"
-                                                                    style="height: 100px;"></textarea>
+                                                                    class="form-control" style="height: 100px;"
+                                                                    th:if="${detailpatient!=null}"
+                                                                    th:text="${detailpatient.medical_history}"></textarea>
+                                                                <textarea name="mhistory" type="textarea"
+                                                                    class="form-control" style="height: 100px;"
+                                                                    th:if="${detailpatient==null}"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -335,13 +355,24 @@
                                                     <div class="row">
                                                         <div class="mb-3 col-md-7">
                                                             <label class="form-label">BMI:</label>
-                                                            <input type="text" placeholder="BMI" value=""
+                                                            <input type="text" placeholder="BMI"
+                                                                th:if="${detailpatient!=null}"
+                                                                th:value="${detailpatient.BMI}"
+                                                                style="background-color: gainsboro;"
+                                                                class="form-control" readonly>
+                                                            <input type="text" placeholder="BMI"
+                                                                th:if="${detailpatient==null}"
                                                                 style="background-color: gainsboro;"
                                                                 class="form-control" readonly>
                                                         </div>
                                                         <div class="mb-3 col-md-5">
                                                             <label class="form-label">Blood:</label>
-                                                            <input type="text" name="blood" placeholder=""
+                                                            <input type="text" name="blood"
+                                                                th:if="${detailpatient!=null}"
+                                                                th:value="${detailpatient.blood}" placeholder=""
+                                                                class="form-control">
+                                                            <input type="text" name="blood"
+                                                                th:if="${detailpatient==null}" placeholder=""
                                                                 class="form-control">
                                                         </div>
                                                     </div>
@@ -350,14 +381,22 @@
                                                     <label class="form-label">Height:</label>
                                                     <div class="mb-3 d-flex align-items-center">
                                                         <input type="text" name="height" class="form-control"
-                                                            style="width: 90%;"></input>
+                                                            style="width: 90%;" th:if="${detailpatient!=null}"
+                                                            th:value="${detailpatient.height}"></input>
+                                                        <input type="text" name="height" class="form-control"
+                                                            style="width: 90%;" th:if="${detailpatient==null}"></input>
                                                         <label class="pl-1" style="padding: 10px;">Cm</label>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Hemoglobin:</label>
                                                     <div class="mb-3 d-flex align-items-center">
-                                                        <input type="text" name="hemoglobin" class="form-control"
+                                                        <input type="text" name="hemoglobin"
+                                                            th:if="${detailpatient!=null}"
+                                                            th:value="${detailpatient.hemoglobin}" class="form-control"
+                                                            style="width: 90%;"></input>
+                                                        <input type="text" name="hemoglobin"
+                                                            th:if="${detailpatient==null}" class="form-control"
                                                             style="width: 90%;"></input>
                                                         <label class="pl-1" style="padding: 10px;">g/dL</label>
                                                     </div>
@@ -374,8 +413,11 @@
                                                             <label class="form-label">Right Eyes</label>
                                                             <div class="form-group row">
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" name="rightEye"
-                                                                        placeholder="10/10">
+                                                                    <input type="text" th:if="${detailpatient!=null}"
+                                                                        th:value="${detailpatient.righteye}"
+                                                                        name="rightEye" placeholder="10/10">
+                                                                    <input type="text" th:if="${detailpatient==null}"
+                                                                        name="rightEye" placeholder="10/10">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -385,7 +427,12 @@
                                                             <div class="form-group row">
                                                                 <div class="col-sm-12">
                                                                     <input type="text" name="leftEye"
-                                                                        placeholder="10/10">
+                                                                        placeholder="10/10"
+                                                                        th:if="${detailpatient!=null}"
+                                                                        th:value="${detailpatient.lefteye}">
+                                                                    <input type="text" name="leftEye"
+                                                                        placeholder="10/10"
+                                                                        th:if="${detailpatient==null}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -396,8 +443,11 @@
                                                     <div class="mb-3">
                                                         <div class="mb-3 d-flex align-items-center"
                                                             style="padding-left: 150px;">
-                                                            <input type="text" name="iop" class="form-control"
+                                                            <input type="text" name="iop" th:if="${detailpatient!=null}"
+                                                                th:value="${detailpatient.IOP}" class="form-control"
                                                                 style="width: 80%; "></input>
+                                                            <input type="text" name="iop" th:if="${detailpatient==null}"
+                                                                class="form-control" style="width: 80%; "></input>
                                                             <label class="pl-1" style="padding: 10px;">mmHg</label>
                                                         </div>
                                                     </div>
@@ -409,7 +459,12 @@
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
                                                         <textarea name="description" type="textarea"
-                                                            class="form-control" style="height: 100px;"></textarea>
+                                                            class="form-control" th:if="${detailpatient!=null}"
+                                                            th:text="${detailpatient.description}"
+                                                            style="height: 100px;"></textarea>
+                                                        <textarea name="description" type="textarea"
+                                                            class="form-control" th:if="${detailpatient==null}"
+                                                            style="height: 100px;"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -419,7 +474,12 @@
                                                     <div class="col-sm-12">
                                                         <textarea name="eyesDescription" type="textarea"
                                                             class="form-control" style="height: 100px;"
-                                                            placeholder="Nomal"></textarea>
+                                                            placeholder="Nomal" th:if="${detailpatient!=null}"
+                                                            th:text="${detailpatient.eyes_description}"></textarea>
+                                                        <textarea name="eyesDescription" type="textarea"
+                                                            class="form-control" style="height: 100px;"
+                                                            placeholder="Nomal"
+                                                            th:if="${detailpatient==null}"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -429,7 +489,12 @@
                                                     <div class="col-sm-12">
                                                         <textarea name="leftDescription" type="textarea"
                                                             class="form-control" style="height: 100px;"
-                                                            placeholder="Nomal"></textarea>
+                                                            placeholder="Nomal" th:if="${detailpatient!=null}"
+                                                            th:text="${detailpatient.lefteye_description}"></textarea>
+                                                        <textarea name="leftDescription" type="textarea"
+                                                            class="form-control" style="height: 100px;"
+                                                            placeholder="Nomal"
+                                                            th:if="${detailpatient==null}"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -439,7 +504,12 @@
                                                     <div class="col-sm-12">
                                                         <textarea name="rightDescription" type="textarea"
                                                             class="form-control" style="height: 100px;"
-                                                            placeholder="Nomal"></textarea>
+                                                            placeholder="Nomal" th:if="${detailpatient!=null}"
+                                                            th:text="${detailpatient.righteye_description}"></textarea>
+                                                        <textarea name="rightDescription" type="textarea"
+                                                            class="form-control" style="height: 100px;"
+                                                            placeholder="Nomal"
+                                                            th:if="${detailpatient==null}"></textarea>
                                                     </div>
                                                 </div>
                                             </div>

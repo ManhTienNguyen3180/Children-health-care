@@ -1,8 +1,10 @@
 package com.example.project.controller.admin;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,19 +38,40 @@ public class AdminAddPatientDetails {
 
   @GetMapping
   public String pageAfteradd(Model model, @RequestParam("id") String id) {
-    LocalDateTime localDateTime = LocalDateTime.now();
-    model.addAttribute("datetime", localDateTime);
-    // Extract hours and minutes
-    int hour = localDateTime.getHour();
-    int minute = localDateTime.getMinute();
 
-    model.addAttribute("date", localDateTime.toLocalDate());
-    model.addAttribute("time", String.format("%02d:%02d", hour, minute));
-    patient p = PatientService.findByPatientId(Integer.parseInt(id)).get();
-    List<doctor> listd = dService.fetchDoctorList();
-    model.addAttribute("listd", listd);
-    if (p != null) {
+    Optional<patient> optionalPatient = PatientService.findByPatientId(Integer.parseInt(id));
+
+    if (optionalPatient.isPresent()) {
+      patient p = optionalPatient.get();
+      Optional<details_Patient> optionalPatientDetail = PatientService
+          .findByPatientIdDetail(p);
       model.addAttribute("patientInfo", p);
+      List<doctor> listd = dService.fetchDoctorList();
+      model.addAttribute("listd", listd);
+      if (optionalPatientDetail.isPresent()) {
+        details_Patient pd = optionalPatientDetail.get();
+        model.addAttribute("detailpatient", pd);
+        LocalDateTime createByDate = pd.getCreate_at();
+        if (createByDate != null) {
+          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+          DateTimeFormatter formatterdate = DateTimeFormatter.ofPattern("YYYY-MM-dd");
+          model.addAttribute("datetime", pd.getCreate_at());
+          String formattedTime = formatter.format(createByDate);
+          model.addAttribute("date", formatterdate.format(createByDate));
+          model.addAttribute("time", formattedTime);
+        } else {
+          model.addAttribute("time", "N/A"); // Handle the case when create_by is null
+        }
+
+      } else {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        model.addAttribute("datetime", localDateTime);
+        // Extract hours and minutes
+        int hour = localDateTime.getHour();
+        int minute = localDateTime.getMinute();
+        model.addAttribute("date", localDateTime.toLocalDate());
+        model.addAttribute("time", String.format("%02d:%02d", hour, minute));
+      }
     } else {
       model.addAttribute("mess", "Patient not found");
       return "admin/add-patient";
@@ -105,7 +128,7 @@ public class AdminAddPatientDetails {
 
       PatientService.addPatient(pd);
       model.addAttribute("mess", "Add success");
-      return "redirect:/admin/patient-profile?id="+id;
+      return "redirect:/admin/patient-profile?id=" + id;
     } catch (Exception e) {
       // TODO: handle exception
       model.addAttribute("mess", "Add fail");

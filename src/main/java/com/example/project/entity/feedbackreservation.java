@@ -19,7 +19,7 @@ public class feedbackreservation {
     private int reservation_id;
     private int rating;
     private String comment;
-    @Column(name = "FeedbackDate")
+    @Column(name = "feedback_date")
     private Date date;
     private String Doctor_Knowledge;
     private String Nurse_Patience;
