@@ -176,8 +176,14 @@ public class UserService {
     }
   }
 
-  public void updateRoleName(){
-    
+  public void updateStatus(int userid){
+    Optional<user> useOptional = userRepository
+        .findById(userid);
+    if (useOptional.isPresent()) {
+      user foundUser = useOptional.get();
+      foundUser.setStatus(0);
+      userRepository.save(foundUser);
+    } 
   }
   // update user status and role
   public void updateUserByUserid2(int userid, String statusUpdate, String roleUpdate) {

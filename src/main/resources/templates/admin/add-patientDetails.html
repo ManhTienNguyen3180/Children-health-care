@@ -261,20 +261,7 @@
                                                 </div>
                                                 <div class="d-flex align-items-center mt-2">
 
-                                                    <div class="mb-3 col-md-12">
-                                                        <label class="form-label">Family Medical History</label>
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-12">
-                                                                <textarea name="fmhistory" type="textarea"
-                                                                    class="form-control" style="height: 100px;"
-                                                                    th:if="${detailpatient!=null}"
-                                                                    th:text="${detailpatient.Family_medical_history}"></textarea>
-                                                                <textarea name="fmhistory" type="textarea"
-                                                                    class="form-control" style="height: 100px;"
-                                                                    th:if="${detailpatient==null}"></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                   
 
                                                 </div>
                                                 <div class="d-flex align-items-center mt-2">
@@ -388,71 +375,9 @@
                                                         <label class="pl-1" style="padding: 10px;">Cm</label>
                                                     </div>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Hemoglobin:</label>
-                                                    <div class="mb-3 d-flex align-items-center">
-                                                        <input type="text" name="hemoglobin"
-                                                            th:if="${detailpatient!=null}"
-                                                            th:value="${detailpatient.hemoglobin}" class="form-control"
-                                                            style="width: 90%;"></input>
-                                                        <input type="text" name="hemoglobin"
-                                                            th:if="${detailpatient==null}" class="form-control"
-                                                            style="width: 90%;"></input>
-                                                        <label class="pl-1" style="padding: 10px;">g/dL</label>
-                                                    </div>
-                                                </div>
+                                               
                                             </div><!--end col-->
-                                            <div class="col-md-6" style="border: 1px ;
-                                            width: 80%;
-                                            margin: 0 auto;
-                                            text-align: center;">
-                                                <div class="custom-div">
-                                                    <div class="d-flex align-items-center mt-2">
 
-                                                        <div class="mb-3 col-md-6">
-                                                            <label class="form-label">Right Eyes</label>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-12">
-                                                                    <input type="text" th:if="${detailpatient!=null}"
-                                                                        th:value="${detailpatient.righteye}"
-                                                                        name="rightEye" placeholder="10/10">
-                                                                    <input type="text" th:if="${detailpatient==null}"
-                                                                        name="rightEye" placeholder="10/10">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="mb-3 col-md-6">
-                                                            <label class="form-label">Left Eyes</label>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-12">
-                                                                    <input type="text" name="leftEye"
-                                                                        placeholder="10/10"
-                                                                        th:if="${detailpatient!=null}"
-                                                                        th:value="${detailpatient.lefteye}">
-                                                                    <input type="text" name="leftEye"
-                                                                        placeholder="10/10"
-                                                                        th:if="${detailpatient==null}">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3 col-md-12">
-                                                        <label class="form-label">IOP:</label>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <div class="mb-3 d-flex align-items-center"
-                                                            style="padding-left: 150px;">
-                                                            <input type="text" name="iop" th:if="${detailpatient!=null}"
-                                                                th:value="${detailpatient.IOP}" class="form-control"
-                                                                style="width: 80%; "></input>
-                                                            <input type="text" name="iop" th:if="${detailpatient==null}"
-                                                                class="form-control" style="width: 80%; "></input>
-                                                            <label class="pl-1" style="padding: 10px;">mmHg</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <label style="font-weight: bold;">Note:</label>
                                             <div class="mb-3 col-md-12">
                                                 <label class="form-label">Clinical diagnosis</label>
@@ -467,56 +392,11 @@
                                                             style="height: 100px;"></textarea>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="mb-3 col-md-12">
-                                                <label class="form-label">Eyes diagnosis</label>
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <textarea name="eyesDescription" type="textarea"
-                                                            class="form-control" style="height: 100px;"
-                                                            placeholder="Nomal" th:if="${detailpatient!=null}"
-                                                            th:text="${detailpatient.eyes_description}"></textarea>
-                                                        <textarea name="eyesDescription" type="textarea"
-                                                            class="form-control" style="height: 100px;"
-                                                            placeholder="Nomal"
-                                                            th:if="${detailpatient==null}"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label class="form-label">Left Eyes diagnosis</label>
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <textarea name="leftDescription" type="textarea"
-                                                            class="form-control" style="height: 100px;"
-                                                            placeholder="Nomal" th:if="${detailpatient!=null}"
-                                                            th:text="${detailpatient.lefteye_description}"></textarea>
-                                                        <textarea name="leftDescription" type="textarea"
-                                                            class="form-control" style="height: 100px;"
-                                                            placeholder="Nomal"
-                                                            th:if="${detailpatient==null}"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label class="form-label">Right Eyes diagnosis</label>
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <textarea name="rightDescription" type="textarea"
-                                                            class="form-control" style="height: 100px;"
-                                                            placeholder="Nomal" th:if="${detailpatient!=null}"
-                                                            th:text="${detailpatient.righteye_description}"></textarea>
-                                                        <textarea name="rightDescription" type="textarea"
-                                                            class="form-control" style="height: 100px;"
-                                                            placeholder="Nomal"
-                                                            th:if="${detailpatient==null}"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <input type="submit" value="Save" class="btn btn-soft-success m-1">
-                                        </div>
 
-                                        <label th:text="${mess}" style="color: red;">
+                                                <input type="submit" value="Save" class="btn btn-soft-success m-1">
+                                            </div>
+
+                                            <label th:text="${mess}" style="color: red;">
 
 
                     </form>

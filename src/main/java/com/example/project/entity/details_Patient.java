@@ -9,9 +9,13 @@ public class details_Patient {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int detailsPatientId;
-  @OneToOne
+  // set auto tang
+  @ManyToOne
   @JoinColumn(nullable = false, name = "patient_id")
   private patient patient;
+
+  // set trong database UQ
+  private int reservation_id;
   private String Family_medical_history;
   private String medical_history;
   @Column(nullable = false)
@@ -37,14 +41,14 @@ public class details_Patient {
   @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'Unknown'")
   private String BMI;
   // chỉ số khối cơ thể
-  @Column(nullable = false, columnDefinition = "double DEFAULT 0")
+  @Column(nullable = true, columnDefinition = "double DEFAULT 0")
   private double Hemoglobin;
   // g/dL huyết sắc tố, viết tắt Hb hay Hgb
-  @Column(nullable = false, columnDefinition = "Double DEFAULT 10")
+  @Column(nullable = true, columnDefinition = "Double DEFAULT 10")
   private double lefteye;
-  @Column(nullable = false, columnDefinition = "Double DEFAULT 10")
+  @Column(nullable = true, columnDefinition = "Double DEFAULT 10")
   private double righteye;
-  @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'Unknown'")
+  @Column(nullable = true, columnDefinition = "VARCHAR(255) DEFAULT 'Unknown'")
   private String IOP;
   // mmhg nhãn áp
   @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'Normal'")
@@ -52,11 +56,11 @@ public class details_Patient {
   @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'Normal'")
   private String heal_description;
   // based of on bmi
-  @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'Normal'")
+  @Column(nullable = true, columnDefinition = "VARCHAR(255) DEFAULT 'Normal'")
   private String eyes_description;
-  @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'Normal'")
+  @Column(nullable = true, columnDefinition = "VARCHAR(255) DEFAULT 'Normal'")
   private String lefteye_description;
-  @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'Normal'")
+  @Column(nullable = true, columnDefinition = "VARCHAR(255) DEFAULT 'Normal'")
   private String righteye_description;
 
   private int doctor_id;
@@ -265,6 +269,14 @@ public class details_Patient {
 
   public void setDoctor_id(int doctor_id) {
     this.doctor_id = doctor_id;
+  }
+
+  public int getReservation_id() {
+    return reservation_id;
+  }
+
+  public void setReservation_id(int reservation_id) {
+    this.reservation_id = reservation_id;
   }
 
 }

@@ -126,21 +126,30 @@ public class PatientService {
   // Detail patient
 
   public Optional<details_Patient> findByPatientDetailId(int patientDetailid) {
-    if (patientDetailRepo.findPatientDetailById(patientDetailid).isPresent()) {
-      return patientDetailRepo.findPatientDetailById(patientDetailid);
+    List<details_Patient> results = patientDetailRepo.findPatientDetailById(patientDetailid);
+    if (!results.isEmpty()) {
+      return Optional.of(results.get(0));
+    } else {
+      return Optional.empty();
     }
-    return null;
   }
 
   public Optional<details_Patient> findByPatientIdDetail(patient patientId) {
-    return patientDetailRepo.findByPatientId(patientId);
-
+    List<details_Patient> results = patientDetailRepo.findByPatientId(patientId);
+    if (!results.isEmpty()) {
+      return Optional.of(results.get(0));
+    } else {
+      return Optional.empty();
+    }
   }
-
-  public void addPatient(details_Patient p) {
+ public Optional<details_Patient> findByPatientIdHadReserId(patient patientId,int reservation_id) {
+    return patientDetailRepo.findByPatientIdHadReserId(patientId,reservation_id);
+  }
+  public void addPatient(details_Patient p, int reservation_id) {
     Optional<details_Patient> existingPatient = findByPatientIdDetail(p.getPatient());
-    if (existingPatient.isPresent()) {
+    if (existingPatient.isPresent() && reservation_id == 0) {
       details_Patient patientToUpdate = existingPatient.get();
+      // update pation detail
       // Set the new details for the patient
       patientToUpdate.setFamily_medical_history(p.getFamily_medical_history());
       patientToUpdate.setMedical_history(p.getMedical_history());
@@ -163,8 +172,12 @@ public class PatientService {
       p.setDoctor_id(p.getDoctor_id());
       // Update other properties as needed
 
-    } else {
-           patientDetailRepo.save(p);
+    } else if (existingPatient.isPresent() && reservation_id != 0) {
+      //
+      p.setReservation_id(reservation_id);
+      patientDetailRepo.save(p);
+    } else if (!existingPatient.isPresent() && reservation_id != 0) {
+      patientDetailRepo.save(p);
     }
   }
 

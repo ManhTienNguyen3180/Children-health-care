@@ -118,7 +118,6 @@ public class AdminAddPatient {
       p.setImage(imageAddress);
       p.setPatient_name(fullName);
       p.setStatus(0);
-      p.setUser_id(u.getUser_id());
       p.setPatient_email(Email);
       p.setPatient_phone(phonenum);
       p.setPatient_address(province + ", " + district + ", " + ward);

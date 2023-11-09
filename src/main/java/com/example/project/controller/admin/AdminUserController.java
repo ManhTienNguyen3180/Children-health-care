@@ -155,4 +155,11 @@ public class AdminUserController {
     model.addAttribute("orders", "order=" + r);
     return "admin/users";
   }
+
+  @GetMapping("/admin/delete")
+  public String changeStatus(@RequestParam("id")int id){
+    userService.updateStatus(id);
+    return "redirect:/admin/users";
+  }
+
 }

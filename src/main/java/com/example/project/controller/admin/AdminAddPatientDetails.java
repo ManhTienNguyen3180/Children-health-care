@@ -84,26 +84,33 @@ public class AdminAddPatientDetails {
       @RequestParam("id") String id,
       @RequestParam("doctor") String doctor,
       @RequestParam("datetime") LocalDateTime datetime,
-      @RequestParam("fmhistory") String fmhistory,
       @RequestParam("heartbeat") int heartbeat,
       @RequestParam("bodytem") int bodytem,
       @RequestParam("weight") String weight,
+       @RequestParam("height") String height,
       @RequestParam("mhistory") String mhistory,
       @RequestParam("blood") String blood,
-      @RequestParam("height") String height,
-      @RequestParam("hemoglobin") String hemoglobin,
-      @RequestParam("rightEye") String rightEye,
-      @RequestParam("leftEye") String leftEye,
-      @RequestParam("iop") String iop,
-      @RequestParam("description") String description,
-      @RequestParam("eyesDescription") String eyesDescription,
-      @RequestParam("leftDescription") String leftDescription,
-      @RequestParam("rightDescription") String rightDescription) {
+     
+      @RequestParam("description") String description) {
     try {
+      if(!weight.isEmpty()||!height.isEmpty()){
+        try {
+          Integer.parseInt(weight);
+        } catch (Exception e) {
+                model.addAttribute("mess", "Please add valid weight");
+
+        }
+        try {
+          Integer.parseInt(height);
+        } catch (Exception e) {
+                model.addAttribute("mess", "Please add valid height");
+
+        }
+            return pageAfteradd(model, id);
+      }
       user u = (user) session.getAttribute("user");
       details_Patient pd = new details_Patient();
       pd.setPatient(PatientService.findByPatientId(Integer.parseInt(id)).get());
-      pd.setFamily_medical_history(fmhistory);
       pd.setMedical_history(mhistory);
       pd.setCreate_at(datetime);
       pd.setCreate_by(u.getFull_name());
@@ -114,18 +121,16 @@ public class AdminAddPatientDetails {
       pd.setWeight(weight);
       String formattedBMI = String.format("%.2f", calculateBMI(weight, height));
       pd.setBMI(formattedBMI);
-      pd.setHemoglobin(Double.parseDouble(hemoglobin));
-      pd.setLefteye(Double.parseDouble(leftEye));
-      pd.setRighteye(Double.parseDouble(rightEye));
-      pd.setIOP(iop);
       pd.setDescription(description);
       pd.setHeal_description(BMI(calculateBMI(weight, height)));
-      pd.setEyes_description(eyesDescription);
-      pd.setRighteye_description(rightDescription);
-      pd.setLefteye_description(leftDescription);
       pd.setDoctor_id(Integer.parseInt(doctor));
-
-      PatientService.addPatient(pd);
+      pd.setReservation_id(60);
+      if (PatientService.findByPatientIdHadReserId(PatientService.findByPatientId(Integer.parseInt(id)).get(), 50)
+          .isPresent()) {
+        model.addAttribute("mess", "You can add patient detail one time per reservation");
+        return pageAfteradd(model, id);
+      }
+      PatientService.addPatient(pd, 50);
       model.addAttribute("mess", "Add success");
       return "redirect:/admin/patient-profile?id=" + id;
     } catch (Exception e) {
