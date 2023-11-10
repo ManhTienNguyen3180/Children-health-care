@@ -16,7 +16,7 @@ public interface ReservationDetailRepo extends JpaRepository<reservationdetail, 
     void mergeReservationDetail(int reservation_id, int service_id, String service_name, int price, Date create_at,
             String create_by, int doctor_id, String doctor_name);
 
-    @Query(value = "select r.reservation_id,r.patient_name,p.patient_email,p.dob,p.gender,r.date,r.time,r.doctor_name,r.status,p.patient_phone,p.patient_address,r.description from reservation r right join patient p on r.patient_id = p.patient_id where r.reservation_id = ?1", nativeQuery = true)
+    @Query(value = "select r.reservation_id,r.patient_name,p.patient_email,p.dob,p.gender,r.date,r.time,r.doctor_name,r.status,p.patient_phone,p.patient_address,r.description,r.patient_id from reservation r right join patient p on r.patient_id = p.patient_id where r.reservation_id = ?1", nativeQuery = true)
     List<Object[]> getReservationDetail(int reservation_id);
 
     @Query("select rd from reservationdetail rd where rd.reservation_id = ?1")

@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,7 +23,6 @@ import com.example.project.entity.user;
 import com.example.project.service.ContactService;
 import com.example.project.service.PatientService;
 
-import jakarta.mail.internet.ParseException;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -98,7 +96,7 @@ public class AdminAddPatient {
       }
 
     }
-    try {
+    // try {
 
       LocalDate localDate = LocalDate.now();
       // Convert LocalDate to Date
@@ -108,9 +106,6 @@ public class AdminAddPatient {
       p.setDob(date);
       if (datem != null) {
         p.setCreate_at(datem);
-      } else {
-        model.addAttribute("mess", "Cant pasrse dob");
-        return page(model);
       }
 
       if (PatientService.findByPatientEmail(Email) != null) {
@@ -123,7 +118,6 @@ public class AdminAddPatient {
       p.setImage(imageAddress);
       p.setPatient_name(fullName);
       p.setStatus(0);
-      p.setUser_id(u.getUser_id());
       p.setPatient_email(Email);
       p.setPatient_phone(phonenum);
       p.setPatient_address(province + ", " + district + ", " + ward);
@@ -143,11 +137,11 @@ public class AdminAddPatient {
 
       model.addAttribute("mess", "Add success");
       return "redirect:/admin/add-patientDetails?id=" + pwithId.getPatient_id(); // Fixed the URL
-    } catch (Exception e) {
-      // TODO: handle exception
-      model.addAttribute("mess", "Add fail");
-    }
-    return page(model);
+    // } catch (Exception e) {
+    //   // TODO: handle exception
+    //   model.addAttribute("mess", "Add fail");
+    // }
+    // return page(model);
   }
 
 }

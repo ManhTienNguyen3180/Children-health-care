@@ -7,6 +7,7 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,12 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.project.entity.details_Patient;
-import com.example.project.entity.doctor;
+
 import com.example.project.entity.patient;
 import com.example.project.entity.reservation;
 import com.example.project.service.DoctorServiceImpl;
 import com.example.project.service.PatientService;
 import com.example.project.service.ReservationService;
+
 
 @Controller
 @RequestMapping("admin/patient-profile")
@@ -38,47 +40,56 @@ public class AdminPatientProfile {
   public String page(@RequestParam("id") String Patientid, Model model) {
     patient p = patientService.findByPatientId(Integer.parseInt(Patientid)).get();
     try {
-      details_Patient d = patientService
-          .findByPatientIdDetail(patientService.findByPatientId(Integer.parseInt(Patientid)).get()).get();
-      LocalDateTime localDateTime = d.getCreate_at();
+      details_Patient d = null;
+      Optional<patient> patientOptional = patientService.findByPatientId(Integer.parseInt(Patientid));
+      if (patientOptional.isPresent()) {
+          Optional<details_Patient> detailsPatientOptional = patientService.findByPatientIdDetail(patientOptional.get());
+          if (detailsPatientOptional != null && detailsPatientOptional.isPresent()) {
+            d = detailsPatientOptional.get();
+        } 
+      }
+      if(d!=null){
+      LocalDateTime localDateTime = d.getCreate_at(); 
+      int hour = localDateTime.getHour();
+      int minute = localDateTime.getMinute();
       model.addAttribute("datetime", localDateTime);
       model.addAttribute("doctorNew", doctorservice.findById(d.getDoctor_id()));
-      int hour = localDateTime.getHour();
-      int minute = localDateTime.getMinute();
+     
       model.addAttribute("date", localDateTime.toLocalDate());
       model.addAttribute("time", String.format("%02d:%02d", hour, minute));
       model.addAttribute("PatientDetail", d);
+    }
     } catch (Exception e) {
-      details_Patient d = new details_Patient();
-      d.setBMI("unknow");
-      d.setBlood("unknow");
-      d.setBody_temperature(0);
-      d.setDescription("N/A");
+      // details_Patient d = new details_Patient();
+      // d.setBMI("unknow");
+      // d.setBlood("unknow");
+      // d.setBody_temperature(0);
+      // d.setDescription("N/A");
 
-      d.setEyes_description("unknow");
-      d.setFamily_medical_history("unknow");
-      d.setHeal_description("unknow");
-      d.setHeartbeat(0);
-      d.setHeight("unknow");
-      d.setHemoglobin(0);
-      d.setIOP("unknow");
-      d.setLefteye(0);
-      d.setLefteye_description("unknow");
-      d.setMedical_history("unknow");
-      d.setRighteye(0);
-      d.setRighteye_description("unknow");
-      d.setWeight("unknow");
-      d.setCreate_by("unknow");
-      doctor doc = new doctor();
-      doc.setDoctor_name("Not provided");
-      LocalDateTime localDateTime = LocalDateTime.of(0001, 1, 1, 0, 0, 0);
-      model.addAttribute("datetime", localDateTime);
-      model.addAttribute("doctorNew", doc);
-      int hour = localDateTime.getHour();
-      int minute = localDateTime.getMinute();
-      model.addAttribute("date", localDateTime.toLocalDate());
-      model.addAttribute("time", String.format("%02d:%02d", hour, minute));
-      model.addAttribute("PatientDetail", d);
+      // d.setEyes_description("unknow");
+      // d.setFamily_medical_history("unknow");
+      // d.setHeal_description("unknow");
+      // d.setHeartbeat(0);
+      // d.setHeight("unknow");
+      // d.setHemoglobin(0);
+      // d.setIOP("unknow");
+      // d.setLefteye(0);
+      // d.setLefteye_description("unknow");
+      // d.setMedical_history("unknow");
+      // d.setRighteye(0);
+      // d.setRighteye_description("unknow");
+      // d.setWeight("unknow");
+      // d.setCreate_by("unknow");
+      // doctor doc = new doctor();
+      // doc.setDoctor_name("Not provided");
+      // LocalDateTime localDateTime = LocalDateTime.of(0001, 1, 1, 0, 0, 0);
+      // model.addAttribute("datetime", localDateTime);
+      // model.addAttribute("doctorNew", doc);
+      // int hour = localDateTime.getHour();
+      // int minute = localDateTime.getMinute();
+      // model.addAttribute("date", localDateTime.toLocalDate());
+      // model.addAttribute("time", String.format("%02d:%02d", hour, minute));
+      // model.addAttribute("PatientDetail", d);
       // TODO: handle exception
     }
 

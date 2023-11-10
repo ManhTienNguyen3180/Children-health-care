@@ -40,88 +40,7 @@
 
     <div class="page-wrapper doctris-theme toggled">
         <nav id="sidebar" class="sidebar-wrapper">
-            <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
-                <div class="sidebar-brand">
-                    <a th:href="@{/home}">
-                        <img th:src="@{/images/logo-dark.png}" height="24" class="logo-light-mode" alt="">
-                        <img th:src="@{/images/logo-light.png}" height="24" class="logo-dark-mode" alt="">
-                    </a>
-                </div>
-
-                <ul class="sidebar-menu pt-3">
-                    <li><a th:href="@{/admin/dashboard}"><i
-                                class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
-                    <li><a th:href="@{/admin/appointment}"><i
-                                class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a></li>
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="fa-solid fa-user fa-xs"
-                                style="margin-right: 5px;"></i>User</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a th:href="@{/admin/users}">All Users</a></li>
-                                <li><a th:href="@{/admin/add-user}">Add Users</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a th:href="@{/admin/doctors}">Doctors</a></li>
-                                <li><a th:href="@{/admin/add-doctor}">Add Doctor</a></li>
-                                <li><a th:href="@{/admin/schedule}">Schedule</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Patients</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a th:href="@{/admin/patients}">All Patients</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a class="" th:href="@{/blogsManagement}">Blogs</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Services</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a class="" th:href="@{/servicesManagement}">Services</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="sidebar-dropdown">
-                        <a href="javascript:void(0)"><i class="uil uil-columns me-2 d-inline-block"></i>Sliders</a>
-                        <div class="sidebar-submenu">
-                            <ul>
-                                <li><a class="" th:href="@{/slidersManagement}">Sliders</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-
-
-                </ul>
-                <!-- sidebar-menu  -->
-            </div>
-            <!-- sidebar-content  -->
-            <ul class="sidebar-footer list-unstyled mb-0">
-                <li class="list-inline-item mb-0 ms-1">
-                    <a href="#" class="btn btn-icon btn-pills btn-soft-primary">
-                        <i class="uil uil-comment icons"></i>
-                    </a>
-                </li>
-            </ul>
+            <div lang="en" th:include="admin/sidebar :: sidebar"></div>
         </nav>
         <!-- sidebar-wrapper  -->
 
@@ -249,12 +168,13 @@
                                         <h6 class="mb-0">Address</h6>
                                         <p class="text-muted mb-0 ms-2" th:text="${patient.patient_address}"></p>
                                     </div>
-                                    <div class="d-flex align-items-center mt-2">
+                                    <div class="d-flex align-items-center mt-2" th:if="${PatientDetail != null}">
                                         <i class="uil uil-italic align-text-bottom text-primary h5 mb-0 me-2"></i>
                                         <h6 class="mb-0">Body status</h6>
                                         <p class="text-muted mb-0 ms-2" th:text="${PatientDetail.heal_description}"></p>
+                                        </p>
                                     </div>
-                                    <div class="d-flex align-items-center mt-2">
+                                    <div class="d-flex align-items-center mt-2" th:if="${doctorNew != null}">
                                         <i class="uil uil-italic align-text-bottom text-primary h5 mb-0 me-2"></i>
                                         <h6 class="mb-0">Doctor</h6>
                                         <p class="text-muted mb-0 ms-2" th:text="${doctorNew.doctor_name}"></p>
@@ -301,7 +221,7 @@
                                     <div class="tab-pane fade show active" id="pills-overview" role="tabpanel"
                                         aria-labelledby="overview-tab">
 
-                                        <div class="row">
+                                        <div class="row" th:if="${PatientDetail != null}">
                                             <div class="col-md-6">
 
 
@@ -310,21 +230,7 @@
                                                     <input type="text" th:value="*{date}" class="form-control"
                                                         readonly></input>
                                                 </div>
-                                                <div class="d-flex align-items-center mt-2">
 
-                                                    <div class="mb-3 col-md-12">
-                                                        <label class="form-label">Family Medical History</label>
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-12">
-                                                                <textarea name="fmhistory" type="textarea"
-                                                                    class="form-control" style="height: 100px;"
-                                                                    th:text="${PatientDetail.Family_medical_history}"
-                                                                    readonly></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
                                                 <div class="d-flex align-items-center mt-2">
                                                     <div class="mb-3" style="width: 50%;">
                                                         <label class="form-label">Heartbeat:</label>
@@ -369,21 +275,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="d-flex align-items-center mt-2">
 
-                                                    <div class="mb-3 col-md-12">
-                                                        <label class="form-label">Medical History</label>
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-12">
-                                                                <textarea name="mhistory" type="textarea"
-                                                                    class="form-control" style="height: 100px;"
-                                                                    th:text="${PatientDetail.medical_history}"
-                                                                    readonly></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
 
 
 
@@ -413,59 +305,9 @@
                                                         <label class="pl-1" style="padding: 10px;">Cm</label>
                                                     </div>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Hemoglobin:</label>
-                                                    <div class="mb-3 d-flex align-items-center">
-                                                        <input type="text" name="hemoglobin" class="form-control"
-                                                            style="width: 90%;" th:value="${PatientDetail.Hemoglobin}"
-                                                            readonly></input>
-                                                        <label class="pl-1" style="padding: 10px;">g/dL</label>
-                                                    </div>
-                                                </div>
+
                                             </div><!--end col-->
-                                            <div class="col-md-6" style="border: 1px ;
-                                            width: 80%;
-                                            margin: 0 auto;
-                                            text-align: center;">
-                                                <div class="custom-div">
-                                                    <div class="d-flex align-items-center mt-2">
 
-                                                        <div class="mb-3 col-md-6">
-                                                            <label class="form-label">Right Eyes</label>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-12">
-                                                                    <input type="text" name="rightEye"
-                                                                        placeholder="10/10"
-                                                                        th:value="${PatientDetail.righteye}" readonly>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="mb-3 col-md-6">
-                                                            <label class="form-label">Left Eyes</label>
-                                                            <div class="form-group row">
-                                                                <div class="col-sm-12">
-                                                                    <input type="text" name="leftEye"
-                                                                        placeholder="10/10"
-                                                                        th:value="${PatientDetail.lefteye}" readonly>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3 col-md-12">
-                                                        <label class="form-label">IOP:</label>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <div class="mb-3 d-flex align-items-center"
-                                                            style="padding-left: 150px;">
-                                                            <input type="text" name="iop" class="form-control"
-                                                                style="width: 80%; " th:value="${PatientDetail.IOP}"
-                                                                readonly></input>
-                                                            <label class="pl-1" style="padding: 10px;">mmHg</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <label style="font-weight: bold;">Note:</label>
                                             <div class="mb-3 col-md-12">
                                                 <label class="form-label">Clinical diagnosis</label>
@@ -477,43 +319,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="mb-3 col-md-12">
-                                                <label class="form-label">Eyes diagnosis</label>
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <textarea name="eyesDescription" type="textarea"
-                                                            class="form-control" style="height: 100px;"
-                                                            placeholder="Nomal"
-                                                            th:text="${PatientDetail.eyes_description}"
-                                                            readonly></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label class="form-label">Left Eyes diagnosis</label>
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <textarea name="leftDescription" type="textarea"
-                                                            class="form-control" style="height: 100px;"
-                                                            th:text="${PatientDetail.lefteye_description}"
-                                                            readonly></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="mb-3 col-md-6">
-                                                <label class="form-label">Right Eyes diagnosis</label>
-                                                <div class="form-group row">
-                                                    <div class="col-sm-12">
-                                                        <textarea name="rightDescription" type="textarea"
-                                                            class="form-control" style="height: 100px;"
-                                                            th:text="${PatientDetail.righteye_description}"
-                                                            readonly></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
+
 
                                         </div>
-
+                                        <div class="row" th:if="${PatientDetail == null}" style="text-align: center;">
+                                            The patient has not provided medical history information
+                                        </div>
                                     </div>
 
                                     <div class="tab-pane fade" id="pills-experience" role="tabpanel"
@@ -555,33 +366,8 @@
                                                             th:value="${patient.patient_address}" readonly>
                                                     </div>
                                                 </div><!--end col-->
-
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label"> Status: </label>
-                                                        <select class="form-control gender-name select2input"
-                                                            name="status">
-                                                            <option value="1" th:selected="${patient.status==1}">
-                                                                Reservation ended
-                                                            </option>
-                                                            <option value="0" th:selected="${patient.status==0}">In
-                                                                Process
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div><!--end col-->
-
                                                 <input type="hidden" name="id" th:value="${param.id}">
-
-                                                <div class="mt-4 pt-2">
-
-                                                    <div class="mt-4">
-                                                        <input type="submit" value="Save Change"
-                                                            class="btn btn-warning"></input>
-                                                    </div><!--end col-->
-                                                </div>
                                             </div>
-
                                     </div>
                                     <div class="tab-pane fade" id="pills-experience1" role="tabpanel"
                                         aria-labelledby="experience-tab">

@@ -245,7 +245,7 @@ public class ReservationController {
         reservation.setCreate_at(new java.sql.Date(System.currentTimeMillis()));
         reservation.setCreate_by("admin");
         reservation.setTime(time);
-
+        reservation.setService_name(patient_name+" reservation");
         if (service_ids != 0) {
             int total_cost = 0;
             for (service service : services) {

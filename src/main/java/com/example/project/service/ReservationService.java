@@ -258,6 +258,7 @@ public class ReservationService {
             reservationDTO.setPatient_phone(Integer.parseInt(String.valueOf(obj[9])));
             reservationDTO.setPatient_address(String.valueOf(obj[10]));
             reservationDTO.setNote(String.valueOf(obj[11]));
+            reservationDTO.setPatient_id(Integer.parseInt(String.valueOf(obj[12])));
         }
         return reservationDTO;
     }

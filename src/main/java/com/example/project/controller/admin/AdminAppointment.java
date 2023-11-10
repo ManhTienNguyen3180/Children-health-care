@@ -1,6 +1,5 @@
 package com.example.project.controller.admin;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -75,6 +74,7 @@ public class AdminAppointment {
     model.addAttribute("doctorname", reservationDTO.getDoctor_name());
     model.addAttribute("listService", serviceService.findServiceByCategoryId(doctor.getDoctorserviceId()));
     model.addAttribute("listDoctor", doctorService.getDoctorByDoctorServiceID(doctor.getDoctorserviceId()));
+    model.addAttribute("reservationDTO", reservationDTO);
     return "admin/edit-appointment";
   }
   @GetMapping("/admin/appointment/delete/{reid}/{serviceid}")

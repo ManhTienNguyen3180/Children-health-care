@@ -335,7 +335,17 @@
                                     <div class="row">
 
 
-
+                                        <div class="mb-3">
+                                            <label class="form-label">Patient</label><br>
+                                            Name: <small th:text="${reservationDTO.patient_name}"></small><br>
+                                            Email: <small th:text="${reservationDTO.patient_email}"></small><br>
+                                            Phone: <small th:text="${reservationDTO.patient_phone}"></small><br>
+                                            Address: <small th:text="${reservationDTO.patient_address}"></small><br>
+                                            Note: <small th:text="${reservationDTO.note}"></small><br>
+                                            <a class="w-60 btn btn-primary"  th:href="@{'/admin/add-patientDetails?id='+${reservationDTO.patient_id}+'&&reservationid='+${reservationDTO.reservation_id}}" href="">Add medical</a>
+                                            
+                                        </div>
+                                        <hr>
                                         <div class="mb-3">
                                             <label class="form-label">Status</label>
                                             <select class="form-control department-name select2input"

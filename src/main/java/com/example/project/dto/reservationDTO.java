@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class reservationDTO {
     private int reservation_id;
+    private int patient_id;
     private String patient_name;
     private String patient_email;
     private int patient_phone;
@@ -30,6 +31,23 @@ public class reservationDTO {
         this.status = status;
     }
     
+    public reservationDTO(int reservation_id, int patient_id, String patient_name, String patient_email,
+            int patient_phone, String patient_address, String note, Date dob, int gender, Date date, String time,
+            String doctor_name, int status) {
+        this.reservation_id = reservation_id;
+        this.patient_id = patient_id;
+        this.patient_name = patient_name;
+        this.patient_email = patient_email;
+        this.patient_phone = patient_phone;
+        this.patient_address = patient_address;
+        this.note = note;
+        this.dob = dob;
+        this.gender = gender;
+        this.date = date;
+        this.time = time;
+        this.doctor_name = doctor_name;
+        this.status = status;
+    }
     public reservationDTO(int reservation_id, String patient_name, String patient_email, int patient_phone, Date dob,
             int gender, Date date, String time, String doctor_name, int status) {
         this.reservation_id = reservation_id;
@@ -111,6 +129,7 @@ public class reservationDTO {
     public Date getDob() {
         return dob;
     }
+    
     public void setDob(Date dob) {
         this.dob = dob;
     }
@@ -161,6 +180,12 @@ public class reservationDTO {
     }
     public void setNote(String note) {
         this.note = note;
+    }
+    public int getPatient_id() {
+        return patient_id;
+    }
+    public void setPatient_id(int patient_id) {
+        this.patient_id = patient_id;
     }
     
 }

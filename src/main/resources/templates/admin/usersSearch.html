@@ -229,7 +229,6 @@
 
                             <input type="hidden" name="s" th:value="${param.s}">
                         </form>
-                        <label th:text="${searchName}" style="color:red;"></label>
                         <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                             <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                                 <li class="breadcrumb-item"><a href="dashboard">Doctris</a></li>
@@ -296,7 +295,7 @@
                                                 <a th:href="@{'/admin/user-profile/' + ${users.user_id}}"
                                                     class="btn btn-icon btn-pills btn-soft-success"><i
                                                         class="uil uil-pen"></i></a>
-                                                <a th:href="@{'/admin/delete/' + ${users.user_id}}"
+                                                <a th:href="@{'/admin/delete?id=' + ${users.user_id}}"
                                                     class="btn btn-icon btn-pills btn-soft-danger"><i
                                                         class="uil uil-trash"></i></a>
                                             </td>
