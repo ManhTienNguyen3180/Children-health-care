@@ -3,6 +3,7 @@ package com.example.project.controller;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -16,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
 
+import com.example.project.Admin.SliderController.Model.Slider;
+import com.example.project.Admin.SliderController.Service.SliderService;
 import com.example.project.entity.user;
 import com.example.project.service.BlogService;
 import com.example.project.service.DoctorService;
@@ -33,6 +36,8 @@ public class HomeController {
     @Autowired
     private BlogService BlogService;
 
+    @Autowired
+    SliderService serviceS;
     @Autowired
     private com.example.project.service.UserService userService;
 
@@ -79,6 +84,9 @@ public class HomeController {
         model.addAttribute("doctor", DoctorService.fetchDoctorList());
         model.addAttribute("service", ServiceService.fechServicesList());
         model.addAttribute("blogNew", BlogService.getBlogsNew());
+        
+        List<Slider> previewList = serviceS.findPreviewSlider();
+        model.addAttribute("previewSlider", previewList);
         return "home";
     }
     

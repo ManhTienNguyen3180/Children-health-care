@@ -50,7 +50,8 @@ public class SecurityConfig {
                         "/doctor", "/service/**","service-detail/**","doctor-detail/**", "/blog", "/reset", "/logout")
                 .permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/fonts/**").permitAll()              
-                .requestMatchers("admin/**").hasRole("ADMIN")
+                .requestMatchers("admin/**").hasAnyAuthority("ROLE_ADMIN","ROLE_DOCTOR","ROLE_MANAGER")
+                
                 .requestMatchers("/blog-detail/{id}").permitAll()
                 .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin

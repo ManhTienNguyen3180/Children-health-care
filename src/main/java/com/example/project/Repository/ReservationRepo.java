@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.example.project.entity.patient;
 import com.example.project.entity.reservation;
 
 @Repository
@@ -24,8 +25,8 @@ public interface ReservationRepo extends JpaRepository<reservation, Integer> {
     @Query(value = "SELECT MAX(reservation_id) FROM reservation", nativeQuery = true)
     int getLastReservationId();
 
-    @Query(value = "select count(reservation_id) from reservation r where r.doctor_id = ?1 and r.date = ?2", nativeQuery = true)
-    int countByReservationId(int doctorid, Date date);
+    @Query(value = "select count(r.reservation_id) from reservation r where r.doctor_id = ?1 and r.date = ?2 and r.time = ?3 and r.status not in (2,4)", nativeQuery = true)
+    int countByReservationId(int doctor_id, Date date, String time);
 
     @Query("SELECT u FROM reservation u where patient_id=?1 ")
     Optional<reservation> findByPatient(int patient_id, int reservation_id);
@@ -44,7 +45,10 @@ public interface ReservationRepo extends JpaRepository<reservation, Integer> {
 
     @Query(value = "select r.reservation_id,r.patient_name,p.patient_email,p.dob,p.gender,r.date,r.time,r.doctor_name,r.status from reservation r left join patient p on r.patient_id = p.patient_id order by r.status", nativeQuery = true)
     Page<Object[]> getListReservation(PageRequest pageable);
-
+    
+    @Query(value = "select r.reservation_id,r.patient_name,p.patient_email,p.dob,p.gender,r.date,r.time,r.doctor_name,r.status from reservation r left join patient p on r.patient_id = p.patient_id where r.doctor_name = ?1 and r.status in (1,2,3,4) order by r.status", nativeQuery = true)
+    List<Object[]> getListReservationByName(String name);
+    
     @Query(value = "select r.reservation_id,r.patient_name,p.patient_email,p.dob,p.gender,r.date,r.time,r.doctor_name,r.status from reservation r left join patient p on r.patient_id = p.patient_id where r.status = ?1", nativeQuery = true)
     Page<Object[]> getListReservationByStatus(int status, PageRequest pageable);
     

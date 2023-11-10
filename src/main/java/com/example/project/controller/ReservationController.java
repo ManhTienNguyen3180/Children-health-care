@@ -135,8 +135,9 @@ public class ReservationController {
             doctorId = 0;
         }
         reservation r = ReservationService.findByDoctor_idAndDateAndTime(doctorId, java.sql.Date.valueOf(date), time);
-        if (r != null) {
-            redirAttr.addFlashAttribute("messageReser", "This time slot is not available");
+        int count = ReservationService.countByReservationId(doctorId, java.sql.Date.valueOf(date), time);
+        if (count >= 5) {
+            redirAttr.addFlashAttribute("messageReser", "This time slot is full of reservations");
             return "redirect:/bookingappointment";
         } else {
             if (service_id != null) {

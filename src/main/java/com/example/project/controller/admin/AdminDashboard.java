@@ -52,16 +52,20 @@ public class AdminDashboard {
         List<Integer> monthlyReservationData;
         if (select == null) {
             monthlyReservationData = resSer.countReservationsByMonth(year);
-            System.out.println(monthlyReservationData.size());
             model.addAttribute("selectedYear", year);
         } else {
             monthlyReservationData = resSer.countReservationsByMonth(select);
-            System.out.println(monthlyReservationData.size());
             model.addAttribute("selectedYear", select);
         }
-
+        Integer total= 0;
+        for (Integer integer : monthlyReservationData) {
+            total+=integer;
+        }
+        
         // Pass the data to the Thymeleaf template
         model.addAttribute("monthlyReservationData", monthlyReservationData);
+        model.addAttribute("totalperyear", total);
+
         
         model.addAttribute("depNum", serCatSer.findAll().size());
 

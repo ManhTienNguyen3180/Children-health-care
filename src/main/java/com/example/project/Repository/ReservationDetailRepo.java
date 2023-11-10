@@ -32,6 +32,11 @@ public interface ReservationDetailRepo extends JpaRepository<reservationdetail, 
     @Query(value = "UPDATE reservation SET doctor_name = ?2,doctor_id=?1 WHERE reservation_id = ?3", nativeQuery = true)
     void editReservationDoc(int docid, String docname,int id);
 
+    @Transactional
+    @Modifying
+    @Query(value = "delete from reservationdetail r where r.reservation_id = ?1 and r.service_id = ?2", nativeQuery = true)
+    void DeleteService(int reid,int serviceid);
+
 
     @Query("select rd from reservationdetail rd where rd.reservation_id = ?1")
     List<reservationdetail> findByReservation_id(int reservation_id);

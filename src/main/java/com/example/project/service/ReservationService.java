@@ -129,8 +129,8 @@ public class ReservationService {
         return repository.getLastReservationId();
     }
 
-    public int countByReservationId(int doctorid, Date date) {
-        return repository.countByReservationId(doctorid, date);
+    public int countByReservationId(int doctorid, Date date,String time) {
+        return repository.countByReservationId(doctorid, date,time);
     }
 
     public void mergeReservationDetail(int reservation_id, int service_id, String service_name, int price,
@@ -200,6 +200,25 @@ public class ReservationService {
         }
         return listBDTO;
     }
+    public List<reservationDTO> findPaginatedByName(String name) {
+        List<Object[]> listB = repository.getListReservationByName(name);
+        List<reservationDTO> listBDTO = new ArrayList<>();
+        for (Object[] b : listB) {
+            reservationDTO reservationDTO = new reservationDTO();
+            reservationDTO.setReservation_id(Integer.parseInt(String.valueOf(b[0])));
+            reservationDTO.setPatient_name(String.valueOf(b[1]));
+            reservationDTO.setPatient_email(String.valueOf(b[2]));
+            
+            reservationDTO.setGender(Integer.parseInt(String.valueOf(b[4])));
+            reservationDTO.setDate(Date.valueOf(String.valueOf(b[5])));
+            reservationDTO.setTime(String.valueOf(b[6]));
+            reservationDTO.setDoctor_name(String.valueOf(b[7]));
+            reservationDTO.setStatus(Integer.parseInt(String.valueOf(b[8])));
+            listBDTO.add(reservationDTO);
+
+        }
+        return listBDTO;
+    }
 
     public List<reservationDTO> findPaginatedFilter(int status,int pageNo, int pageSize) {
         PageRequest pageable = PageRequest.of(pageNo - 1, pageSize);
@@ -249,7 +268,9 @@ public class ReservationService {
     }
 
 
-
+    public void DeleteService(int reid,int serviceid) {
+        detailRepo.DeleteService(reid, serviceid);
+    }
 
     public void editReservation(int id, int statusedit) {
         detailRepo.editReservation(id, statusedit);

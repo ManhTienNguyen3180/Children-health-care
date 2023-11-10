@@ -55,7 +55,7 @@ public class SliderController {
             } catch (Exception e) {
                 return "redirect:/slidersManagement/addFail";
             }
-        }
+        } 
         Slider slider = serviceS.findById(id);
         slider.setTitle(title);
         slider.setBacklink(backlink);
@@ -155,8 +155,8 @@ public class SliderController {
         model.addAttribute("slidersList", listS);
 
         List<Slider> previewList = serviceS.findPreviewSlider();
-        List<Slider> hiddenList = serviceS.findHiddenSlider();
         model.addAttribute("previewSlider", previewList);
+        List<Slider> hiddenList = serviceS.findHiddenSlider();
         model.addAttribute("hiddenList", hiddenList);
 
         model.addAttribute("allSliders", serviceS.findAll());

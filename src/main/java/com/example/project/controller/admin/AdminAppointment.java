@@ -4,8 +4,8 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
-import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,15 +16,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.project.Repository.ReservationRepo;
 import com.example.project.dto.reservationDTO;
 import com.example.project.entity.doctor;
 import com.example.project.entity.reservation;
+import com.example.project.entity.reservationdetail;
+import com.example.project.entity.service;
 import com.example.project.service.DoctorService;
 import com.example.project.service.ReservationService;
 import com.example.project.service.ServiceCategoryService;
+import com.example.project.service.ServiceService;
 
 import jakarta.websocket.server.PathParam;
 
@@ -42,12 +46,18 @@ public class AdminAppointment {
   @Autowired
   DoctorService doctorService;
 
+  @Autowired
+  ServiceService serviceService;
   @GetMapping("admin/appointment")
   public String page(Model model) {
 
     return list(1, model);
   }
-
+  @GetMapping("admin/appointment/{name}")
+  public String pagename(Model model,@PathVariable String name) {
+    model.addAttribute("listReservation", ReservationService.findPaginatedByName(name));
+    return "admin/appointment";
+  }
   @GetMapping("/admin/appointment/detail")
   public String detailString() {
     return "admin/reservation-detail";
@@ -63,15 +73,41 @@ public class AdminAppointment {
     model.addAttribute("timechoose", reservationDTO.getTime());
     doctor doctor = doctorService.findDoctorByDoctorName(reservationDTO.getDoctor_name());
     model.addAttribute("doctorname", reservationDTO.getDoctor_name());
+    model.addAttribute("listService", serviceService.findServiceByCategoryId(doctor.getDoctorserviceId()));
     model.addAttribute("listDoctor", doctorService.getDoctorByDoctorServiceID(doctor.getDoctorserviceId()));
     return "admin/edit-appointment";
+  }
+  @GetMapping("/admin/appointment/delete/{reid}/{serviceid}")
+  public String delete(@PathVariable int reid,@PathVariable int serviceid, Model model) {
+    ReservationService.DeleteService(reid, serviceid);
+    return "redirect:/admin/appointment/edit/" + reid;
+  }
+
+  @PostMapping("/admin/appointment/addservice")
+  public String addservice(@RequestParam(value = "serviceId", required = false) List<Integer> service_id,
+      @RequestParam(value = "reservationId", required = false) int reservation_id, Model model) {
+    reservationDTO reservationDTO = ReservationService.getReservationDTODetail(reservation_id);
+    doctor doctor = doctorService.findDoctorByDoctorName(reservationDTO.getDoctor_name());    
+    List<service> services = serviceService.findListByServiceId(service_id);
+    List<reservationdetail> reservationdetails = ReservationService.getReservationdetail(reservation_id);
+    for (service service : services) {
+      for (reservationdetail reservationdetail : reservationdetails) {
+        if (reservationdetail.getService_id() == service.getService_id()) {
+          model.addAttribute("error", "*Dịch vụ đã tồn tại");
+          return "redirect:/admin/appointment/edit/" + reservation_id;
+        }
+      }
+      java.sql.Date date1 = new java.sql.Date(reservationDTO.getDate().getTime());
+      ReservationService.mergeReservationDetail(reservation_id, service.getService_id(), service.getService_name(), service.getPrice(), date1, "admin", doctor.getDoctor_id(), doctor.getDoctor_name());;
+    }
+    return "redirect:/admin/appointment/edit/" + reservation_id;
   }
 
   @RequestMapping(value = "/admin/appointment/edit/save", method = RequestMethod.POST)
   public String edit(@PathParam("id") int id, @PathParam("status") int status,
       @PathParam("statusedit") int statusedit, @PathParam("doctoredit") Integer doctoredit,
       @PathParam("datechoose") String datechoose, @PathParam("timechoose") String timechoose, Model model,
-      RedirectAttributes redirectAttributes) {
+      RedirectAttributes redirectAttributes,@RequestParam(value = "serviceId", required = false) List<Integer> service_id) {
 
     if (status == 0 && ((statusedit != 1 || statusedit != 4))) {
       if (statusedit == 1 || statusedit == 4) {
@@ -118,7 +154,7 @@ public class AdminAppointment {
     model.addAttribute("totalPages", page.getTotalPages());
     return "admin/appointment";
   }
-
+  
   public int getDayOfWeek(String dateStr) {
     try {
       // Định dạng của chuỗi ngày
