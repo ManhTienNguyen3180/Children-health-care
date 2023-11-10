@@ -82,7 +82,6 @@ public class AdminAddUser {
       u.setImage("https://th.bing.com/th/id/R.5097b0247a92d47178df598b82944f15?rik=GOBuYfESpwbvFA&pid=ImgRaw&r=0");
       u.setStatus(1);
       u.setRole_id(roles);
-      u.setFull_name(roles.getRole_name());
       u.setCreate_at(LocalDate.now());
       // u.setCreate_by(us.getFull_name());
       u.setCreate_by("Admin");
