@@ -3,6 +3,7 @@ package com.example.project.controller.admin;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +50,7 @@ public class AdminAddUser {
     // Define your regex patterns
     String emailPattern = "^[a-zA-Z0-9._%+-]+@gmail\\.com$";
     String phonePattern = "^0[1-9]\\d{7,8}$";
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     if (!password.equalsIgnoreCase(cpassword) || !email.matches(emailPattern)
         || !phonenum.matches(phonePattern) || password.length() < 6) {
@@ -74,7 +76,7 @@ public class AdminAddUser {
     if (s == null && a == null) {
       user u = new user();
       u.setUsername(username);
-      u.setPassword(password);
+      u.setPassword(passwordEncoder.encode(password));
       u.setFull_name(fullname);
       u.setGender(gender);
       u.setPhone(Integer.parseInt(phonenum));

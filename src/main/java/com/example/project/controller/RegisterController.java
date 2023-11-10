@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,9 +64,10 @@ public class RegisterController {
       if (s == null) {
         user u = new user();
         u.setRolename(roleService.findRoleById(1).getRole_name());
-      
+      		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
         u.setUsername(username);
-        u.setPassword(password);
+        u.setPassword(passwordEncoder.encode(password));
         u.setFull_name(fullname);
         u.setGender(gender);
         u.setPhone(Integer.parseInt(phonenum));
