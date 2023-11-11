@@ -40,7 +40,7 @@ public class AdminPatientProfile {
   public String page(@RequestParam("id") String Patientid, Model model) {
     patient p = patientService.findByPatientId(Integer.parseInt(Patientid)).get();
     try {
-      details_Patient d = null;
+      details_Patient d = new details_Patient();
       Optional<patient> patientOptional = patientService.findByPatientId(Integer.parseInt(Patientid));
       if (patientOptional.isPresent()) {
           Optional<details_Patient> detailsPatientOptional = patientService.findByPatientIdDetail(patientOptional.get());

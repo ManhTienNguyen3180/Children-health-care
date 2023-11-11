@@ -174,6 +174,9 @@ public class ReservationService {
     public List<reservation> listReservationByPatientId(int patientId) {
         return repository.findByPatient_id(patientId);
     }
+    public Optional<reservation> findReByPid(int patientId) {
+        return repository.findReByPid(patientId);
+    }
 
     public List<reservation> findByPatientDate(int patient_id, String date) {
         return repository.findByPatientDate(patient_id, date);

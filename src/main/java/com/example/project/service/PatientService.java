@@ -1,17 +1,23 @@
 package com.example.project.service;
 
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.project.Repository.PatientDetail;
 import com.example.project.Repository.PatientRepo;
+import com.example.project.dto.reservationDTO;
 import com.example.project.entity.details_Patient;
 import com.example.project.entity.patient;
 
@@ -35,14 +41,183 @@ public class PatientService {
     return patientRepo.findAll(pageable);
   }
 
+  public Page<patient> FindPaginatedByDoctor(String search, int pageNo, int pageSize) {
+    Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+    Page<Object[]> page = patientRepo.findAllD(search, pageable);
+    List<Object[]> listB = page.getContent();
+    List<patient> listp = new ArrayList<>();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+    for (Object[] b : listB) {
+      patient p = new patient();
+      p.setPatient_id(Integer.parseInt(String.valueOf(b[0])));
+      p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
+      p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
+      p.setCreate_by(String.valueOf(b[3]));
+      p.setDescription(String.valueOf(b[4]));
+      p.setGender(Integer.parseInt(String.valueOf(b[5])));
+      p.setPatient_name(String.valueOf(b[7]));
+      p.setStatus(Integer.parseInt(String.valueOf(b[8])));
+      try {
+        p.setUser_id(Integer.parseInt(String.valueOf(b[9])));
+
+      } catch (Exception e) {
+        // TODO: handle exception
+      }
+      p.setPatient_email(String.valueOf(b[10]));
+      p.setPatient_phone(String.valueOf(b[11]));
+      p.setPatient_address(String.valueOf(b[12]));
+      listp.add(p);
+    }
+    return new PageImpl<>(listp, pageable, page.getTotalElements());
+  }
+
   public Page<patient> findUsersAndFilterStatus(int r, Integer pageno, int pagesize) {
     Pageable pageable = PageRequest.of(pageno - 1, pagesize);
+
     return patientRepo.findUsersAndFilterStatus(r, pageable);
+  }
+
+  public Page<patient> findUsersAndFilterStatusbyDoctor(String doctorname, int r, Integer pageno, int pagesize) {
+    Pageable pageable = PageRequest.of(pageno - 1, pagesize);
+    Page<Object[]> page = patientRepo.findUsersAndFilterStatusbyDoctor(doctorname, r, pageable);
+    List<Object[]> listB = page.getContent();
+    List<patient> listp = new ArrayList<>();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+    for (Object[] b : listB) {
+      patient p = new patient();
+      p.setPatient_id(Integer.parseInt(String.valueOf(b[0])));
+      p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
+      p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
+      p.setCreate_by(String.valueOf(b[3]));
+      p.setDescription(String.valueOf(b[4]));
+      p.setGender(Integer.parseInt(String.valueOf(b[5])));
+      p.setImage(String.valueOf(b[6]));
+      p.setPatient_name(String.valueOf(b[7]));
+      p.setStatus(Integer.parseInt(String.valueOf(b[8])));
+      p.setUser_id(Integer.parseInt(String.valueOf(b[9])));
+      p.setPatient_email(String.valueOf(b[10]));
+      p.setPatient_phone(String.valueOf(b[11]));
+      p.setPatient_address(String.valueOf(b[12]));
+      listp.add(p);
+    }
+    return new PageImpl<>(listp, pageable, page.getTotalElements());
   }
 
   public Page<patient> findUsersAndFilterGender(int r, Integer pageno, int pagesize) {
     Pageable pageable = PageRequest.of(pageno - 1, pagesize);
     return patientRepo.findUsersAndFilterGender(r, pageable);
+  }
+
+  public Page<patient> findUsersAndFilterGenderByDoctor(String doctorname, int r, Integer pageno, int pagesize) {
+    Pageable pageable = PageRequest.of(pageno - 1, pagesize);
+    Page<Object[]> page = patientRepo.findUsersAndFilterGenderbyDoctor(doctorname, r, pageable);
+    List<Object[]> listB = page.getContent();
+    List<patient> listp = new ArrayList<>();
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+    for (Object[] b : listB) {
+      patient p = new patient();
+      p.setPatient_id(Integer.parseInt(String.valueOf(b[0])));
+      p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
+      p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
+      p.setCreate_by(String.valueOf(b[3]));
+      p.setDescription(String.valueOf(b[4]));
+      p.setGender(Integer.parseInt(String.valueOf(b[5])));
+      p.setImage(String.valueOf(b[6]));
+      p.setPatient_name(String.valueOf(b[7]));
+      p.setStatus(Integer.parseInt(String.valueOf(b[8])));
+      p.setUser_id(Integer.parseInt(String.valueOf(b[9])));
+      p.setPatient_email(String.valueOf(b[10]));
+      p.setPatient_phone(String.valueOf(b[11]));
+      p.setPatient_address(String.valueOf(b[12]));
+      listp.add(p);
+    }
+    return new PageImpl<>(listp, pageable, page.getTotalElements());
+  }
+
+  public Page<patient> findPaginatedContainsWithPagingByDoctor(String doctorname, String searchValue, Integer pageno,
+      int pagesize) {
+    Pageable pageable = PageRequest.of(pageno - 1, pagesize);
+    Page<Object[]> page = patientRepo.findPaginatedContainsWithPagingbyDoctor(doctorname, searchValue, pageable);
+    List<Object[]> listB = page.getContent();
+    List<patient> listp = new ArrayList<>();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+    for (Object[] b : listB) {
+      patient p = new patient();
+      p.setPatient_id(Integer.parseInt(String.valueOf(b[0])));
+      p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
+      p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
+      p.setCreate_by(String.valueOf(b[3]));
+      p.setDescription(String.valueOf(b[4]));
+      p.setGender(Integer.parseInt(String.valueOf(b[5])));
+      p.setImage(String.valueOf(b[6]));
+      p.setPatient_name(String.valueOf(b[7]));
+      p.setStatus(Integer.parseInt(String.valueOf(b[8])));
+      p.setUser_id(Integer.parseInt(String.valueOf(b[9])));
+      p.setPatient_email(String.valueOf(b[10]));
+      p.setPatient_phone(String.valueOf(b[11]));
+      p.setPatient_address(String.valueOf(b[12]));
+      listp.add(p);
+    }
+    return new PageImpl<>(listp, pageable, page.getTotalElements());
+  }
+
+  public Page<patient> findUsersContainsAndFilterStatusWithPagingByDoctor(String doctorname, String searchValue, int r,
+      Integer pageno,
+      int pagesize) {
+    Pageable pageable = PageRequest.of(pageno - 1, pagesize);
+    Page<Object[]> page = patientRepo.findUsersContainsAndFilterStatusWithPagingbyDoctor(doctorname, searchValue, r,
+        pageable);
+    List<Object[]> listB = page.getContent();
+    List<patient> listp = new ArrayList<>();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+    for (Object[] b : listB) {
+      patient p = new patient();
+      p.setPatient_id(Integer.parseInt(String.valueOf(b[0])));
+      p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
+      p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
+      p.setCreate_by(String.valueOf(b[3]));
+      p.setDescription(String.valueOf(b[4]));
+      p.setGender(Integer.parseInt(String.valueOf(b[5])));
+      p.setImage(String.valueOf(b[6]));
+      p.setPatient_name(String.valueOf(b[7]));
+      p.setStatus(Integer.parseInt(String.valueOf(b[8])));
+      p.setUser_id(Integer.parseInt(String.valueOf(b[9])));
+      p.setPatient_email(String.valueOf(b[10]));
+      p.setPatient_phone(String.valueOf(b[11]));
+      p.setPatient_address(String.valueOf(b[12]));
+      listp.add(p);
+    }
+    return new PageImpl<>(listp, pageable, page.getTotalElements());
+  }
+
+  public Page<patient> findUsersContainsAndFilterGenderWithPagingByDoctor(String doctorname, String searchValue, int r,
+      Integer pageno,
+      int pagesize) {
+    Pageable pageable = PageRequest.of(pageno - 1, pagesize);
+    Page<Object[]> page = patientRepo.findUsersContainsAndFilterGenderWithPagingbyDoctor(doctorname, searchValue, r,
+        pageable);
+    List<Object[]> listB = page.getContent();
+    List<patient> listp = new ArrayList<>();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+    for (Object[] b : listB) {
+      patient p = new patient();
+      p.setPatient_id(Integer.parseInt(String.valueOf(b[0])));
+      p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
+      p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
+      p.setCreate_by(String.valueOf(b[3]));
+      p.setDescription(String.valueOf(b[4]));
+      p.setGender(Integer.parseInt(String.valueOf(b[5])));
+      p.setImage(String.valueOf(b[6]));
+      p.setPatient_name(String.valueOf(b[7]));
+      p.setStatus(Integer.parseInt(String.valueOf(b[8])));
+      p.setUser_id(Integer.parseInt(String.valueOf(b[9])));
+      p.setPatient_email(String.valueOf(b[10]));
+      p.setPatient_phone(String.valueOf(b[11]));
+      p.setPatient_address(String.valueOf(b[12]));
+      listp.add(p);
+    }
+    return new PageImpl<>(listp, pageable, page.getTotalElements());
   }
 
   public Page<patient> findPaginatedContainsWithPaging(String searchValue, Integer pageno, int pagesize) {
@@ -142,9 +317,11 @@ public class PatientService {
       return Optional.empty();
     }
   }
- public Optional<details_Patient> findByPatientIdHadReserId(patient patientId,int reservation_id) {
-    return patientDetailRepo.findByPatientIdHadReserId(patientId,reservation_id);
+
+  public Optional<details_Patient> findByPatientIdHadReserId(patient patientId, int reservation_id) {
+    return patientDetailRepo.findByPatientIdHadReserId(patientId, reservation_id);
   }
+
   public void addPatient(details_Patient p, int reservation_id) {
     Optional<details_Patient> existingPatient = findByPatientIdDetail(p.getPatient());
     if (existingPatient.isPresent() && reservation_id == 0) {

@@ -332,65 +332,71 @@
                                         <h5 class="mb-0">Contact :</h5>
 
 
-                                        <form class="mt-4" th:action="@{patient-profile}" method="post">
-                                            <div class="row">
-                                                <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
 
-                                                </div><!--end col-->
+                                            </div><!--end col-->
 
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Email</label>
-                                                        <input name="email" id="email" type="email" class="form-control"
-                                                            placeholder="email :" th:value="${patient.patient_email}"
-                                                            readonly>
-                                                    </div>
-                                                </div><!--end col-->
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Email</label>
+                                                    <input name="email" id="email" type="email" class="form-control"
+                                                        placeholder="email :" th:value="${patient.patient_email}"
+                                                        readonly>
+                                                </div>
+                                            </div><!--end col-->
 
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Phone no.</label>
-                                                        <input name="number" id="number" type="text"
-                                                            class="form-control" placeholder="Phone no. :"
-                                                            th:value="${patient.patient_phone}" readonly>
-                                                    </div>
-                                                </div><!--end col-->
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Phone no.</label>
+                                                    <input name="number" id="number" type="text" class="form-control"
+                                                        placeholder="Phone no. :" th:value="${patient.patient_phone}"
+                                                        readonly>
+                                                </div>
+                                            </div><!--end col-->
 
 
-                                                <div class="col-md-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label"> Address: </label>
-                                                        <input name="address" type="text"
-                                                            class="flatpickr flatpickr-input form-control"
-                                                            id="checkin-date" placeholder="Address:"
-                                                            th:value="${patient.patient_address}" readonly>
-                                                    </div>
-                                                </div><!--end col-->
-                                                <input type="hidden" name="id" th:value="${param.id}">
-                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label"> Address: </label>
+                                                    <input name="address" type="text"
+                                                        class="flatpickr flatpickr-input form-control" id="checkin-date"
+                                                        placeholder="Address:" th:value="${patient.patient_address}"
+                                                        readonly>
+                                                </div>
+                                            </div><!--end col-->
+                                            <input type="hidden" name="id" th:value="${param.id}">
+                                        </div>
                                     </div>
                                     <div class="tab-pane fade" id="pills-experience1" role="tabpanel"
                                         aria-labelledby="experience-tab">
                                         <h5 class="mb-0">Reservation :</h5>
 
 
-                                        <div class="row">
+                                        <div class="row" th:each="reservation :${reservation}">
                                             <div class="col-lg-6 col-12 mt-4">
 
 
                                                 <h5>Appointment List</h5>
 
-                                                <div class="d-flex justify-content-between align-items-center rounded p-3 shadow mt-3"
-                                                    th:each="resers :${reservation}">
-                                                    <a th:href="@{/admin/appointment/edit/{Reservation_id}(Reservation_id=${PatientDetail.Reservation_id})}">
-                                                    <i class="fa-solid fa-stethoscope fa-2xl"></i></a>
+                                                <div
+                                                    class="d-flex justify-content-between align-items-center rounded p-3 shadow mt-3">
+                                                    <div th:if="${PatientDetail!=null}">
+                                                        <a
+                                                            th:href="@{/admin/appointment/edit/{Reservation_id}(Reservation_id=${PatientDetail.Reservation_id})}">
+                                                            <i class="fa-solid fa-stethoscope fa-2xl"></i></a>
+                                                    </div>
+                                                    <div th:if="${PatientDetail==null}">
+                                                        <a href="#">
+                                                            <i class="fa-solid fa-stethoscope fa-2xl"></i></a>
+                                                    </div>
                                                     <div class="flex-1 overflow-hidden ms-2">
-                                                        <h6 class="mb-0" th:text="${resers.service_name}"></h6>
+                                                        <h6 class="mb-0" th:text="${reservation.service_name}"></h6>
                                                         <p class="text-muted mb-0 text-truncate small"
-                                                            th:text="${resers.doctor_name}">
+                                                            th:text="${reservation.doctor_name}">
                                                         </p>
                                                     </div>
-                                                    <span class="mb-0" th:text="${resers.date}"></span>
+                                                    <span class="mb-0" th:text="${reservation.date}"></span>
                                                 </div>
 
 
@@ -399,8 +405,8 @@
                                             <div class="col-lg-6 col-12 mt-4">
                                                 <h5>Payment List</h5>
 
-                                                <div class="d-flex justify-content-between align-items-center rounded p-3 shadow mt-3"
-                                                    th:each="reservation:${reservation}">
+                                                <div
+                                                    class="d-flex justify-content-between align-items-center rounded p-3 shadow mt-3">
                                                     <div class="flex-1 overflow-hidden">
                                                         <h6 class="flex-1 mb-0" th:text="${reservation.service_name}">
                                                         </h6>
@@ -408,10 +414,15 @@
                                                             th:text="${reservation.total_cost+'vnd'}">
                                                         </p>
                                                     </div>
-                                                    <a th:href="@{/admin/appointment/detail/{Reservation_id}(Reservation_id=${PatientDetail.Reservation_id})}"
-                                                        class="btn btn-icon btn-primary" 
-                                                        data-bs-target="#view-invoice"><i
-                                                            class="uil uil-clipboard-notes icons"></i></a>
+                                                    <div th:if="${PatientDetail!=null}">
+                                                        <a th:href="@{/admin/appointment/detail/{Reservation_id}(Reservation_id=${PatientDetail.Reservation_id})}"
+                                                            class="btn btn-icon btn-primary"><i
+                                                                class="uil uil-clipboard-notes icons"></i></a>
+                                                    </div>
+                                                    <div th:if="${PatientDetail==null}">
+                                                        <a href="#" class="btn btn-icon btn-primary"><i
+                                                                class="uil uil-clipboard-notes icons"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
