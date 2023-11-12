@@ -40,7 +40,30 @@ public interface PatientRepo extends JpaRepository<patient, Integer> {
   @Query("SELECT u FROM patient u WHERE u.patient_name LIKE  %?1% or u.patient_email LIKE  %?1% AND gender= ?2 ")
   Page<patient> findUsersContainsAndFilterGenderWithPaging(String name, int gender, Pageable pageable);
 
-  @Query("SELECT u FROM patient u where patient_id=?1")
+
+  @Query(value = "SELECT p.patient_id,p.dob,p.create_at,p.create_by,p.description,p.gender,p.image,p.patient_name,p.status,p.user_id,p.patient_email,p.patient_phone,p.patient_address,p.modify_at FROM patient p\n" + //
+    "JOIN reservation r ON p.patient_id = r.patient_id where r.doctor_name=?1", nativeQuery = true)
+    Page<Object[]> findAllD(String doctorname, Pageable pageable);
+  @Query(value = "SELECT p.patient_id,p.dob,p.create_at,p.create_by,p.description,p.gender,p.image,p.patient_name,p.status,p.user_id,p.patient_email,p.patient_phone,p.patient_address,p.modify_at FROM patient p\n" + //
+    "JOIN reservation r ON p.patient_id = r.patient_id where r.doctor_name=?1 and p.status=?2", nativeQuery = true)
+    Page<Object[]> findUsersAndFilterStatusbyDoctor(String doctorname,int r, Pageable pageable);
+
+  @Query(value = "SELECT p.patient_id,p.dob,p.create_at,p.create_by,p.description,p.gender,p.image,p.patient_name,p.status,p.user_id,p.patient_email,p.patient_phone,p.patient_address,p.modify_at FROM patient p\n" + //
+    "JOIN reservation r ON p.patient_id = r.patient_id where r.doctor_name=?1 and p.gender=?2", nativeQuery = true)
+    Page<Object[]> findUsersAndFilterGenderbyDoctor(String doctorname,int r, Pageable pageable);
+  
+    @Query(value = "SELECT p.patient_id,p.dob,p.create_at,p.create_by,p.description,p.gender,p.image,p.patient_name,p.status,p.user_id,p.patient_email,p.patient_phone,p.patient_address,p.modify_at FROM patient p\n" + //
+    "JOIN reservation r ON p.patient_id = r.patient_id where r.doctor_name=?1 and p.patient_name LIKE  %?2% or p.patient_email LIKE  %?2% ", nativeQuery = true)
+    Page<Object[]> findPaginatedContainsWithPagingbyDoctor(String doctorname,String search, Pageable pageable);
+  
+    @Query(value = "SELECT p.patient_id,p.dob,p.create_at,p.create_by,p.description,p.gender,p.image,p.patient_name,p.status,p.user_id,p.patient_email,p.patient_phone,p.patient_address,p.modify_at FROM patient p\n" + //
+    "JOIN reservation r ON p.patient_id = r.patient_id where r.doctor_name=?1 and p.gender=?3 and p.patient_name LIKE  %?2% or p.patient_email LIKE  %?2%  ", nativeQuery = true)
+    Page<Object[]> findUsersContainsAndFilterGenderWithPagingbyDoctor(String doctorname,String search,int r, Pageable pageable);
+  @Query(value = "SELECT p.patient_id,p.dob,p.create_at,p.create_by,p.description,p.gender,p.image,p.patient_name,p.status,p.user_id,p.patient_email,p.patient_phone,p.patient_address,p.modify_at FROM patient p\n" + //
+    "JOIN reservation r ON p.patient_id = r.patient_id where r.doctor_name=?1 and p.status=?3 and p.patient_name LIKE  %?2% or p.patient_email LIKE  %?2%  ", nativeQuery = true)
+    Page<Object[]> findUsersContainsAndFilterStatusWithPagingbyDoctor(String doctorname,String search,int r, Pageable pageable);
+  
+    @Query("SELECT u FROM patient u where patient_id=?1")
   Optional<patient> findByPatient_id(int patient_id);
 
   @Query("SELECT u FROM patient u where user_id=?1")
@@ -48,6 +71,8 @@ public interface PatientRepo extends JpaRepository<patient, Integer> {
 
   @Query("SELECT u FROM patient u where patient_email=?1")
   Optional<patient> findbyEmail(String patient_email);
+
+
 
   @Modifying
   @Transactional
