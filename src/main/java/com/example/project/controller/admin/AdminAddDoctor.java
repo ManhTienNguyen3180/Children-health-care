@@ -130,6 +130,7 @@ public class AdminAddDoctor {
         DoctorService.save(doctor);
 
         redirectAttributes.addFlashAttribute("successmessage", "Doctor added successfully!");
+        return "redirect:/admin/add-doctor";
       } else {
         redirectAttributes.addFlashAttribute("dobmessage", "Doctor must have at least 18 years old");
         reFill(redirectAttributes, doctor_name, position, phone, service_id, description, dob);

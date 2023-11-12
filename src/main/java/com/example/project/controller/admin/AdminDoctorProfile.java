@@ -49,12 +49,12 @@ public class AdminDoctorProfile {
   @RequestMapping("/admin/doctors/delete/{doctor_id}")
   public String deleteDoctor(@PathVariable(name = "doctor_id") int id, RedirectAttributes redirectAttributes) {
 
-    slot s = ScheduleService.findSlotByDoctorID(id);
-    if (s != null) {
-      int slotid = s.getId();
+    List<slot> s = ScheduleService.getSlotsByDoctorId(id);
+    for (slot slot : s) {
+      int slotid = slot.getId();
       DoctorService.deleteSlot(slotid);
     }
-      
+
     redirectAttributes.addFlashAttribute("successmessage", "Doctor deleted successfully!");
     DoctorService.deleteDoctor(id);
 

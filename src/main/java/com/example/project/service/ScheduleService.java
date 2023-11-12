@@ -45,6 +45,7 @@ public class ScheduleService {
     public List<slot> getSlotsByDoctorId(int doctorId) {
         return repo.findByDoctorId(doctorId);
     }
+    
     public List<slot> checkSlotByDoctorIdAndDayOfWeekAndTime(int dayOfWeek, int doctorId, Time endTime, Time startTime) {
         return repo.checkSlotByDoctorIdAndDayOfWeekAndTime(dayOfWeek, doctorId, endTime, startTime);
     }

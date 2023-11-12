@@ -255,7 +255,7 @@
                                                 <select class="form-control department-name select2input"
                                                     id="categoryserviceId" name="categoryserviceId">
                                                     <option value="">Select Service</option>
-                                                    <option value="0">Chưa xác định chuyên khoa</option>
+                                                    <!-- <option value="0">Chưa xác định chuyên khoa</option> -->
                                                     <option th:each="service:${listCategoryService}"
                                                         th:text="${service.name}" th:value="${service.id}"></option>
 

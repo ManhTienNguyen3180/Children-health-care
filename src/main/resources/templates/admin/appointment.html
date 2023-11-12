@@ -91,7 +91,7 @@
 
                                         </div>
                                     </a>
-                                    <a class="dropdown-item text-dark" href="dashboard"><span
+                                    <a class="dropdown-item text-dark" href="dashboard" th:if="${session.user.role_id.role_id != 1}"><span
                                             class="mb-0 d-inline-block me-1"><i
                                                 class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
                                     <a class="dropdown-item text-dark" th:href="@{/user-profile}"><span
