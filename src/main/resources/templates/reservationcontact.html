@@ -35,11 +35,11 @@
             <!-- Logo container-->
             <div>
                 <a class="logo" href="home">
-
-                    <img src="images/logo-dark.png" height="24" alt="">
-
-
-
+                    <span >
+                        <img src="images/logo-dark.png" class="l-dark" height="24" alt="">
+                        <img src="images/logo-dark.png" class="l-light" height="24" alt="">
+                    </span>
+                    <img src="images/logo-dark.png" height="24" class="logo-dark-mode" alt="">
                 </a>
             </div>
             <!-- End Logo container-->
@@ -58,34 +58,16 @@
                     <!-- End mobile menu toggle-->
                 </div>
             </div>
-            <!-- End Mobile Toggle -->
 
-            <!-- Start Dropdown -->
-            <!-- <ul  th:if="${session.user != NULL}" class="dropdowns list-inline mb-0">
-
-                    <li class="list-inline-item mb-0 ms-1">
-                        <div class="dropdown dropdown-primary" >
-                            <a href="user-profile"><button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img  th:src="${session.user.image}" src="images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button></a>
-                            <a th:href="@{/logout}" href="logout">Log out</a>
-                        </div>
-                        
-                    </li>
-                </ul> -->
             <ul th:if="${session.user != NULL}" class="dropdowns list-inline mb-0">
-                <!-- <li class="list-inline-item mb-0">
-                        <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                            aria-controls="offcanvasRight">
-                            <div class="btn btn-icon btn-pills btn-primary"><i data-feather="settings"
-                                    class="fea icon-sm"></i></div>
-                        </a>
-                    </li> -->
 
-                <!-- <li class="list-inline-item mb-0 ms-1">
+
+                <li class="list-inline-item mb-0 ms-1">
                     <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
                         <i class="uil uil-search"></i>
                     </a>
-                </li> -->
+                </li>
 
                 <li class="list-inline-item mb-0 ms-1">
                     <div class="dropdown dropdown-primary">
@@ -95,16 +77,19 @@
                                 class="avatar avatar-ex-small rounded-circle" alt=""></button>
                         <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                             style="min-width: 200px;">
-                            <a class="dropdown-item d-flex align-items-center text-dark" href="doctor-profile.html">
-                                <img th:src="${session.user.image}" src="images/doctors/01.jpg"
-                                    class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                            <a class="dropdown-item d-flex align-items-center text-dark" href="user-profile">
+                                
+                                <img th:src="${session.user.image}" src=""
+                                    class="avatar avatar-md-sm rounded-circle border shadow" alt="" >
                                 <div class="flex-1 ms-2">
-                                    <span th:text="${session.user.full_name}" class="d-block mb-1">Calvin Carlo</span>
+                                    <span th:text="${session.user.full_name}" class="d-block mb-1"></span>
                                     <!-- <small  class="text-muted">Orthopedic</small> -->
                                 </div>
                             </a>
-                            <a class="dropdown-item text-dark" href="doctor-dashboard.html"><span
-                                    class="mb-0 d-inline-block me-1"><i
+                            <a class="dropdown-item text-dark" th:href="@{/admin/dashboard}" th:if="${session.user.role_id.role_id != 1}"><span
+                                class="mb-0 d-inline-block me-1"><i
+                                    class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
+                            <a class="dropdown-item text-dark" href="/myreservation"><span class="mb-0 d-inline-block me-1"><i
                                         class="uil uil-dashboard align-middle h6"></i></span> My reservation</a>
                             <a class="dropdown-item text-dark" href="user-profile"><span
                                     class="mb-0 d-inline-block me-1"><i
@@ -144,9 +129,9 @@
 
             <div id="navigation">
                 <!-- Navigation Menu-->
-                <ul class="navigation-menu nav-left">
+                <ul class="navigation-menu nav-left ">
                     <li class="has-submenu parent-menu-item">
-                        <a href="home">Home</a>
+                        <a href="/home">Home</a>
 
                     </li>
 
@@ -163,12 +148,18 @@
                     <li class="has-submenu parent-parent-menu-item">
                         <a href="/blog">Blog</a>
 
-                    </li>
+                        <!-- </li>
+                        
+                            <li th:if="${u!=null && u.role==2}" class="has-submenu parent-parent-menu-item">
+                                <a href="#">Dashboard</a>
+                                
+                        </li> -->
+
 
                 </ul>
             </div>
-        </div><!--end container-->
-    </header><!--end header-->
+        </div>
+    </header>
     <!-- Navbar End -->
 
     <!-- Hero Start -->
@@ -287,7 +278,7 @@
                                         <span style="padding-right: 10px;position: relative;left: 15px;top: 9px"><i
                                                 style="color: #666;" class="fa fa-user" aria-hidden="true"></i></span>
                                         <input style="border: none;outline: none;" name="user_name" type="text"
-                                            class="form-control" placeholder="Họ tên người đặt" id="fullname">
+                                            class="form-control" placeholder="Họ tên người đặt" id="fullname" required>
                                     </div>
 
 
@@ -316,7 +307,7 @@
                                                 aria-hidden="true"></i></span>
 
                                         <input style="border: none;outline: none;" name="patient_email" type="email"
-                                            placeholder="Email" class="form-control" id="email">
+                                            placeholder="Email" class="form-control" id="email" required>
                                     </div>
 
                                     <div class="invalid-feedback">
@@ -331,14 +322,14 @@
 
                                         <input style="border: none;outline: none;" name="patient_name" type="text"
                                             placeholder="Họ tên bệnh nhân (bắt buộc)" class="form-control"
-                                            id="fullname">
+                                            id="fullname" required>
                                     </div>
 
                                     <div class="invalid-feedback">
                                         Please enter a valid email address for shipping updates.
                                     </div>
                                 </div>
-                                <input type="radio" name="gender" value="1" class="col-1"><span class="col-2">Nam</span>
+                                <input type="radio" name="gender" checked value="1" class="col-1"><span class="col-2">Nam</span>
                                 <input type="radio" name="gender" value="0" class="col-1"><span class="col-2">Nữ</span>
                                 <!-- <div class="col-12">
                                     <div style="border-radius: 3px;display: flex; border: 1px solid #ccc;">
