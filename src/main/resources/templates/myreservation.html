@@ -66,24 +66,19 @@
             <ul th:if="${session.user != NULL}" class="dropdowns list-inline mb-0">
 
 
-                <li class="list-inline-item mb-0 ms-1">
-                    <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
-                        <i class="uil uil-search"></i>
-                    </a>
-                </li>
+                
 
                 <li class="list-inline-item mb-0 ms-1">
                     <div class="dropdown dropdown-primary">
                         <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                th:src="${session.user.image}" src="images/doctors/01.jpg"
+                                th:src="${'/'+session.user.image}" src="images/doctors/01.jpg"
                                 class="avatar avatar-ex-small rounded-circle" alt=""></button>
                         <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                             style="min-width: 200px;">
-                            <a class="dropdown-item d-flex align-items-center text-dark" href="user-profile">
+                            <a class="dropdown-item d-flex align-items-center text-dark" href="/user-profile">
                                 
-                                <img th:src="${session.user.image}" src=""
+                                <img th:src="${'/'+session.user.image}" src=""
                                     class="avatar avatar-md-sm rounded-circle border shadow" alt="" >
                                 <div class="flex-1 ms-2">
                                     <span th:text="${session.user.full_name}" class="d-block mb-1"></span>
@@ -95,7 +90,7 @@
                                     class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
                             <a class="dropdown-item text-dark" href="/myreservation"><span class="mb-0 d-inline-block me-1"><i
                                         class="uil uil-dashboard align-middle h6"></i></span> My reservation</a>
-                            <a class="dropdown-item text-dark" href="user-profile"><span
+                            <a class="dropdown-item text-dark" href="/user-profile"><span
                                     class="mb-0 d-inline-block me-1"><i
                                         class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
                             <div class="dropdown-divider border-top"></div>
@@ -121,7 +116,7 @@
                         </a>
                     </li> -->
                 <li class="list-inline-item mb-0">
-                    <a href="bookingappointment">
+                    <a href="/bookingappointment">
                         <div class="btn btn-primary">Book Appointment</div>
                     </a>
                 </li>
@@ -185,7 +180,7 @@
 
                         <ul class="list-unstyled sidebar-nav mb-0">
 
-                            <li class="navbar-item"><a href="doctor-profile.html" class="navbar-link"> Profile</a></li>
+                            <!-- <li class="navbar-item"><a href="doctor-profile.html" class="navbar-link"> Profile</a></li> -->
                             <li class="navbar-item"><a href="/user-profile" class="navbar-link"> Profile
                                     Settings</a></li>
                             <li class="navbar-item"><a href="/myreservation" class="navbar-link"> My Reservation</a></li>

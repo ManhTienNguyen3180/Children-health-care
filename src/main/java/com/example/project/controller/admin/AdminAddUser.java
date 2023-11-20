@@ -81,7 +81,7 @@ public class AdminAddUser {
       u.setGender(gender);
       u.setPhone(Integer.parseInt(phonenum));
       u.setEmail(email);
-      u.setImage("https://th.bing.com/th/id/R.5097b0247a92d47178df598b82944f15?rik=GOBuYfESpwbvFA&pid=ImgRaw&r=0");
+      u.setImage("images/avar.png");
       u.setStatus(1);
       u.setRole_id(roles);
       u.setCreate_at(LocalDate.now());

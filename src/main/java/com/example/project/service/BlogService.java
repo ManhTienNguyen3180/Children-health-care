@@ -23,7 +23,7 @@ public interface BlogService {
     void delete(int id);
 
     //get list blog by cate_id
-    List<Blog> getBlogByCategoryId(int category_id);
+    List<Blog> getBlogByCategoryId(int blog_id,int category_id);
 
     //get list blog by status
     List<Blog> getBlogsNew();

@@ -119,7 +119,7 @@ public class SliderController {
     }
 
     @PostMapping("/slidersManagement/position")
-    public String position(Model model, @RequestParam("list") Integer[] sliderIds) {
+    public String position(Model model, @RequestParam(value = "list",required = false) Integer[] sliderIds) {
         List<Slider> listS = new ArrayList<>();
         List<Slider> total = serviceS.findAll();
         for (Slider slider : total) {

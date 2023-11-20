@@ -50,8 +50,8 @@ public class PatientService {
     for (Object[] b : listB) {
       patient p = new patient();
       p.setPatient_id(Integer.parseInt(String.valueOf(b[0])));
-      p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
-      p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
+      // p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
+      // p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
       p.setCreate_by(String.valueOf(b[3]));
       p.setDescription(String.valueOf(b[4]));
       p.setGender(Integer.parseInt(String.valueOf(b[5])));
@@ -86,8 +86,8 @@ public class PatientService {
     for (Object[] b : listB) {
       patient p = new patient();
       p.setPatient_id(Integer.parseInt(String.valueOf(b[0])));
-      p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
-      p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
+      // p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
+      // p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
       p.setCreate_by(String.valueOf(b[3]));
       p.setDescription(String.valueOf(b[4]));
       p.setGender(Integer.parseInt(String.valueOf(b[5])));
@@ -118,8 +118,8 @@ public class PatientService {
     for (Object[] b : listB) {
       patient p = new patient();
       p.setPatient_id(Integer.parseInt(String.valueOf(b[0])));
-      p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
-      p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
+      // p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
+      // p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
       p.setCreate_by(String.valueOf(b[3]));
       p.setDescription(String.valueOf(b[4]));
       p.setGender(Integer.parseInt(String.valueOf(b[5])));
@@ -145,8 +145,8 @@ public class PatientService {
     for (Object[] b : listB) {
       patient p = new patient();
       p.setPatient_id(Integer.parseInt(String.valueOf(b[0])));
-      p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
-      p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
+      // p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
+      // p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
       p.setCreate_by(String.valueOf(b[3]));
       p.setDescription(String.valueOf(b[4]));
       p.setGender(Integer.parseInt(String.valueOf(b[5])));
@@ -174,8 +174,8 @@ public class PatientService {
     for (Object[] b : listB) {
       patient p = new patient();
       p.setPatient_id(Integer.parseInt(String.valueOf(b[0])));
-      p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
-      p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
+      // p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
+      // p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
       p.setCreate_by(String.valueOf(b[3]));
       p.setDescription(String.valueOf(b[4]));
       p.setGender(Integer.parseInt(String.valueOf(b[5])));
@@ -203,8 +203,8 @@ public class PatientService {
     for (Object[] b : listB) {
       patient p = new patient();
       p.setPatient_id(Integer.parseInt(String.valueOf(b[0])));
-      p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
-      p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
+      // p.setDob(Date.valueOf(LocalDate.parse(String.valueOf(b[1]), formatter)));
+      // p.setCreate_at(Date.valueOf(LocalDate.parse(String.valueOf(b[2]), formatter)));
       p.setCreate_by(String.valueOf(b[3]));
       p.setDescription(String.valueOf(b[4]));
       p.setGender(Integer.parseInt(String.valueOf(b[5])));

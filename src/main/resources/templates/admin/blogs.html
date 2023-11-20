@@ -271,8 +271,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="height: 150px; font-weight: 400;" th:each="listB:${blogs}">
-                                    <td th:text="${listB.blogId}" class="text-center"></td>
+                                <tr style="height: 150px; font-weight: 400;" th:each="listB,stt:${blogs}">
+                                    <td th:text="${stt.count}" class="text-center"></td>
                                     <td th:each="cat : ${blogsCategory}" th:text="${cat.categoryBlogName}"
                                         th:if="${cat.categoryBlogId==listB.categoryBlogId}" class="text-center"></td>
                                     <td th:text="${listB.title}" class="text-center"></td>

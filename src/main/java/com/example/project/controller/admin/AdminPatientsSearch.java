@@ -86,7 +86,7 @@ public class AdminPatientsSearch {
   }
 
   public String findPaginatedContainsWithPaging(String searchValue, Model model, Integer pageno, HttpSession session) {
-    int pagesize = 3;
+    int pagesize = 10;
     Page<patient> page;
     user u = (user) session.getAttribute("user");
     if (u.getRole_id().getRole_id() == 4) {
@@ -103,7 +103,7 @@ public class AdminPatientsSearch {
 
   public String findUsersAndFilterGender(String searchValue, int r, Integer pageno,
       Model model, HttpSession session) {
-    int pagesize = 3;
+    int pagesize = 10;
     String s = "Female";
     if (r == 0) {
       s = "male";
@@ -127,7 +127,7 @@ public class AdminPatientsSearch {
 
   public String findUsersAndFilterStatus(String searchValue, int r, Integer pageno,
       Model model, HttpSession session) {
-    int pagesize = 3;
+    int pagesize = 10;
     Page<patient> page;
     user u = (user) session.getAttribute("user");
     if (u.getRole_id().getRole_id() == 4) {

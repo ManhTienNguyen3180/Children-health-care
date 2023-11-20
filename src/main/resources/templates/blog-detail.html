@@ -84,18 +84,18 @@
             <ul th:if="${session.user != NULL}" class="dropdowns list-inline mb-0">
 
 
-                <li class="list-inline-item mb-0 ms-1">
+                <!-- <li class="list-inline-item mb-0 ms-1">
                     <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
                         <i class="uil uil-search"></i>
                     </a>
-                </li>
+                </li> -->
 
                 <li class="list-inline-item mb-0 ms-1">
                     <div class="dropdown dropdown-primary">
                         <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                th:src="${session.user.image}" src="images/doctors/01.jpg"
+                                th:src="'/'+${session.user.image}" src="images/doctors/01.jpg"
                                 class="avatar avatar-ex-small rounded-circle" alt=""></button>
                         <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                             style="min-width: 200px;">
@@ -139,7 +139,7 @@
                         </a>
                     </li> -->
                 <li class="list-inline-item mb-0">
-                    <a href="bookingappointment">
+                    <a href="/bookingappointment">
                         <div class="btn btn-primary">Book Appointment</div>
                     </a>
                 </li>
@@ -315,18 +315,7 @@
 
 
 
-                            <!-- TAG CLOUDS -->
-                            <div class="widget mb-4 pb-2">
-                                <h5 class="widget-title">Tags Cloud</h5>
-                                <div style="display: flex;flex-direction: row;">
-                                    <div class="tagcloud mt-4" th:each="t:${tags}">
-
-                                        <a th:href="'/blog?tags='+${t[1]}" class="rounded" th:text="${t[1]}"></a>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- TAG CLOUDS -->
+                            
 
 
                         </div>
@@ -507,28 +496,7 @@
     <!-- Back to top -->
 
     <!-- Offcanvas Start -->
-    <div class="offcanvas bg-white offcanvas-top" tabindex="-1" id="offcanvasTop">
-        <div class="offcanvas-body d-flex align-items-center align-items-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="text-center">
-                            <h4>Search now.....</h4>
-                            <div class="subcribe-form mt-4">
-                                <form>
-                                    <div class="mb-0">
-                                        <input type="text" id="help" name="name" class="border bg-white rounded-pill"
-                                            required="" placeholder="Search">
-                                        <button type="submit" class="btn btn-pills btn-primary">Search</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div><!--end container-->
-        </div>
-    </div>
+    
     <!-- Offcanvas End -->
 
     <!-- Offcanvas Start -->

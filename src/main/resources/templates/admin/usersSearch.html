@@ -179,8 +179,8 @@
                                     </thead>
                                     <tbody>
 
-                                        <tr th:each="users : ${listuser}" th:if="${userSession.user_id!=users.user_id}">
-                                            <th class="p-3" th:text="${users.user_id}">1</th>
+                                        <tr th:each="users,stt : ${listuser}" th:if="${userSession.user_id!=users.user_id}">
+                                            <th class="p-3" th:text="${stt.count}">1</th>
                                             <td class="py-3">
                                                 <a href="#" class="text-dark">
                                                     <div class="d-flex align-items-center">

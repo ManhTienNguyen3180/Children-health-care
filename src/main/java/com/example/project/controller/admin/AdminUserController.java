@@ -99,7 +99,7 @@ public class AdminUserController {
 
   public String findPaginated(Integer pageno,
       Model model) {
-    int pagesize = 4;
+    int pagesize = 10;
 
     Page<user> page = userService.FindPaginated(pageno, pagesize);
     List<user> listuser = page.getContent();
@@ -112,7 +112,7 @@ public class AdminUserController {
 
   public String findPaginatedWithFilter(role r, Integer pageno,
       Model model) {
-    int pagesize = 4;
+    int pagesize = 10;
 
     Page<user> page = userService.findUsersAndFilterRole(r, pageno, pagesize);
     List<user> listuser = page.getContent();
@@ -127,7 +127,7 @@ public class AdminUserController {
 
   public String findUsersAndFilterGender(int r, Integer pageno,
       Model model) {
-    int pagesize = 4;
+    int pagesize = 10;
     String s = "Female";
     if (r == 0) {
       s = "male";
@@ -144,7 +144,7 @@ public class AdminUserController {
 
   public String findUsersAndFilterStatus(int r, Integer pageno,
       Model model) {
-    int pagesize = 4;
+    int pagesize = 10;
 
     Page<user> page = userService.findUsersAndFilterStatus(r, pageno, pagesize);
     List<user> listuser = page.getContent();

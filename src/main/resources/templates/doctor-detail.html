@@ -76,24 +76,19 @@
                 <ul th:if="${session.user != NULL}" class="dropdowns list-inline mb-0">
     
     
-                    <li class="list-inline-item mb-0 ms-1">
-                        <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
-                            <i class="uil uil-search"></i>
-                        </a>
-                    </li>
+                    
     
                     <li class="list-inline-item mb-0 ms-1">
                         <div class="dropdown dropdown-primary">
                             <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                    th:src="${session.user.image}" src="images/doctors/01.jpg"
+                                    th:src="'/'+${session.user.image}" src="/images/doctors/01.jpg"
                                     class="avatar avatar-ex-small rounded-circle" alt=""></button>
                             <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                 style="min-width: 200px;">
                                 <a class="dropdown-item d-flex align-items-center text-dark" href="user-profile">
                                     
-                                    <img th:src="${session.user.image}" src=""
+                                    <img th:src="'/'+${session.user.image}" src=""
                                         class="avatar avatar-md-sm rounded-circle border shadow" alt="" >
                                     <div class="flex-1 ms-2">
                                         <span th:text="${session.user.full_name}" class="d-block mb-1"></span>
@@ -105,7 +100,7 @@
                                         class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
                                 <a class="dropdown-item text-dark" href="/myreservation"><span class="mb-0 d-inline-block me-1"><i
                                             class="uil uil-dashboard align-middle h6"></i></span> My reservation</a>
-                                <a class="dropdown-item text-dark" href="user-profile"><span
+                                <a class="dropdown-item text-dark" href="/user-profile"><span
                                         class="mb-0 d-inline-block me-1"><i
                                             class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
                                 <div class="dropdown-divider border-top"></div>
@@ -131,7 +126,7 @@
                             </a>
                         </li> -->
                     <li class="list-inline-item mb-0">
-                        <a href="bookingappointment">
+                        <a href="/bookingappointment">
                             <div class="btn btn-primary">Book Appointment</div>
                         </a>
                     </li>
@@ -247,7 +242,7 @@
                                         
                                         
                                     </div>
-                                    <h6 th:text="'Phone: '+${doc.phone}"></h6>
+                                    <h6 th:text="'Phone: 0'+${doc.phone}"></h6>
                                     
 
                                     
@@ -322,7 +317,7 @@
                                                                         <div class="d-flex align-items-center" style="display: flex;flex-direction: row;">
                                                                             <div style="width: 150px;" class="d-flex align-items-center">
                                                                                 <a class="pe-3" href="#">
-                                                                                    <img th:src="${r[4]}" class="img-fluid avatar avatar-md-sm rounded-circle shadow"
+                                                                                    <img th:src="'/'+${r[4]}" class="img-fluid avatar avatar-md-sm rounded-circle shadow"
                                                                                         alt="img">
                                                                                 </a>
                                                                                 <div class="commentor-detail">
@@ -465,27 +460,7 @@
         <!-- Back to top -->
 
         <!-- Offcanvas Start -->
-        <div class="offcanvas bg-white offcanvas-top" tabindex="-1" id="offcanvasTop">
-            <div class="offcanvas-body d-flex align-items-center align-items-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="text-center">
-                                <h4>Search now.....</h4>
-                                <div class="subcribe-form mt-4">
-                                    <form>
-                                        <div class="mb-0">
-                                            <input type="text" id="help" name="name" class="border bg-white rounded-pill" required="" placeholder="Search">
-                                            <button type="submit" class="btn btn-pills btn-primary">Search</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div><!--end col-->
-                    </div><!--end row-->
-                </div><!--end container-->
-            </div>
-        </div>
+        
         <!-- Offcanvas End -->
 
         <!-- Offcanvas Start -->

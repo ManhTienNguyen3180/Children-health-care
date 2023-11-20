@@ -252,7 +252,7 @@ public class ReservationService {
             reservationDTO.setReservation_id(Integer.parseInt(String.valueOf(obj[0])));
             reservationDTO.setPatient_name(String.valueOf(obj[1]));
             reservationDTO.setPatient_email(String.valueOf(obj[2]));
-           
+            
             reservationDTO.setGender(Integer.parseInt(String.valueOf(obj[4])));
             reservationDTO.setDate(Date.valueOf(String.valueOf(obj[5])));
             reservationDTO.setTime(String.valueOf(obj[6]));

@@ -96,9 +96,9 @@ public class AdminDoctorProfile {
       @PathParam("docdob") Date dob,
       @PathParam("docphone") int phone,
       @PathParam("service_id") int service_id,
-      @PathParam("gender") String gender,
+      @PathParam("gender") int gender,
       @RequestParam("docimg") MultipartFile file,
-      @RequestParam("docstatus") String docstatus,
+      @RequestParam("docstatus") int docstatus,
       @PathParam("docdes") String description,
       Model model, HttpSession session, ModelAndView modelAndView, RedirectAttributes redirectAttributes) {
     Optional<doctor> doc = DoctorService.findDoctorById(doctor_id);
@@ -121,7 +121,7 @@ public class AdminDoctorProfile {
 
     doctor.setDoctor_name(doctor_name);
     doctor.setPosition(position);
-    if (gender.equalsIgnoreCase("Male")) {
+    if (gender==1) {
       doctor.setGender(1);
     } else {
       doctor.setGender(0);
@@ -138,7 +138,7 @@ public class AdminDoctorProfile {
       return "redirect:/admin/add-doctor";
     }
 
-    if (docstatus.equalsIgnoreCase("Active")) {
+    if (docstatus == 1) {
       doctor.setStatus(1);
     } else {
       doctor.setStatus(0);

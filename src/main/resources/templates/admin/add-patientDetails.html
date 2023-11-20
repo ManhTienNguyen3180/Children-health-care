@@ -139,7 +139,7 @@
 
                                         <p class="text-muted mb-0 ms-2" th:text="${patientInfo.patient_name}">Female</p>
                                     </div>
-                                    <div class="d-flex align-items-center mt-2">
+                                    <!-- <div class="d-flex align-items-center mt-2">
 
                                         <h6 class="mb-0">Doctor:</h6>
 
@@ -147,7 +147,7 @@
                                             <option th:each="doctor: ${listd}" th:value="${doctor.doctor_id}"
                                                 th:text="${doctor.doctor_name}"></option>
                                         </select>
-                                    </div>
+                                    </div> -->
                                     <input type="hidden" th:value="${param.reservationid}" name="reservation_id">
                                     <div class="d-flex align-items-center mt-2">
 

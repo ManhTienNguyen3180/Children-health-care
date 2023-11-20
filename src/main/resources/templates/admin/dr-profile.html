@@ -79,13 +79,13 @@
                             <div class="dropdown dropdown-primary">
                                 <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                        th:src="@{${session.user.image}}" class="avatar avatar-ex-small rounded-circle"
+                                        th:src="'/'+${session.user.image}" class="avatar avatar-ex-small rounded-circle"
                                         alt=""></button>
                                 <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                     style="min-width: 200px;">
                                     <a class="dropdown-item d-flex align-items-center text-dark"
                                         th:href="@{/user-profile}">
-                                        <img th:src="@{${session.user.image}}"
+                                        <img th:src="'/'+${session.user.image}"
                                             class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                         <div class="flex-1 ms-2">
                                             <span class="d-block mb-1" th:text="@{${session.user.full_name}}"></span>
@@ -112,7 +112,7 @@
             <div class="container-fluid">
                 <div class="layout-specing">
                     <div class="d-md-flex justify-content-between">
-                        <h5 class="mb-0">Thông tin bác sĩ</h5>
+                        <h5 class="mb-0">Doctor Information</h5>
 
                         <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                             <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
@@ -148,7 +148,7 @@
                                                 href="#pills-overview" role="tab" aria-controls="pills-overview"
                                                 aria-selected="false">
                                                 <div class="text-center pt-1 pb-1">
-                                                    <h4 class="title fw-normal mb-0">Tổng quan</h4>
+                                                    <h4 class="title fw-normal mb-0">Overview</h4>
                                                 </div>
                                             </a><!--end nav link-->
                                         </li><!--end nav item-->
@@ -158,7 +158,7 @@
                                                 href="#pills-review" role="tab" aria-controls="pills-review"
                                                 aria-selected="false">
                                                 <div class="text-center pt-1 pb-1">
-                                                    <h4 class="title fw-normal mb-0">Phản hồi</h4>
+                                                    <h4 class="title fw-normal mb-0">Review</h4>
                                                 </div>
                                             </a><!--end nav link-->
                                         </li><!--end nav item-->
@@ -168,7 +168,7 @@
                                                 href="#pills-timetable" role="tab" aria-controls="pills-timetable"
                                                 aria-selected="false">
                                                 <div class="text-center pt-1 pb-1">
-                                                    <h4 class="title fw-normal mb-0">Lịch làm việc</h4>
+                                                    <h4 class="title fw-normal mb-0">Schedule</h4>
                                                 </div>
                                             </a><!--end nav link-->
                                         </li><!--end nav item-->
@@ -179,24 +179,24 @@
                                         <div class="tab-pane fade show active" id="pills-overview" role="tabpanel"
                                             aria-labelledby="overview-tab">
 
-                                            <h6 class="mb-0">Chức vụ:
+                                            <h6 class="mb-0">Position:
                                                 <h6 th:text="${doctor.position}"></h6>
                                             </h6>
                                             <br>
-                                            <h6 class="mb-0" th:switch="${doctor.gender}">Giới tính:
+                                            <h6 class="mb-0" th:switch="${doctor.gender}">Gender:
                                                 <h6 th:case="1">Nam</h6>
                                                 <h6 th:case="0">Nữ</h6>
                                             </h6>
                                             <br>
-                                            <h6 class="mb-0">Sinh nhật:
+                                            <h6 class="mb-0">DOB:
                                                 <h6 th:text="${doctor.dob}"></h6>
                                             </h6>
                                             <br>
-                                            <h6 class="mb-0">Khoa:
+                                            <h6 class="mb-0">Department:
                                                 <h6 th:text="${service.name}"></h6>
                                             </h6>
                                             <br>
-                                            <h6 class="mb-0" th:switch="${doctor.status}">Trạng thái:
+                                            <h6 class="mb-0" th:switch="${doctor.status}">Status:
                                                 <h6 th:case="1" style="color: green;">Hoạt dộng</h6>
                                                 <h6 th:case="0" style="color: red;">Khóa</h6>
                                             </h6>
@@ -219,7 +219,7 @@
                                                                                 <div class="d-flex align-items-center" style="display: flex;flex-direction: row;">
                                                                                     <div style="width: 150px;" class="d-flex align-items-center">
                                                                                         <a class="pe-3" href="#">
-                                                                                            <img th:src="${r[4]}" class="img-fluid avatar avatar-md-sm rounded-circle shadow"
+                                                                                            <img th:src="'/'+${r[4]}" class="img-fluid avatar avatar-md-sm rounded-circle shadow"
                                                                                                 alt="img">
                                                                                         </a>
                                                                                         <div class="commentor-detail">

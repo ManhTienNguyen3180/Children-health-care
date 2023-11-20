@@ -44,14 +44,14 @@
 
         <!-- Start Page Content -->
         <main class="page-content bg-light">
-            <div class="top-header d-print-none">
+            <div class="top-header">
                 <div class="header-bar d-flex justify-content-between border-bottom">
                     <div class="d-flex align-items-center">
                         <a href="#" class="logo-icon">
-                            <img src="/images/logo-icon.png" height="30" class="small" alt="">
+                            <img src="../images/logo-icon.png" height="30" class="small" alt="">
                             <span class="big">
-                                <img src="/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                                <img src="/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                                <img src="../images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+                                <img src="../images/logo-light.png" height="24" class="logo-dark-mode" alt="">
                             </span>
                         </a>
                         <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
@@ -77,20 +77,20 @@
                             <div class="dropdown dropdown-primary">
                                 <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                        th:src="@{${session.user.image}}" class="avatar avatar-ex-small rounded-circle"
+                                        th:src="'/../'+${session.user.image}" class="avatar avatar-ex-small rounded-circle"
                                         alt=""></button>
                                 <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                     style="min-width: 200px;">
                                     <a class="dropdown-item d-flex align-items-center text-dark"
                                         th:href="@{/user-profile}">
-                                        <img th:src="@{${session.user.image}}"
+                                        <img th:src="'/../'+${session.user.image}"
                                             class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                         <div class="flex-1 ms-2">
                                             <span class="d-block mb-1" th:text="@{${session.user.full_name}}"></span>
 
                                         </div>
                                     </a>
-                                    <a class="dropdown-item text-dark" href="dashboard"><span
+                                    <a class="dropdown-item text-dark" href="dashboard" th:if="${session.user.role_id.role_id != 1}"><span
                                             class="mb-0 d-inline-block me-1"><i
                                                 class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
                                     <a class="dropdown-item text-dark" th:href="@{/user-profile}"><span
@@ -199,7 +199,7 @@
                                             Phone: <small th:text="${reservationDTO.patient_phone}"></small><br>
                                             Address: <small th:text="${reservationDTO.patient_address}"></small><br>
                                             Note: <small th:text="${reservationDTO.note}"></small><br>
-                                            <a class="w-60 btn btn-primary"  th:href="@{'/admin/add-patientDetails?id='+${reservationDTO.patient_id}+'&&reservationid='+${reservationDTO.reservation_id}}" href="">Add medical</a>
+                                            <a class="w-60 btn btn-primary"  th:if="${session.user.role_id.role_id == 4}" th:href="@{'/admin/add-patientDetails?id='+${reservationDTO.patient_id}+'&&reservationid='+${reservationDTO.reservation_id}}" href="">Add medical</a>
                                             
                                         </div>
                                         <hr>
@@ -239,7 +239,7 @@
 
                                             </select>
                                         </div>
-
+                                        <p th:text="${error}" style="color: red;"></p>
                                         <button class="w-60 btn btn-primary" type="submit">Save</button>
                                     </div>
                                     </form>

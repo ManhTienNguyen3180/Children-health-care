@@ -178,11 +178,13 @@ public class ReservationController {
     public String saveReservation(Model model, HttpSession session, @RequestParam("patient_name") String patient_name,
             @RequestParam("patient_email") String patient_email, @RequestParam("patient_phone") String patient_phone,
             @RequestParam("patient_address") String patient_address,
-            @RequestParam("patient_note") String patient_note) throws MessagingException {
+            @RequestParam("patient_note") String patient_note,@RequestParam("patient_date") String patient_date,
+            @RequestParam("gender") int gender) throws MessagingException {
         reservation reservation = new reservation();
         int doctor_id;
         String doctor_name;
         int service_ids = 0;
+        Date dob =  java.sql.Date.valueOf(patient_date);
         // get data from session
         List<service> services = (List<service>) session.getAttribute("selectedServices");
         if (services == null) {
@@ -211,12 +213,13 @@ public class ReservationController {
             patient.setPatient_phone(patient_phone);
             patient.setPatient_address(patient_address);
             patient.setDescription(patient_note);
-            patient.setDob(new java.sql.Date(System.currentTimeMillis()));
+            patient.setDob(dob);
             patient.setStatus(1);
             patient.setCreate_by("admin");
             patient.setCreate_at(new java.sql.Date(System.currentTimeMillis()));
             patient.setUser_id(user.getUser_id());
-
+            patient.setImage("images/avar.png");
+            patient.setGender(gender);
             PatientService.save(patient);
         } else {
             patient.setPatient_name(patient_name);
@@ -224,11 +227,12 @@ public class ReservationController {
             patient.setPatient_phone(patient_phone);
             patient.setPatient_address(patient_address);
             patient.setDescription(patient_note);
-            patient.setDob(new java.sql.Date(System.currentTimeMillis()));
+            patient.setDob(dob);
             patient.setStatus(1);
             patient.setCreate_by("admin");
             patient.setCreate_at(new java.sql.Date(System.currentTimeMillis()));
-
+            patient.setImage("images/avar.png");
+            patient.setGender(gender);
             PatientService.save(patient);
         }
 

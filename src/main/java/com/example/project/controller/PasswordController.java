@@ -16,7 +16,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.project.entity.user;
 import com.example.project.service.EmailService;
 import com.example.project.service.UserService;
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
+import ch.qos.logback.core.model.Model;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -57,39 +59,41 @@ public class PasswordController {
 
 	// Process reset password form
 	@RequestMapping(value = "/reset", method = RequestMethod.POST)
-	public ModelAndView setNewPassword(ModelAndView modelAndView, @RequestParam(value = "token") String token,
-			@RequestParam(value = "password") String password, RedirectAttributes redir) {
+	public String setNewPassword(Model model,@RequestParam(value = "token") String token,
+			@RequestParam(value = "password") String password,@RequestParam(value = "re_password") String re_password, RedirectAttributes redir) {
 
-		// Find the user associated with the reset token
+		
 		user = userService.findByResetToken(token);
 
-		// This should always be non-null but we check just in case
-		if (user.isPresent()) {
-
+		
+		if (user.isPresent() && password.equalsIgnoreCase(re_password)) {
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			user resetUser = user.get();
 
-			// Set new password
-			resetUser.setPassword(password);
+			
+			resetUser.setPassword(passwordEncoder.encode(password));
 
-			// Set the reset token to null so it cannot be used again
+			
 			resetUser.setResetToken(null);
 
-			// Save user
+			
 			userService.save(resetUser);
 
-			// In order to set a model attribute on a redirect, we must use
-			// RedirectAttributes
+			
 			redir.addFlashAttribute("successMessage", "You have successfully reset your password.  You may now login.");
 
-			modelAndView.setViewName("redirect:login");
-			return modelAndView;
+			
+			return "redirect:/login";
 
-		} else {
-			modelAndView.addObject("errorMessage", "This is an invalid password reset link.");
-			modelAndView.setViewName("resetPassword");
+		} else if(!password.equalsIgnoreCase(re_password)) {
+			redir.addFlashAttribute("errorMessage", "Your new password and confirm password are not match.");
+			return "redirect:/reset?token="+token;
+		}
+		else {
+			redir.addFlashAttribute("errorMessage", "Oops!  This is an invalid password reset link.");
+			return "redirect:/login";
 		}
 
-		return modelAndView;
 	}
 
 	// Process form submission from forgotPassword page

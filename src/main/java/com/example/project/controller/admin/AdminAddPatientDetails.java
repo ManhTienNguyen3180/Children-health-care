@@ -34,12 +34,12 @@ public class AdminAddPatientDetails {
   private ContactService contactService;
   @Autowired
   private DoctorService dService;
-
+  
   @GetMapping
   public String pageAfteradd(Model model, @RequestParam("id") String id) {
 
     Optional<patient> optionalPatient = PatientService.findByPatientId(Integer.parseInt(id));
-
+    
     if (optionalPatient.isPresent()) {
       patient p = optionalPatient.get();
       Optional<details_Patient> optionalPatientDetail = PatientService
@@ -83,7 +83,7 @@ public class AdminAddPatientDetails {
   public String addDetail(Model model,
       HttpSession session,
       @RequestParam("id") String id,
-      @RequestParam("doctor") String doctor,
+      
       @RequestParam("datetime") LocalDateTime datetime,
       @RequestParam("heartbeat") int heartbeat,
       @RequestParam("bodytem") int bodytem,
@@ -127,7 +127,7 @@ public class AdminAddPatientDetails {
       pd.setBMI(formattedBMI);
       pd.setDescription(description);
       pd.setHeal_description(BMI(calculateBMI(weight, height)));
-      pd.setDoctor_id(Integer.parseInt(doctor));
+      //pd.setDoctor_id(Integer.parseInt(doctor));
       pd.setReservation_id(reservation_id);
       if (PatientService.findByPatientIdHadReserId(PatientService.findByPatientId(Integer.parseInt(id)).get(), reservation_id)
           .isPresent()) {

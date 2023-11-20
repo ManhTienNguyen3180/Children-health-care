@@ -495,17 +495,13 @@
                                         <input th:each="slider: ${previewSlider}" class="list" draggable="true"
                                             th:value="${slider.id}" name="list"></input>
                                     </div>
-                                    <div id="validationpos" class="mt-2"></div>
+                                    <div style="color:red" id="validationpos" class="mt-2"></div>
                                 </form>
 
-                                <input type="submit" id="submitButton" class="btn btn-primary" value="Save changes">
+                                <input type="submit" id="submitButton" class="btn btn-primary" value="Save changes"  onclick="submitForm()">
 
                                 <script>
-                                    document.getElementById("submitButton").addEventListener("click", function () {
-                                        document.getElementById("positionForm").submit();
-                                    });
-
-                                    function validPos() {
+                                    function submitForm() {
                                         var rightPosition = document.getElementById("rightPosition");
                                         var inputTags = rightPosition.getElementsByTagName("input");
 
@@ -513,11 +509,15 @@
 
                                         if (inputTags.length === 0) {
                                             var validationpos = document.getElementById("validationpos");
-                                            validationpos.innerHTML = "Error: There are no input tags in the 'rightPosition' div.";
-                                            return false; // Prevent form submission
-                                        }
+                                            validationpos.innerHTML = "Must display at least 1 slider in the home page";
+                                        } else {
+                                            // Reset the error message if there was one
+                                            var validationpos = document.getElementById("validationpos");
+                                            validationpos.innerHTML = "";
 
-                                        return true; // Allow form submission
+                                            // Trigger form submission
+                                            document.getElementById("positionForm").submit();
+                                        }
                                     }
                                 </script>
 

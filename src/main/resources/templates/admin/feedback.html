@@ -55,18 +55,7 @@
                         <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
                             <i class="uil uil-bars"></i>
                         </a>
-                        <div class="search-bar p-0 d-none d-lg-block ms-2">
-                            <div id="search" class="menu-search mb-0">
-                                <form th:action="@{patientsSearch}" role="search" method="get" id="searchform"
-                                    class="searchform">
-                                    <div>
-                                        <input type="text" class="form-control border rounded-pill" name="s" id="s"
-                                            placeholder="Search Keywords..." th:value="${param.s}">
-                                        <input type="submit" value="Search">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                       
                     </div>
 
                     <ul class="list-unstyled mb-0">
@@ -76,13 +65,13 @@
                            <div class="dropdown dropdown-primary">
                                 <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                        th:src="@{${session.user.image}}" class="avatar avatar-ex-small rounded-circle"
+                                        th:src="'/'+${session.user.image}" class="avatar avatar-ex-small rounded-circle"
                                         alt=""></button>
                                 <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                     style="min-width: 200px;">
                                     <a class="dropdown-item d-flex align-items-center text-dark"
                                         th:href="@{/user-profile}">
-                                        <img th:src="@{${session.user.image}}"
+                                        <img th:src="'/'+${session.user.image}"
                                             class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                         <div class="flex-1 ms-2">
                                             <span class="d-block mb-1" th:text="@{${session.user.full_name}}"></span>
@@ -113,22 +102,12 @@
                         <h5 class="mb-0">Feedback List</h5>
                         <span style="font-size: larger;width: 50px;">Filter: </span>
                             <!-- Example single danger button -->
-                            <div class="btn-group" >
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                                    aria-expanded="false"  >
-                                    Ratings
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" th:href="@{/admin/feedback}">--All Rating--</a>
-                                    </li>
-                                        <li th:each="cat : ${listRate}">
-                                            <a  th:value="${cat}" th:text="${cat}"
-                                                class="dropdown-item"
-                                                th:href="@{'/admin/feedback/filter/'+ ${cat}}">
-                                            </a>
-                                        </li>
-                                </ul>
-                                
+                            <div class="btn-group" th:each="cat : ${listRate}">
+
+                                <a th:href="@{'/admin/feedback/filter/'+ ${cat}}">
+                                    <button class="btn btn-primary " th:text="${cat}"></button>
+                                </a>
+
                             </div>
                         </div>
 
@@ -179,8 +158,8 @@
                                     <tbody>
 
 
-                                        <tr th:each="fb : ${listAll}">
-                                            <th class="p-3" th:text="${fb[0]}"></th>
+                                        <tr th:each="fb,stt : ${listAll}">
+                                            <th class="p-3" th:text="${stt.count}"></th>
                                             <td class="py-3" th:text="${fb[2]}"></td>
                                         
                                             <th class="p-3" th:text="${fb[4]}"></th>

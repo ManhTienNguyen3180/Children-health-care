@@ -110,12 +110,7 @@
             <ul th:if="${session.user != NULL}" class="dropdowns list-inline mb-0">
 
 
-                <li class="list-inline-item mb-0 ms-1">
-                    <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
-                        <i class="uil uil-search"></i>
-                    </a>
-                </li>
+                
 
                 <li class="list-inline-item mb-0 ms-1">
                     <div class="dropdown dropdown-primary">
@@ -177,7 +172,7 @@
 
             <div id="navigation">
                 <!-- Navigation Menu-->
-                <ul class="navigation-menu nav-left nav-light">
+                <ul class="navigation-menu nav-left ">
                     <li class="has-submenu parent-menu-item">
                         <a href="home">Home</a>
 
@@ -373,18 +368,16 @@
                 </div><!--end col-->
             </div><!--end row-->
 
-            <div class="row">
+            <div class="row" >
                 <div class="col-xl-3 col-md-4 col-12 mt-5" th:each="service,iterStat : ${service}"
                     th:if="${iterStat.index &lt; 6}">
                     <div class="card features feature-primary bg-transparent border-0">
-                        <!-- <div class="icon text-center rounded-md">
-                                <i class="ri-eye-fill h3 mb-0"></i>
-                            </div> -->
+                        
                         <div class="card-body p-0 mt-3">
+                            <a th:href="@{/service-detail/{id}(id=${service.service_id})}"><img th:src="${service.img}" class="img-fluid" alt="" style="width: 100%;height: 200px;"></a>
                             <a th:href="@{/service-detail/{id}(id=${service.service_id})}" class="title text-dark h4"
                                 th:text="${service.service_name}"></a>
-                            <p class="text-muted mt-3">There is now an abundance of readable dummy texts required purely
-                                to fill a space.</p>
+                            <br>
                             <a th:href="@{/service-detail/{id}(id=${service.service_id})}" class="link">Read More </a>
                         </div>
                     </div>
@@ -543,61 +536,7 @@
             </div><!--end row-->
         </div><!--end container-->
 
-        <div class="container mt-100 mt-60">
-            <div class="row align-items-lg-end">
-                <div class="col-md-6">
-                    <div class="me-xl-3">
-                        <div class="section-title mb-4 pb-2">
-                            <i class="uil uil-notes text-primary h2"></i>
-                            <h4 class="title mb-4">Book Your Appointment</h4>
-                            <p class="text-muted para-desc mb-0">Great doctor if you need your family member to get
-                                effective immediate assistance, emergency treatment or a simple consultation.</p>
-                        </div>
-
-                        <div
-                            class="features feature-bg-primary d-flex bg-white p-4 rounded-md shadow position-relative overflow-hidden">
-                            <i class="uil uil-stethoscope-alt icons h2 mb-0 text-primary"></i>
-                            <div class="ms-3">
-                                <h5 class="titles">Success Of Treatment</h5>
-                                <p class="text-muted para mb-0">The most well-known dummy text is the 'Lorem Ipsum',
-                                    which is said to have originated in the 16th century.</p>
-                            </div>
-                            <div class="big-icon">
-                                <i class="uil uil-stethoscope-alt"></i>
-                            </div>
-                        </div>
-
-                        <div
-                            class="features feature-bg-primary d-flex bg-white p-4 rounded-md shadow position-relative overflow-hidden mt-4">
-                            <i class="uil uil-microscope icons h2 mb-0 text-primary"></i>
-                            <div class="ms-3">
-                                <h5 class="titles">Modern Technology</h5>
-                                <p class="text-muted para mb-0">The most well-known dummy text is the 'Lorem Ipsum',
-                                    which is said to have originated in the 16th century.</p>
-                            </div>
-                            <div class="big-icon">
-                                <i class="uil uil-microscope"></i>
-                            </div>
-                        </div>
-
-                        <div
-                            class="features feature-bg-primary d-flex bg-white p-4 rounded-md shadow position-relative overflow-hidden mt-4">
-                            <i class="uil uil-user-md icons h2 mb-0 text-primary"></i>
-                            <div class="ms-3">
-                                <h5 class="titles">Certified Doctors</h5>
-                                <p class="text-muted para mb-0">The most well-known dummy text is the 'Lorem Ipsum',
-                                    which is said to have originated in the 16th century.</p>
-                            </div>
-                            <div class="big-icon">
-                                <i class="uil uil-user-md"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div><!--end col-->
-
-
-            </div><!--end row-->
-        </div><!--end container-->
+        
     </section><!--end section-->
     <!-- End -->
 

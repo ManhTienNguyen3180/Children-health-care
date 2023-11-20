@@ -63,24 +63,24 @@
                 <ul th:if="${session.user != NULL}" class="dropdowns list-inline mb-0">
     
     
-                    <li class="list-inline-item mb-0 ms-1">
+                    <!-- <li class="list-inline-item mb-0 ms-1">
                         <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
                             <i class="uil uil-search"></i>
                         </a>
-                    </li>
+                    </li> -->
     
                     <li class="list-inline-item mb-0 ms-1">
                         <div class="dropdown dropdown-primary">
                             <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                    th:src="${session.user.image}" src="images/doctors/01.jpg"
+                                    th:src="'/'+${session.user.image}" src="images/doctors/01.jpg"
                                     class="avatar avatar-ex-small rounded-circle" alt=""></button>
                             <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3"
                                 style="min-width: 200px;">
                                 <a class="dropdown-item d-flex align-items-center text-dark" href="user-profile">
                                     
-                                    <img th:src="${session.user.image}" src=""
+                                    <img th:src="'/'+${session.user.image}" src=""
                                         class="avatar avatar-md-sm rounded-circle border shadow" alt="" >
                                     <div class="flex-1 ms-2">
                                         <span th:text="${session.user.full_name}" class="d-block mb-1"></span>
@@ -118,7 +118,7 @@
                             </a>
                         </li> -->
                     <li class="list-inline-item mb-0">
-                        <a href="bookingappointment">
+                        <a href="/bookingappointment">
                             <div class="btn btn-primary">Book Appointment</div>
                         </a>
                     </li>
@@ -290,7 +290,7 @@
                     <div class="col-xl-3 col-lg-3 col-md-6" th:each="doctor : ${docs}" >
                         <div class="card team border-0 rounded shadow overflow-hidden" style="height: 450px;margin-bottom: 20px;">
                             <div class="team-img position-relative">
-                                <img th:src="${doctor[5]}" class="img-fluid" alt="" style="height: 323px;">
+                                <img th:src="${doctor[5]}" class="img-fluid" alt="" style="height: 323px;width: 100%;">
                                 <!-- <ul class="list-unstyled team-social mb-0">
                                     <li><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="facebook" class="icons"></i></a></li>
                                     <li class="mt-2"><a href="#" class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="linkedin" class="icons"></i></a></li>
@@ -323,7 +323,7 @@
                                         <div class="d-flex align-items-center" style="display: flex;flex-direction: row;">
                                             <div style="width: 150px;" class="d-flex align-items-center">
                                                 <a class="pe-3" href="#">
-                                                    <img th:src="${r[4]}"
+                                                    <img th:src="'/'+${r[4]}"
                                                         class="img-fluid avatar avatar-md-sm rounded-circle shadow" alt="img">
                                                 </a>
                                                 <div class="commentor-detail">

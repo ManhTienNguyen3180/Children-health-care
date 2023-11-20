@@ -109,7 +109,7 @@ public class AdminUsersSearch {
   }
 
   public String findPaginated(String s, Model model, Integer pageno) {
-    int pagesize = 4;
+    int pagesize = 10;
 
     Page<user> page = userService.findUsersContainWithPaging(s, pageno, pagesize);
     List<user> listuser = page.getContent();
@@ -122,7 +122,7 @@ public class AdminUsersSearch {
 
   public String findUsersContainAndFilterRoleWithPaging(String s, role r, Integer pageno,
       Model model) {
-    int pagesize = 4;
+    int pagesize = 10;
         
     Page<user> page = userService.findUsersContainAndFilterRoleWithPaging(s, r, pageno, pagesize);
     List<user> listuser = page.getContent();
@@ -137,7 +137,7 @@ public class AdminUsersSearch {
 
   public String findUsersContainsAndFilterGenderWithPaging(String name, int r, Integer pageno,
       Model model) {
-    int pagesize = 4;
+    int pagesize = 10;
     String s = "Female";
     if (r == 0) {
       s = "male";
@@ -154,7 +154,7 @@ public class AdminUsersSearch {
 
   public String findUsersContainsAndFilterStatusWithPaging(String name, int r, Integer pageno,
       Model model) {
-    int pagesize = 4;
+        int pagesize = 10;
 
     Page<user> page = userService.findUsersContainsAndFilterStatusWithPaging(name, r, pageno, pagesize);
     List<user> listuser = page.getContent();

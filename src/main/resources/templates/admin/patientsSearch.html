@@ -162,13 +162,12 @@
                                     <tbody>
 
 
-                                        <tr th:each="patients : ${listPatients}">
-                                            <th class="p-3" th:text="${patients.patient_id}"></th>
+                                        <tr th:each="patients,stt : ${listPatients}">
+                                            <th class="p-3" th:text="${stt.count}"></th>
                                             <td class="py-3">
                                                 <a href="#" class="text-dark">
                                                     <div class="d-flex align-items-center">
-                                                        <img th:src="${patients.image}"
-                                                            class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                       
                                                         <span class="ms-2" th:text="${patients.patient_name}"></span>
                                                     </div>
                                                 </a>
