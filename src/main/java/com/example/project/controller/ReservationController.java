@@ -271,8 +271,8 @@ public class ReservationController {
 
             }
             // send email of reservation to patient email
-            ReservationService.sendEmail(patient_email, patient_name, doctor.getDoctor_name(), date, services,
-                    total_cost);
+            // ReservationService.sendEmail(patient_email, patient_name, doctor.getDoctor_name(), date, services,
+            //         total_cost);
 
             // remove session
             session.removeAttribute("selectedServices");
